@@ -1,0 +1,155 @@
+<extend name="./Public/template/base.html"/>
+<block name="content">
+	<load href="__PUBLIC__/css/service.css" />
+	<load href="__PUBLIC__/js/jquery.cookie.js" />
+
+	<!-- <load href="__PUBLIC__/css/"/> -->
+	<!-- 导航栏 -->
+		<div class="menu-nav">
+			<div class="middle">
+				<div class="menu-nav-left">
+					<h3><a href="{:U('Home/service/index')}">服务商库首页</a></h3>
+				</div>
+				<ul class="menu-nav-ul">
+					<li><a href=""></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<!-- 主体内容 -->
+		<div class="server-content">
+			<div class="middle server-content-bg">
+				<!-- 分类 -->
+				<div class="server-category">
+					<dl class="filter-category">
+						<dt>分<span style="display:inline-block;width:2em;"></span>类:</dt>
+						<dd class="cate-body" >
+							<volist name="category" id="cate">
+							 <a href="{:U('Home/Service/cateServer',array('cate_id'=>$cate['id']))}" target="_blank">{$cate['cate_name']}</a>
+							 </volist>
+						</dd>
+						<dd class="show-more" style="display:block;">更多</dd>
+						<!-- <dd class="show-more">收起</dd> -->
+					</dl>
+					<dl class="filter-category">
+						<!-- <dt>服务商类型：</dt>
+						<dd class="cate-body" >
+							 <a  href="{:U('Home/Service/server')}" >全部</a>	
+							 <a  href="{:U('Home/Service/server',array('sign'=>0))}" >个人服务</a>
+							 <a  href="{:U('Home/Service/server',array('sign'=>1))}">企业服务</a>
+						</dd> -->
+					</dl>
+				</div>
+				<!-- 分类结束 -->
+
+				<!-- 内容块 -->
+				<div class="server-left">
+					<div class="server-store">
+						<ul>
+							<li ><a  href="{:U('Service/category',array('sort'=>'id','asc'=>'desc','cate_id'=>$parent['id']))}">{$parent['cate_name']}店铺</a></li>
+							<li id="server-color"><a href="{:U('Service/cateServer',array('cate_id'=>$parent['id']))}">{$parent['cate_name']}服务</a></li>
+						</ul>
+					</div>
+					<!-- 搜索条件 -->
+					<div class="server-list-sorttag">
+						<ul id="js-search">
+							<li ><a s="0" id="server-list-a" href="{:U('Service/cateServer',array('sort'=>'id','asc'=>'desc','cate_id'=>$parent['id']))}">默认</a><i class="server-list-iconv"></i></li>
+							<li><a s="1" href="{:U('Service/cateServer',array('sort'=>'sales_num','asc'=>'desc','cate_id'=>$parent['id']))}">成交数量</a> <i class="server-list-iconv"></i></li>
+							<li><a s="2" href="{:U('Service/cateServer',array('sort'=>'price','asc'=>'desc','cate_id'=>$parent['id']))}">价格</a><i class="server-list-iconv"></i></li>
+							<li><a s="3" href="{:U('Service/cateServer',array('sort'=>'assess','asc'=>'desc','cate_id'=>$parent['id']))}">好评率</a><i class="server-list-iconv"></i></li>
+						</ul>
+						<!-- <ul id="js-search">
+							<li><a s="0" id="server-list-a" href="{:U('Service/server',array('asc'=>'desc'))}">默认</a><i class="server-list-iconv"></i></li>
+							<li><a s="1" href="{:U('Service/server',array('sort'=>'sales_num','asc'=>'desc'))}">成交数量</a> <i class="server-list-iconv"></i></li>
+							<li><a s="2" href="{:U('Service/server',array('sort'=>'price','asc'=>'desc'))}">价格</a><i class="server-list-iconv"></i></li>
+							<li><a s="3" href="{:U('Service/server',array('sort'=>'assess','asc'=>'desc'))}">好评率</a><i class="server-list-iconv"></i></li>
+						</ul> -->
+					</div>
+
+					<!-- 内容列表，展示 -->
+					<div class="server-list-main">
+						<ul class="server-item-ul">
+						<volist name="cate_server" id="data" empty="暂时没有数据">
+							<li>
+								<div class="provider-left">
+									<img src="__PUBLIC__/Uploads/{$data['pubh_pic']}" alt="">
+								</div>
+								<div class="service-item-top">
+									<div class="service-desc">
+										<a href="{:U('Home/service/detail',array('sid'=>$data['id'],'storeid'=>$data['pubh_shopid']))}" target="_blank">{$data['pubh_title']}</a>
+									</div>
+									<div class="service-price">￥<span>{$data['pubh_price']}</span></div>
+									<div class="service-num">
+										<p>成交量：{$data['pubh_volume']}</p>
+										<p>雇主评价：{$data['num']|default=0}</p>
+									</div>
+									<div class="service-rate">
+										<p>好评率：{$data['comment']|default=0}%</p>
+										<p>综合评分：{$data['assess']|default='0.00'}</p>
+									</div>
+									<div class="clear"></div>
+									<div class="service-item-btm">
+										<a href="{:U('Home/service/salerinfo',array('storeid'=>$data['pubh_shopid']))}">{$data['store_name']}</a> |
+										<a href="">给我留言</a>
+									</div>
+								</div>
+							</li>
+						</volist>
+						</ul>
+						<!-- 分页 -->
+						<if condition="$cate_server"> 
+							<div class="js-page" style="margin-top:30px;margin-bottom:20px;">{$show}</div>
+						</if>
+						<!-- 分页 -->
+
+					</div>
+				</div>
+				<div class="server-right">
+					广告模块
+				</div>
+			</div>
+		</div>
+		<script>
+			var sign=true;
+			$('.show-more').click(function(){
+				if(sign){
+					$(this).html('收起');
+					// 动画缓冲
+					// $('.server-category dd').eq(0).animate({'height': '100px'},1000);
+					$('.server-category dd').css({'height': 'auto'});
+					sign=false;
+				}else{
+					$(this).html('更多');
+					$('.server-category dd').css({'height': '25px'});
+					$('dd.show-more').css({'height':'25px'});
+					sign=true;
+				}
+
+			});
+			
+			$(document).ready(function (){
+				$('#js-search li a').each(function(){
+				    if($($(this))[0].href==String(window.location)){
+				    	$("#js-search li").removeClass("server-list-li");
+				    	$('#js-search li a').attr('id',''); 	
+				    	$(this).attr('id','server-list-a');
+				       	res=$(this).attr('s');
+				        $.cookie('cuttent',res);
+				    }
+				});
+				// 点击分页，保持状态
+				$('.js-page a').each(function(){
+				    $('#js-search li a').each(function(){
+					    if($($(this))[0].href!=String(window.location)){
+					    	var num=$.cookie("cuttent");
+					    	$('#js-search li a').eq(num).attr('id','server-list-a');
+							$('#js-search li a').eq(!num).attr('id','');					    	
+					    }
+					});
+				});
+
+
+			});
+			
+		</script>
+</block>

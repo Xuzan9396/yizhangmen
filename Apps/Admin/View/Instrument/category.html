@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+    <load href="__PUBLIC__/css/bootstrap.min.css" />
+    <load href="__PUBLIC__/css/dataTables.bootstrap.css" /> 
+    <load href="__PUBLIC__/css/style.min.css" />
+    <load href="__PUBLIC__/css/font-awesome.min.css" />
+    <load href="__PUBLIC__/layui/css/layui.css"  />
+    <load href="__PUBLIC__/admin/css/animate.min.css" />
+    <load href="__PUBLIC__/admin/css/animate.min.css"  />
+</head>
+    <style type="text/css">
+           .addbut{
+        display: block;
+        margin-left:48%;
+        cursor: pointer;
+        position: absolute;
+        z-index: 1;
+      }
+
+      img{
+        cursor: pointer;
+      }
+     
+      .layui-form-select{
+        display: none;
+      }
+
+    .addadvetr{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background: white;
+        display: none;
+        z-index: 2;
+        padding: 100px;
+    }
+
+    #myForm{
+        width: 500px;
+        height: 500px;
+        margin: 0 auto;
+
+    }
+
+    .content{
+        outline:none;
+        width: 300px;
+        height: 40px;
+        border: 1px solid #EEEEEE;
+        line-height: 40px;
+        padding: 0px 10px;
+
+    }
+
+    #stotese{
+        width: 300px;
+        height: 35px;
+    }
+
+    .selectul{
+        width: auto;
+        height: auto;
+        border: 1px solid #EEEEEE;
+        position: absolute;
+        background: white;
+        display: none;
+    } 
+
+    .selectul li{
+        transition: background 0.5s;
+        width: 498px;
+        padding: 2px 10px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+     .selectul li:hover{
+        transition: background 0.5s;
+        background: #EEE;
+     }
+
+     .small{
+        font-size: 8px;
+        color: green;
+     }
+
+     .imgd{
+        width: 105px;
+        left: 200px;
+        top: 200px;
+        position: absolute;
+    }
+
+    .imgd img{
+        width: 100px;
+        height: 100px;
+    }
+
+    .cateimg{
+        width: 50px;
+        height: 50px;
+    }
+    </style>
+<body>        
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <!-- 厂家信息开始 -->
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">               
+                    <div class="ibox-content">
+                    <button type="button" class="btn btn-primary addbut">添加分类</button>
+                        <table class="table table-striped table-bordered table-hover dataTables-example" id="layer-photos-demo">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>PID</th>
+                                    <th>分类图标</th>
+                                    <th>分类名称</th>
+                                    <th>路径</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="cate['cate']" item="v">
+                                    <tr>
+                                        <td>{$v.id}</td>
+                                        <td>{$v.parent_id}</td>
+                                        <td><img class="cateimg" src="__PUBLIC__/Uploads{$v.cate_pic}"></td>
+                                        <td>{$v.cate_name}</td>
+                                        <td>{$v.cate_path}</td>
+                                        <td > <button type="button" class="btn btn-primary"  onclick="modify('{$v.id}','{$v.parent_id}','{$v.cate_name}')" >修改</button> <button type="button" class="btn btn-danger" onclick="del('{$v.id}')">删除</button></td>
+                                    </tr>
+                                </foreach>                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- 分类信息结束 -->
+
+            <!-- 添加分类区域开始 -->
+             <div class="addadvetr">
+                    <div class="container">
+                        <div class="row">
+                          <div class="imgd"><h3>图片预览</h3><img src="" id="jimg"></div>
+                            <form role="form" method="post" enctype="multipart/form-data" id="myForm" onsubmit="return false" >
+                             <!-- Split button -->
+
+                             <div class="form-group">
+                                <label for="">选择父级</label>
+                               <select class="form-control" name="category_id">
+                                   <option value="0">顶级</option>
+                                    <foreach name="cate['cate1']" item="v"> 
+                                        <option value="{$v.id}">{$v.cate_name}</option>
+                                    </foreach>
+                               </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">分类名称</label>
+                                <input type="text" class="form-control input-lg"  value="" autocomplete="off" placeholder="请填写分类名称" name="cate_name">
+                            </div>
+
+                            <div class="form-group">
+                                 <label for="exampleInputFile"></label>
+                                 <input type="file" id="exampleInputFile" name="cate_pic">
+                                 <p class="help-block">请选择图片文件<br>分类图标最佳尺寸为80*80</p>
+                                 <p>最佳格式为png</p>
+                                 <p>不支持bmp等格式图片，请谨慎选择</p>
+                             </div> 
+                              <button type="submit" class="btn btn-default cancel">取消</button>
+                              <button type="submit" class="btn btn-primary save">保存</button> 
+                            </form>    
+                        </div>
+                    </div>
+                </div>
+                <!-- 添加分类结束 -->
+        </div>
+    </div>
+          
+    <!-- Mainly scripts -->
+    <load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+    <load href="__PUBLIC__/js/bootstrap.min.js" />
+    <load href="__PUBLIC__/layer/layer.js"/>
+    <load href="__PUBLIC__/js/mo.js" />
+    <load href="__PUBLIC__/js/jquery.dataTables.js" />
+    <load href="__PUBLIC__/js/dataTables.bootstrap.js" />
+    <load href="__PUBLIC__/layui/layui.js" />
+    <script>
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable();
+
+            /* Init DataTables */
+            var oTable = $('#editable').dataTable();
+
+            /* Apply the jEditable handlers to the table */
+            oTable.$('td').editable('../example_ajax.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+
+                "width": "90%",
+                "height": "100%"
+            });
+
+        });
+
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+                "Custom row",
+                "New row",
+                "New row",
+                "New row",
+                "New row"]);
+
+        }
+
+        //上传图片预览（创建一个URL对象）
+        function getObjectURL(file) {
+            var url = null ; 
+            if (window.createObjectURL!=undefined) { // basic
+                url = window.createObjectURL(file) ;
+            } else if (window.URL!=undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file) ;
+            } else if (window.webkitURL!=undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file) ;
+            }
+            return url ;
+        }
+
+        //实例化对象。把所选择的图片URL放到预览处实现预览
+        var formData;
+        $("#exampleInputFile").change(function(){
+            var objUrl = getObjectURL(this.files[0]);
+            formData = new FormData($('#myForm')[0]);
+            console.log("objUrl = "+objUrl);
+            if (objUrl) {
+                $("#jimg").attr("src", objUrl);
+            }
+            
+        }) ;   
+            
+        //添加分类切换页面
+        $('.addbut,.cancel').click(function(){
+            $('.addadvetr').slideToggle();
+        })
+
+
+        //添加分类
+        $('.save').click(function(){
+            mo.ajaxUp(formData,"{:U('Instrument/addCategory')}",function(res){
+                if(res['status']){
+                    mo.msg(res['info'],1);
+                }else{
+                    mo.msg(res['info']);
+                }
+            })
+        })
+
+           //删除分类
+        function del(id){
+            mo.confirm('你确定要删除吗？',function(){
+                mo.ajax({'id':id},"{:U('Instrument/ajaxDelCate')}",function(res){
+                    if(res['status']){
+                        mo.msg(res['info'],1);
+                    }else{
+                        mo.msg(res['info']);
+                    }
+                })
+            },'警告');
+        }
+
+        //修改信息
+        function modify(id,parent_id,cate_name){
+            var str = '';
+            mo.ajax({'id':id},"{:U('ajaxShowCateOne')}",function(res){
+                if(res){
+                    str += '<form onsubmit="return false" id="myform1"><input type="hidden" value='+id+' name="id"> <input type="hidden" value='+parent_id+' name="parent_id"> <input type="text" value='+res['cate_name']+' name="cate_name" class="form-control"></form>';
+                }
+                mo.mod(str,function(){
+                    mo.ajax($('#myform1').serialize(),"{:U('Instrument/ajaxModifyCate')}",function(res){
+                        if(res['status']){
+                            mo.msg(res['info'],1);
+                        }else{
+                            mo.msg(res['info']);
+                        }
+                    })
+                },cate_name);
+            })
+        }
+    </script>
+
+</body>
+
+</html>

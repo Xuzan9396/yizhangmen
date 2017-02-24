@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+        <load href="__PUBLIC__/css/bootstrap.min.css" />
+        <load href="__PUBLIC__/css/dataTables.bootstrap.css" /> 
+        <load href="__PUBLIC__/css/style.min.css" />
+        <load href="__PUBLIC__/css/font-awesome.min.css" />
+        <load href="__PUBLIC__/admin/css/animate.min.css" />
+
+    </head>
+
+    <body class="gray-bg">        
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>姓名</th>
+                                        <th>性别</th>    
+                                        <th>电话</th>
+                                        <th>qq</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <foreach name="admnlist" key='key' item="val">
+                                        <tr class="gradeX">
+                                            <td>{$val.admn_id}</td>
+                                            <td>{$val.admn_realname}</td>
+                                            <td>{$val.admn_sex}</td>
+                                            <td>{$val.admn_tel}</td>
+                                            <td>{$val.admn_qq}</td>
+                                            <td>
+                                                <a class="btn btn-info" class="J_menuItem" href='{:U("Admin/Admin/priviLage",["id"=>$val["admn_id"]])}'><i class="glyph-icon icon-chevron-right"></i>权限分配</a>
+                                                <a class="btn btn-info" class="J_menuItem" href='{:U("Admin/Admin/admnInfo",["id"=>$val["admn_id"]])}'><i class="glyph-icon icon-chevron-right"></i>修改信息</a>
+                                                
+                                                <a class="btn btn-warning" class="J_menuItem" onclick="editpass(this,{$val['admn_id']},'{$val['admn_realname']}')"><i class="glyph-icon icon-chevron-right"></i>修改密码</a>
+
+                                                <a class="btn btn-danger del-admin" class="J_menuItem" href='javascript:;' onclick="del({$val['admn_id']},this)"><i class="glyph-icon icon-chevron-right"></i>删除用户</a>
+                                            </td>
+                                        </tr>
+                                    </foreach>                         
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content modal-content1 animated bounceInRight">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+                        </button>
+                        <i class="fa fa-laptop modal-icon"></i>
+                        <h4 class="modal-title">修改管理员 <b id="modal-pid1"></b> 的密码</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group"><label>原始密码</label> <input type="password" placeholder="原始密码,长度不少于6位" id="oldpwd" class="form-control"></div>
+                        <div class="form-group"><label>新密码</label> <input type="password" placeholder="新密码,长度不少于6位" id="pwd-content" class="form-control"></div>
+                        <div class="form-group"><label>重复新密码</label> <input type="password" placeholder="新密码,长度不少于6位" id="repwd" class="form-control"></div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                        <button type="button" onclick="editPwd()" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+  
+    <!-- Mainly scripts -->
+    <load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+    <load href="__PUBLIC__/js/bootstrap.min.js" />
+    <load href="__PUBLIC__/layer/layer.js"/>
+    <load href="__PUBLIC__/js/jquery.dataTables.js" />
+    <load href="__PUBLIC__/js/dataTables.bootstrap.js" />
+
+    <script>
+
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable();
+
+            /* Init DataTables */
+            var oTable = $('#editable').dataTable();
+
+            /* Apply the jEditable handlers to the table */
+            oTable.$('td').editable('../example_ajax.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+                "width": "90%",
+                "height": "100%"
+            });
+        });
+
+        // 删除管理员
+        function del(id , obj){
+            var bool = confirm("删除是不可恢复的，你确认要删除吗？");
+            if(bool){
+                $.get("{:U('Admin/Admin/delAdmn')}",{'id':id},function(data){
+                    if (data) {
+                        $(obj).parent().parent().remove();
+                        layer.msg('删除成功',{icon:6});
+                    }
+                });
+            }
+            
+        };
+
+        // 修改密码 开始
+        var p1 = $('.modal-content1').html();
+        function editpass(obj,mid,pname){
+            $('#myModal1').modal('show');
+            $('.modal-content1').html(p1);
+            $('#modal-pid1').html(pname);
+            $('#modal-pid1').attr('mid',mid);
+        }
+        function editPwd()
+        {
+            if( $('#pwd-content').val().length >= 6 && $('#oldpwd').val().length >= 6 ){
+                $.ajax({
+                    url:"{:U('Admin/Admin/editAdmnpwd')}",
+                    data:{'admn_id':$('#modal-pid1').attr('mid'),'admn_password':$('#pwd-content').val(),'oldpwd':$('#oldpwd').val(),'repwd':$('#repwd').val()},
+                    type:'post',
+                    success: function(data){
+                        if (data['status']) {
+                            $('#myModal1').modal('hide');
+                            layer.msg(data['info'],{icon:6});
+
+                        }else{
+                            layer.msg(data['info'],{icon:5});
+                        }
+                        
+                    }
+                });
+            }else{
+              layer.msg('密码长度不少于6位',{icon:5});  
+            }
+            
+        }
+        // 修改密码 结束
+    
+    </script>
+
+</html>

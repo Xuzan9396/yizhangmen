@@ -1,0 +1,74 @@
+/*独立于orderWorked.html'*/
+/*评价*/
+.evaluate2{
+	margin-top: 50px;
+	padding: 0;
+	font-size: 16px;
+	color: #333333;
+}
+.evaluate2-btn{
+	margin-top: 20px;
+}
+.evaluate2-btn button{
+	background: #62C9FA;
+}
+/*----------------------------*/
+/*进度条*/
+/*评价进度球*/
+.speed-evaluate-box1{
+	margin-top: 170px;
+	background: #516784;
+}
+
+.speed-bar-service1{
+	height: 650px;
+	width: 5px;
+	background: #516784;
+}
+/*模态框评价*/
+.modal-content{
+	padding: 15px;
+}
+.contract-modalbox{
+	width: 568px;
+	margin-left: 15px;
+}
+.modal-title{
+	font-size: 16px;
+	color: #333333;
+}
+/*评价花*/
+.comment-icon{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    margin-bottom: -3px;
+}
+.good-comment{
+    background-image: url(../../../image/service/comment/good-evaluate.png);
+}
+.middle-comment{
+    background-image: url(../../../image/service/comment/middle-evaluate.png);
+}
+.bad-comment{
+    background-image: url(../../../image/service/comment/bad-evaluate.png);
+}
+
+.table2-n th{
+	line-height: 27px;
+	text-align: center;
+	width:350px;
+    color: #808080; 
+}
+
+.font1{
+	cursor: pointer;
+}
+#evaluate-text{
+	resize: none;
+	color: #999999;
+}
+.mini-size{
+    color: #ccc;
+}

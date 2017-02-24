@@ -1,0 +1,280 @@
+<extend name="./Public/template/base1.html" />
+<block name="title"><title>仪掌门-仪器库</title></block>
+<block name="file">
+	
+</block>
+
+<block name="content">
+	<style type="text/css">
+		.active{
+			background: #3195F3;
+			color:white;
+			font-weight: bold;
+			font-size: 20px;
+		}
+
+		.nav-bar{
+			width: 1180px;
+			height: 50px;
+			line-height: 50px;
+			background: #62C9FA;
+			margin:10px 0;
+		}
+
+		.nav-bar-ul li,.nav-bar-ul a{
+			transition: background 0.5s;
+			float: left;
+			color: white;
+			padding:0 10px;
+			text-decoration: none;
+			cursor: pointer;
+			font-size: 18px;
+			font-weight: bold;
+		}
+		.nav-bar-ul li:hover{
+			transition: background 0.5s;
+			background: #3195F3;
+		}
+
+		.instrument{
+			width: 1170px;
+			height: auto;
+			overflow: auto;
+		}
+
+		.instrument-category{
+			width: 1170px;
+			height: 60px;
+			border-bottom: 1px solid #3195F3;
+			margin: 10px auto;
+
+		}
+
+		.instrument-category li{
+			transition: background 0.5s;
+			width: 150px;
+			height: 60px;
+			float: left;
+			line-height: 60px;
+			text-align: center;
+			cursor: pointer;
+		}
+
+
+		.instrument-category li:hover{
+			transition: background 0.5s;
+			background: #86D3F7;
+		}
+
+		.instrument-detail{
+			width: 1170px;
+			height: 910px;
+			overflow: hidden;
+		}
+
+		.instrument-detail-cate{
+			width: 1170px;
+			height: 910px;
+			position: absolute;
+			overflow: hidden;
+			background: white;
+			display: none;
+		}
+
+		.instrumentfa{
+			transition: border 0.5s,box-shadow 0.5s,background 0.5s;
+			width: 157px;
+			height: 170px;
+			border: 1px solid #EEEEEE;
+			background: #F7F7F7;
+			text-align: center;
+			padding: 15px;
+			border: 1px solid white;
+			float: left;
+			margin: 5px;
+		}
+
+		.instrumentfa:hover{
+			transition: border 0.5s,box-shadow 0.5s,background 0.5s;
+			border: 1px solid #3195F3;
+			box-shadow: 5px 5px 10px 1px gray;
+			cursor:pointer;
+			background: white;
+		}
+
+		.instrumentfa a{
+			text-decoration: none;
+		}
+
+		.nstrumentso{
+			width: 100px;
+			height: 120px;
+			margin: 0 auto;
+
+		}
+
+		.instrumentso img{
+			width: 80px;
+			height: 80px;
+			display: block;
+			margin: 0 auto;
+		}
+
+		.instrumentco{
+			transition: border 0.5s,box-shadow 0.5s;
+			width: 157px;
+			height: 170px;
+			margin: 5px;
+			border: 1px solid #62C9FA;
+			float: left;
+			text-align: center;
+			padding: 5px;
+			background: white;
+		}
+
+		.instrumentco:hover{
+			transition: border 0.5s,box-shadow 0.5s;
+			border: 1px solid #3195F3;
+			box-shadow: 5px 5px 10px 1px gray;
+		}
+
+		.instrumentcoda{
+			width: 110px;
+			height: 130px;
+			margin: 0 auto;
+		}
+
+		.instrumentcoda img{
+			width: 100px;
+			height: 100px;
+		}
+
+		.instrumentcodab{
+			transition: background 0.5s;
+			display: inline-block;
+			width: 100%;
+			height: 30px;
+			background: #3195F3;
+			text-align: center;
+			line-height: 30px;
+			color: white;
+			text-decoration: none;
+		}
+
+		.instrumentcodab:hover{
+			transition: background 0.5s;
+			color: white;
+			background: #62C9FA;
+		}
+	</style>
+	<div class="container">
+		<div class="nav-bar">
+			<ul class="nav-bar-ul" >
+				<li><a href="{:U('Home/Need/needIndex')}">需求大厅</a></li>
+				<li><a href="{:U('home/service/index')}">服务商库</a></li>
+				<li class="active"><a href="{:U('Home/Instrument/index')}">仪器库</a></li>
+			</ul>
+		</div>
+	</div>
+
+	
+	<div class="container">
+		<div class="instrument">
+			<ul class="instrument-category">
+				<li class="active">分类查询</li>
+				<li>厂商查询</li>
+			</ul>
+			<div class="instrument-detail">
+				<div class="instrument-detail-cate">
+					<foreach name="TopCate" item="v">
+						<div class="instrumentfa" onclick="ajaxCate({$v['id']})">
+							<div class="instrumentso">
+								<img src="__PUBLIC__/Uploads{$v.cate_pic}">
+								<h4>{$v.cate_name}</h4>
+								<span>{$v.id}</span>
+							</div>
+						</div>
+					</foreach>
+				</div>
+
+				<div class="instrument-detail-cate">
+					
+					<foreach name="company['company']" item="v">
+					<div class="instrumentco">
+						<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}">
+							<div class="instrumentcoda">
+								<img src="__PUBLIC__/Uploads{$v.appt_company_pic}">
+								<p>{$v.appt_company_name}</p>
+							</div>
+						</a>
+					</div>
+			
+					</foreach>
+					<a href="{:U('Instrument/company')}" class="instrumentcodab">+ 查看更多</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<load href="__PUBLIC__/js/mo.js" />
+	<script type="text/javascript">
+
+		$('.instrument-category li').click(function(){
+			$(this).addClass('active').siblings().removeClass('active');
+			$('.instrument-detail-cate').eq($(this).index()).fadeIn().siblings().fadeOut();
+		})
+
+		$('.instrument-detail-cate').eq(0).show();
+
+		function ajaxCate(id)
+		{
+			$.ajax({
+				url: "ajaxGetCate",
+				data:"id="+id,
+				context: document.body,
+				success: function(data){
+					if(data){
+						$('.instrumentfa').parent().html(data);
+					}else{
+						mo.msg('没有数据');
+					}
+				}
+			});
+		}
+
+		function ajaxReCate(id)
+		{
+			$.ajax({
+				url: "ajaxReturnCate",
+				data:"id="+id,
+				context: document.body,
+				success: function(data){
+					if(data){
+						$('.instrumentfa').parent().html(data);
+					}else{
+						mo.msg('没有数据');
+					}
+				}
+			});
+		}
+
+		function test(id){
+			alert(id);
+		}
+
+		$('instrumentso h4').click(function(){
+			$.ajax({
+				url: "ajaxReturn",
+				data:"id="+$(this).children().children('span').text(),
+				context: document.body,
+				success: function(data){
+					if(data){
+						$('.instrumentfa').parent().html(data);
+					}else{
+						mo.msg('没有数据');
+					}
+				}
+			});
+		});
+
+	</script>
+</block>

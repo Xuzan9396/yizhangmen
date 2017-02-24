@@ -1,0 +1,24 @@
+<extend name="./Public/template/base.html"/>
+<block name="content">
+	<load href="__PUBLIC__/css/store.css" />
+	<load href="__PUBLIC__/css/service.css" />
+	<load href="__PUBLIC__/css/assess.css" />
+	<include file="./Apps/Home/View/service/publicStoreNav.html"/>
+		<!-- 案例展示   主体内容-->
+		<div class="deal-assess border">
+		<notempty name="service">
+			<div class="deal-assess-content store-border">
+				<foreach name="service" item="value" key="key">
+					<div class="store-onecase min-height">
+						<div class="store-onecase-pic"><a href="{:U('home/service/detail',['sid'=>$value['id'],'storeid'=>$value['pubh_shopid']])}"><img src="/shop/Public/Uploads/{$value['pubh_pic']}" width="257" height="257" alt=""></a></div>
+						<p><span>￥ {$value['pubh_price']}</span><a href="">成交:{$value['pubh_volume']+1}次</a></p>
+						<div class="store-onecase-description"><a href="{:U('home/service/detail',['sid'=>$value['id'],'storeid'=>$value['pubh_shopid']])}">{$value['pubh_title']}</a></div>
+					</div>
+				</foreach>
+			</div>
+			
+		<else/>
+			<div class="serviceNull">目前还没有此类服务!</div>
+		</notempty>
+		</div>
+</block>

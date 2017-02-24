@@ -1,0 +1,307 @@
+*{
+	font-family:glyphicons-halflings-regular;
+	-moz-font-family: glyphicons-halflings-regular;
+	-webkit-font-family: glyphicons-halflings-regular;
+}
+
+.container{
+	padding:0;
+}
+
+body,a,ul,li{
+	transition: color 0.5s;
+	font-size: 14px;
+	text-decoration: none;
+	color:black;
+	list-style: none;
+	padding:0;
+	margin:0;
+	font-family: glyphicons-halflings-regular;
+	-moz-font-family: glyphicons-halflings-regular;
+	-webkit-font-family: glyphicons-halflings-regular;	
+}
+
+header{
+	width: 100%;
+	height: 130px;
+	top:0;
+	left: 0;
+	z-index: 100;
+	background: white;
+}
+
+/*.headerfu{
+	height: 130px;
+}*/
+
+a:hover{
+	transition: color 0.5s;
+	color:#3195F3;
+}
+.left-nav li{
+	float: left;
+}
+
+.left-nav li,.right-nav li{
+	margin-left: 15px;
+}
+.right-nav{
+	float:right;
+}
+
+.nav-item{
+	line-height: 50px;
+}
+
+
+.nav-item li{
+	transition: background 0.5s;
+	width: 90px;
+	margin:0px;
+	padding: 5px;
+	line-height: 20px;
+}
+
+.nav-item li:hover{
+	transition: background 0.5s;
+	background: #EEEEEE;
+}
+.nav-item a{
+	transition: color 0.5s;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+.nav-item a:hover{
+	transition: color 0.5s;
+	color:#3195F3;
+}
+
+.right-nav .nav-item{
+	float: left;
+		margin-left: 15px;
+}
+
+.nav-item .nav-item-sub{
+	display: none;
+	position: absolute;
+	z-index: 100;
+	border:1px solid #EEEEEE;
+	background: white;
+	text-align: center;
+}
+
+.nav-item:hover .nav-item-sub{
+	display: block;
+}
+
+.nav-item:hover .caret{
+	transition: transform 0.5s;
+	transform: rotate(180deg);
+}
+
+.caret{
+	transition: transform 0.5s;
+}
+
+.line{
+	border-top:1px solid #EEEEEE;
+	margin-bottom: 15px;
+}
+
+.footer-link{
+	margin:0 auto;
+	width: 600px;
+	height: 30px;
+}
+.footer-link li{
+	float: left;
+	margin:10px;
+
+}
+
+.footer-copyright{
+	width: 1120px;
+	height: 50px;
+	display: block;
+	float: left;
+	text-align: center;
+}
+
+.search-box{
+	width: 600px;
+	height: 42px;
+	border:3px solid #3195F3 ;
+	margin:10px auto;
+	overflow: hidden;
+}
+
+.search-but{
+	width: 100px;
+	height: 38px;
+	cursor: pointer;
+	float: left;
+
+}
+
+.search-but div:nth-of-type(1){
+	transition: background 0.5s, font-size 0.5s;
+	width: 100px;
+	height: 40px;
+	background: #EEEEEE;
+	line-height: 40px;
+	text-align: center;
+	float: left;
+}
+
+.search-but div:nth-of-type(1):hover{
+	transition: background 0.5s;
+	background: white;
+}
+
+.search-but div:nth-of-type(1):hover .caret{
+	transition: transform 0.5s;
+	transform: rotate(180deg);
+}
+
+.caret{
+	transition: transform 0.5s;
+}
+
+.search-but ul{
+	position: absolute;
+	display: none;
+	background: white;
+	width: 100px;
+	z-index: 100;
+	margin-top: -5px;
+}
+
+.search-but li{
+	transition: background 0.5s;
+	line-height: 30px;
+}
+
+.search-but li:hover{
+	transition: background 0.5s;
+	background: #EEEEEE;
+}
+.search-but:hover ul{
+	display: block;
+}
+
+.search-but li a{
+	box-sizing: border-box;
+	margin:0 10px;
+	text-decoration: none;
+}
+
+.search-box input{
+	display: block;
+	width: 400px;
+	height: 40px;
+	border:none;
+	outline: none;
+	float: left;
+	margin: 0 5px;
+}
+
+.search-box button{
+	transition: background 0.5s;
+	display: block;
+	width: 80px;
+	height: 42px;
+	background:  #3195F3;
+	float: right;
+	border:none;
+	outline: none;
+	color:white;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 40px;
+	margin-top: -4px;
+
+
+}
+
+.search-box button:hover,.publishbut a:hover{
+	transition: background 0.5s;
+	background:  #62C9FA;
+}
+
+
+
+#Login{
+	width: 600px;
+	margin:0 auto;
+}
+
+#myModalLabel{
+	color:#188DC8;
+	text-align:center;
+}
+
+#js-error-info{
+	color:red;
+	font-size:12px;
+}
+
+.navbar{
+	margin-bottom:5px;
+}
+
+#Login{
+}
+
+#Login a{
+	color:#188DC8;
+}
+
+#login-recode{
+	margin-left:10px;
+}
+
+i{
+	color:#0055A2;
+}
+
+.homeimg{
+	width:200px;
+	height: 70px;
+	float: left;
+	overflow: hidden;
+}
+
+.homeimg img{
+	width: 200px;
+	height: 70px;
+}
+
+.publishbut{
+	width: 190px;
+	height: 42px;
+	float: right;
+	margin: 10px auto;
+}
+
+#HomeForm{
+	float: left;
+	margin-left: 100px;
+}
+
+.publishbut a{
+	transition: background 0.5s;
+	width: 92px;
+	height: 42px;
+	background: #3195F3;
+	color: white;
+	text-align: center;
+	line-height: 42px;
+	display: block;
+	float: left;
+	text-decoration: none;
+}
+
+.publishbut a:nth-of-type(2){
+	float: right;
+}

@@ -1,0 +1,204 @@
+<extend name="./Public/template/serviceShop.html" />
+<block name="right1">
+	<script src="__PUBLIC__/layer/layer.js"></script>
+
+	<load href="__PUBLIC__/css/storeRegister1.css" />
+	<load href="__PUBLIC__/js/uploadPreview.js" />
+	<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+	<script src="__PUBLIC__/layui/layui.js"></script>
+	<style>
+	#row1 [class*="col-"]{
+
+	margin-bottom: 0;
+
+	padding-bottom: 0;
+
+	}
+	</style>
+	<div class="col-free-shop">
+		<p class="free-set-shop">店铺修饰</p>
+	</div>
+	<div>
+		<!-- Nav tabs -->
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-9">
+				<ul class="nav nav-tabs nav-tabs1" style="margin-left:-40px" role="tablist">
+					<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">店铺案例</a></li>
+					<li  role="presentation"><a id="two" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">我要装修</a></li>
+				</ul>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="home">
+				<div class="row jiben-info2 bor-botm">
+					<div class="carousel">添加案例</div>
+					<div>
+						<div class="order_span"><span class="font-span">输入订单号，可以快速找到订单并添加案例</span></div>
+						<div class="order_input">
+							<form action="{:U('home/service/storeManagement')}">
+								<input type="text" name="order_number" class="form-control input-serach" value="{:I('get.order_number')}">
+								<input type="submit" value="搜索" class="a-serach layui-btn layui-btn-radius layui-btn-normal">
+							</form>
+						</div>
+					</div>
+					<table class="table">
+						<tr class="th-bak">
+							<th>任务名称</th>
+							<th>价格</th>
+							<th>订单编号</th>
+							<th>操作</th>
+						</tr>
+						<foreach name="data" item="val">
+							<tr>
+								<td>{$val['pubh_title']}</td>
+								<td>{$val['pubh_price']}</td>
+								<td>{$val['order_number']}</td>
+								<td>
+									<a class="layui-btn layui-btn-small" href="{:U('home/service/storeCase',array('id'=>$val['id'],'price'=>$val['pubh_price']))}">
+										<if condition="($val['order_sign'] eq 0) "> 添加
+											<else/> 编辑
+										</if>
+									</a>
+								</td>
+							</tr>
+						</foreach>
+						<tr>
+							<td colspan="4">{$show}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="profile">
+				<div class="row jiben-info2">
+					<div class="descr-nav">
+						<span id="add-carousel">添加轮播图</span>
+					</div>
+					<div id="up-file">
+						
+					</div>
+
+					<div class="descr-nav-2">
+						<span id="add-carousel-2">添加展示图</span>
+					</div>
+					<div id="up-file-2">
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('#add-carousel').click(function(){
+			$('#add-carousel').css("background","#cccccc");
+			$('#up-file').html('<form id="myform"  enctype="multipart/form-data"><div class="up-cont"><p  id="hidden-wai">请选择图片</p><input id ="input-file" name="myfile[]" multiple type="file"/></div><div id="file-num-tips"></div><p id="error"></p><input disabled id="sub" type="submit" style="width:120px;margin-top:30px;background:#F8F8F8;border:1px solid #F8F8F8;"value="上传"><div id="choose-tips"></div></form>');
+			$('.up-cont').css({"width":"120px","position":"relative","overflow":"hidden"});
+			$('#input-file').css({"width":"120px","float":"float:left","opacity":"0"});
+			$('#hidden-wai').css({"position":"absolute","top":"0px","left":"0px","width":"120px","float":"left","text-algin":"center","background":"#F8F8F8","border":"1px solid #F8F8F8"});
+
+			$('#file-num-tips').css({"display":"block","height":"33px","position":"absolute","top":"30px","left":"230px"});
+			$('#choose-tips').css({"border":"1px solid #ccc","border-radius":"5px","min-hieght":"400px","width":"300px","position":"absolute","top":"20px","left":"400px","padding":"10px"});
+			$('#choose-tips').html('<i style="text-algin:center;">温馨提示 !</i><p>1.店铺轮播图最佳尺寸为1920 * 500,其他尺寸效果不佳。</p><p>2.上传的图片大小不得超过3M。</p><p>3.高质量的图片可能会提高店铺服务的销量。</p>');
+			// $('#sub').attr('disabled',true);
+			$('#input-file').change(function(){
+				var num=$(this).prop('files').length;
+				$('#file-num-tips').html('<p>已经选择了'+num+'个文件</p>');
+				var fileval=$(this).val();
+				if(num !=3 || !/\.(jpg|jpeg|png|gif)$/.test(fileval)){
+					$('#error').css({"color":"red","margin-top":"15px"}).html('请上传3张图片 , 必须是jpg,jpeg,png,gif格式中的一种或几种');
+					
+				}else{
+					$('#sub').attr('disabled',false);
+					$('#error').html('');
+					$('#myform').submit(function(){
+						var formData = new FormData($("#myform" )[0]);
+						$.ajax({
+							type:"post",
+							url:"{:U('Home/Service/storeDescription')}",
+							data: formData,
+				          	async: false,
+				          	cache: false,
+				          	contentType: false,
+				          	processData: false,
+							success: function(data){
+
+								if(data){
+									layer.msg('上传成功!');
+									$('#input-file').after($('#input-file').clone().val("")); 
+									$('#file-num-tips').html('');
+									$('#input-file').remove();
+
+								}else{
+									layer.msg('上传失败!');
+									$('#input-file').after($('#input-file').clone().val("")); 
+									$('#file-num-tips').html('');
+									$('#input-file').remove();
+								}
+							}
+						});
+						return false;
+					});
+				}
+			});
+		});
+	</script>
+	<script>
+		$('#add-carousel-2').click(function(){
+			$('#add-carousel-2').css("background","#cccccc");
+			$('#up-file-2').html('<form id="myform-2"  enctype="multipart/form-data"><div class="up-cont-2"><p  id="hidden-wai-2">请选择图片</p><input id ="input-file-2" name="pic[]" multiple type="file"/></div><div id="file-num-tips-2"></div><p id="error-2"></p><input disabled id="sub-2" type="submit" style="width:120px;margin-top:30px;background:#F8F8F8;border:1px solid #F8F8F8;"value="上传"><div id="choose-tips-2"></div></form>');
+			$('.up-cont-2').css({"width":"120px","position":"relative","overflow":"hidden"});
+			$('#input-file-2').css({"width":"120px","float":"float:left","opacity":"0"});
+			$('#hidden-wai-2').css({"position":"absolute","top":"0px","left":"0px","width":"120px","float":"left","text-algin":"center","padding-left":"25px","background":"#F8F8F8"});
+
+			$('#file-num-tips-2').css({"display":"block","height":"33px","position":"absolute","top":"30px","left":"230px"});
+			$('#choose-tips-2').css({"border":"1px solid #ccc","border-radius":"5px","min-hieght":"400px","width":"300px","position":"absolute","top":"20px","left":"400px","padding":"10px"});
+			$('#choose-tips-2').html('<i style="text-algin:center;">温馨提示 !</i><p>1.店铺展示图最佳 <b>宽度</b> 为1100像素，其他尺寸效果不佳。</p><p>1.上传图片大小不得超过3M。</p><p>3.尽量上传清晰的图片,来提高店铺的吸引力。</p>');                                        
+			// $('#sub').attr('disabled',true);
+			$('#input-file-2').change(function(){
+				var num=$(this).prop('files').length;
+				$('#file-num-tips-2').html('<p>已经选择了'+num+'个文件</p>');
+				var fileval2=$(this).val();
+				if(num >4 || num==0 || !/\.(jpg|jpeg|png|gif)$/.test(fileval2)){
+					$('#error-2').css({"color":"red","margin-top":"15px"}).html('请上传4张图片 , 必须是jpg,jpeg,png,gif格式中的一种或几种');
+					
+				}else{
+					$('#sub-2').attr('disabled',false);
+					$('#error-2').html('');
+					$('#myform-2').submit(function(){
+						var formData = new FormData($("#myform-2" )[0]);
+						$.ajax({
+							type:"post",
+							url:"{:U('Home/Service/storeShowPic')}",
+							data: formData,
+				          	async: false,
+				          	cache: false,
+				          	contentType: false,
+				          	processData: false,
+							success: function(data){
+
+								if(data){
+									layer.msg('上传成功!');
+									$('#input-file-2').after($('#input-file-2').clone().val("")); 
+									$('#file-num-tips-2').html('');
+									$('#input-file-2').remove();
+
+								}else{
+									layer.msg('上传失败!');
+									$('#input-file-2').after($('#input-file-2').clone().val("")); 
+									$('#file-num-tips-2').html('');
+									$('#input-file-2').remove();
+								}
+							}
+						});
+						return false;
+					});
+				}
+				
+			});
+		});
+	</script>
+</block>

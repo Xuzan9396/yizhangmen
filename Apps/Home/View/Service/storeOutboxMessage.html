@@ -1,0 +1,222 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+<load href="__PUBLIC__/css/storeRegister1.css" />
+	<!-- <div class="col-free-shop">
+			  		<p class="free-set-shop">免费开店</p>
+			  	</div>
+			  	<div class="open-shop-bd">
+			  		<ul class="ui-step">
+			  			<li class="ui-step-active">
+			  				<div class="item-hd">
+			  					<span class="item-bg item-bg2"></span>
+			  					<span class="item-ico">√</span>
+			  				</div>
+			  				<div class="shop-ws">
+			  					店铺完善信息
+			  				</div>
+			  			</li>
+
+			  			<li class="ui-step-active">
+			  				<div class="item-hd">
+			  					<span class="item-bg item-bg2"></span>
+			  					<span class="item-ico item-ico3">√</span>
+			  				</div>
+			  				<div class="shop-ws">
+			  					技能设置
+			  				</div>
+			  			</li>
+
+			  			<li class="ui-step-active">
+			  				<div class="item-hd">
+			  					<span class="item-ico item-ico3">3</span>
+			  				</div>
+			  				<div class="shop-ws">
+			  					出售服务
+			  				</div>
+			  			</li>
+			  		</ul>
+			  	</div>
+
+			  	<div class="clear"></div>
+
+			  	<div class="row jiben-info">
+			  		<div><b>温馨提示</b></div>
+			  	</div>
+
+			  	<div class="row shop-rule">
+			  		<strong class="item-label text-primary">选择你想入住的一级类目：</strong>
+			  		&nbsp;&nbsp;&nbsp;
+			  		<select name="xuzan"  class="form-control form-categroy-one">
+			  			<option value="2">一级类目</option>
+			  			<option value="1" >硬件开发</option>
+			  			<option value="1" >网站开发</option>
+			  		</select>
+
+			  	</div>
+			  	<div class="up-down-step">
+			  		<a href="" class="btn btn-default">上一步</a>
+			  		<input type="submit" class="btn btn-warning" value="提交信息">
+			  	</div>
+			  	</form>
+			  	<div class="clear"></div>
+
+			<script>
+			$('document').ready(function(){
+
+				// $('.form-categroy-one').change(function(){
+
+				// });
+
+			});
+
+			</script> -->
+
+
+
+			<!-- 开始 -->
+			<div class="container-filut">
+				<div class="" style="width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;">
+						<div class="" style="">
+							发件箱
+						</div>
+				</div>
+			</div>
+			<div class="container-filut" style="position:relative;top:0px;left:0px;border:1px solid #ccc;margin-top:10px;">
+				<div class="" style="margin-bottom:100px;border-bottom:1px solid #ccc;width:100%;padding:20px;">
+					<form id="formbox" action="{:U('Home/Service/storeOutboxMessageAct')}" method="post">
+					<table class="table table-hover" style="table-layout:fixed">
+						<tr>
+							<th style="width:10%">选择</th>
+							<th style="width:20%">标题</th>
+							<th style="width:20%">收件人</th>
+							<th style="width:30%">时间</th>
+							<th style="width:20%">操作</th>
+						</tr>
+						<foreach name="mesm_list" key="k" item="val">
+							<tr class="pipt">
+								<td class="aa"><input class="ipt-checked" type="checkbox" name="mesm_id[]" value="{$val['mesm_id']}"/></td>
+								<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{$val['mesm_title']}</td>
+								<td>{$val['mesm_receiver']}</td>
+								<td>{:date("Y-m-d H:i:s",$val['mesm_sendtime'])}</td>
+								<td>
+									<a href="{:U('Home/Service/storeOutboxMessageAct',['action'=>'sel','mesm_id'=>$val['mesm_id'],'p'=>$return_p])}" class="">查看</a>
+									<!-- <a href="{:U('Home/Message/outboxMessageAct',['action'=>'del','mesm_id'=>$val['mesm_id']])}">删除</a> -->
+									<!-- <button id="btn-sel" class="btn bnt-info" param="{:U('Home/Message/outboxMessageAct',['action'=>'sel','mesm_id'=>$val['mesm_id']])}" type="button" onclick="buttonSel()">查看</button> -->
+									<a href="javascript:void(0);" class="btn-deleteact" mesmid="{:U('Home/Service/storeOutboxMessageAct',['action'=>'del','mesm_id'=>$val['mesm_id']])}" type="button">删除</a>
+								</td>
+							</tr>
+						</foreach>
+					</table>
+				</div>
+				<div class="" style="position:absolute;bottom:30px;left:0px;width:150px;height:40px;text-align:center;line-height:40px;">
+					<button type="button" id="check-all" class="btn btn-info" status='0' onclick="choose();">全选</button>
+					<!-- <input id="check-del" type="submit"  class="btn btn-info" value="删除"> -->
+					<button id=".btn-deleteDel" onclick="cklenDel()" class="btn btn-info" type="button">删除</button>
+				</div>
+				</form>
+				<div class="" style="position:absolute;bottom:30px;right:0px;width:500px;height:40px;text-align:center;line-height:40px;">
+					{$return_page}
+				</div>
+			</div>
+			<!-- 结束 -->
+
+	<script type="text/javascript">
+
+					$('#sel-change').change(function(){
+						$('#form-sel-change').submit();
+					});
+
+					function choose(){
+							if($('#check-all').attr('status') == '0'){
+									$('.ipt-checked').map(function(){
+										$(this).prop('checked',true);
+									});
+									$('#check-all').attr('status','1');
+							}else{
+								$('.ipt-checked').map(function(){
+									$(this).prop('checked',false);
+								});
+								$('#check-all').attr('status','0');
+							}
+					}
+
+					$('.btn-deleteact').click(function(){
+						 var url=$(this).attr('mesmid');
+						swal({
+							title: "你确定要删除吗!",
+							showCancelButton: true,
+							confirmButtonColor: "#DD6B55",
+							confirmButtonText: "确定",
+							cancelButtonText: "取消",
+						 }, function(){
+								 $.get(url);
+								 window.location.reload();
+							});
+					});
+
+					function cklenDel(){
+							var len = $("input[type='checkbox']:checked").length;
+							if(len > 0){
+								swal({
+										title: "你确定要删除吗!",
+										showCancelButton: true,
+										confirmButtonColor: "#DD6B55",
+										confirmButtonText: "确定",
+										cancelButtonText: "取消",
+										// closeOnConfirm: false
+									 }, function(){
+
+									 $('#formbox').submit();
+								 	 });
+							}else{
+								// 弹提示框
+								toastr.options = {
+										closeButton: false,
+										debug: false,
+										progressBar: false,
+										positionClass: "toast-top-center",
+										onclick: null,
+										showDuration: "300",
+										hideDuration: "1000",
+										timeOut: "5000",
+										extendedTimeOut: "1000",
+										showEasing: "swing",
+										hideEasing: "linear",
+										showMethod: "fadeIn",
+										hideMethod: "fadeOut"
+								};
+								var $toast = toastr['warning']('你没有选择操作项');
+							}
+					}
+
+					function cklenRead(){
+							var len = $("input[type='checkbox']:checked").length;
+							if(len > 0){
+								$('#checked-hid').attr('value','markRead');
+								$('#form-ipt-checked').submit();
+							}else{
+								// 弹提示框
+								toastr.options = {
+										closeButton: false,
+										debug: false,
+										progressBar: false,
+										positionClass: "toast-top-center",
+										onclick: null,
+										showDuration: "300",
+										hideDuration: "1000",
+										timeOut: "5000",
+										extendedTimeOut: "1000",
+										showEasing: "swing",
+										hideEasing: "linear",
+										showMethod: "fadeIn",
+										hideMethod: "fadeOut"
+								};
+								var $toast = toastr['warning']('你没有选择操作项');
+							}
+					}
+
+			</script>
+
+
+
+</block>

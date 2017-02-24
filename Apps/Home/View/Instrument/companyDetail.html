@@ -1,0 +1,227 @@
+<extend name="./Public/template/base1.html" />
+<block name="title"><title>仪器库-厂商详情</title></block>
+<block name="content">
+<style type="text/css">
+	body,a{
+		font-family: initial;
+		text-decoration: none;
+	}
+
+	.result{
+		width: 100%;
+		height: auto;
+		overflow: auto;
+
+	}
+
+	.company-content{.
+		width: 880px;
+		height: auto;
+		overflow: auto;
+		border-right: 2px solid #F1F1F1;
+		float: left;
+	}
+
+	.company-info{
+		width: 100%;
+		height: auto;
+	}
+
+	.company-info-title{
+		width: 100%;
+		border-bottom: 2px solid #3498DB;
+	}
+
+	.company-info-title h3{
+		color: #3498DB;
+		margin-left: 10px;
+	}
+
+	.company-info-content{
+		margin-left: 10px;
+		margin-top: 20px;
+		float: left;
+	}
+
+	.company-info-data{
+		width: 550px;
+		height: auto;
+		overflow: auto;
+		background: #DDEEFF;
+		padding: 15px 10px;
+	}
+
+	.company-info-data dt{
+		width: 112px;
+		float: left;
+		text-align: right;
+		color: #999999;
+		font-weight: bold;
+	}
+
+	.company-info-data dd{
+		margin-left: 120px;
+	}
+
+	.company-info-data dd a{
+		color: #3498DB;
+	}
+
+	.company-logo{
+		float: right;
+		width: 210px;
+		height: 210px;
+		margin-top: 50px;
+		margin-right: 50px;
+	}
+
+	.company-logo img{
+		width: 210px;
+		height: 210px;
+	}
+
+	.allgoods{
+		width: 100%;
+		height: auto;
+		overflow: auto;
+		padding: 10px; 
+	}
+
+	.allgoods ul{
+		width: 100%;
+		height: auto;
+		border: 1px solid  #E3E3E3;
+		border-radius: 5px;
+		padding: 15px;
+	}
+
+	.allgoods-cate{
+		width: 100%;
+		height: auto;
+		overflow: auto;
+		border: 1px solid #E3E3E3;
+		border-radius: 5px;
+		margin-bottom: 10px;
+	}
+
+	.allgoods-cate-title{
+		width: 100%;
+		height: auto;
+		overflow: auto;
+		background: #F5F5F5;
+		padding: 0px 10px;
+		border-bottom: 1px solid #E3E3E3;
+	}
+
+	.allgoods-name{
+		width: 100%;
+		height: auto;
+		padding: 10px;
+	}
+
+	.allgoods-name a{
+		font-weight: bold;
+		color: #337AB7;
+	}
+
+	.company-part{
+		width: 290px;
+		float: right;
+		padding-left: 10px;
+	}
+
+	.company-part ul li{
+		width: auto;
+		height: auto;
+		overflow: auto;
+		border-bottom: 1px solid #E3E3E3;
+	}
+
+	.company-part ul li div{
+		width: 172px;
+		height: auto;
+		float: left;
+	}
+
+	.company-part ul li img{
+		width: 70px;
+		height: 70px;
+		float: right;
+	}
+
+	.company-part ul li div a{
+		color:#337AB7;
+		font-size: 16px;
+		text-decoration: none;
+	}
+</style>
+	<div class="container">
+		<div class="company-title">
+			<div>
+				<a href="{:U('Instrument/index')}">首页</a> / 制造商：{$company.company.appt_company_name}
+			</div>
+		</div>
+		<hr>
+		<div class="result">
+			<div class="company-content">
+				<div class="company-info">
+					<div class="company-info-title">
+						<h3>{$company.company.appt_company_name}</h3>
+					</div>
+					<div class="company-info-content">
+						<p>公司信息：</p>
+						<dl class="company-info-data">
+							<dt>国家</dt>
+							<dd>{$company.company.appt_country}</dd>
+							<dt>地址</dt>
+							<dd>{$company.company.appt_address}</dd>
+							<dt>电话</dt>
+							<dd>{$company.company.appt_phone}</dd>
+							<dt>传真</dt>
+							<dd>{$company.company.appt_portraiture}</dd>
+							<dt>官方网站</dt>
+							<dd><a href="http://{$company.company.appt_www}" target="bank">{$company.company.appt_www}</a></dd>
+							<dt>详情</dt>
+							<dd>{$company.company.appt_detail}</dd>
+						</dl>
+					</div>
+					<div class="company-logo">
+						<img src="__PUBLIC__/Uploads{$company.company.appt_company_pic}">
+					</div>
+				</div>
+				<div class="allgoods">
+					<h5>所有产品列表：</h5>
+					<ul>
+						<foreach name="company['allGoods']" item="val">
+							<li class="allgoods-cate">
+								<div class="allgoods-cate-title">
+									<h4><a href="javascript:;">{$val.cate.pcate_name}</a></h4>
+								</div>
+								<div class="allgoods-name">
+									<foreach name="val['soncate']" key="k" item="v">
+										<a href="/shop/Home/Instrument/category.html?gid={$v['cate_id']}&cid={$v.com_id}">{$v.cate_name}</a>({$v.count})
+									</foreach>
+								</div>
+							</li>
+						</foreach>
+					</ul>
+				</div>	
+			</div>
+			<div class="company-part">
+				<h4>公司产品（部分）</h4>
+				<hr>
+				<ul>
+					<foreach name="company['comCate']" item="v">
+						<li>
+							<div>
+								<h5><a href="{:U('Home/Instrument/detail?id='.$v['appt_id'])}">{$v.appt_goodsname}</a></h5>
+								<p><a href="">{$v.cate_sname}</a></p>
+							</div>
+							<img src="__PUBLIC__/Uploads{$v.appt_pic}">
+						</li>
+					</foreach>
+				</ul>
+			</div>
+		</div>
+	</div>
+</block>

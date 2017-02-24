@@ -1,0 +1,32 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+	<load href="__PUBLIC__/css/officalOrderDetail.css" />
+	<empty name="data">
+		<div class="offical-title">
+			<span class="offical-detail mleft">官方推荐</span>
+		</div>
+		<hr>
+		<div class="not-tips">暂无官方推荐需求</div>
+	<else />
+		<div class="offical-main">
+			<div class="offical-title">
+				<span class="offical-detail">官方推荐</span>
+				<span class="offical-order0-time">{:date('Y-m-d / H:i:s',$data['need_valid_time'])}</span>
+				<span class="offical-endtime">投标截止时间 :</span>
+				<span class="offical-description">这是官方为你精心推荐的订单</span>
+			</div>
+			<div class="offical-contents">
+				<p class="offical-service-title"><a href="{:U('Home/Need/needDisplay',['needid'=>$data['need_id']])}">{$data['need_title']}</a></p>
+				<p class="money-keep">￥{$data['need_budget']} &nbsp;&nbsp;&nbsp;&nbsp;方案征集中</p>
+				<p class="offical-cate"><b>服务分类</b> : {$data['cate_name']}</p>
+				<p class="offical-request"><b>具体要求如下 :</b></p>
+				<div class="order-request">{$data['need_desc']}</div>
+					
+				<div class="offical-bottom">
+					<span>目前还剩 <b>10</b> 个投标名额</span>
+					<a class="bid-now" href="{:U('Home/Need/needDisplay',['needid'=>$data['need_id']])}">立即投标</a>
+				</div>
+			</div>
+		</div>
+	</empty>
+</block>

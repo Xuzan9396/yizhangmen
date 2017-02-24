@@ -1,0 +1,1115 @@
+<extend name="./Public/template/base1.html" />
+<block name="title"><title>仪器库-分类产品</title></block>
+<block name="content">
+<style type="text/css">
+		
+
+	.title{
+		width: 100%;
+		height: 30px;
+		padding: 10px 0px;
+	}
+
+	.title ol li{
+		float: left;
+	}
+
+	.alpha-jump{
+		width: 90%;
+		height: 30px;
+		margin: 0 auto;
+		display: none;
+		line-height: 30px;
+	}
+
+	.alpha-jump a{
+		transition: background 0.5s;
+		box-sizing: border-box;
+		border: 1px solid #CCCCCC;
+		text-decoration: none;
+		padding: 3px 7px;
+		box-sizing: border-box;
+		border-radius: 5px
+	}
+
+	.alpha-jump a:hover{
+		transition: background 0.5s;
+		background: #CCCCCC;
+		animation: glow 1s ease-out infinite alternate;
+	}
+
+	@keyframes glow{
+		0%{
+			box-shadow: 0 0 1px 1px #CCCCCC;
+		}
+
+		100%{
+			box-shadow: 0 0 5px 2px red;
+		}
+	}
+
+	.filter{
+		width: auto;
+		height: auto;
+		overflow: auto;
+		margin:10px 0px;
+	}
+
+	.filter-label,.filter-label1,.filter-label2,.filter-label3{
+		width: 120px;
+		float: left;
+		text-align: right;
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	.filter-choices1,.filter-choices2,.filter-choices3,.filter-choices{
+		width: 90%;
+		height: 27px;
+		overflow: hidden;
+		margin: 0 auto;
+	}
+
+	.filter-actions,.filter-actions1,.filter-actions2,.filter-actions3{
+		float: right;
+
+	}
+
+	.filter-panel,.filter-panel1,.filter-panel2,.filter-panel3{
+		width: 80%;
+		float: left;
+	}
+
+	.filter-choices label,.filter-choices1 label,.filter-choices2 label,.filter-choices3 label{
+		margin-right: 10px;
+	}
+
+	.filter-choices{
+		position: absolute;
+		width: 843px;
+		margin-left: 46px;
+		background: white;
+
+	}
+
+	.filter-choices li{
+		position: absolute;
+		display: none;
+		width: 840px;
+	}
+
+	.moresearch{
+		transition: background 0.5s;
+		width: 200px;
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		border: 1px solid #62C9FA;
+		background: #3195F3;
+		color: white;
+		cursor: pointer;
+		margin: 0 auto;
+	}
+
+	.moresearch:hover{
+		transition: background 0.5s;
+		background: #62C9FA;
+	}
+
+	.search-bar{
+		height: 220px;
+		overflow: hidden;
+	}
+
+	.filter-choices span,.filter-choices1 span{
+		color: #CCCCCD;
+	}
+
+	.results-query{
+		width: 100%;
+		height: 50px;
+	}
+
+	.bdsharebuttonbox{
+		width: 180px;
+		height: 28px;
+		float: left;
+	}
+
+	.bdsharebuttonbox a{
+		box-sizing: border-box;
+		width: 17px;
+		height: 18px;
+		float: left;
+		margin-right: 5px;
+		background-image: url('__PUBLIC__/image/icons_0_16.png');
+		background-repeat: no-repeat;
+	}
+
+	.bds_more{
+		background-position: 0 0;
+	}
+
+	.bds_sqq{
+		background-position: 0 -2652px;
+	}
+
+	.bds_copy{
+		background-position: 0 -2288px;
+	}
+
+	.bds_mail{
+		background-position: 0 -2340px;
+	}
+
+	.bds_tsina{
+		background-position: 0 -104px;
+	}
+
+	.bds_weixin{
+		background-position: 0 -1612px;
+	}
+
+	.searchform{
+		width: 350px;
+		height: 50px;
+		float: right;
+	}
+
+	.searchform input{
+		width: 280px;
+		float: left;
+	}
+
+	.searchform button{
+		float: left;
+		color: white;
+	}
+
+	.resultli{
+		width: 580px;
+		height: auto;
+		overflow: auto;
+		float: left;
+	}
+
+	.result{
+		width: 555px;
+		height: auto;
+		overflow: auto;
+	}
+
+	.prod{
+		width: 555px;
+		height: 30px;
+		border-bottom: 2px solid #62C9FA;
+	}
+
+	.prod button{
+		display: block;
+		float: right;
+		margin-top: -45px;
+		width: 60px;
+		height: 28px;
+		line-height: 20px;
+		text-align: center;
+		padding: 0;
+	}
+
+	.prod h3{
+		width: 300px;
+		box-sizing: border-box;
+	}
+
+	.prod a{
+		font-size: 26px;
+		color: #337AB7;
+		text-decoration: none;
+		font-family: inherit;
+	}
+
+	.buts{
+		width: 555px;
+		height: 35px;
+		float: left;
+	}
+
+	.buts button{
+		float: left;
+		margin-right: 6px;
+	}
+
+	.col{
+		width: 380px;
+		height: 225px;
+		float: left;
+		overflow: hidden;
+	}
+
+	.col p{
+		margin-bottom: 5px;
+	}
+
+	.colimg{
+		width: 160px;
+		height: 160px;
+		float: right;
+		margin-top:20px;
+	}
+
+	.colimg img{
+		width: 160px;
+		height: 160px;
+	}
+
+	.attribute-name{
+		font-size: 14px;
+		font-weight: bold;
+		width: 120px;
+		text-align: right;
+		display: block;
+		color: #999999;
+		float: left;
+		margin-right: 5px;
+		overflow: hidden;
+		text-overflow: hidden;
+
+	}
+
+	.attribute-val{
+		width: 250px;
+		float: left;
+	}
+
+	.company-name{
+		color: #337AB7;
+		font-size: 16px;
+		box-sizing: border-box;
+		margin-left: 8px;
+	}
+
+	.pageshow{
+		width: 800px;
+		height: auto;
+		margin: 20px 40%;
+	
+	}
+
+	.filter-term{
+		width: 90%;
+		height: auto;
+		overflow: auto;
+		margin-bottom: 10px;
+	}
+
+	.filter-term-son{
+		width: 84%;
+		height: auto;
+		float: right;
+
+	}
+
+	.filter-term-span{
+		width: auto;
+		border: 1px solid gray;
+		display: block;
+		padding: 8px 5px;
+		font-size: 16px;
+		text-decoration: none;
+		border-radius: 5px;
+		margin-right: 5px;
+		margin-bottom: 5px;
+		float: left;
+	}
+
+	.remove{
+		cursor: pointer;
+	}
+
+	.contrast{
+		width: 1180px;
+		height: 120px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin-bottom: 0;
+		margin: auto;
+		border: 1px solid #62C9FA;
+		position: fixed;
+		background: white;
+		padding: 10px;
+		z-index: 999;
+		display: none;
+	}
+
+	.contrast2{
+		width: 180px;
+		height: 120px;
+		float: right;
+	}
+
+	.jin{
+		cursor:not-allowed;
+	}
+
+	.duibi{
+		width: 120px;
+		margin: 12px auto;
+		display: block;
+	}
+
+	.dib{
+		width: 130px;
+		display: block;
+		margin: 0 auto;
+	}
+
+	.cde{
+		display: block;
+		float: right;
+	}
+
+	.compare-prod{
+		width: 242px;
+		height: 100px;
+		border-right: 1px solid #62C9FA;
+		float: left;
+		overflow: hidden;
+	}
+
+	.glyphicon{
+		cursor: pointer;
+	}
+
+	.compare-prod img{
+		width: 80px;
+		height: 80px;
+		display: block;
+		float: left;
+		margin-left: 20px;
+	}
+
+	.compare-prod p{
+		display: block;
+		width: 100px;
+		text-align: right;
+		float: right;
+		margin-right: 10px;
+	}
+
+	.compare-prod p:nth-of-type(2){
+		text-align: left;
+	}
+
+	.bii{
+		width: 200px;
+		height: 50px;
+		border: 2px solid red;
+		line-height: 50px;
+		color: red;
+		text-align: center;
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 80%;
+		display: none;
+		z-index: 999;
+		background: white;
+		margin: auto;
+		border-radius: 5px;
+	}
+</style>
+	<div class="container">
+		<div class="title">
+			<ol>
+				<li><a href="{:U('Instrument/index')}">首页</a>	<a href="{:U('Instrument/category?gid='.$_GET['gid'])}">{$data['title']}</a></li>
+			</ol>
+		</div>
+		<hr>
+			<div class="search-bar">
+				<div class="filters">
+					<div class="filter">
+					 	<div class="filter-label">制造商</div>
+					 	<div class="filter-panel">
+					 		<div class="alpha-jump">
+					 			<a href="javascript:;" class="all">全部</a>
+					 			<a href="javascript:;" class>A</a>
+					 			<a href="javascript:;" class>B</a>
+					 			<a href="javascript:;" class>C</a>
+					 			<a href="javascript:;" class>D</a>
+					 			<a href="javascript:;" class>E</a>
+					 			<a href="javascript:;" class>F</a>
+					 			<a href="javascript:;" class>G</a>
+					 			<a href="javascript:;" class>H</a>
+					 			<a href="javascript:;" class>I</a>
+					 			<a href="javascript:;" class>J</a>
+					 			<a href="javascript:;" class>K</a>
+					 			<a href="javascript:;" class>L</a>
+					 			<a href="javascript:;" class>M</a>
+					 			<a href="javascript:;" class>N</a>
+					 			<a href="javascript:;" class>O</a>
+					 			<a href="javascript:;" class>P</a>
+					 			<a href="javascript:;" class>Q</a>
+					 			<a href="javascript:;" class>R</a>
+					 			<a href="javascript:;" class>S</a>
+					 			<a href="javascript:;" class>T</a>
+					 			<a href="javascript:;" class>U</a>
+					 			<a href="javascript:;" class>V</a>
+					 			<a href="javascript:;" class>W</a>
+					 			<a href="javascript:;" class>X</a>
+					 			<a href="javascript:;" class>Y</a>
+					 			<a href="javascript:;" class>Z</a>
+					 		</div>
+					 	
+						 		<ul class="filter-choices">
+						 			<li style="display: block;">
+						 				<foreach name="data['company']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyA']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyB']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyC']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyD']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyE']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyF']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyG']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyH']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyI']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyJ']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyK']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyL']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyM']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyN']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyO']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyP']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyQ']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyR']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyS']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyT']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyU']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyV']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyW']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyX']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyY']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyZ']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 			<li>
+						 				<foreach name="data['companyOh']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_company_name" value="{$v.appt_company_id}">
+							 					<a href="/shop/Home/Instrument/category?gid={$_GET['gid']}&cid={$v.appt_company_id}">{$v.appt_company_name}<span>({$v.count})</span></a>
+							 				</label>
+							 			</foreach>
+						 			</li>
+						 		</ul>
+					 		
+					 	</div>
+					 	<div class="filter-actions">
+					 		<a href="javascript:;"><span class="x-toggle">展开</span></a>
+					 		<a href="javascript:;"><span class="y-toggle">应用</span></a>
+					 	</div>
+					</div>
+
+					<foreach name="data['cateAttr']" item="val">
+						<div class="filter">
+						 	<div class="filter-label1">{$val.appt_attribute_name}</div>
+						 	<div class="filter-panel1">
+						 		<ul class="filter-choices1">
+						 			<li>
+						 				<foreach name="val['attribute_val']" item="v">
+							 				<label>
+							 					<input type="checkbox" name="appt_attr" value="{$v.appt_attributeval_value}">
+							 					<a href="javascript:;">{$v.appt_attributeval_value}<span>({$v.count})</span></a>
+							 					
+							 				</label>
+						 				</foreach>
+						 			</li>
+						 		</ul>
+						 	</div>
+						 	<div class="filter-actions1">
+						 		<a href="javascript:;"><span class="y-toggle1">应用</span></a>
+						 	</div>
+						</div>
+				 	</foreach>
+				</div>
+			</div>
+			<if condition="$data['filter']" >
+				<div class="filter-term">
+					<div class="filter-label">筛选条件</div>
+					<div class="filter-term-son">
+						<foreach name="data['filter']" item="val">
+							<if condition="$val['appt_id']">
+								<span class="filter-term-span">{$val.appt_company_name}<i class="glyphicon glyphicon-remove remove" cid="{$val.appt_id}"></i></span>
+							</if>
+							<if condition="$val['attr_id']">
+								<span class="filter-term-span">{$val.attr_name}<i class="glyphicon glyphicon-remove remove" aid="{$val.attr_name}"></i></span>
+							</if>
+						</foreach>
+					</div>
+				</div>
+			</if>
+		<div class="moresearch">更多搜索条件</div>
+	</div>
+	<hr>
+	
+	<div class="container">
+		<div class="results-query">
+			<div class="bdsharebuttonbox">
+				<a href="#" class="bds_more"></a>
+				<a href="#" class="bds_sqq" title="分享到QQ好友"></a>
+				<a href="#" class="bds_copy" title="分享到复制网址"></a>
+				<a href="#" class="bds_mail" title="分享到邮件分享"></a>
+				<a href="#" class="bds_tsina" title="分享到新浪微博"></a>
+				<a href="#" class="bds_weixin" title="分享到微信"></a>
+			</div>
+			<!-- <div class="searchform">
+				<form method="get">
+					<div class="form-group">
+						<input type="text"  class="form-control" name="q" placeholder="在结果中过滤">
+						<button type="subimt" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>搜索</button>
+					</div>
+				</form>
+			</div> -->
+		</div>
+		<ul>
+			<foreach name="data['goods']" item="v">
+				<li class="resultli">
+					<div class="result">
+						<div class="prod">
+							<h3><a href="{:U('Home/Instrument/detail?id='.$v['appt_id'])}">{$v.appt_goodsname}</a></h3>
+							<if condition="$_SESSION['home_user_info']">
+								<if condition="$v['collect'] == 1">
+									<button type="button" class="btn btn-default chang" onclick="collect(this,'{$v.appt_id}')" status="0" style="color:red">已收藏</button>
+
+								<else />
+									<button type="button" class="btn btn-default chang" onclick="collect(this,'{$v.appt_id}')" status="1">☆ 收藏</button>
+								</if>
+							<else />
+								<button type="button" class="btn btn-default chang" onclick="showloginn()">☆ 收藏</button>
+
+							</if>
+						</div>
+						<div class="col">
+							<p><a href="{:U('Instrument/companyDetail?cid='.$v['appt_company_id'])}" class="company-name">{$v.appt_company_name}</a></p>
+						
+								<foreach name="v['attribute']" item="val">
+									<p><span class="attribute-name">{$val.attribute_name}</span>
+									<span class="attribute-val">{$val.appt_attributeval_value}</span></p>
+								</foreach>
+						
+						</div>
+						<div class="colimg">
+							<a href="{:U('Home/Instrument/detail?id='.$v['appt_id'])}"><img src="__PUBLIC__/Uploads{$v.appt_pic}"></a>
+						</div>
+						<div class="buts">
+							<a href="{:U('Home/WordOfMouth/index',['id'=>$v['appt_id'],'pid'=>$_GET['gid']])}"><button class="btn btn-default"><i class="glyphicon glyphicon-heart-empty"></i>口碑</button></a>
+							<a href="http://{$v.appt_www}" target="bank"><button class="btn btn-default"><i class="glyphicon glyphicon-globe"></i>官网资料</button></a>
+							<button class="btn btn-default" onclick="contrast('{$v.appt_pic}','{$v.appt_goodsname}','{$v.appt_id}')"><i class="glyphicon glyphicon-unchecked"></i>对比</button>
+							<button class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i>询价</button>
+						</div>
+					</div>
+				</li>
+			</foreach>
+		</ul>
+ 
+	</div>
+	
+	<div class="pageshow">{$data['pageshow']}</div>
+	<div class="contrast">
+		<div class="contrast1">
+			<div class="compare-prod"></div>	
+		
+			<div class="compare-prod"></div>	
+							
+			<div class="compare-prod"></div>	
+							
+			<div class="compare-prod"></div>				
+		</div>
+		<div class="contrast2">
+			<a class="btn btn-success duibi jin">对比</a>
+			<c class="dib">
+				<a class="btn btn-default clear">清空</a>
+				<a class="btn btn-default cde">隐藏</a>
+			</c>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('.y-toggle').click(function(){
+		   var gid = {$_GET['gid']};
+			var arr = [];
+			$('input[name=appt_company_name]:checked').each(function(){
+				arr.push( $(this).val());
+			})
+			arr = $.unique(arr);	
+			if( arr.length ){
+
+				window.location.href = "/shop/Home/Instrument/category/?gid="+gid+"&cid="+arr;
+				
+			}
+		})
+
+		$('.filter').each(function(){
+			var obj = $(this);
+			$(this).find('.y-toggle1').click(function(){
+				var arra = [];
+				obj.find('input[name=appt_attr]:checked').each(function(){
+					arra.push( $(this).val());
+				})
+				arra = $.unique(arra);
+				arra = arra.join('$');
+				if( arra.length ){
+					var get = window.location.href;
+					var n = get.indexOf("?");
+					get = get.substring(n+1);
+					
+					get = get + "&aid=" + arra;
+					window.location.href = "/shop/Home/Instrument/category/?"+get;
+
+				}
+			})
+		})
+
+		$('.filter-term-span').each(function(){
+			var obj = $(this);
+			$(this).find('i').click(function(){
+				var get = window.location.href;
+				var n = get.indexOf("?");
+				get = get.substring(n+1);
+				var arr = get.split('&');
+				arr[arr[0].substring(0,3)] = arr[0].substring(4);
+				arr[arr[1].substring(0,3)] = arr[1].substring(4);
+				if( arr[2]){
+					arr[arr[2].substring(0,3)] = arr[2].substring(4);
+				}
+
+				var cid = '';
+				if( $(this).attr('cid') ){
+				    cid = $(this).attr('cid');
+					var ncid = arr['cid'];
+					ncid = ncid.split(',');
+					ncid.splice($.inArray(cid,ncid),1)
+					cid = ncid.join(',');
+				}else{
+					cid = arr['cid'];
+				}
+
+				var gid = arr['gid'];						
+				var narr = [];
+				narr['gid'] = arr['gid'];
+				if( arr['cid'] ){
+					narr['cid'] = cid;
+				}
+				if( $(this).attr('aid')){
+					
+					var aid = $(this).attr('aid').split(':')[1];
+				
+					narr['aid'] = arr['aid'];
+					var aarr = narr['aid'].split('$');
+					aarr.splice($.inArray(aid,aarr),1);
+					aarr = aarr.join('$');
+
+				}else{
+					aarr = arr['aid'];
+				}
+
+				var str = '';
+				str += "gid=" + narr['gid'];
+				if( arr['cid']){
+					str += "&cid=" + cid;
+				}
+				if( aarr){
+					str += "&aid=" + aarr;
+				}
+		
+				window.location.href = "/shop/Home/Instrument/category/?"+str;
+			})
+		})
+
+		 function trim(stri) { return stri.replace(/(^\s*)|(\s*$)/g, ""); }
+		
+	var flag = true;
+		$('.x-toggle').click(function(){
+			$('.alpha-jump').slideToggle();
+			if(flag){
+				$('.x-toggle').html('收起');
+				$('.filter-choices').animate({
+					'border':'1px solid #CCCCCC',
+					'height':'200px',
+					'overflow':'auto',
+				}).css('border','1px solid #CCCCCC');
+				
+				flag = false;
+			}else{
+				$('.x-toggle').html('展开');
+				$('.filter-choices').animate({
+					'border':'none',
+					'height':'27px',
+					'overflow':'hidden',
+				}).css('border','none');
+				
+				$('.filter-choices li').eq(0).show().siblings().hide();
+				flag = true;
+			}
+		})
+
+		
+		$('.x-toggle1').each(function(){
+			$(this).click(function(){
+				if(flag1){
+					$(this).parent().parent().prev().find('ul').css({
+						'border':'1px solid #CCCCCC',
+						'height':'auto',
+						'overflow':'auto',
+					})
+					flag1 = false;
+					
+				}else{
+					$(this).parent().parent().prev().find('ul').css({
+						'border':'1px solid white',
+						'height':'27px',
+						'overflow':'hidden',
+					})
+					flag1 = true;
+				}	
+			})
+		})
+
+
+		$('.alpha-jump a').each(function(){
+			$(this).hover(function(){
+				$('.filter-choices li').eq($(this).index()).css({
+					'display':'block'
+				}).siblings().css({
+					'display':'none'
+				})
+			})
+		})
+
+		var flag2 = true;
+		if($('.filters').height() <= 230 ){
+			$('.moresearch').hide();
+		}else{
+			$('.moresearch').show();
+		}
+		$('.moresearch').click(function(){
+			if(flag2){
+				$('.search-bar').animate({
+					'height' : $('.filters').height()+30+'px',
+				}).css('overflow','auto')
+				flag2 = false;
+			}else{
+				$('.search-bar').animate({
+					'height' : '220px',
+					'overflow':'hidden',
+				})
+				flag2 = true;
+			}
+		})
+	
+		
+		function collect(obj,id){
+			$.ajax({
+				data:{'id':id,'status':$(obj).attr('status')},
+				type:'post',
+				url:"{:U('Home/Instrument/collect')}",
+				success:function(res){
+					if(res == '1'){
+						$(obj).html('已收藏').css({
+							'color' : 'red'
+						}).attr('status','0');
+					}else if(res == '0'){
+						$(obj).html('☆ 收藏').css({
+							'color':'black'
+						}).attr('status','1')
+					}
+				}
+			})
+		}
+
+		var status = 0;
+		$('.clear').click(function(){
+			status = 0;
+			$('.duibi').addClass('jin');
+			$('.compare-prod').children().slideUp();
+
+			setTimeout(function(){
+				$('.compare-prod').children().remove();
+			},500)
+		})
+
+		$('.cde').click(function(){
+			$('.contrast').slideUp();
+
+		})
+
+		var lenn = true;
+		function contrast(pic,name,id){
+							
+			if( status >= 1 ){
+				$('.duibi').removeClass('jin');
+			}else{
+				$('.duibi').addClass('jin');
+			}
+
+			var str = '<img src="/shop/Public/Uploads/'+pic+'" pid='+id+'> <p><i class="glyphicon glyphicon-remove" onclick="remove(this)"></i></p><p>'+name+'</p>';
+			$('.contrast').slideDown();
+			var len = 4;
+			if( !$('.compare-prod').eq(0).children().length ){
+				$('.compare-prod').eq(0).children().remove();
+				$('.compare-prod').eq(0).append(str);
+				len--;
+			}else if( !$('.compare-prod').eq(1).children().length ){
+				$('.compare-prod').eq(1).children().remove();
+				$('.compare-prod').eq(1).append(str);
+				len--;
+			}else if( !$('.compare-prod').eq(2).children().length ){
+				$('.compare-prod').eq(2).children().remove();
+				$('.compare-prod').eq(2).append(str);
+				len--;
+			}else if( !$('.compare-prod').eq(3).children().length ){
+				$('.compare-prod').eq(3).children().remove();
+				$('.compare-prod').eq(3).append(str);
+			}
+
+			if( len == 4 ){
+				if( lenn ){
+					var str = '<div class="bii">最多可以对比4个</div>';
+					$('body').append(str);
+					$('.bii').slideDown().delay(3000).slideUp();
+					lenn = false;
+					setTimeout(function(){
+						$('.bii').remove();
+						lenn = true;
+					},5000)
+				}
+			}
+			status++;
+
+		}
+
+		function remove(obj){
+			status --;
+
+			$(obj).parent().parent().children().slideUp();
+			setTimeout(function(){
+				$(obj).parent().parent().children().remove();
+			},500)
+			if( status >= 2 ){
+				$('.duibi').removeClass('jin');
+			}else{
+				$('.duibi').addClass('jin');
+			}
+		}
+
+		$('.duibi').click(function(){
+			var pid = '';
+			var get = window.location.href;
+			var n = get.indexOf("?");
+			get = get.substring(n+1);
+			if( status >= 2 ){
+				if( $('.compare-prod').eq(0).children().length ){
+					pid += $('.compare-prod').eq(0).find('img').attr('pid');
+				}
+
+				if( $('.compare-prod').eq(1).children().length ){
+					pid += ','+$('.compare-prod').eq(1).find('img').attr('pid');
+				}
+
+				if( $('.compare-prod').eq(2).children().length ){
+					pid += ','+$('.compare-prod').eq(2).find('img').attr('pid');
+				}
+
+				if( $('.compare-prod').eq(3).children().length ){
+					pid += ','+$('.compare-prod').eq(3).find('img').attr('pid');
+				}
+
+				window.location.href = "/shop/Home/Instrument/compare/?pid="+pid+'&'+get;
+			}
+		})
+	</script>
+</block>

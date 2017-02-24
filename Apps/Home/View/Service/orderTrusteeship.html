@@ -1,0 +1,333 @@
+<extend name='./Public/template/base.html' />
+
+
+    <block name="file">
+        <!-- 独立的 -->
+        <load file="__PUBLIC__/home/order/css/order-trusteeship.css"/>
+    	<load file="__PUBLIC__/home/order/css/order-contract.css"/>
+    </block>
+
+
+<block name="content">
+    <!-- 托管页开始 -->
+
+    <div class="container">
+        <div class="row">
+            <div class="container-box col-lg-12">
+                <!-- 左边内容 -->
+                <div class="box-left col-lg-9">
+                    <!-- 服务信息 -->
+                    <div class="service-info">
+                        <div class="service-info-box">
+                            <!-- 头像 -->
+                            <div class="service-info-div">
+                                <a href="">
+                                    <img src="__PUBLIC__/Uploads/headportrait/{$userList['impr_picture']}" alt="">
+                                </a>
+                            </div>
+                            <!-- 购买信息 -->
+                            <div class="service-info-div-title">
+                                <span>{$userList['user_account']}</span>
+                                <a href="">购买您的出售服务</a>
+                            </div>
+                            <div class="service-info-con col-lg-10">
+                                <div class="service-info-money">
+                                    <span class="span1" style="background:#ccc;">金额</span>
+                                    <span class="span2" style="color:#ccc;">￥</span>
+                                    <span class="span3" style="color:#ccc;">{$list['order_number_price']}</span>
+                                    <span class="span4">交易金额</span>
+                                </div>
+                                <button type="button" class="btn" disabled="disabled">评价雇主</button>
+                            </div>
+                            <div class="service-info-con col-lg-10">
+                                <span class="service-info-con-span" style="color:#393D49">解释说明托管内容流程业务规则</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 服务信息结束 -->
+                    <!-- 内容头部选项 -->
+                    <div class="content col-lg-12">
+                        <!-- 选项 -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active contentorder-title col-lg-2"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">需求描述</a></li>
+                            <li role="presentation" class="contentorder-title col-lg-2"><a href="#contract" aria-controls="home" role="tab" data-toggle="tab" >合同</a></li>
+                            <li role="presentation" class="contentorder-title col-lg-2"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" id="workid">工作台</a></li>
+                        </ul>
+                        <!-- 内容 -->
+                        <div class="tab-content">
+                            <!-- 需求开始 -->
+                            <div role="tabpanel" class="tab-pane active" id="home">
+                                <!-- 订单号 -->
+                                <div class="ordernum">
+                                    订单号:&nbsp;&nbsp;<span>{$list['order_number']}</span>
+                                </div>
+                                <!-- 要求 -->
+                                <div class="order-need">
+                                    您的要求:
+                                </div>
+                                <!-- 订单的信息 -->
+                                <div class="order-info">
+                                    <p>服务分类:<span>{$cate['catename']}</span></p>
+                                    <p>购买数量:<span>{$list['order_number_total']}</span></p>
+                                    <p>您的需要:<span>{$list['pubh_title']}</span></p>
+                                    <p>具体需取:<span>{$list['order_description']}</span></p>
+                                </div>
+                                <!-- 订单的信息结束 -->
+                                <div class="order-time col-lg-12">
+                                    <div class="col-lg-4">
+                                        <span>时间:</span>
+                                        <span>{:date('Y-m-d',$list['order_time'])}</span>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <span>订单号:</span>
+                                        <span>{$list['order_number']}</span>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <a href="">申请退款&nbsp;&gt;</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 需求结束 -->
+                            <!-- 合同开始 -->
+                            <div role="tabpanel" class="tab-pane" id="contract">
+                                <div class="row">
+                                    <div class="contract-box col-lg-12">
+                                        <h3 class="contract-title">三方合同</h3>
+                                        <p class="contract-explain">三方合同说明：此合同由雇主、服务商及XXX网在线签订、共同遵守</p>
+                                        <div class="contract-file col-lg-12">
+                                            <dl class="contract-file-dl">
+                                                <dt class="contract-file-dt">合同文件</dt>
+                                                <p style="font-size:14px">暂未上传合同</p>
+                                            </dl>
+                                        </div>
+                                        <div class="contract-text col-lg-12">
+                                            <p>
+                                                1.雇主与服务商应确认各项目阶段具体内容、工作期限、支付金额的事项，无异议后服务商开始工作
+                                            </p>
+                                            <p>
+                                                2.本协议订立后,服务商应按照约定的工作期限、工作内容完成工作并提交工作成果，双方可协商变更各项目阶段工作内容、期限、支付金额等内容，变更须以补充协议或者其他明确的方式作出，否则视为未变更
+                                            </p>
+                                        </div>
+                                        <div class="contract-seal col-lg-6">
+                                            <p>
+                                                甲方(雇主): <span>{$user.user_account}</span>
+                                            </p>
+                                            <p>
+                                                签署日期: <span>2017年01月01日</span>
+                                            </p>
+                                            <div class="contract-seal-img">
+                                                <img class="seal-img-no" src="__PUBLIC__/image/service/image/signs.png">
+                                            </div>
+                                        </div>
+                                        <div class="contract-seal col-lg-6">
+                                            <p>
+                                                乙方(服务商): <span>{$store.store_realname}</span>
+                                            </p>
+                                            <p>
+                                                签署日期: <span>2017年01月01日</span>
+                                            </p>
+                                            <div class="contract-seal-img">
+                                                <if condition="$order['order_status'] lt 7">
+                                                <img class="seal-img-no" src="__PUBLIC__/image/service/image/signs.png">
+                                                <else/>
+                                                    <img class="seal-img-ok" src="__PUBLIC__/image/service/image/signs.png">
+                                                </if>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 工作台 -->
+                            <div role="tabpanel" class="tab-pane" id="profile">
+                                <!-- 进度条 -->
+                                <div class="speed col-lg-1">
+                                    <center>
+                                        <!-- 服务球 -->
+                                        <div class="speed-service speed-service-box1 col-lg-12">
+                                            <span class="speed-service">服务</span>
+                                        </div>
+                                        <!-- 上传合同 -->
+                                        <div class="speed-service speed-work-box1 col-lg-12"  style="background:#516784;">
+                                            <span class="speed-service speed-work" >合同</span>
+                                        </div>
+                                        <!-- 工作球 -->
+                                        <div class="speed-service speed-work-box1 col-lg-12">
+                                            <span class="speed-service speed-work">工作</span>
+                                        </div>
+                                        <!-- 评价球 -->
+                                        <div class="speed-service speed-evaluate-box1 col-lg-12">
+                                            <span class="speed-service">评价</span>
+                                        </div>
+                                        <!-- 条 -->
+                                        <div class="speed-bar">
+                                            <!-- 服务条 -->
+                                            <div class="speed-bar-service1"></div>
+                                        </div>
+                                    </center>
+                                </div>
+                                <!-- 服务部分 -->
+                                <div class="work-box col-lg-11">
+                                    <if condition="$list['order_status'] eq 0">
+                                        <div class="service1 col-lg-12" style="margin-top:30px;">
+                                            <p class="col-lg-12">
+                                                <span class="col-lg-9">恭喜！&nbsp;{$userList['user_account']}:{$list['pubh_title']}</span>
+                                                <span class="col-lg-3" style="font-size:12px;">{:date('Y-m-d H:i:s',$list['order_time'])}</span>
+                                            </p>
+                                            <p class="service-p2 col-lg-12">
+                                                雇主还未托管赏金，建议您尽快联系雇主，托管赏金，开始工作。
+                                            </p>
+                                            <div class="service-btnbox col-lg-12">
+                                                <p><span class="glyphicon glyphicon-earphone" style="color:#5FB878;"></span>联系方式：{$userList['user_phone']}</p>
+                                            </div>
+                                        </div>
+                                    <else />
+                                        <div class="service1 col-lg-12" style="margin-top:30px;">
+                                            <p class="col-lg-12">
+                                                <span class="col-lg-9">恭喜！&nbsp;{$userList['user_account']}:购买您出售的服务</span>
+                                                <span class="col-lg-3" style="font-size:12px;">{:date('Y-m-d H:i:s',$list['order_time'])}</span>
+                                            </p>
+                                            <p class="service-p2 col-lg-12">
+                                                雇主托管赏金后，可以开始工作了。
+                                            </p>
+                                            <div class="service-btnbox col-lg-12">
+                                                <p><span class="glyphicon glyphicon-earphone" style="color:#5FB878;"></span>联系方式：{$userList['user_phone']}</p>
+                                                <p style="border:1px solid;">雇主已经托管：
+                                                    <font style="color:#F8A61C;border:1px solid ;">
+                                                      {$list['order_trusteeship_price']|default = '0.00'}元</font>
+                                                </p>
+                                                <p>你已经确认开始工作了，请尽快完成工作！</p>
+                                            </div>
+
+                                        </div>
+                                    </if>
+                                </div>
+                                <!-- 服务部分结束 -->
+                                <!-- 上传合同 -->
+                                <div class="work-box col-lg-11" style="margin-top:20px;">
+                                <if condition="$list['order_status'] eq 0">
+                                    <style type="text/css">
+                                        .color-gray{
+                                            color:#d2d2d2;
+                                        }
+                                    </style>
+                                    <div class="service-work2 col-lg-12 color-gray" >
+                                        <p class="col-lg-12">
+                                            您已经发起了一份交易合同，请尽快联系雇主签署合同。
+                                        </p>
+                                        <div class="service-btnbox col-lg-12">
+                                            <p>你已经确认开始工作了，请尽快完成工作！</p>
+                                            <p>若有内容变更，请及时修改。合同签署后，再开始工作，工作成果有保障</p>
+                                            <div>
+                                                <form action="{:U('trusteeship')}" enctype="multipart/form-data" method="post">
+                                                    <input type="file" name="order_file" disabled="disabled" />
+                                                    <input type="hidden" name="order_id" value="{:I('get.id')}">
+                                                    <input type="submit" disabled="disabled" value="上传" >
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <else />
+
+                                    <div class="service-work2 col-lg-12" >
+                                        <p class="col-lg-12">
+                                            您已经发起了一份交易合同，请尽快联系雇主签署合同。
+                                        </p>
+                                        <div class="service-btnbox col-lg-12">
+
+                                            <p style="border:1px solid;display:none">雇主已经支付：
+                                                <font style="color:#F8A61C;border:1px solid ;">10元</font>
+                                            </p>
+                                            <p>你已经确认开始工作了，请尽快完成工作！</p>
+                                            <p>若有内容变更，请及时修改。合同签署后，再开始工作，工作成果有保障</p>
+                                            <div>
+                                                <form action="{:U('trusteeship')}" enctype="multipart/form-data" method="post">
+                                                    <input type="file" name="order_file" />
+                                                    <input type="hidden" name="order_id" value="{:I('get.id')}">
+                                                    <input type="submit" value="上传" >
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </if>
+
+                                </div>
+                                
+                                <!-- 工作部分 -->
+                                <div class="work-box col-lg-11">
+                                    <div class="service-work1 col-lg-12" style="margin-top:10px;">
+                                        <p class="col-lg-12">
+                                            按照雇主的要求完成工作，优质的服务可以让您建立良好的口碑，获取更多的订单。
+                                        </p>
+                                        <div class="service-btnbox col-lg-12">
+
+                                            <p style="border:1px solid;display:none">雇主已经支付：
+                                                <font style="color:#F8A61C;border:1px solid ;">10元</font>
+                                            </p>
+                                            <p>你已经确认开始工作了，请尽快完成工作！</p>
+                                            <p>付款时间：2016-9-16 18:6:8</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- 工作部分 -->
+                                <!-- 评价部分 -->
+                                <div class="evaluate-box col-lg-11">
+                                    <div class="evaluate1 col-lg-12">
+                                        <p class="col-lg-12">
+                                            雇主已全部支付赏金，需求圆满结束。
+                                        </p>
+                                        <p class="col-lg-12">
+                                            请引导雇主对您进行评价。主动好评会对您的能力和服务商排名值都有积极的影响。
+                                        </p>
+                                        <div class="evaluate-btn col-lg-12">
+                                            <button type="button" class="btn btn-default" disabled="disabled">评价雇主</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 评价结束 -->
+                            </div>
+                            <!-- 工作台结束 -->
+                        </div>
+                    </div>
+                </div>
+                <!-- 右边服务商信息 -->
+                <div class="box-right col-lg-3">
+                    <p class="service-store-title">--雇主--</p>
+                    <!-- 服务商店铺信息 -->
+                    <div class="service-store">
+                        <!-- 店铺图片 -->
+                        <a href="">
+                            <img class="service-store-img" src="__PUBLIC__/Uploads/headportrait/{$userList['impr_picture']}"  alt="">
+                        </a>
+                        <!-- 雇主名称 -->
+                        <p class="service-store-name">
+                            {$userList['user_account']}
+                        </p>
+
+
+                        <p class="service-store-level">
+                            <span>购买的服务名称:</span>
+                            <span class="level-span">{$list['pubh_title']}</span>
+                        </p>
+                        <!--电话 -->
+                        <p class="service-store-level">
+                            <span>电话:</span>
+                            <span class="level-span">{$userList['user_phone']}</span>
+                        </p>
+                    </div>
+                    <!-- 最新案例 -->
+                    <p class="service-store-title">--他的最新需求--</p>
+                    <div class=" col-lg-12">
+                        <volist name="need" id="vo" >
+                            <a target="_blank" href="{:U('home/Need/needDisplay' ,array('needid' => $vo['need_id']))}"><p class="col-lg-12">*{$vo['need_title']} </p></a>
+                        </volist>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#workid').trigger('click');
+    </script>
+</block>

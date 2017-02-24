@@ -1,0 +1,14 @@
+目录名 : (作用)
+
+fonts/		:存放字体文件(公共)
+css/ 		:存放css文件(公共)
+image/ 		:存放image文件(公共)
+js 		:存放js文件(公共)
+template/ 	:(模板继承)
+ueditor/ 	:文章编辑插件
+hplus/		:模态框插件
+admin/		:后台资源目录
+home/		:前台资源目录
+
+
+  	

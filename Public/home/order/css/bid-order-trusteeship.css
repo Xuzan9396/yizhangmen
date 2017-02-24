@@ -1,0 +1,342 @@
+p{
+	margin: 0;
+	padding: 0;
+}
+/*背景色*/
+body{
+	background: #f0f0f0;
+}
+a{
+	out-line: none;
+}
+
+/*大框*/
+.container-box{
+	background: #f1f1f1;
+	margin-top: 10px;
+}
+/*左边区域*/
+.box-left{
+	height: 100%;
+	background: #fafafa;
+	border-radius: 5px;
+	box-shadow: 5px 5px 2px #E6E6E6;
+}
+/*右边区*/
+.box-right{
+	width: 282px;
+	height: 100%;
+	margin-left: 10px;
+	background: #fafafa;
+	border-radius: 5px;
+	box-shadow: 5px 5px 2px #E6E6E6;
+}
+/*右边服务商信息*/
+/*服务商店铺信息*/
+.service-store{
+	height: 328px;
+	margin-top: 5px;
+	background: #fff;
+	border: 1px solid #f9f9f9;
+	border-radius: 5px;
+	box-shadow: 5px 5px 2px #f2f2f2;
+}
+.service-store-title{
+	height: 30px;
+	margin-top: 10px;
+	line-height: 30px;
+	text-align: center;
+	color: #666666;
+	font-size: 18px;
+	font-weight: 700;
+}
+/*店铺主图*/
+.service-store-img{
+	display: block;
+	width: 165px;
+	height: 165px;
+	margin: 15px auto;
+}
+/*服务商名*/
+.service-store-name{
+	height: 35px;
+	padding-bottom: 15px;
+	line-height: 20px;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 700;
+	color: #3195F3;
+	border-bottom: 1px dashed #999999;
+}
+/*能力等级 还有地址通用*/
+.service-store-level{
+	height: 20px;
+	line-height: 20px;
+	font-size: 14px;
+	color: #666666;
+	margin-top: 10px;
+	padding-left: 0;
+}
+.level-span{
+	color: #333;
+}
+/*最新案例*/
+.service-store-case{
+	margin-top: 5px;
+	background: #fff;
+	border: 1px solid #f9f9f9;
+	border-radius: 5px;
+	box-shadow: 5px 5px 2px #f2f2f2;
+	padding: 10px;
+}
+.service-store-case p{
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	color: #333333;
+	font-weight: 700;
+	border-bottom: 1px dashed #ccc;
+}
+/*钱*/
+.case-money{
+	color: #FA2C2C;
+}
+/*右边区结束*/
+/*左边区域开始*/
+/*第一层信息*/
+.service-info{
+	height: 140px;
+	margin-top: 5px;
+	border: 1px solid #ccc;
+	padding: 5px;
+}
+.service-info-box{
+	height: 140px;
+	float: left;
+	padding: 5px;
+}
+/*头像*/
+.service-info-div{
+	display: block;
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin-top: 10px;
+}
+/*图像图片圆形*/
+.service-info-div img{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+/*购买的服务*/
+.service-info-div-title{
+	float: left;
+	width: 663px;
+	height: 25px;
+	margin-top: 10px;
+	margin-left: 20px; 
+	line-height: 25px;
+}
+.service-info-div-title span{
+	color: #333333;
+	font-size: 16px;
+	font-weight: 700;
+}
+.service-info-div-title a{
+	text-decoration: none;
+	out-line: none;
+	ont-size: 14px;
+}
+/*金额*/
+.service-info-money{
+	width: 240px;
+	height: 35px;
+	float: left;
+	border: 1px solid #ccc;
+	line-height: 35px;
+	text-align: center;
+	background: #FAF2E8;
+}
+.service-info-money .span1{
+	display: block;
+	float: left;
+	height: 33px;
+	color: #fff;
+	font-size: 16px;
+	font-weight: 200;
+	background: #62C9FA;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.service-info-money .span2{
+	display: block;
+	float: left;
+	height: 33px;
+	color: #FA2C2C;
+	font-weight: 700;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.service-info-money .span3{
+	display: block;
+	float: left;
+	height: 33px;
+	color: #FA2C2C;
+	font-weight: 700;
+	text-align: right;
+}
+
+/*操作*/
+.service-info-con{
+	float: left;
+	line-height: 25px;
+	margin-top: 10px;
+}
+.service-info-con .btn-info{
+	margin-left: 20px;
+}
+.service-info-con .btn{
+	color: #fafafa;
+}
+.service-info-con-span{
+	color: #62C9FA;
+	font-weight: 700;
+	text-align: right;
+	font-size: 14px;
+}
+.service-info-con a{
+	font-weight: bold;
+}
+/*信息结束*/
+/*进度条*/
+a{
+	text-decoration: none;
+}
+/*进度条样式*/
+.ui-stepBar-wrap{
+	position: relative;
+	width: 100%;
+	height: 130px;
+	overflow: hidden;
+	z-index: 10;
+}
+.ui-stepBar-wrap .ui-stepBar{
+	position: relative;
+	width: 90%;
+	height: 5px;
+	background: #cccccc;
+	top: 50px;
+	left: 5%;
+	z-index: 11;
+}
+.ui-stepBar-wrap .ui-stepBar .ui-stepProcess{
+	position: relative;
+	width: 0;
+	height: 5px;
+	background: #516784;
+	top: 0;
+	left: 0;
+	z-index: 12;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap{
+	width: 90%;
+	margin: 0 auto;
+	height: 100%;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo{
+	position: relative;
+	float: left;
+	padding-top: 36px;
+	text-align: center;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .ui-stepSequence{
+	position: relative;
+	padding: 4px 8px;
+	border-radius: 50%;
+	z-index: 13;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .ui-stepName{
+	position: relative;
+	line-height: 50px;
+	z-index: 13;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-pre-change,
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-hind-change{
+	cursor: pointer;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-pre-change:hover{
+	box-shadow: 0 0 3px 1px #516784;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-hind-change:hover{
+	box-shadow: 0 0 3px 1px #cccccc;
+}
+.judge-stepSequence-pre{
+	background: #516784;
+	color: #ffffff;
+}
+.judge-stepSequence-hind{
+	background: #cccccc;
+	color: #000000;
+}
+
+.author{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	margin: 40px auto;
+	color: #1569ec;
+	text-shadow: 1px 1px 0 #e7e7e7, 0 1px 7px #fff;
+}
+/*进度条结束*/
+/*模态框*/
+.modal-title{
+	color: #333333;
+	font-weight: 700;
+}
+.form-group{
+	margin-bottom: 10px;
+}
+.modal-footer .btn-primary{
+	margin-right: 10px;
+}
+.modal-test-p{
+	color: #0DAD51;
+	font-weight: 300;
+}
+/*需求信息*/
+.need-box{
+	width: 778px;
+	margin: 20px 50px;
+	padding: 10px; 
+	background: #ffffff;
+	border: 1px solid #f9f9f9;
+	border-radius: 5px;
+	box-shadow: 5px 5px 2px #f2f2f2;
+}
+.need-box-needid {
+	color: #333333;
+	font-weight: 400;
+	font-size: 16px;
+}
+.need-box-pdesc{
+	font-weight: bold;
+	margin-top: 20px;
+	color: #333333;
+	font-size: 18px;
+}
+.need-desc{
+	margin-top: 20px;
+	font-weight: 400;
+	font-size: 16px;
+	color: #333333;
+	line-height: 40px;
+}
+.need-other{
+	margin-top: 50px;
+}
+.need-time{
+	font-size: 14px;
+}

@@ -1,0 +1,49 @@
+<extend name="./Public/template/base.html"/>
+<block name="content">
+	<load href="__PUBLIC__/css/store.css" />
+	<load href="__PUBLIC__/css/service.css" />
+	<load href="__PUBLIC__/css/assess.css" />
+	<include file="./Apps/Home/View/service/publicStoreNav.html"/>
+		<!-- 档案   主体内容-->
+		<div class="deal-assess">
+			<div class="deal-assess-content">
+				<!-- 左边内容 -->
+				<div class="deal-assess-left">
+					<div class="deal-assess-brand">
+						<div class="deal-brand-top">
+							<img src="__PUBLIC__/Uploads/{$shop[0]['file_image']}" alt="">
+						</div>
+						<div class="deal-brand-hire">
+							<p><strong>实名认证:</strong>已认证  </p>
+			    			<p><strong>手机绑定:</strong>已绑定  </p>
+						</div>
+					</div>
+
+				</div>
+				<!-- 档案右边 内容 -->
+				<div class="deal-assess-right">
+					<div class="record">
+						<div class="record-title">
+							{$shop[0]['store_name']}
+						</div>
+						<div class="record-content">
+							<div class="record-content-summary">
+								<p><strong>简介：</strong>{$shop[0]['store_describe']}</p>
+							</div>
+							<div class="record-content-summary">
+								<p><strong>地址：</strong>{$shop[0]['store_address']}</p>
+							</div>
+
+							<div class="record-content-work">
+								工作经历
+							</div>
+							<p style="margin-top:20px;"></p>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<!-- 档案   主体内容-->
+</block>

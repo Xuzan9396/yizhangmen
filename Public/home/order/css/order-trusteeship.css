@@ -1,0 +1,440 @@
+/*公用部分开始*/
+/*
+orderTrusteeship.html
+orderWorked.html
+orderEvaluate.html
+公用
+*/
+/*---------------------------------*/
+p,dl,dt,dd{
+	margin: 0;
+	padding: 0;
+}
+/*背景色*/
+body{
+	background: #f0f0f0;
+}
+a{
+	out-line: none;
+}
+/*大框*/
+.container-box{
+	height: 1098px;
+	background: #f1f1f1;
+	margin-top: 10px;
+}
+/*左边区域*/
+.box-left{
+	height: 1096px;
+	background: #fafafa;
+	border-radius: 5px;
+	box-shadow: 5px 5px 2px #E6E6E6;
+}
+/*右边区*/
+.box-right{
+	width: 282px;
+	height: 1096px;
+	margin-left: 10px;
+	background: #fafafa;
+	border-radius: 5px;
+	box-shadow: 5px 5px 2px #E6E6E6;
+}
+/*右边服务商信息*/
+/*服务商店铺信息*/
+.service-store{
+	height: 328px;
+	margin-top: 5px;
+	background: #fff;
+	border: 1px solid #f9f9f9;
+	border-radius: 5px;
+	box-shadow: 5px 5px 2px #f2f2f2;
+}
+.service-store-title{
+	height: 30px;
+	margin-top: 10px;
+	line-height: 30px;
+	text-align: center;
+	color: #666666;
+	font-size: 16px;
+	font-weight: 700;
+}
+/*店铺主图*/
+.service-store-img{
+	display: block;
+	width: 165px;
+	height: 165px;
+	margin: 15px auto;
+}
+/*服务商名*/
+.service-store-name{
+	height: 35px;
+	padding-bottom: 15px;
+	line-height: 20px;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 700;
+	color: #3195F3;
+	border-bottom: 1px dashed #999999;
+}
+/*能力等级 还有地址通用*/
+.service-store-level{
+	height: 20px;
+	line-height: 20px;
+	font-size: 14px;
+	color: #666666;
+	margin-top: 10px;
+	padding-left: 0;
+}
+.level-span{
+	color: #333;
+}
+/*最新案例*/
+.service-store-case{
+	margin-top: 5px;
+	background: #fff;
+	border: 1px solid #f9f9f9;
+	border-radius: 5px;
+	box-shadow: 5px 5px 2px #f2f2f2;
+	padding: 10px;
+}
+.service-store-case p{
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	color: #333333;
+	font-weight: 700;
+	border-bottom: 1px dashed #ccc;
+}
+/*钱*/
+.case-money{
+	color: #FA2C2C;
+}
+/*右边区结束*/
+/*左边区域开始*/
+/*第一层信息*/
+.service-info{
+	height: 140px;
+	margin-top: 5px;
+	border: 1px solid #ccc;
+	padding: 5px;
+}
+.service-info-box{
+	height: 140px;
+	float: left;
+	padding: 5px;
+}
+/*头像*/
+.service-info-div{
+	display: block;
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin-top: 10px;
+}
+/*图像图片圆形*/
+.service-info-div img{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+/*购买的服务*/
+.service-info-div-title{
+	float: left;
+	width: 663px;
+	height: 25px;
+	margin-top: 10px;
+	margin-left: 20px; 
+	line-height: 25px;
+}
+.service-info-div-title span{
+	color: #333333;
+	font-size: 16px;
+	font-weight: 700;
+}
+.service-info-div-title a{
+	text-decoration: none;
+	font-size: 14px;
+}
+/*金额*/
+.service-info-money{
+	height: 35px;
+	float: left;
+	border: 1px solid #ccc;
+	line-height: 35px;
+	text-align: center;
+	background: #FAF2E8;
+}
+.service-info-money .span1{
+	display: block;
+	float: left;
+	width: 60px;
+	height: 33px;
+	color: #fff;
+	font-size: 16px;
+	font-weight: 200;
+	background: #62C9FA;
+
+}
+.service-info-money .span2{
+	display: block;
+	float: left;
+	width: 20px;
+	height: 33px;
+	color: #FA2C2C;
+	font-weight: 700;
+	text-align: center;
+	padding-left: 3px;
+}
+.service-info-money .span3{
+	display: block;
+	float: left;
+	height: 33px;
+	color: #FA2C2C;
+	font-weight: 700;
+	text-align: center;
+	padding-left: 2px;
+}
+.service-info-money .span4{
+	display: block;
+	float: right;
+	height: 33px;
+	color: #999999;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+/*操作*/
+.service-info-con{
+	float: left;
+	line-height: 25px;
+	margin-top: 10px;
+}
+.service-info-con .btn{
+	margin-left: 20px;
+}
+.service-info-con-span{
+	color: #62C9FA;
+	font-weight: 700;
+	text-align: right;
+	font-size: 14px;
+}
+.service-info-con .btn{
+	color: #fafafa;
+}
+.service-info-con .btn-a{
+	font-size: 14px;
+  	font-weight: 600;
+  	padding: 6px 12px;
+  	white-space: nowrap;
+  	vertical-align: middle;
+}
+.order-remove{
+	font-weight: bold;
+}
+/*信息结束*/
+/*第二层选项*/
+.content{
+	margin-top: 20px;
+}
+/*选项内容*/
+.contentorder-title{
+	font-size: 24px;
+	font-weight: 700;
+	color: #999;
+	cursor: pointer;
+	text-align: center;
+}
+/*需求描述*/
+.tab-content{
+	margin-top: 5px;
+	padding: 10px;
+}
+/*购买个数*/
+.ordernum {
+	margin-top: 20px;
+	font-size: 14px;
+	color: #333;
+	font-weight: 300;
+}
+/*你的需求*/
+.order-need{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 18px;
+	color: #333;
+	font-weight: 800;
+}
+/*购买服务信息*/
+.order-info{
+	margin-top: 10px;
+	font-size: 18px;
+	color: #333;
+	font-weight: 800;
+}
+.order-info p{
+	display: block;
+	margin-top: 10px;
+}
+.order-info p span{
+	font-size: 14px;
+	color: #333333;
+	font-weight: 500;
+}
+/*时间*/
+.order-time{
+	margin-top: 30px;
+}
+/*公用部分结束*/
+/*--------------------------*/
+/*工作台开始*/
+.work-box{
+	padding: 5px; 
+}
+/*服务部分*/
+.service1{
+	margin-top: 30px;
+	padding: 0;
+	font-size: 16px;
+	color: #333333;
+}
+.service1 p{
+	margin-top: 10px;
+}
+.service1 p a{
+	color: #3195F3;
+	font-weight: 700;
+}
+.service1-order-time{
+	font-size: 14px;
+	color: #333333;
+}
+/*第二行 为了对齐*/
+.service-p2{
+	padding-left: 30px;
+}
+/*联系方式*/
+.information{
+	margin-top: 20px;
+	margin-left: 15px;
+}
+/*高度*/
+.information div{
+	height: 30px;
+	padding: 0;
+}
+/*字体*/
+.information-span{
+	color: #FF9400;
+	font-size: 16px;
+}
+/*按钮*/
+.service-btnbox{
+	margin-top: 20px;
+	padding-left: 30px;
+}
+/*模态框*/
+#trusteeship-modal .form-group{
+	margin-top: 20px;
+}
+#trusteeship-modal .btn-primary{
+	margin-right: 10px;
+}
+#trusteeship-modal p{
+	color: #0DAD51;
+	font-weight: 300;
+}
+
+/*合同 工作 公用*/
+.service-work1{
+	margin-top: 50px;
+	padding: 0;
+	font-size: 16px;
+	color: #d2d2d2;
+}
+.service-work1 p{
+	margin-top: 10px;
+	padding-left: 30px;
+}
+/*文件柜文件下载区*/
+.file-dowmload1{
+	height: 25px;
+	border: 1px solid #d2d2d2;
+	line-height: 25px;
+	margin-top: 10px;
+	margin-left: 30px;
+}
+/*按钮*/
+.service-work-btn{
+	margin-top: 20px;
+	margin-left: 15px;
+}
+/*评价*/
+.evaluate1{
+	margin-top: 50px;
+	padding: 0;
+	font-size: 16px;
+	color: #d2d2d2;
+}
+
+.evaluate1 p{
+	margin-top: 10px;
+	padding-left: 20px;
+}
+.evaluate-btn{
+	margin-top: 20px;
+	margin-left: 15px;
+}
+/*----------------------------*/
+/*进度条*/
+.speed{
+	height: 800px;
+	padding: 5px;
+}
+/*三种进度球样式通用*/
+.speed-service{
+	width: 46px;
+	height: 46px;
+	margin-left:2px;
+	padding: 0;
+	border-radius: 50%;
+	z-index: 10;
+}
+/*服务进度球*/
+.speed-service-box1{
+	background: #516784;
+}
+/*合同进度球*/
+.speed-contract-box1{
+	margin-top: 180px;
+	background: #d2d2d2;
+}
+/*工作进度球*/
+.speed-work-box1{
+	margin-top: 160px;
+	background: #d2d2d2;
+}
+/*评价进度球*/
+.speed-evaluate-box1{
+	margin-top: 170px;
+	background: #d2d2d2;
+}
+/*三种进度名通用*/
+.speed-service{
+	color: #fff;
+	font-size: 16px;
+	line-height: 46px;
+}
+.speed-bar{
+	width: 5px;
+	height: 650px;
+	background: #dcdcdc;
+	margin-top: 46px;
+	z-index: -1;
+}
+.speed-bar-service1{
+	height: 160px;
+	width: 5px;
+	background: #516784;
+}
+
+

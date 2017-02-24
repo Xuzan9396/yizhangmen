@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<load href="__PUBLIC__/layui/css/layui.css" />
+	<load href="__PUBLIC__/css/bootstrap.min.css" />
+	<load href="__PUBLIC__/layui/layui.js" />
+  	<load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+  	<!-- <load href="__PUBLIC__/layer/layer.js"/> -->
+  	<load href="__PUBLIC__/js/bootstrap.min.js" />
+  	<style>
+
+  		#width{
+  			width:120px;
+  		}
+  		.padd-left{
+  			padding-left: 20px;
+  			padding-top:5px;
+  			margin-top:15px;
+  			border:1px solid #e6e6e6;
+  		}
+  		.float{
+  			float:left;
+  		}
+  		.clear{
+  			clear:both;
+  		}
+  		.trade-title{
+  			width:50px;
+  			height:36px;
+  			text-align: center;
+  		}
+  		.trade-title p{
+  			margin-top:10px;
+  		}
+  		.a-bg{
+  			background:#34A8FF;
+  			color:white;
+  			text-decoration: none;
+  		}
+  		.a-bg:hover{
+  			color:white;
+  			text-decoration: none;
+  		}
+  		table tr td,th{
+  			text-align: center;
+  		}
+		p{
+			font-size:18px;
+		}
+  	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="main-search padd-left">
+			<p>分类名 : <span>{$title}</span></p>
+			<p>匹配到如下店铺 :</p>
+		</div>
+		<table class="table table-hover table-striped">
+			<tr>
+				<th>店铺ID</th>
+				<th>店铺名称</th>
+				<th>电话</th>
+				<th>邮件</th>
+				<th>地址</th>
+				<th>操作</th>
+			</tr>
+			<foreach name="storeList" item="val" key="key">
+			<tr>
+				<td>{$val['id']}</td>
+				<td>{$val['store_name']}</td>
+				<td>{$val['store_phone']}</td>
+				<td>{$val['store_email']}</td>
+				<td>{$val['store_address']}</td>
+				<td id="{$val['id']}">
+				<if condition="$val['status'] eq 0">
+					<a  class="layui-btn layui-btn-primary layui-btn-small a-bg" onclick='getData("{$val.id}","{$need_id}",this);' href="javascript:void(0)">推荐该店铺</a>
+				<else/>
+					<a  class="layui-btn layui-btn-primary layui-btn-small a-bg"  href="javascript:void(0)">店铺已推荐</a>
+				</if>
+				</td>
+			</tr>
+			</foreach>
+			<tr>
+				<td colspan="6">{$show}</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
+<script>
+	function getData(id,need_id,obj)
+    {
+      	$.ajax({
+            type: "post",
+            url:"{:U('Admin/VipChannel/recommendDetail')}",
+            data: {'id':id,'needid':need_id},
+            dataType: "json",
+            async: false,
+            success: function(data) {
+               if(data == '3' || data == '1'){
+               	$(obj).attr('disabled', true).html('店铺已推荐');
+               }
+            }
+    	});
+    }
+    // layer.msg('玩命提示中');
+
+	layui.use('laydate', function(){
+	  var laydate = layui.laydate;
+	  var start = {
+	    min: laydate.now()
+	    ,max: '2099-06-16 23:59:59'
+	    ,istoday: false
+	    ,choose: function(datas){
+	      end.min = datas; //开始日选好后，重置结束日的最小日期
+	      end.start = datas //将结束日的初始值设定为开始日
+	    }
+	  };
+	var end = {
+	    min: laydate.now()
+	    ,max: '2099-06-16 23:59:59'
+	    ,istoday: false
+	    ,choose: function(datas){
+	      start.max = datas; //结束日选好后，重置开始日的最大日期
+	    }
+	  };
+	document.getElementById('LAY_demorange_s').onclick = function(){
+	    start.elem = this;
+	    laydate(start);
+	  }
+	document.getElementById('LAY_demorange_e').onclick = function(){
+	    end.elem = this
+	    laydate(end);
+	  }
+	});
+</script>

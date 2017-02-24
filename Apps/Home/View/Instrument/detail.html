@@ -1,0 +1,238 @@
+<extend name="./Public/template/base1.html" />
+<block name="title"><title>仪器库-产品详情</title></block>
+<block name="file"></block>
+<block name="content">
+	<style>
+		.list-container{
+			width: 1170px;
+			height: auto;
+			margin-top: 20px;
+		}
+		.breadcrumb{
+			background: white;
+			margin-left: -15px;
+		}
+		.results{
+			width: 1140px;
+			height: auto;
+		}
+		.clone-me{
+			width: 1170px;
+			height: auto;
+			margin-bottom: 70px;
+		}
+		.prod-short{
+			width: 845px;
+			height: auto;
+		}
+		.prod-name{
+			width: 845px;
+			height: 40px;
+			border-bottom: 2px solid #9dbff4;
+			padding:0;
+			margin:0;
+		}
+		.prod-name h1{
+			margin-top: 0;
+			padding-bottom: 12px;
+			font-size: 24px;
+			color: #3498db;
+
+		}
+		.row-firm{
+			margin-top: 10px;
+			margin-bottom: 20px;
+			width: 875px;
+			height: 220px;
+		}
+		.row-img{
+			margin-top: 30px;
+		}
+		.firm{
+			width: 555px;
+			height: 20px;
+		}
+		.divPanel-body{
+			border-radius: 5px;
+			display: none;
+			background: #DEF;
+		}
+		.fa-caret-down{
+		    width:0;
+		    height:0;
+		    border-width:5px 5px 0;
+		    border-style:solid;
+		    border-color:#333 transparent transparent;
+		    position:relative;
+		    top:10px;
+		    left: 3px;
+		}
+		.firm-detail:hover{
+			cursor: pointer;
+		}
+		.prod-desc dt{
+			margin-left: 60px;
+			float: left;
+		}
+		.prod-desc dd{
+			margin-left: 100px;
+			color: gray;
+		}
+		.prod-desc dd a{
+			color: gray;
+		}
+		.prod-detail{
+			clear: left;
+			width:845px;
+			height: auto;
+		}
+		.product-actions{
+			margin-bottom: 20px;
+		}
+		.nav-tabs{
+			width:845px;
+			height: 40px;
+			margin-top: 20px;
+			margin-bottom: 10px;
+		}
+		.presentation{
+			width:90px;
+			height: 40px;
+			border-top: 1px solid #ddd;
+			border-bottom: 1px solid white;
+			border-left: 1px solid #ddd;
+			border-right: 1px solid #ddd;
+			border-radius: 5px 5px 0 0;
+		}
+		.presentation a{
+			width: 88px;
+			height: 39px;
+		}
+		.pull-right a:hover{
+			height: 40px;
+			cursor: pointer;
+		}	
+		.table-hover{
+			width: 100%;
+		}
+		.col-label{
+			width: 126px;
+			height: 28px;
+		}
+		.mlt-right{
+			border-left: 2px solid #eee;
+		}
+		.prod-mlt{
+			width: 260px;
+			height: 96px;
+			border-bottom: 1px solid #eee;
+			position: relative;
+			margin-left: 5px;
+		}
+		.mlt-right h4{
+			margin-bottom: 30px;
+		}
+		.prod-mlt h5,p{
+			width: 170px;
+		}
+		.prod-mlt img{
+			position: absolute;
+			top:0;
+			right: 0;
+		}
+		.samemanu{
+			border-top: 2px solid #eee;
+			margin-bottom: 20px;
+		}
+	</style>
+	<div class="container list-container">
+		<ol class="breadcrumb rf-product-category">
+			<li><a href="{:U('Instrument/index')}">首页</a>{$data['title']}</li>   
+		</ol>
+		<div class="results">
+			<div class="row clone-me">
+				<div class="col-sm-9">
+					<div class="prod prod-short">
+						<div class="prod-name">
+							<h1>{$data['data']['appt_goodsname']}</h1>
+						</div>
+						<div class="row row-firm">
+							<div class="col-md-8">
+								<p class="firm">厂商: <a href="{:U('Instrument/companyDetail?cid='.$data['company']['appt_id'])}">{$data['company']['appt_company_name']}</a> <a class="firm-detail">详细<i class="fa fa-caret-down"></i></a></p>
+								<div class="panel-collapse collapse in">
+									<div class="panel-body divPanel-body">
+										<dl class="prod-desc">
+											<dt>国家</dt>
+											<dd>{$data['company']['appt_country']}</dd>											
+											<dt>地址</dt>
+											<dd>{$data['company']['appt_address']}</dd>
+											<dt>电话</dt>
+											<dd>{$data['company']['appt_phone']}</dd>											
+											<dt>传真</dt>
+											<dd>{$data['company']['appt_portraiture']}</dd>											
+											<dt>官网</dt>
+											<dd><a href="http://{$data['company']['appt_www']}" target="bank">{$data['company']['appt_www']}</a></dd>
+											<dt>详情</dt>
+											<dd>{$data['company']['appt_detail']}</dd>
+										</dl>
+									</div>
+								</div>
+								<div class="product-actions">
+									<a href="" class="btn btn-primary"><i class="glyphicon glyphicon-shopping-cart"></i>产品手册</a>
+									<a href="{:U('Home/Instrument/compare')}" class="btn btn-primary"><i class="glyphicon glyphicon-shopping-cart"></i>产品对比</a>
+									<a href="{:U('Home/WordOfMouth/index?id='.$data['data']['appt_id'])}" class="btn btn-primary"><i class="glyphicon glyphicon-shopping-cart"></i>仪器口碑</a>
+								</div>
+							</div>
+							<div class="col-md-4 row-img">
+								<img width="220" height="220" src="__PUBLIC__/Uploads{$data['data']['appt_pic']}" alt="">
+							</div>
+						</div>
+					</div>
+					<div class="prod-detail">
+						<ul class="nav nav-tabs">
+							<li class="presentation"><a href="">产品规格</a></li>
+							<li class="pull-right"><a>纠错</a></li>
+						</ul>
+						<table class="table table-striped table-hover">
+							<tbody>
+								<foreach name="data['attr']" item="v">
+									<tr>
+										<td class="col-label">{$v.attribute_name}</td>
+										<td>{$v.appt_attributeval_value}</td>
+									</tr>
+								</foreach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-sm-3 mlt-right">
+					<h4>类似商品</h4>
+					<foreach name="data['leishi']" item="v">
+					<div class="prod-mlt">
+						<h5><a href="{:U('Home/Instrument/detail?id='.$v['appt_id'])}">{$v.appt_goodsname}</a></h5>
+						<p class="prod-cat-name">{$v.category_name}</p>
+						<p><a href="{:U('Instrument/companyDetail?cid='.$v['appt_company_id'])}">{$v.company_name}</a></p>
+						<a href="{:U('Home/Instrument/detail?id='.$v['appt_id'])}"><img width="70" height="70" src="__PUBLIC__/Uploads{$v.appt_pic}" class="prod-thumb" alt=""></a>
+					</div>
+					</foreach>
+				</div>
+			</div>
+			<div class="row clone-me samemanu">
+				<div class="col-sm-12"><h4>公司其他产品</h4></div>
+					<foreach name="data['oherGoods']" item="v">
+						<div class="prod-manu col-sm-2">
+							<h5><a href="{:U('Home/Instrument/detail?id='.$v['appt_id'])}">{$v.appt_goodsname}</a></h5>
+							<p class="prod-cat-name">{$v.cate_name}</p>
+							<p><a href="{:U('Instrument/companyDetail?cid='.$v['appt_company_id'])}">{$v.company_name}</a></p>
+							<img src="" alt="">
+						</div>
+					</foreach>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('.firm-detail').click(function(){
+			$('.divPanel-body').css({'marginBottom':'15px'}).toggle('normal');
+		});
+	</script>
+</block>

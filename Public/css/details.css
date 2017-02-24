@@ -1,0 +1,288 @@
+.carousel-size{
+	width:630px;
+	height:380px;
+	float:left;
+}
+.car-left{
+	float:left;
+}
+.img-size{
+	width:630px;
+	height:380px;
+	overflow: hidden;
+}
+.carousel-size img{
+	width:630px;
+	height:330px;
+}
+.server-content {
+	background: #fff;
+	width: 1100px;
+}
+.server-content-bg {
+    padding-left: 0px;
+
+}
+
+.details-total{
+	width:100%;
+}
+.details-content{
+	width:1100px;
+	height:auto;
+	padding-top:10px;
+	padding-left:10px;
+	padding-bottom: 20px;
+	border:1px solid #ccc;
+	overflow: hidden;
+}
+.details-carousel{
+	width:630px;
+	float:left;
+}
+.details-right-buyinfo{
+	width:412px;
+	height:373px;
+	float:right;
+	margin-right:10px;
+}
+.details-right-header{
+}
+.details-right-header p{
+	line-height:27px;
+	text-align:left;
+	font-size:18px;
+	font-weight:bold;
+}
+.details-server-info{
+	height:100px;
+	margin-top:20px;
+	background:#F0F0F0;
+}
+#details-status{
+	margin-top:10px;
+}
+.details-access{
+	width:200px;
+	height:100px;
+	float:left;
+	border-right:1px solid #ccc;
+}
+.details-deal{
+	width:210px;
+	height:100px;
+	float:right;
+}
+.details-access p ,.details-deal p{
+	margin-left:20px;
+}
+.details-access p span{
+	color:red;
+}
+#details-haoping{
+	margin-top:20px;
+}
+.details-deal span{
+	color:red;
+}
+.details-server-buynum{
+	width:400px;
+	margin-top:30px;
+	padding-left:20px;
+	float:left;
+}
+#details-input{
+	width:30px;
+	height:30px;
+}
+#details-decr-num,#details-incre-num{
+	font-weight:bold;
+	border:1px solid #cccccc;
+}
+#details-decr-num:hover,#details-incre-num:hover{
+	cursor:pointer;
+}
+.details-price{
+	width:412px;
+	height:36px;
+	margin-top:20px;
+	padding-left:20px;
+	line-height:36px;
+	float:left;
+	background: #E5E8F0;
+}
+.details-price  span{
+	font-size:20px;
+	color:red;
+}
+.details-buynow{
+	transition: background 0.5s,border-radius 0.5s;	
+	display:block;
+	width:200px;
+	height:40px;
+	float:left;
+	text-align:center;
+	text-decoration:none;
+	color:white;
+	font-size:20px;
+	margin-left:100px;
+	margin-top:30px;
+	line-height:40px;
+	background:#FF7A1A;
+}
+.details-buynow:hover{
+	text-decoration:none;
+	color:white;
+	opacity:0.8;
+}
+/*选项卡*/
+.details-tab{
+	margin-top: 20px;
+	width: 800px;
+	float: left;
+}
+.tab-content{
+	padding-left: 10px;
+}
+.tab-content img{
+	max-width:790px;
+}
+.assess{
+	padding-top: 20px;
+}
+.assess-left{
+	width: 120px;
+	height: 70px;
+
+	float: left;
+	border-right: 1px solid #ccc;
+
+}
+.assess-colligate{
+	width:250px;
+	height: 70px;
+	float: left;
+	border-right: 1px solid #ccc;
+	text-align: center;
+}
+.assess-pleased{
+	height: 70px;
+	width: 250px;
+	float: left;
+	text-align: center;
+}
+
+/*评分列表*/
+.assess-list{
+	width: 750px;
+	/*min-height:100px;*/
+	height: auto;	
+	border-bottom: 1px solid #ccc;
+	overflow: hidden;
+	margin-top: 20px;
+}
+.assess-list-pic{
+	width: 60px;
+	height: 60px;
+	float: left;
+}
+.assess-list-pic img{
+	width: 60px;
+	height: 60px;
+}
+.assess-list-name{
+	width:150px;
+	float: left;
+	margin-left: 20px;
+}
+.assess-list-name p a{
+	color:#3C8FED;
+	font-size: 18px;
+	font-weight: bold;
+}
+.assess-list-name p{
+	margin-top: 10px;
+}
+.assess-list-content{
+	float: left;
+	width: 420px;
+	color:#888;
+	font-size: 12px;
+	margin-top: 10px;
+	overflow:hidden;width:420px;white-space:nowrap;text-overflow:ellipsis;
+}
+
+
+.assess-list-time{
+	float: right;
+	width: 80px;
+	height: 60px;
+	text-align: center;
+	color: #888;
+	font-size: 12px;
+	margin-top: 10px;
+}
+/*选项卡结束*/
+.details-foot-contents{
+	width:1060px;
+	float:left;
+	/*margin:20px 20px;*/
+}
+.details-foot-contents p{
+	height:40px;
+	line-height:40px;
+	font-size:20px;
+	float:left;
+	width:780px;
+	font-weight:bold;
+	background:#EAE8E8;
+}
+
+#foot-contents-detail,#foot-contents-access{
+	display:block;
+	float:left;
+	height:40px;
+	padding:0px 10px;
+}
+#foot-contents-access:hover,#foot-contents-detail:hover{
+	 background:#989393;
+}
+
+#foot-right-contents{
+	width:260px;
+	float:right;
+	margin-top:50px;
+	margin-right: 5px;
+}
+.foot-right-other{
+	font-size:20px;
+	font-weight:bold;
+	text-align: center;
+}
+.foot-right-other-server{
+	border:1px solid #cccccc;
+	border-radius:8px;
+	margin-top:20px;
+}
+.otherserver-img{
+	width:240px;
+	height:240px;
+	margin:10px auto;
+}
+.othersever-description{
+	height:30px;
+	font-size:14px;
+	font-weight:bold;
+	text-align:center;
+}
+.otherserver-volume{
+	height:26px;
+	font-size:14px;
+	text-align:center;
+}
+.otherserver-volume span{
+	padding:10px;
+}
+.number{
+	color:red;
+}

@@ -1,0 +1,316 @@
+<extend name='./Public/template/base.html'/>
+
+<block name="file">
+    <!-- 独立的 -->
+    <load file="__PUBLIC__/home/order/css/order-trusteeship.css"/>
+</block>
+
+<block name="content">
+	<!-- 托管页开始 -->
+	<div class="container">
+		<div class="row">
+			<div class="container-box col-lg-12">
+				<!-- 左边内容 -->
+				<div class="box-left col-lg-9">
+					<!-- 服务信息 -->
+					<div class="service-info">
+						<div class="service-info-box">
+							<!-- 头像 -->
+							<div class="service-info-div">
+								<a href="">
+									<img src="__PUBLIC__/Uploads/headportrait/{$user.impr_picture}">
+								</a>
+							</div>
+							<!-- 购买信息 -->
+							<div class="service-info-div-title">
+								<span>购买的服务:</span>
+								<a href="">{$publish.pubh_title}</a>
+							</div>
+							<div class="service-info-con col-lg-10">
+								<div class="service-info-money">
+									<span class="span1">金额</span>
+									<span class="span2">￥</span>
+									<span id="number-price" class="span3">{$order.order_number_price}</span>
+									<span class="span4">订单总金额</span>
+								</div>
+								<button type="button" class="btn btn-info trusteeship-btn">托管赏金</button>
+								<a href="{:U('Home/StoreOrder/orderRemove')}" class="order-remove btn btn-warning">取消订单</a>
+							</div>
+							<div class="service-info-con col-lg-10">
+								<span class="service-info-con-span">托管赏金可以全额托管,也可部分托管(总金额的30%以上),托管赏金即可签合同</span>
+							</div>
+						</div>
+					</div>
+					<!-- 服务信息结束 -->
+					<!-- 内容头部选项 -->
+					<div class="content col-lg-12">
+						<!-- 选项 -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class=" contentorder-title col-lg-2"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">需求描述</a></li>
+							<li role="presentation" class="active contentorder-title col-lg-2"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">工作台</a></li>
+						</ul>
+						<!-- 内容 -->
+						<div class="tab-content">
+							<!-- 需求开始 -->
+							<div role="tabpanel" class="tab-pane" id="home">
+								<!-- 订单号 -->
+								<div class="ordernum">
+									订单号:&nbsp;&nbsp;<span>{$order.order_number}</span>
+								</div>
+								<!-- 要求 -->
+								<div class="order-need">
+									您的要求:
+								</div>
+								<!-- 订单的信息 -->
+								<div class="order-info">
+									<p>服务分类:<span>{$store_category}</span></p>
+									<p>购买数量:<span>{$order.order_number_total}</span></p>
+									<p>您的需要:<span>{$publish.pubh_title}</span></p>
+									<p>具体需取:<span>{$order.description}</span></p>
+								</div>
+								<!-- 订单的信息结束 -->
+								<div class="order-time col-lg-12">
+									<div class="col-lg-4">
+										<span>时间:</span>
+										<span>{:date('Y-m-d',$order['order_time'])}</span>
+									</div>
+									<div class="col-lg-4">
+										<span>订单号:</span>
+										<span>{$order.order_number}</span>	
+									</div>
+									<div class="col-lg-4">
+										<a href=""><span>申请退款&nbsp;&gt;</span></a>
+									</div>
+								</div>
+							</div>
+							<!-- 需求结束 -->
+							<!-- 工作台 -->
+							<div role="tabpanel" class="active tab-pane" id="profile">
+								<!-- 进度条 -->
+								<div class="speed col-lg-1">
+									<center>
+										<!-- 服务球 -->
+										<div class="speed-service speed-service-box1 col-lg-12">
+											<span class="speed-service">服务</span>
+										</div>
+										<!-- 合同球 -->
+										<div class="speed-service speed-contract-box1 col-lg-12">
+											<span class="speed-service speed-work">合同</span>
+										</div>
+										<!-- 工作球 -->
+										<div class="speed-service speed-work-box1 col-lg-12">
+											<span class="speed-service speed-work">工作</span>
+										</div>
+										<!-- 评价球 -->
+										<div class="speed-service speed-evaluate-box1 col-lg-12">
+											<span class="speed-service">评价</span>
+										</div>
+										<!-- 条 -->
+										<div class="speed-bar">
+											<!-- 服务条 -->
+											<div class="speed-bar-service1"></div>
+										</div>
+									</center>
+								</div>
+								<!-- 服务部分 -->
+								<div class="work-box col-lg-11">
+									<div class="service1 col-lg-12">
+										<p class="col-lg-12">
+											<span class="col-lg-9">您购买了服务:&nbsp;<a href="">{$publish.pubh_title}</a></span>
+											<span class="service1-order-time col-lg-3">{:date('Y-m-d H:i:s',$order['order_time'])}</span>
+										</p>
+										<p class="service-p2 col-lg-12">
+											您托管赏金后，服务商方可确认开始工作。也可您主动联系服务商，线下沟通需求，确认合作。
+										</p>
+										<div class="information col-lg-12">
+											<div class="row">
+												<div class="col-lg-4">
+													<img width="30" src="__PUBLIC__/image/service/image/tel.jpg" alt="">
+													<span class="information-span">{$store.store_phone}</span>
+												</div>
+												<div class="col-lg-4">
+													<img width="30" src="__PUBLIC__/image/service/image/QQ.jpg" alt="">
+													<span class="information-span">{$store.store_qq}</span>
+												</div>
+												<div class="col-lg-4">
+													<img width="30" src="__PUBLIC__/image/service/image/email.jpg" alt="">
+													<span class="information-span">{$store.store_email}</span>
+												</div>
+											</div>
+										</div>
+										<div class="service-btnbox col-lg-12">
+											<button type="button" class="btn btn-info trusteeship-btn">托管赏金</button>
+										</div>
+									</div>
+									<!-- 模态框 -->
+									<div class="modal fade" id="trusteeship-modal">
+										<div class="modal-dialog">
+										    <div class="modal-content">
+										      	<div class="modal-header">
+										        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										       		<h4 class="modal-title">请输入赏金</h4>
+										      	</div>
+										      	<div class="row">
+										      		<center>
+												      	<form action="{:U('Home/StoreOrder/orderTrusteeship')}" method="post" onsubmit="return orderVerify()">
+												      		<input type="hidden" name="order_number_price" value="{$order.order_number_price}">
+													      	<div class="modal-body">
+													        	<div class="form-group">
+																    <label class="sr-only" for="exampleInputAmount"></label>
+																    <div class="input-group col-lg-8">
+																      	<div class="input-group-addon">￥</div>
+																      	<input type="text" class="form-control" id="exampleInputAmount" placeholder="金额" name="order_trusteeship_price">
+																      	<div class="input-group-addon">.00</div>
+																    </div>
+																</div>
+																<div>
+																	<p>托管赏金为总交易额的 30% 以上.</p>
+																</div>
+													      	</div>
+													      	<div class="modal-footer" style="width:598px;">
+													        	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+													        	<button type="submit" class="btn btn-primary">确定托管</button>
+													      	</div>
+												      	</form>
+											      	</center>
+										      	</div>
+										    </div><!-- /.modal-content -->
+										</div><!-- /.modal-dialog -->
+									</div><!-- /.modal -->
+									<!-- 模态框结束 -->
+								</div>
+								<!-- 服务部分结束 -->
+								<!-- 合同 -->
+								<div class="work-box col-lg-11">
+									<div class="service-work1 col-lg-12">
+										<p class="col-lg-12">
+											您尚未与服务商签署交易合同,。交易合同可以有效保障双方权益，减少争议纠纷。
+										</p>
+										<p class="col-lg-12">
+											若协议内容变更或修改了需求赏金，请您及时与雇主补充合同进行描述。
+										</p>
+										<div class="service-work-btn col-lg-12">
+											<button type="button" class="btn btn-default" disabled="disabled">签合同</button>
+										</div>
+										<p class="col-lg-12">
+											<span>
+												查看合同
+											</span>
+										</p>
+									</div>
+								</div>
+								<!-- 合同结束 -->
+								<!-- 工作部分 -->
+								<div class="work-box col-lg-11">
+									<div class="service-work1 col-lg-12">
+										<p class="col-lg-12">
+											服务商正在工作中，为保障服务效果，请与服务商保持良好的沟通，跟进项目。
+										</p>
+										<p class="col-lg-12">
+											该需求需要服务商提供源文件，如果服务商还没有上传任何源文件，请慎重付款。
+										</p>
+										<div class="file-dowmload1 col-lg-12">
+											<span>文件柜:</span>
+											<span>服务商还没上传任何原件</span>
+										</div>
+										<div class="service-work-btn col-lg-12">
+											<button type="button" class="btn btn-default" disabled="disabled">付款给服务商</button>
+										</div>
+										<p class="col-lg-12">
+											工作出现问题？你可以发起 申请退款>
+										</p>
+									</div>
+								</div>
+								<!-- 工作部分 -->
+								<!-- 评价部分 -->
+								<div class="evaluate-box col-lg-11">
+									<div class="evaluate1 col-lg-12">
+										<p class="col-lg-12">
+											项目已完成，请对服务商进行评价。
+										</p>
+										<div class="evaluate-btn col-lg-12">
+											<button type="button" class="btn btn-default" disabled="disabled">评价服务商</button>
+											<button type="button" class="btn btn-default" disabled="disabled">评价服务</button>
+										</div>
+									</div>
+								</div>
+								<!-- 评价结束 -->
+							</div>
+							<!-- 工作台结束 -->
+						</div>
+					</div>
+				</div>
+				<!-- 右边服务商信息 -->
+				<div class="box-right col-lg-3">
+					<p class="service-store-title">--服务商--</p>
+					<!-- 服务商店铺信息 -->
+					<div class="service-store">
+						<!-- 店铺图片 -->
+						<a href="">
+							<img class="service-store-img" src="__PUBLIC__/Uploads/{$store['file_image']}">
+						</a>
+						<!-- 店铺名称 -->
+						<p class="service-store-name">
+							{$store.store_name}
+						</p>
+						<!-- 能力等级 -->
+						<p class="service-store-level">
+							<span>建立时间:</span>
+							<span class="level-span">{:date('Y-m-d',$store['store_addtime'])}</span>
+						</p>
+						<!-- 所在地 -->
+						<p class="service-store-level">
+							<span>所在地:</span>
+							<span class="level-span">{$store.store_address}</span>
+						</p>
+					</div>
+					<!-- 最新案例 -->
+					<p class="service-store-title">--他的最新案例--</p>
+					<div class="service-store-case col-lg-12">
+						<!-- 遍历最新成功案例 -->
+						<foreach name="case" item="val">
+							<p class="col-lg-12">
+								<span class="case-money">￥金额</span>
+								<span class="level-span">{$val.case_title}</span>
+							</p>
+						</foreach>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<load href="__PUBLIC__/js/mo.js" />
+	<script type="text/javascript">
+		// 模态框
+		$('.trusteeship-btn').click(function(){
+			// 调用模态框
+	   		$('#trusteeship-modal').modal();
+	   		// 位置
+	   		var top = $(window).height()/4
+	   		$('#trusteeship-modal').css('margin-top',top);
+	    });
+
+	    //js验证
+	    function orderVerify(){
+	    	// 赏金
+	    	var reward = $('#exampleInputAmount').val();
+	    	// 总金额
+	    	var moneyprice = parseInt($('#number-price').html());
+
+	    	var pregreward = /^[1-9]\d{1,9}$/;
+	    	if(reward == ''){
+	    		mo.msg('请填写金额');
+	    		return false;
+	    	}else if(!pregreward.test(reward)){
+				mo.msg('请正确输入赏金');
+				return false;
+	    	}else if(reward < parseInt(moneyprice * 3 / 10)){
+	    		mo.msg('赏金小少为总金额的30%');
+	    		return false;
+	    	}else if(reward > moneyprice){
+	    		mo.msg('赏金高于总金额');
+	    		return false;
+	    	}
+	    }
+	</script>
+</block>

@@ -1,0 +1,42 @@
+
+<include file="Apps/Admin/View/StoreOpen/storeHeader.html" />
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+    		<form name="main_form" method="POST" action="__SELF__" enctype="multipart/form-data" >
+    	<input type="hidden" name="id" value="{$data['id']}"  />
+        <table class="table">
+			<tr>
+				<td>上级权限：</td>
+				<td>
+					父级分类名称:<select name="parent_id" class="form-control" style="width:200px">
+						<option value="0">顶级权限</option>
+						<?php foreach ($parentData as $k => $v): ?>
+						<?php if($v['id'] == $data['id'] || in_array($v['id'], $children)) continue ; ?>
+						<option style="font-size:{$v['level']};" <?php if($v['id'] == $data['parent_id']): ?>selected="selected"<?php endif; ?> value="<?php echo $v['id']; ?>"><?php echo str_repeat('-', 5*$v['level']).$v['cate_name']; ?></option>
+						<?php endforeach; ?>
+						</select>
+				</td>
+			</tr>
+            <tr>
+                <td>分类名称：</td>
+                <td>
+                    修改子级的名称:<input  type="text" name="cate_name" value="{$data['cate_name']}" class="form-control" style="width:200px"//>
+
+
+                </td>
+            </tr>
+            <tr>
+            	<td></td>
+                <td>
+                    <input type="submit" class="layui-btn" value=" 确定 " />
+                    <input type="reset" class="layui-btn" value=" 重置 " />
+                </td>
+            </tr>
+        </table>
+    </form>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+</body>
+</html>

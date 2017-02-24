@@ -1,0 +1,489 @@
+
+<extend name='./Public/template/userBase.html'/>
+
+<block name="file">
+
+		<load file="__PUBLIC__/home/pro/css/crowdfunding.css"/>
+
+		<load file="__PUBLIC__/home/pro/js/basics.js"/>
+		<!-- JS公共部分 结束 -->
+		<!-- <load file="__PUBLIC__/home/pro/js/crowdfunding.js"/> -->
+</block>
+
+<!-- 用户中心主题部分 -->
+<block name="content">
+		<!-- 核心分类类目开始 -->
+		<div class="container border1 nopadding margin10">
+		  	<div id="vertical_navigation" class="col-lg-2 background831312 nopadding">
+				<!-- 头像部分 -->
+			    <!-- <div class="dead_pic">
+			    	<img src="__PUBLIC__/home/pro/img/member_center/nopic.jpg.png"><br>
+			      	<span class="username">用户名</span>
+			    </div> -->
+			    <!-- 会员等级星星 -->
+					<!-- 用户类型： 跟投人<br> -->
+			    <!-- <div class="usertype">
+			      	会员等级：
+			      	<img style="margin-right:0px;" src="__PUBLIC__/home/pro/img/member_center/star.png">
+			      	<img style="margin-right:0px;" src="__PUBLIC__/home/pro/img/member_center/xx2.png">
+			      	<img style="margin-right:0px;" src="__PUBLIC__/home/pro/img/member_center/xx2.png">
+			      	<img style="margin-right:0px;" src="__PUBLIC__/home/pro/img/member_center/xx2.png">
+			      	<img style="margin-right:0px;" src="__PUBLIC__/home/pro/img/member_center/xx2.png">
+			    </div> -->
+			    <!-- 分割线 -->
+			    <!-- <div class="box-line"></div> -->
+			    <!-- 我的信息开始 -->
+			    <div class="menu">
+			      	<div class="menu_title">我的消息</div>
+			      	<div class="menu_list">
+				        <ul class="list-unstyled">
+				        	<li id="listClick1" class="" onClick="listClick(1)">
+				        		<img src="__PUBLIC__/home/pro/img/member_center/left_icon_2.png">
+				        		交易动态
+				        	</li>
+				          	<li id="listClick2" class="" onClick="listClick(2)">
+				          		<img src="__PUBLIC__/home/pro/img/member_center/left_icon_2.png">
+				          		系统通知
+				          	</li>
+				          	<li id="listClick3" class="" onClick="listClick(3)">
+				          		<img src="__PUBLIC__/home/pro/img/member_center/left_icon_2.png">
+				          		我的私信
+				          	</li>
+				          	<li id="listClick4" class="" onClick="listClick(4)">
+				          		<img src="__PUBLIC__/home/pro/img/member_center/left_icon_2.png">
+				          		写消息
+				          	</li>
+				          	<li id="listClick5" class="" onClick="listClick(5)">
+				          		<img src="__PUBLIC__/home/pro/img/member_center/left_icon_2.png">
+				          		发件箱
+				          	</li>
+				        </ul>
+			      </div>
+			    </div><!-- 我的信息结束 -->
+
+			    <!-- 我的相关项目开始 -->
+			    <div class="menu">
+			      	<div class="menu_title"> 交易维权 </div>
+			      	<div class="menu_list">
+			        	<ul class="list-unstyled">
+			          		<li id="listClick6" class="" onClick="listClick(6)">
+			          			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_2.png">
+								举报管理
+			          		</li>
+			          		<li id="listClick7" class="" onClick="listClick(7)">
+			          			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_2.png">
+			          			维权管理
+			          		</li>
+			        	</ul>
+			      	</div>
+			    </div>
+		  	</div>
+		  	<!-- 分类类目结束 -->
+		  	<!-- 显示内容区开始 -->
+		  	<div class="col-lg-10">
+		  		<iframe name="left" id="crowdfunding_iframe" src="{:U('Home/Message/outboxMessage')}" frameborder="false" scrolling="no" style="border:none;" width="100%" height="1085" allowtransparency="true"></iframe>
+		 	</div>
+		 	<!-- 显示内容结束 -->
+		</div>
+		<script>
+				$('.menu_title').click(function(){
+					$(this).next().slideToggle();
+				});
+				// console.log(get_param);
+				function listClick(value){
+					if(value == 1){
+						$("#listClick_1").css("border-bottom","1px solid #C40521");
+						$("#listClick_1").css("color","#C40521");
+						$("#listClick_3").css("border-bottom","1px solid #CCC");
+						$("#listClick_3").css("color","#666");
+						$("#listClick_4").css("border-bottom","1px solid #CCC");
+						$("#listClick_4").css("color","#666");
+
+						$("#crowdfunding_iframe").attr("src","{:U('Home/Message/transationMessage')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","menu_list_on");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 2){
+						// 修改头像
+						$("#crowdfunding_iframe").attr("src","{:U('Home/Message/systemMessage')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","menu_list_on");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 3){
+						$("#listClick_1").css("border-bottom","1px solid #CCC");
+						$("#listClick_1").css("color","#666");
+						$("#listClick_3").css("border-bottom","1px solid #C40521");
+						$("#listClick_3").css("color","#C40521");
+						$("#listClick_4").css("border-bottom","1px solid #CCC");
+						$("#listClick_4").css("color","#666");
+						// 技能标签
+						$("#crowdfunding_iframe").attr("src","{:U('Home/Message/meMessage')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","menu_list_on");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 4){
+						$("#listClick_1").css("border-bottom","1px solid #CCC");
+						$("#listClick_1").css("color","#666");
+						$("#listClick_3").css("border-bottom","1px solid #CCC");
+						$("#listClick_3").css("color","#666");
+						$("#listClick_4").css("border-bottom","1px solid #C40521");
+						$("#listClick_4").css("color","#C40521");
+
+						$("#crowdfunding_iframe").attr("src","{:U('Home/Message/writeMessage')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","menu_list_on");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 5){
+						$("#crowdfunding_iframe").attr("src","{:U('Home/Message/outboxMessage')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","menu_list_on");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 6){
+						$("#crowdfunding_iframe").attr("src","{:U('Home/Message/informMessage')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","menu_list_on");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 7){
+						$("#crowdfunding_iframe").attr("src","{:U('Home/Message/benefitMessage')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","menu_list_on");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 8){
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/incomeDetail')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","menu_list_on");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 9){
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/wantDeposit')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","menu_list_on");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 10){
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/accountRecharge')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","menu_list_on");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 11){
+
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/allAttention')}");
+						$("#crowdfunding_iframe").attr("height","2000");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","menu_list_on");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 12){
+						$("#listClick_11").css("border-bottom","1px solid #CCC");
+						$("#listClick_11").css("color","#666");
+						$("#listClick_12").css("border-bottom","1px solid #C40521");
+						$("#listClick_12").css("color","#C40521");
+						$("#listClick_13").css("border-bottom","1px solid #CCC");
+						$("#listClick_13").css("color","#666");
+
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/myFans')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","menu_list_on");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 13){
+						$("#listClick_11").css("border-bottom","1px solid #CCC");
+						$("#listClick_11").css("color","#666");
+						$("#listClick_12").css("border-bottom","1px solid #CCC");
+						$("#listClick_12").css("color","#666");
+						$("#listClick_13").css("border-bottom","1px solid #C40521");
+						$("#listClick_13").css("color","#C40521");
+
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/mutualAttention')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","menu_list_on");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 14){
+						$("#crowdfunding_iframe").attr("src","crowdfunding.center/messages.html");
+						$("#crowdfunding_iframe").attr("height","1045");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","menu_list_on");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 15){
+						$("#crowdfunding_iframe").attr("src","crowdfunding.center/inbox.html");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","menu_list_on");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 16){
+						$("#crowdfunding_iframe").attr("src","crowdfunding.center/outbox.html");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","menu_list_on");
+					}
+				}
+		</script>
+</block>
+
+<block name="foot_bar">
+	<h1>你好! 这里是foot</h1>
+</block>

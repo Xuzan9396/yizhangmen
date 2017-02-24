@@ -1,0 +1,64 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+<load href="__PUBLIC__/css/publishService.css" />
+
+	<div class="service-publish-main">
+		<div class="header-name">
+			<div class="left-line"></div>
+			<div class="publishService-title">发布服务</div>
+		</div>
+		<div class="line-top"></div>
+		<!--进度条 -->
+		<div class="publish-stepbar">
+			<div class="stepbar-middle">
+				<div class="first-step">1.选择服务类目</div>
+				<div class="second-step">2.填写服务信息</div>
+				<div class="third-step">3.发布成功,审核中</div>
+			</div>
+		</div>
+		<form id="cate_form" action="{:U('Home/Service/publishServiceOne',['status'=>1])}" method="post">
+
+			<div class="publish-cate">
+				<div class="publish-choose-cate">
+					<select class="form-control select-first-category" name="firstCate" id="firstCate">
+						<option value="{$list['cate_firstid']['id']}">{$list['cate_firstid']['cate_name']}</option>
+
+					</select>
+					<select class="form-control select-first-category" name="secondCate" id="secondCate">
+						<option value="{$list['cate_secondid']['id']}">{$list['cate_secondid']['cate_name']}</option>
+					</select>
+					<select class="form-control select-first-category" name="thirdCate" id="thirdCate">
+						<option value="">--请选择--</option>
+						<foreach name="list['cate_threeid']" item="val" key="k">
+							<option value="{$val['id']}">{$val['cate_name']}</option>
+						</foreach>
+					</select>　　<span id="tips_null"></span>
+				</div>
+			</div>
+			<div class="clear"></div>
+			<div class="next-step">
+				<input id="cate-botton" type="submit" value="下一步 填写服务信息"/>
+			</div>
+		</form>
+		<div class="one-tips">
+			<div class="wenxin-tips"><i>温馨提示 !</i></div>
+			<p>1. 错误填写服务属性，可能会引起服务下架或搜索流量减少，影响您的正常销售</p>
+			<p>2. 服务的标题需要和当前服务的类目、属性一致，否则会被下架</p>
+			<p>3. 服务发布后相关人员审核会在第一时间内对发布的服务进行审核</p>
+		</div>
+	</div>
+	
+	<script>
+		$('document').ready(function(){
+			$('#cate_form').submit(function(){
+				if($('#thirdCate').val()==''){
+					$('#tips_null').css('color','red').html('服务分类不能为空');
+					return false;
+				}else{
+					return true;
+				}
+			});
+
+		});
+	</script>
+</block>

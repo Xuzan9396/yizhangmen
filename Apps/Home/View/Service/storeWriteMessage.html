@@ -1,0 +1,90 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+<load href="__PUBLIC__/css/storeRegister1.css" />
+
+			<!-- 开始 -->
+			<div class="container-fiuld">
+				<div class="" style="width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;">
+						<div class="" style="">
+									写信息
+						</div>
+				</div>
+			</div>
+
+			<div class="" style="width:100%;padding:20px 80px 0px 20px;">
+
+			<div class="container-fiuld">
+					<form id="form-writemessage" class="form-horizontal" action="{:U('Home/Service/storeWriteMessageAct')}" method="get">
+					<div class="form-horizontal">
+						<div class="form-group">
+							<label for="inputEmail3" class="col-sm-2 control-label">收件人:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="mesm_receiver" id="inputEmail3" placeholder="收件人">
+							</div>
+						</div>
+						<!-- <br> -->
+						<div class="form-group">
+							<label for="inputPassword3" class="col-sm-2 control-label">消息标题:</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="mesm_title" id="inputPassword3" placeholder="标题">
+							</div>
+						</div>
+						<!-- <br> -->
+						<div class="form-group">
+							<label for="inputPassword3" class="col-sm-2 control-label">消息内容:</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" name="mesm_centent" rows="8"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="button" id="form-submit" class="btn btn-info">保 存</button>
+							</div>
+						</div>
+					</div>
+				</form>
+				</div>
+
+			</div>
+			<!-- 结束 -->
+			<script>
+				// js验证
+				// var form_data=[];
+				$('#form-submit').click(function(){
+						mesm_receiver = $('#form-writemessage input').eq(0).val();
+						mesm_title = $('#form-writemessage input').eq(1).val();
+						mesm_centent =  $('#form-writemessage textarea').eq(0).val();
+
+						$.post("{:U('Home/Message/writeMessageAct')}",{"mesm_receiver" : mesm_receiver,"mesm_title" : mesm_title,"mesm_centent" : mesm_centent},
+					 function(data){
+						console.log(data);
+						 if(data.status == true){
+							 $('#form-writemessage').submit();
+						 }
+						 if(data.status == false){
+							 toastr.options = {
+									closeButton: false,
+									debug: false,
+									progressBar: false,
+									positionClass: "toast-top-center",
+									onclick: null,
+									showDuration: "300",
+									hideDuration: "1000",
+									timeOut: "5000",
+									extendedTimeOut: "1000",
+									showEasing: "swing",
+									hideEasing: "linear",
+									showMethod: "fadeIn",
+									hideMethod: "fadeOut"
+							};
+							var toast = 'warning';
+							toastr[toast](data.error_info);
+						 }
+					},'json');
+				});
+
+
+			</script>
+
+</block>

@@ -1,0 +1,519 @@
+*{
+	padding:0;
+	margin:0;
+}
+.deal-assess{
+	background:#E8E8E8;
+	width: 100%;
+	height: auto;
+}
+.deal-assess-content{
+	width:1100px;
+	margin:0 auto;
+	overflow: hidden;
+	padding-top: 20px;
+	background: #E8E8E8;;
+}
+/*左边*/
+.deal-assess-left{
+	float: left;
+	width: 245px;
+	height: 500px;
+	background: #FFFFFF;
+	overflow: hidden;
+}
+.deal-assess-brand{
+	width: 200px;
+	height:400px;
+	border: 1px solid #ccc;
+	margin: 20px auto 0;
+	padding: 5px;
+}
+.deal-brand-top{
+	width: 180px;
+	height: 180px;
+	margin: 0 auto;
+}
+.deal-brand-top img{
+	width: 180px;
+	height:180px;
+}
+.deal-brand-hire{
+	width: 180px;
+	/*height: 45px;*/
+	margin: 10px auto 0;
+	/*border:1px solid #ccc;*/
+	line-height: 45px;
+}
+.deal-brand-hire a{
+	display: block;
+	line-height: 45px;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	color: #fff;
+}
+.deal-brand-bottom{
+	width: 180px;
+	height:100px;
+	margin: 20px auto 0;
+	background: #0DAD51;
+}
+.deal-brand-bottom-iconv{
+	width: 55px;
+	height: 55px;
+	float: left;
+	margin-top: 20px;
+	margin-left: 10px;
+	background: url('../image/service/image/guzhu-large.png');
+}
+.deal-brand-bottom-right{
+	float: right;
+	width: 110px;
+	height: 100px;
+}
+.deal-brand-bottom-right p{
+	color: #fff;
+}
+.deal-brand-bottom-right p:first-child{
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.deal-brand-two{
+	font-size: 12px;
+}
+.deal-brand-two span{
+	font-size: 14px;
+	font-weight: bold;
+}
+/*右边*/
+.deal-assess-right{
+	float: right;
+	width: 827px;
+	/*height: 800px;*/
+	margin-bottom: 30px;
+	background: #fff;
+}
+.deal-assess-right-top{
+	width:827px;
+}
+.deal-assess-right-title{
+	height: 50px;
+	background: #F3F3F3;
+	line-height: 50px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #555;
+	padding-left: 10px;
+}
+.deal-assess-right-content{
+	float: left;
+	/*border:1px solid red; */
+	/*height:200px;*/
+	width: 500px;
+}
+.deal-assess-right-content p{
+	margin: 20px;
+
+}
+.deal-assess-right-txt{
+	font-size: 16px;
+	font-weight: bold;
+}
+.deal-assess-right-num{
+	font-size: 14px;
+	font-weight: bold;
+	color: #FF6000;
+}
+.store-table tr{
+	height: 50px;
+}
+.store-situation-title{
+	color: #888;
+}
+.store-table .td1{
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+}
+.store-td-num{
+	font-size: 14px;
+	color: #FF6000;
+	font-weight: bold;
+}
+.store-situation-btm{
+	border-top: 1px solid #ccc;
+	height: 50px;
+	line-height: 50px;
+}
+.store-situation-btm span{
+	padding-right: 50px;
+}
+.store-evaluate{
+	/*height: 500px;*/
+	border:1px solid #ccc;
+	min-height: 300px;
+
+}
+.store-evaluate-title{
+	height: 50px;
+	line-height: 50px;
+	border-bottom: 2px solid #ccc;
+
+}
+.store-evaluate-title span{
+	font-size: 16px;
+	font-weight: bold;
+	margin-right: 200px;
+}
+/*评分列表*/
+.assess-list{
+	/*width: 750px;*/
+	/*min-height:100px;*/
+	height: auto;	
+	border-bottom: 1px solid #ccc;
+	overflow: hidden;
+	margin-top: 20px;
+}
+.assess-list-pic{
+	width: 60px;
+	height: 60px;
+	float: left;
+
+}
+.assess-list-pic img{
+	width: 60px;
+	height: 60px;
+}
+.assess-list-name{
+	width:150px;
+	float: left;
+	margin-left: 20px;
+}
+.assess-list-name p a{
+	color:#3C8FED;
+	font-size: 18px;
+	font-weight: bold;
+}
+.assess-list-name p{
+	margin-top: 10px;
+}
+.assess-list-content{
+	float: left;
+	width: 420px;
+	color:#888;
+	font-size: 12px;
+	margin-top: 10px;
+}
+
+
+.assess-list-time{
+	float: right;
+	width: 80px;
+	height: 60px;
+	text-align: center;
+	color: #888;
+	font-size: 12px;
+	margin-top: 10px;
+}
+.assess-list-div{
+	display: inline-block;
+	width: 54px;
+	height: 9px;
+}
+
+/*综合评价 第一个星星*/
+.assess-list-icon{
+	/*display: inline-block;*/
+	width: 190px;
+	height: 12px;
+
+}
+
+.xing-1{
+	display: inline-block;
+	width: 78px;
+	height: 12px;
+	background: url('../image/service/image/b_grey.png') no-repeat;
+	position: relative;	
+	float: left;
+}
+.assess-list-icon .num{
+	float: right;
+	line-height: 12px;
+	font-size: 12px;
+
+}
+.xing-1 i{
+	display: inline-block;
+	width: 78px;
+	height: 12px;
+	position: absolute;
+	left:0;
+	top: 0;
+	background: url('../image/service/image/b_yellow.png') no-repeat;
+}
+
+.deal-assess-icon{
+	margin: 20px;
+	float: right;
+    width: 250px;
+    /*height: 100px;*/
+    background-color: #fffdfb;
+
+}
+.xingxing{
+	margin-top: 10px;
+}
+.xingxing li{
+	/*width: 78px;*/
+	height: 20px;
+
+}
+.xingxing li p{
+	margin-left: 20px;
+	font-size: 12px;
+}
+.xingxing li p span{
+	color: #FF7A1A;
+}
+.star-1{
+	display: inline-block;
+	width:78px;
+	height:12px; 
+    background-image: url('../image/service/image/one.png');
+}
+.star-2{
+	display: inline-block;
+	width:78px;
+	height:12px; 
+    background-image: url('../image/service/image/two.png');
+}
+.star-3{
+	display: inline-block;
+	width:78px;
+	height:12px; 
+    background-image: url('../image/service/image/three.png');
+}
+.star-4{
+	display: inline-block;
+	width:78px;
+	height:12px; 
+    background-image: url('../image/service/image/four.png');
+}
+.star-5{
+	display: inline-block;
+	width:78px;
+	height:12px; 
+    background-image: url('../image/service/image/five.png');
+}
+.f1{
+	float: left;
+}
+
+/*综合评价 结束*/
+.assess-xing{
+	display: inline-block;
+	/*width: 90%;*/
+	/*width: 30px;*/
+	height: 9px;
+	background: #FF7A1A;
+	position: relative;
+}
+.assess-xing i{
+	display: inline-block;
+	width: 54px;
+	height: 9px;
+	position: absolute;
+	left:0;
+	top: 0;
+	background: url('../image/service/image/service-icon.png') no-repeat 0 -167px;
+}
+/*店铺评价*/
+
+
+
+/**************************************/
+/*服务商档案*/
+.record{
+	min-height: 500px;
+}
+.record-title{
+	height: 50px;
+	line-height: 50px;
+	font-weight: bold;
+	font-size: 20px;
+	padding-left:20px; 
+	background: #F3F3F3;
+}
+.record-content{
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+} 
+.record-content-summary{
+	border-bottom: 1px dashed #ccc;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+.record-content-work{
+	height: 38px;
+	background: #F3F3F3;
+	line-height: 38px;
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+/*服务商档案结束*/
+
+/*****************************/
+/*案例展示*/
+.example-ul{
+	margin-bottom: 30px;
+}
+.example-ul li{
+	width: 260px;
+    height: 220px;
+    background-color: #fff;
+    margin-right: 15px;
+    margin-bottom: 30px;
+    float: left;
+}
+.example-ul li img{
+	width: 260px;
+	height: 160px;
+}
+.example-ul li p{
+	margin-top: 10px;
+	color:black;
+	font-weight: bold;
+	text-align: center;
+}
+
+/*****************************/
+/*分类列表展示*/
+
+.cate-deal-assess{
+	margin:0 auto;
+	width:1100px;
+}
+.border{
+	min-height:430px;
+	background:#F8F8F8;
+	border:1px solid #F8F8F8;
+}
+.serviceNull{
+	width:400px;
+	text-align:center;
+	height:100px;
+	font-size:20px;
+	color:red;
+	padding-top:30px;
+	margin:100px auto;
+}
+
+.store-onecase{
+	background:white;
+}
+/************案例详情***************/
+
+.case-title{
+	height:60px;
+	width:1100px;
+	border-bottom:1px solid #cccccc;
+}
+.case-title h3{
+	margin-left:30px;
+	margin-top:20px;
+}
+.case-design-main{
+	width:800px;
+	float:left;
+	border-right:1px solid #cccccc;
+}
+.case-design-title p{
+	margin-left:30px;
+	margin-top:10px;
+	font-size:14px;
+}
+.case-desc{
+	background:white;
+	margin-left:25px;
+	padding-bottom:20px;
+	font-size:14px;
+}
+.case-iamges{
+	width:100%;
+	padding-left:30px;
+}
+.case-iamges img{
+	width:740px;
+	margin-top:5px;
+	margin-bottom:5px;
+	float:left;
+}
+.case-right{
+	width:290px;
+	height:375px;
+	float:right;
+	margin-top:10px;
+	margin-right:5px;
+	border-radius:5px;
+	border:1px solid #ccc;
+}
+.price-name{
+	font-size: 14px;
+	margin-top:10px;
+	margin-left:20px;
+    color: #999;
+}
+.case-price{
+	font-size: 31px;
+    color: #ff9400;
+    margin: 0;
+    padding: 10px 20px 0 0;
+    text-align: center;
+}
+.case-company{
+	padding:20px 20px 20px;;
+	margin-top:10px;
+	background-color: #f8f8f8;
+}
+.case-company p{
+	line-height:28px;
+}
+.store-part{
+	background: #fff;
+    padding:20px;
+    margin-top:5px;
+    float:left;
+    width:100%;
+}
+.store-logo{
+	width:80px;
+	height:80px;
+	float:left;
+	border:1px solid #fff;
+}
+.store-logo img{
+	width:80px;
+	height:80px;
+}
+.store-desc{
+	height:70px;
+	float:left;
+	padding-left:10px;
+	padding-top:10px;
+}
+.store-desc p{
+	line-height:28px;
+}
+.deal-border{
+	padding-bottom:20px;
+	border:1px solid #f8f8f8;
+}
+.backg{
+	background: white;
+	margin-top:20px;
+}

@@ -1,0 +1,99 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+	<load href="__PUBLIC__/layui/css/layui.css" />
+	<load href="__PUBLIC__/css/pastService.css"/>
+	<load href="__PUBLIC__/layui/layui.js" />
+	<div class="past-service-main">
+		<div class="header-name">
+			<div class="right-line"></div>
+			<div class="ready-title">已发布的服务</div>
+		</div>
+		
+		<div class="line"></div>
+		<div class="service-trade-contents">
+			<form action="{:U('Home/Service/pastService')}" method="get">
+				<div class="layui-form-pane" style="margin-top:15px;">
+				  	<div class="layui-form-item float">
+					    <label class="layui-form-label" id="trade-time">发布时间</label>
+					    <!-- 开始时间 -->
+				    	<div class="layui-inline" id="start-time">
+							<input class="layui-input start" name="startTime" placeholder="开始时间" value="{:I('get.startTime')}" onclick="layui.laydate({elem: this, festival: true})">
+						</div>
+					    <!-- 结束时间 -->
+					    <div class="layui-inline"  id="end-time">
+  							<input class="layui-input" name="endTime" value="{:I('get.endTime')}" placeholder="截止时间" onclick="layui.laydate({elem: this, festival: true})">
+						</div>
+				  	</div>
+				  	<div id="trade-flow">状态</div>
+				  	<div class="trade-money">
+				  		<select name="tradeMoney" id="trade-money">
+				  			<option value="3" <if condition = "(I('get.tradeMoney',3) eq 3)"> selected </if>>全部</option>
+				  			<option value="2" <if condition = "(I('get.tradeMoney',3) eq 2)"> selected </if>>已通过</option>
+				  			<option value="0" <if condition = "(I('get.tradeMoney',3) eq 0)"> selected </if>>审核中</option>
+				  			<option value="1" <if condition = "(I('get.tradeMoney',3) eq 1)"> selected </if> >未通过</option>
+				  		</select>
+				  	</div>
+				  	<div class="order-search">
+				  		订单名:<input value="{:I('get.pubh_title')}" type="text" name="pubh_title"/>
+				  	</div>
+				</div>
+				<input type="submit" class="layui-btn layui-btn-normal"id="order-search" value="搜索">   
+			</form>
+		</div>
+		<div class="clear"></div>
+		<div class="past-service-data">
+			<table class="table">
+				<tr>
+					<th>名称</th>
+					<th>价格</th>
+					<th>状态</th>
+					<th>时间</th>
+					<th>操作管理</th>
+				</tr>
+				<foreach name="list" item="val" key="key">
+					<tr>
+						<td>{$val['pubh_title']}</td>
+						<td>{$val['pubh_price']}</td>
+						<td>{$val['pubh_status']}</td>
+						<td>{:date('Y/m/d',$val['pubh_time'])}</td>
+						<td>
+							<a href="{:U('Home/Service/moreService',array('id'=>$val['id']))}">更多...</a>
+						</td>
+					</tr>
+				</foreach>
+			</table>
+			<div class="clear"></div>
+			<div style="margin-top:30px">{$show}</div>
+		</div>
+	</div>
+	<script>
+		layui.use('laydate', function(){
+		  var laydate = layui.laydate;
+		  var start = {
+		    min: laydate.now()
+		    ,max: '2099-06-16 23:59:59'
+		    ,istoday: false
+		    ,choose: function(datas){
+		      end.min = datas; //开始日选好后，重置结束日的最小日期
+		      end.start = datas //将结束日的初始值设定为开始日
+		    }
+		  };
+		var end = {
+		    min: laydate.now()
+		    ,max: '2099-06-16 23:59:59'
+		    ,istoday: false
+		    ,choose: function(datas){
+		      start.max = datas; //结束日选好后，重置开始日的最大日期
+		    }
+		  };
+		document.getElementById('LAY_demorange_s').onclick = function(){
+		    start.elem = this;
+		    laydate(start);
+		  }
+		document.getElementById('LAY_demorange_e').onclick = function(){
+		    end.elem = this
+		    laydate(end);
+		  }
+		});
+	</script>
+</block>

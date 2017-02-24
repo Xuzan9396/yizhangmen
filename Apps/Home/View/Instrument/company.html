@@ -1,0 +1,571 @@
+<extend name="./Public/template/base1.html" />
+<block name="title"><title>仪器库-厂商查询</title></block>
+<block name="content">
+<style type="text/css">
+	.vendor-list-all{
+		width: 90%;
+		height: auto;
+		overflow: auto;
+	}
+
+	.company{
+		width: 100%;
+		height: auto;
+		overflow: auto;
+		margin: 10px 0px;
+		padding: 10px 0px;
+	}
+
+	.comapny-container{
+		width: 100%;
+		height: auto;
+		border-top: 1px solid gray;
+		overflow: hidden;
+		padding: 10px 0px;
+		margin: 5px auto;
+	}
+
+	.comapny-container li{
+		transition: border 0.5s,opacity 0.5s;
+		width: 131.5px;
+		height: 160px;
+		float: left;
+		border: 1px solid #EEEEEE;
+		overflow: hidden;
+	}
+
+	.comapny-container li:hover{
+		transition: border 0.5s,opacity 0.5s;
+		border: 1px solid red;
+		opacity: 0.8;
+	}
+
+	.company-logo{
+		width: 116px;
+		height: 120px;
+		text-align: center;
+		line-height: 116px;
+		margin: 0 auto;
+	}
+
+	.company-logo img{
+		padding: 10px 15px;
+		width: 116px;
+	}
+
+	.comapny-container li p{
+		text-align: center;
+		color: #337ABD;
+		margin: 0;
+		padding: 0;
+	}
+
+	.myScrollspy{
+		position: fixed;
+		top: 14%;
+		left: 85%;
+		box-shadow: 0 0 2px 1px #EEEEEE;
+	}
+
+	.myScrollspy li a{
+		transition: background 0.5s;
+		border: 1px solid #EEEEEE;
+		text-align: center;
+		cursor: pointer;
+		font-weight: bold;
+		background: white;
+		width: 38px;
+		display: block; 
+	}
+
+	.myScrollspy li a:hover{
+		transition: background 0.5s;
+		background: #EEEEEE; 
+		
+
+	}
+
+	.myScrollspy li a{
+		text-decoration: none;
+		color: #337AB7;
+	}
+</style>
+	<div class="container">
+		<div class="vendor-list-all" >
+			<div class="company">
+				<h3 id="A">A</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyA']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+							
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="B">B</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyB']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="C">C</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyC']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="D">D</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyD']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="E">E</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyE']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="F">F</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyF']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="G">G</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyG']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="H">H</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyH']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="I">I</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyI']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="J">J</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyJ']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="K">K</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyK']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="L">L</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyL']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="M">M</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyM']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="N">N</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyN']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+			<div class="company">
+				<h3 id="O">O</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyO']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="P">P</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyP']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="Q">Q</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyQ']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="R">R</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyR']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="S">S</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyS']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="T">T</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyT']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="U">U</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyU']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="V">V</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyV']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="W">W</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyW']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="X">X</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyX']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="Y">Y</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyY']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="Z">Z</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyZ']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+
+			<div class="company">
+				<h3 id="OH">其他</h3>
+				<div class="comapny-container">
+					<ul>
+						<foreach name="company['companyOh']" item='v'>	
+							<li>
+								<a href="{:U('Instrument/companyDetail?cid='.$v['appt_id'])}"">
+									<div class="company-logo"><img src="__PUBLIC__/Uploads{$v.appt_company_pic}"></div>
+									<p>{$v.appt_company_name}</p>
+								</a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+		<div class="myScrollspy">
+			<ul>
+				<li><a href="#A">A</a></li>
+				<li><a href="#B">B</a></li>
+				<li><a href="#C">C</a></li>
+				<li><a href="#D">D</a></li>
+				<li><a href="#E">E</a></li>
+				<li><a href="#F">F</a></li>
+				<li><a href="#G">G</a></li>
+				<li><a href="#H">H</a></li>
+				<li><a href="#I">I</a></li>
+				<li><a href="#J">J</a></li>
+				<li><a href="#K">K</a></li>
+				<li><a href="#L">L</a></li>
+				<li><a href="#M">M</a></li>
+				<li><a href="#N">N</a></li>
+				<li><a href="#O">O</a></li>
+				<li><a href="#P">P</a></li>
+				<li><a href="#Q">Q</a></li>
+				<li><a href="#R">R</a></li>
+				<li><a href="#S">S</a></li>
+				<li><a href="#T">T</a></li>
+				<li><a href="#U">U</a></li>
+				<li><a href="#V">V</a></li>
+				<li><a href="#W">W</a></li>
+				<li><a href="#X">X</a></li>
+				<li><a href="#Y">Y</a></li>
+				<li><a href="#Z">Z</a></li>
+				<li><a href="#OH">其他</a></li>
+			
+			</ul>
+
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('.myScrollspy ul li').each(function(){
+			$(this).click(function(){
+				$(this).children('a').css({'color':'white','background':'#0088CC'});
+				$(this).siblings().children('a').css({'background':'white','color':'#337AB7'});
+			})
+			
+		})
+	</script>
+</block>

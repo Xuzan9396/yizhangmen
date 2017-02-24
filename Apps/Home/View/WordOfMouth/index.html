@@ -1,0 +1,828 @@
+<extend name='./Public/template/base1.html'/>
+<block name="title"><title>仪器库-产品口碑</title></block>
+<block name="file">
+	<load href="__PUBLIC__/layer/layer.js" />
+    <load href="__PUBLIC__/layui/css/layui.css"  />
+</block>
+<block name="content">
+	<style>
+		body,div,h1,dl,dt,dd,li,ol,ul,img,textarea{
+			padding: 0;
+			margin: 0;
+		}
+		.row-body{
+			width: 1170px;
+		}
+		.row-cate{
+			margin-top: 10px;
+			margin-left: -15px;
+		}
+		.breadcrumb{
+			background: white;
+			margin-bottom: 0;
+		}
+		.row-top{
+			width: 100%;
+			height: 200px;
+			border: 1px solid #ccd2e8;
+		}
+		.appraise-title{
+			height: 35px;
+			line-height: 35px;
+			border-bottom: 1px solid #ccd2e8;
+			background: #fafbfc;
+		}
+		.car-name{
+			width: auto;
+			margin-right: 20px;
+			height: 35px;
+			float: left;
+		}
+		.car-name span{
+			float: left;
+			width: auto;
+			margin-left: 44px;
+			color: #3b5998;
+			font-weight: bold;
+			font-size: 16px;
+		}
+		.appraise-title .title-kb{
+			float: right;
+			margin-right: 10px;
+			background: #f70;
+			line-height: 24px;
+			color: white;
+			font-size: 12px;
+			height: 24px;
+			margin-top: 5px;
+			width: 80px;
+			text-align: center;
+			border-right: 1px solid #ccd2e8;
+			border-left: 1px solid #ccd2e8;
+		}
+		.tab-nav-list{
+			float: left;
+		}
+		.tab-nav-list li{
+			float: left;
+			background: #f2f5f8;
+			height: 34px;
+			width: 80px;
+			border-top: 2px solid #3b5998;
+			text-align: center;
+			border-right: 1px solid #ccd2e8;
+			border-left: 1px solid #ccd2e8;
+		}
+		.appraise-cont-dl dt{
+			float: left;
+			margin-top: 10px;
+			margin-left: 50px;
+
+		}
+		.list-ul{
+			width:389px;
+			height: 100px;
+			float: left;
+			margin-left: 30px;
+			margin-top: 30px;
+			line-height: 30px;
+		}
+		.appraise-cont-right{
+			float: left;
+			width: 263px;			
+			margin-top: 20px;
+			height: 125px;
+			border-left: 1px solid #ccd2e8;
+			padding-left: 20px;
+		}
+		.appraise-cont-right ul{
+			margin-left: 40px;
+		}
+		.appraise-cont-right li{
+			width: 420px;
+			height: 23px;
+			display: block;
+			line-height: 23px;
+			clear: both;
+			text-align: left;
+		}
+		.appraise-cont-right li:hover{
+			background: #fafbfc;
+		}
+		.appraise-cont-right a{
+			float: left;
+			width: 150px;
+			color: #3b5998;
+		}
+		.appraise-cont-right p{
+			border-bottom: 2px solid #f60;
+			border-right: 1px solid #f60;
+			background: #fafbfc;
+			font-size: 16px;
+			margin-left: -20px;
+		}
+		.appraise-cont-right b{
+			font-size: 18px;
+			margin-right: 10px; 
+			float: left;
+		}
+		.appraise-cont-right div{
+			float: left;
+			font-size: 12px;
+			color: #999;
+		}		
+		.appraise-cont-right span{
+			float: left;
+			width:35px;
+			margin-right: 20px;
+			font-size: 16px;
+			color: #d60000;
+		}
+		.appraise-title .color-b{
+			background: #3b5998;
+		}
+		.tab-nav{
+			margin: 10px 0px;
+			width: 100%;
+			height: 30px;
+			border: 1px solid #ccd2e8;
+			background: #fafbfc;
+		}
+		.tab-nav li{
+			width: 120px;
+			text-align: center;
+			height: 28px;
+			float: left;
+			line-height: 30px;
+			background: #f2f5f8;
+			border-top: 2px solid #3b5998;
+			border-right:  1px solid #ccd2e8;
+		}
+		.mouthcon{
+			width: 100%;
+			height: auto;
+			background: #fafbfc;
+			border: 1px solid #ccd2e8;
+		}
+		.mouthcon-cont{
+			width: 100%;
+			height: auto;
+			overflow: auto;
+			margin-top: 15px;
+			padding-bottom: 20px;	
+			border-bottom: 1px dotted #ccd2e8;
+		}
+		.mouthcon-cont-left{
+			width: 375px;
+			height: 500px;
+			float: left;
+		}
+		.choose-con-top{
+			margin-left: 10px;
+			margin-top: 10px;
+			width: 365px;
+			height: 105px;
+			padding: 10px;
+			background: white;
+			border-top:  1px solid #ccd2e8;
+			border-left:  1px solid #ccd2e8;
+			border-bottom:  1px solid #ccd2e8;
+		}
+		.name-pic{
+			float: left;
+			margin-left: 20px;
+		}
+		.name-text{
+			float: left;
+			margin-top: 15px;
+			margin-left: 20px;
+		}
+		.usercont-main{
+			clear: left;
+			line-height: 20px;
+			font-size: 12px;
+			color: gray;
+			padding-top: 10px;
+			margin-left: 20px;
+		}
+		.usercont-main a{
+			font-size: 12px;			
+		}
+		.name-text-pic{
+			margin-left: 10px;
+			margin-top: -3px;
+		}
+		.choose-con-bottom{
+			margin-left: 10px;
+			margin-top: 10px;
+			width: 365px;
+			background: white;
+			height: auto;
+			border-top:  1px solid #ccd2e8;
+			border-left:  1px solid #ccd2e8;
+			border-bottom:  1px solid #ccd2e8;
+		}
+		.choose-dl{
+			width: 100%;
+			height: 35px;
+		}
+		.choose-dl dt{
+			height: 35px;
+			float: left;
+			font-size: 12px;
+			line-height: 35px;
+			text-align: center;
+			background: #f2f5f8;
+			width: 90px;
+			border-right: 1px dotted #ccd2e8;
+			border-bottom: 1px dotted #ccd2e8;
+			display:block;
+			white-space:nowrap;
+			overflow:hidden; 
+			text-overflow:ellipsis;
+			padding:0 10px;
+			color: #999;
+		}
+		.choose-dl dd{
+			height: 35px;
+			float: left;
+			line-height: 35px;
+			text-align: center;
+			width: 273px;
+			border-bottom: 1px dotted #ccd2e8;
+			padding:0 20px;
+		}
+		.choose-dl dd a{
+			font-size: 12px;
+			color: #333;
+			width: 273px;
+			height: 35px;
+			margin-left: -20px;
+			display:block;
+			white-space:nowrap; 
+			overflow:hidden; 
+			text-overflow:ellipsis;
+		}
+		.mouthcon-cont-right{
+			width: 783px;
+			height: auto;
+			/*overflow: auto;*/
+			background: white;
+			margin-top: 10px;
+			border: 1px solid #ccd2e8;
+			float: left;
+			padding: 20px; 
+		}
+		.nav-sub{
+			width:100%;
+			height: 50px;
+			border-bottom: 1px dotted #ccd2e8;
+			margin-bottom: 15px;
+			text-align: right;
+		}
+		.nav-sub a{
+			font-size: 13px;
+			color: #3B5998;
+			font-weight: bold;
+		}
+		.name-width p{
+			margin-left: 20px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+		.brulImage{
+			float: left;
+			margin-right: 10px;
+		}
+		.imgcont-main{
+			height: auto;
+			margin-top: 10px;
+			margin-left: 20px;
+		}
+		.mouth-remak{
+			clear: left;
+		}
+		.border-b-solid{
+			line-height: 25px;
+			padding:10px;
+			height: 300px;
+			overflow: hidden;
+			position: relative;
+		}
+		.mouth-help{
+			height: 30px;
+			margin-top: 20px;
+			margin-left: 10px;
+			border-top: 1px dotted #ccd2e8;
+			text-overflow: ellipsis;
+			line-height: 30px;
+		}
+		.mouth-help-pinlun{
+			float: right;
+			margin-top: 10px;
+			height: 20px;
+			text-align: center;
+			width: 80px;
+			line-height: 20px;
+			font-size: 12px;
+			background: #f70;
+			color: white;
+			border:1px solid #cc5f00;
+		}
+		.mouth-help-pinlun:hover{
+			cursor: pointer;
+			background: red;
+		}
+		.mouth-help span{
+			color: #f70;
+			font-size: 15px;
+			margin: 3px;
+			font-weight: bold;
+		}
+		.page-cont{
+			width: 100%;
+			height: 70px;
+			text-align: right;
+		}
+		.page{
+			margin-right: 20px;
+		}
+		.font-arial-span{
+			display: block;
+			width: 86px;
+			height: 16px;
+			float: left;
+			margin-top: 7px;
+			margin-right: 10px;
+			background: url('__PUBLIC__/image/wordofmouth/no.png');
+		}
+		.font-arial div{
+			width: 39px;
+			height: 16px;
+			background: url('__PUBLIC__/image/wordofmouth/yes.png');
+		}
+		.font-arial-point{
+			float: left;
+			color: #d60000;
+			font-size: 25px;
+			margin-right: 10px;
+			font-weight: bold;
+		}
+		.score-box p{
+			clear: left;
+		}
+		.number-ren{
+			color: #999;
+			font-size: 12px;
+		}
+		.mouthcon-jinghua{
+			float: left;
+			position: relative;
+			top: -24px;
+		}
+		.tab-nav .tab-nav-active{
+			border-top: 2px solid #f60;
+			background: white;
+			height: 29px;
+			border-bottom: 1px solid white;
+		}
+		.tab-nav-list .tab-nav-active{
+			border-top: 2px solid #f60;
+			background: white;
+			height: 35px;
+			border-bottom: 1px solid white;
+		}
+		.show-koubei{
+			clear: left;
+			border:1px solid #CCD3E4;
+			background: #FAFBFC;
+			color: #3B5B98;
+			width: 120px;
+			height: 25px;
+			font-size: 12px;
+			margin-top: 20px;
+			margin-left: 10px;
+			text-align: center;
+			line-height: 25px;
+		}
+		.show-koubei:hover{
+			cursor: pointer;
+			background: #F1F1F1;
+		}
+		.pic-touming{
+			width: 730px;
+			height: 30px;
+			position: absolute;
+			bottom: -10px;
+			left: 0;
+			background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAeCAYAAAAVdY8wAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEZJREFUeNpi/P//PzcDEYAFiAdQIRexCjmprpBoN/IOnELu4aSQ6LjmIFYh68Ap5Bq4FE6UiYzAAuA/MQqZGIgEA6gQIMAAf24IXRt15nYAAAAASUVORK5CYII=") repeat-x;
+		}
+		.mouth-pinlun{
+			margin-top: 15px;
+			margin-left: 10px;
+		}
+		.mouth-pinlun textarea{
+			width: 730px;
+			resize: none;
+			padding: 10px;
+		}
+		.mouth-pinlun-sub{
+			width: 100%;
+			height: 45px;
+			padding: 10px 0;
+			margin-top: -5px;
+			border-bottom: 1px solid #efefef;
+		}
+		.mouth-pinlun-sub span{
+			float: left;
+			font-size: 12px;
+			color: #666;
+		}
+		.mouth-pinlun-sub div{
+			float: right;
+			width: 60px;
+			height: 20px;
+			background: #999;
+			color: white;
+			text-align: center;
+			line-height: 20px;
+			font-size: 12px;
+			cursor: pointer;
+		}
+		.mouth-pinlun-sub div:hover{
+			background: #666;
+		}
+		.mouth-pinlun-main{
+			width: 100%;
+			height: auto;
+			margin-top: 10px;
+			padding-bottom: 10px;
+			border-bottom: 1px solid #efefef;
+		}
+		.mouth-pinlun-main img{
+			float: left;
+		}
+		.mouth-pinlun-main p{
+			float: left;
+			font-size: 12px;
+			margin-left: 5px;
+			color: #3B5998;
+		}
+		.mouth-pinlun-main span{
+			font-size: 12px;
+			float: right;
+		}
+		.mouth-pinlun-content{
+			clear: both;
+			width: 710px;
+			font-size: 12px;
+			height: auto;
+			color: #666;
+			padding-top: 5px;
+			margin-left: 20px;
+			padding-bottom: 20px;
+			word-break:break-all;
+		}
+		.hsbackground{
+			width: 100px;
+			height: 18px;
+			margin-left: 50px;
+			margin-top: 8px;
+			float: left;
+			background: url('__PUBLIC__/image/wordofmouth/xx2.png');
+		}
+		.xxbackground{
+			float: left;
+			position: relative;
+			width: 100%;
+			height: 18px;
+			background: url('__PUBLIC__/image/wordofmouth/xx3.png');
+		}
+		.choose-dl b{
+			font-size: 14px;
+			color: #FB7C00;
+			float: left;
+			margin-top: 1px;
+			margin-left: 20px;
+		}
+		.img-cont img{
+			display: block;
+			margin:0 auto;
+			height: 90px;
+		}
+		.img-cont{
+			margin: 5px auto;
+			overflow: hidden;
+			display: block;
+			height: 90px;
+			width: 120px;
+			background: #DCDDDD;
+		}
+		.no-praise{
+			margin-top: 30px;
+			margin-bottom: -40px;
+			font-size: 16px;
+			font-weight: bold;
+			color: #d60000;
+		}
+		.praise-title{
+			color: #d60000;
+			font-weight: bold;
+			text-decoration: underline;
+		}
+		.zhezhaocheng{
+			display: block;
+			margin: auto;
+			position: fixed;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			max-height: 400px;
+		}
+		.zzc-bg{
+			position: fixed;
+			display: none;
+			opacity:0.5;
+			top: 0px;
+			left: 0px;
+			width: 1356px;
+			height: 2000px;
+			background: black;
+		}
+	</style>
+	<div class="container row-body">
+		<div class="row-cate">
+			<ol class="breadcrumb rf-product-category">
+				<li><a href="{:U('Home/Instrument/index')}">首页</a></li>
+				<li><a href="{:U('Home/Instrument/category',['gid'=>$category_res['id']])}">{$category_res.cate_name}</a></li>
+				<li>产品口碑</li>
+			</ol>
+		</div>		
+		<div class="row-top">
+			<h1 class="appraise-title">
+				<if condition="$Think.session.home_user_info eq ''">
+					<a class="title-kb" href="" data-toggle="modal" data-target="#Login">发表口碑</a>
+					<a class="title-kb color-b" href="" data-toggle="modal" data-target="#Login">我的口碑</a>
+				<else/>
+					<a class="title-kb" href="{:U('Home/WordOfMouth/add')}">发表口碑</a>
+					<a class="title-kb color-b" href="{:U('Home/WordOfMouth/myPraise?uid='.$_SESSION['home_user_info']['user_id'])}">我的口碑</a>
+				</if>
+				<span class="car-name"><span>{$goods_info['instrument_info']['appt_goodsname']} 口碑</span></span>
+				<ul class="tab-nav-list">
+					<li class="current tab-nav-active">全部在售</li>
+					<li class="current" style="display:none">2016款</li>
+				</ul>
+			</h1>
+			<div class="tab-content">
+				<div class="appraise-cont tab-content-item  current">
+					<dl class="appraise-cont-dl fn-left">
+						<dt><a href=""><img width="180" height="135" src="__PUBLIC__/Uploads{$goods_info['instrument_info']['appt_pic']}" alt=""></a></dt>
+						<dd>
+							<ul class="list-ul font-14">
+								<li class="score-tit">{$val.appe_gid.appt_goodsname} 综合评分</li>
+								<li class="score-box">
+									<span class="font-arial number-fen"><span class="font-arial-span"><div></div></span><span class="font-arial-point">{$score_avg}</span>分</span>
+									<span class="number-ren">（{$goods_info.praise_count}人参与）</span>
+								</li>
+								<li class="score-box">
+									<p>厂商指导价：询价</p>
+								</li>
+							</ul>
+						</dd>
+					</dl>
+					<div class="appraise-cont-right">
+								<ul>
+									<p>同类仪器用户评分TOP排行</p>
+									<foreach name="rank_info_res" item="rank_info_v" key="rank_info_k">
+									<li><b>{$rank_info_k+1}.</b><a href="#">{$rank_info_v.appt_goodsname}</a><span>{$rank_info_v.rank_avg}</span><div>({$rank_info_v.count}人参与)</div></li>
+									</foreach>
+								</ul>
+							<div class="tab-content"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-nav">
+			<ul>
+				<li><a href="{:U($_SERVER['PATH_INFO'].'/type/1')}">全部口碑</a></li>
+				<li><a href="{:U($_SERVER['PATH_INFO'].'/type/2')}">最新口碑</a></li>
+				<li><a href="{:U($_SERVER['PATH_INFO'].'/type/3')}">最热排行</a></li>
+			</ul>
+		</div>
+		<div class="mouthcon">
+
+		<if condition="$info eq null ">
+			<center class="no-praise">该仪器尚未收到口碑</center>
+		<else />
+		<foreach name="info" item="val" >	
+			<div class="mouthcon-cont">
+				<div class="mouthcon-cont-left">
+					<div class="choose-con-top">
+						<div class="usercont">
+							<div class="usercont-name">
+								<div class="name-pic"><a href="{:U('Home/WordOfMouth/myPraise',['uid'=>$val['appe_uid']['user_id'] ])}"><img width="50" height="50" src="__PUBLIC__/Uploads/headportrait/{$val.appe_impuser.impr_picture}" alt=""></a></div>
+								<div class="name-text"><p><a href="{:U('Home/WordOfMouth/myPraise',['uid'=>$val['appe_uid']['user_id'] ])}">{$val.appe_uid.user_account}</a><a href="{:U('Home/WordOfMouth/myPraise',['uid'=>$val['appe_uid']['user_id'] ])}"><img class="name-text-pic" src="__PUBLIC__/image/card_1_26X16.png" alt=""></a></p></div>
+							</div>
+							<div class="usercont-main">他的帖子：<a href="{:U('Home/WordOfMouth/myPraise',['uid'=>$val['appe_uid']['user_id'] ])}">{$val.praise_count}个</a></div>
+						</div>
+					</div>
+					<div class="choose-con-bottom">
+						<dl class="choose-dl">
+							<dt title="购买经销商">购买经销商</dt>
+							<dd title="{$val.appe_shopname}"><a>{$val.appe_shopname}</a></dd>
+						</dl>
+						<dl class="choose-dl">
+							<dt title="购买价">购买价</dt>
+							<dd title="{$val.appe_price}"><a>{$val.appe_price}</a></dd>
+						</dl>
+						<dl class="choose-dl">
+							<dt title="性价比">性价比</dt>
+							<dd title=""><a href=""><span class="hsbackground"><p title="{$val['appe_score'][0]}" class="xxbackground"></p></span><b>{$val['appe_score'][0]}</b></a></dd>
+						</dl>
+						<dl class="choose-dl">
+							<dt title="使用体验">使用体验</dt>
+							<dd title=""><a href=""><span class="hsbackground"><p title="{$val['appe_score'][1]}" class="xxbackground"></p></span><b>{$val['appe_score'][1]}</b></a></dd>
+						</dl>
+						<dl class="choose-dl">
+							<dt title="售后服务">售后服务</dt>
+							<dd title=""><a href=""><span class="hsbackground"><p title="{$val['appe_score'][2]}" class="xxbackground"></p></span><b>{$val['appe_score'][2]}</b></a></dd>
+						</dl>
+					</div>
+				</div>
+				<div class="mouthcon-cont-right commentParentBox">
+					<if condition="$val['appe_status'] eq 3 ">
+					<img title="2级精华贴" class="mouthcon-jinghua" src="__PUBLIC__/image/wordofmouth/jinghua.png" alt="">
+					</if>
+					<div class="mouth-main">
+						<div class="nav-sub"><a href="">{$goods_info['instrument_info']['appt_goodsname']} >></a></div>
+						<div class="mouth-item">
+							<div class="cont-title ">
+								<div class="title-name name-width">
+									<b><a>{$val.appe_ctime|date='Y-m-d H:i:s',###}</a></b> 发表了口碑 
+									<a class="praise-title">{$val.appe_oneword}</a>
+								</div>
+							</div>
+							<div class="imgcont-praise">
+								<a href="" class="btn-img btn-right"><i class="icon16 icon16-right"></i></a>
+								<a href="" class="btn-img btn-left"><i class="icon16 icon16-left"></i></a>
+								<div class="imgcont-main">
+									<div>
+										<ul class="img-list">
+											<foreach name="val['pictures']" item="v1">
+											<li class="brulImage"><span class="img-cont"><img src="__PUBLIC__/Uploads/{$v1.appe_thumb}"></span></li>
+											</foreach>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="text-con height-list">
+								<div class="text-cont js-textcont1306557"></div>
+								<div class="con-mask js-addhidemessage1306557 fn-hide"></div>
+							</div>
+						</div>
+						<div class="mouth-remak">
+							<div class="border-b-solid">
+								【一句话点评】<br>{$val.appe_oneword}<br><br>
+								{$val.appe_satisfy}
+								{$val.appe_unsatisfy}
+								{$val.appe_reason}
+								<div class="pic-touming"></div>
+							</div>
+							<p class="show-koubei" pid="{$val.id}">展开完整口碑</p>
+							<div class="mouth-help">有<span>{$val.appe_browse}</span>个人看过
+
+								<if condition="$Think.session.home_user_info eq ''">
+									<div class="mouth-help-pinlun" index="1" data-toggle="modal" data-target="#Login">评论({$val.comment})</div>
+								<else/>
+									<div index="1" onclick="addComment(this,'{$val.id}')" class="mouth-help-pinlun">评论({$val.comment})</div>
+								</if>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</foreach>
+			</if>
+
+			<img id="tong" style="max-height:600px;display: none;">
+			<div class="zzc-bg"></div>
+			<img class="zhezhaocheng">
+			<div class="page-cont">
+				<div class="page">
+					<nav>
+						<ul class="pagination">
+							{$show}
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+
+		$('.show-koubei').click(function(){
+				$(this).siblings('.border-b-solid').css({'height':'auto','overflow':''});
+				$(this).css('display','none');
+				$.ajax({
+					url:"{:U('Home/WordOfMouth/ajaxAddBrowse')}",
+					data:'pid='+$(this).attr('pid'),
+				});
+		});
+
+		var point_width = parseFloat( $('.font-arial-point').text() )  / 5 * 86;
+
+		$('.font-arial-span div').css('width', point_width +'px');
+
+		var order = <?php echo I('get.order',1) ?>;
+
+		$('.tab-nav li').eq(order-1).addClass('tab-nav-active');
+
+		$('.tab-nav-list li').mouseenter(function(){
+			$(this).addClass('tab-nav-active');
+			$(this).siblings().removeClass('tab-nav-active');
+		});
+
+
+		// 阿贾克斯追加评论列表开始
+		function addComment(obj,id){
+
+			if( $(obj).attr('index') == '1'){
+				$.ajax({
+					url:"{:U('home/WordOfMouth/ajaxAddComment')}",
+					data:'id='+id,
+					success:function(data){
+						$(obj).parent().parent().after(data);
+					}});
+					$(obj).attr('index', '2') ;				
+			}else{
+				$(obj).parent().parent().siblings().remove('.mouth-pinlun');
+					$(obj).attr('index', '1') ;				
+			}			
+		}
+		// 阿贾克斯追加评论列表结束
+
+
+		// 阿贾克斯提交评论开始
+		function submitComment(obj,pid){
+			var commentNums = $.trim( $(obj).parent().siblings('textarea').val() ).length;
+			if( commentNums >= 20 && commentNums <= 200){
+				$.ajax({
+					url:"{:U('home/WordOfMouth/ajaxsubmitComment')}",
+					data:'content='+$(obj).parent().siblings('textarea').val()+'&pid='+pid,
+					success:function(data){
+						if($(obj).parent().siblings('.mouth-pinlun-main').length > 0){
+							$(obj).parent().siblings('.mouth-pinlun-main:first').before(data);
+						}else{
+							$(obj).parent().after('<div class="mouth-pinlun-main">'+data+'</div>');
+						}
+						
+						$(obj).parent().siblings('textarea').val('');
+						$('.comment-limit').text(0).css('color','');
+						layer.msg('评论成功',{icon: 1});
+					}});
+			}else{
+				layer.msg('操作失败,长度要在20-200之间',{icon: 2});
+			}
+		}
+		// 阿贾克斯提交评论结束
+
+		// 评论字数限制
+		$('.mouth-main').delegate('#mouth-textarea','keyup',function(){
+			$(this).siblings('.mouth-pinlun-sub').children().children('.comment-limit').text( $(this).val().length);
+			if( $(this).val().length > 200){
+				var over_nums = $(this).val().length -200;
+				$(this).siblings('.mouth-pinlun-sub').children().children('.comment-limit').css('color','red').text('已超出'+over_nums+'个字').parent().css('color','red');
+			}else if( $(this).val().length < 20){
+				$(this).siblings('.mouth-pinlun-sub').children().children('.comment-limit').css('color','red').parent().css('color','red');
+			}else if( $(this).val().length >=20 ){
+				$(this).siblings('.mouth-pinlun-sub').children().children('.comment-limit').css('color','blue').parent().css('color','green');
+			}else{
+				$(this).siblings('.mouth-pinlun-sub').children().children('.comment-limit').css('color','').parent().css('color','');
+			}
+		});
+		// 评论字数限制
+		$('.xxbackground').each(function(){
+			var xx_length = $(this).parent().siblings('b').text();
+			$(this).css('width', xx_length * '20' + '%');
+		});
+
+		$('.pagination').children().children().unwrap().wrap('<li></li>');
+
+		// 图片弹出层
+		var pp = null;
+		$('.img-cont img').click(function(){
+			pp = $(this).attr('src').substr(0,51) + $(this).attr('src').substr(57);
+			$('.zhezhaocheng').attr('src', pp);
+			$('.zhezhaocheng').css({'display':'block'});
+			$('.zzc-bg').css({'display':'block'});
+		});
+		$('.zzc-bg').click(function(){
+			$('.zhezhaocheng').css({'display':'none'});
+			$('.zzc-bg').css({'display':'none'});
+		});
+		// 图片弹出层
+
+	</script>
+</block>

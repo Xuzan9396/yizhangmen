@@ -1,0 +1,186 @@
+<extend name="./Public/template/serviceShop.html" />
+<block name="right1">
+	<script src="__PUBLIC__/layer/layer.js">
+	</script>
+	<load href="__PUBLIC__/layui/css/layui.css" />
+	<load href="__PUBLIC__/css/order.css" />
+	<load href="__PUBLIC__/layui/layui.js" />
+	<div class="service-trade-main">
+		<div class="header-name">
+			<div class="right-sgin"></div>
+			<div class="trade-title">订单回收站</div>
+		</div>
+		<div class="line"></div>
+		<div class="service-trade-contents">
+			<form>
+				<div class="layui-form-pane" style="margin-top:15px;">
+					<div class="layui-form-item float">
+						<label class="layui-form-label" id="trade-time">交易时间</label>
+						<!-- 开始时间 -->
+						<div class="layui-inline" id="start-time">
+							<input class="layui-input start" value="{:I('get.startTime')}" name="startTime" placeholder="开始时间" onclick="layui.laydate({elem: this, festival: true})">
+						</div>
+						<!-- 结束时间 -->
+						<div class="layui-inline" id="end-time">
+							<input class="layui-input" value="{:I('get.endTime')}" name="endTime" placeholder="截止时间" onclick="layui.laydate({elem: this, festival: true})">
+						</div>
+					</div>
+					<div>
+						<select name="order_status" id="select">
+							<option value="-1" <if condition="I('get.order_status',-1) eq -1">selected</if>>--选择交易状态--</option>
+							<option value="1" <if condition="I('get.order_status',-1) eq 1">selected</if>>订单已经取消</option>
+							<option value="3" <if condition="I('get.order_status',-1) eq 3">selected</if>>退款成功</option>
+							<option value="4" <if condition="I('get.order_status',-1) eq 4">selected</if>>已付款</option>
+						</select>
+					</div>
+					<div class="order-search">
+						订单号:<input type="text" name="order_number" value="{:I('get.order_number')}" />
+					</div>
+
+					<input type="submit" class="layui-btn layui-btn-normal" id="order-search" value="搜索">
+				</div>
+			</form>
+		</div>
+		<div class="clear"></div>
+		<div class="trade-data">
+			<table class="table table-order">
+				<tr>
+					<th>订单号</th>
+					<th>订单名称</th>
+					<th>交易模式</th>
+					<th>交易状态</th>
+					<th>交易金额</th>
+					<th>交易时间</th>
+					<th>还原订单</th>
+					<th>删除订单</th>
+				</tr>
+				<volist name="data" id="vo">
+					<tr>
+						<td>{$vo.order_number}</td>
+						<td>{$vo.pubh_title}</td>
+						<td>{$vo.order_model}</td>
+						<td>{$vo.order_status1}</td>
+						<td>{:date('Y/m/d H:i:s' ,$vo['order_time'])}</td>
+						<td>交易时间</td>
+						<td><a onclick="storeRecycle('{$vo['id']}',this)" class="layui-icon" href="javascript:void(0)">&#xe614;</a></td>
+						<td><a onclick="del('{$vo['id']}',this)" class="layui-icon" href="javascript:void(0)">&#xe640;</a></td>
+
+					</tr>
+				</volist>
+				<tr>
+					<td colspan="8">
+						{$show}
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content order-model">
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
+							<div class="text-center font-employer">雇主详情信息</div>
+							<div id="table-md10">
+
+							</div>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<script>
+		layui.use('laydate', function() {
+			var laydate = layui.laydate;
+			var start = {
+				min: laydate.now(),
+				max: '2099-06-16 23:59:59',
+				istoday: false,
+				choose: function(datas) {
+					end.min = datas; //开始日选好后，重置结束日的最小日期
+					end.start = datas //将结束日的初始值设定为开始日
+				}
+			};
+			var end = {
+				min: laydate.now(),
+				max: '2099-06-16 23:59:59',
+				istoday: false,
+				choose: function(datas) {
+					start.max = datas; //结束日选好后，重置开始日的最大日期
+				}
+			};
+			document.getElementById('LAY_demorange_s').onclick = function() {
+				start.elem = this;
+				laydate(start);
+			}
+			document.getElementById('LAY_demorange_e').onclick = function() {
+				end.elem = this
+				laydate(end);
+			}
+		});
+
+		function detail(id) {
+			$.ajax({
+				type: 'post',
+				url: "{:U('home/service/order1')}",
+				data: {
+					'id': id
+				},
+				dataType: "json",
+				async: true,
+				success: function(data) {
+					$('#table-md10').html(data);
+				}
+			});
+		}
+
+			// 还原订单
+			function storeRecycle(id, obj) {
+				$.ajax({
+					type: 'post',
+					url: "{:U('storeRecycleAdd1')}",
+					data: {
+						'id': id
+					},
+					dataType: 'json',
+					success: function(data) {
+						if (data == '1') {
+							layer.msg('还原成功！');
+							$(obj).parent().parent().remove();
+						} else {
+							layer.msg('还原失败！');
+						}
+					}
+				});
+			}
+
+		// 真正删除订单
+		function del(id, obj){
+			//询问框
+			layer.confirm('确定要删除？', {
+			  btn: ['删除','取消'] //按钮
+			}, function(){
+			  $.ajax({
+				type: "GET",
+				url: "{:U('home/service/orderDelete')}",
+				data: {'id':id},
+				dataType: "json",
+				success: function(res) {
+					 if(res == '1'){
+					 	layer.msg('删除成功', {icon: 1});
+	                    $(obj).parent().parent().remove();
+	                }else{
+						layer.msg('删除失败', {icon:2});
+					}
+				}
+			});
+			}, function(){
+			});
+		}
+
+	</script>
+
+</block>

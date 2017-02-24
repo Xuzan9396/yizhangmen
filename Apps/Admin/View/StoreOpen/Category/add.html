@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/server_category.css">
+	<script src="__PUBLIC__/js/jquery-2.1.3.min.js"></script>
+	<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div  class="row">
+	 <div class="col-md-4"></div>
+	 <div class="col-md-4">
+	    <form name="main_form" method="POST" action="__SELF__" enctype="multipart/form-data">
+	        <table class="table table-bordered">
+				<tr>
+					<td>上级权限</td>
+					<td>
+						<select name="parent_id" class="form-control" style="width:200px">
+							<option value="0">顶级权限</option>
+							<foreach name='parentData' key="k" item="v">
+								<option value="{$v['id']}">{:str_repeat('-', 5*$v['level']).$v['cate_name']}
+								</option>
+							</foreach>
+						</select>
+					</td>
+				</tr>
+	            <tr>
+	                <td>分类名称</td>
+	                <td>
+	                    <input  type="text" name="cate_name" value=""  class="form-control" style="width:200px"/>
+	                    <input type="hidden" name="cate_path">
+	                </td>
+	            </tr>
+	            <tr>
+	            	<td></td>
+	                <td>
+	                    <input type="submit" class="btn btn-info" value=" 提交 " />
+	                    <input type="reset" class="btn btn-info" value=" 重置 " />
+	                </td>
+	            </tr>
+	        </table>
+	    </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+	
+</body>
+</html>

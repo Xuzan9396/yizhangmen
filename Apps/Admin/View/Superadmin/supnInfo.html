@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+      <load href="__PUBLIC__/css/bootstrap.min.css" />
+      <load href="__PUBLIC__/css/dataTables.bootstrap.css" /> 
+      <load href="__PUBLIC__/css/font-awesome.min.css" />
+      <load href="__PUBLIC__/admin/css/animate.min.css" />
+      <load href="__PUBLIC__/home/pro/css/threeCss.css" />
+      <load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+  
+  </head>
+
+  <body class="gray-bg">        
+    <div class="wrapper wrapper-content animated fadeInRight">
+      <div class="row"  style="margin:50px auto;">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-5">
+          <div class="ibox float-e-margins">
+            <div class="ibox-content">
+              <table class="my_info_content_care_table table table-hover" id="tab">
+                <form action="{:U('Admin/Superadmin/editSupninfo')}" method="post">
+                  <tbody>
+                    <tr>
+                      <td align="right" class="color555">姓名：</td>
+                      <td class="color555"><input type="text" value="{$supn_res['supn_realname']}" name="supn_realname" style="padding-left:5px;"></td>
+                    </tr>
+                    <tr>
+                      <td align="right" class="color555">手机号码：</td>
+                      <td class="color555"><input type="text" value="{$supn_res['supn_tel']}" name="supn_tel" maxlength="11" style="padding-left:5px;"></td>
+                    </tr>
+                    <tr>
+                      <td id="msg" colspan="2" style="text-align:center;display:none;color:#F92665;">请谨慎修改，手机号是唯一登录依据</td>
+                    </tr>
+                    <tr>
+                      <td align="right" class="color555">邮箱：</td>
+                      <td class="color555"><input type="email" value="{$supn_res['supn_email']}" name="supn_email" style="padding-left:5px;"></td>
+                    </tr>
+                    <tr>
+                      <td align="right" class="color555">身份证号：</td>
+                      <td class="color555"><input type="text" maxlength="18" value="{$supn_res['supn_identity']}" name="supn_identity" style="padding-left:5px;"></td>
+                    </tr>
+                    <tr>
+                      <td align="right" class="color555">QQ：</td>
+                      <td class="color555"><input type="text" value="{$supn_res['supn_qq']}" name="supn_qq" style="padding-left:5px;"></td>
+                    </tr>
+                    <tr>
+
+                      <if condition="$supn_res['supn_sex'] eq '0'">
+
+                        <td align="right" class="color555">性别：</td>
+                        <td class="color555">
+                          <label class="radio-inline">
+                            <input type="radio" name="supn_sex" id="" value="2"> 保密 
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="supn_sex" id="" value="1"> 男士 
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="supn_sex" id="" value="0" checked> 女士 
+                          </label>
+                        </td>
+
+                      <elseif condition="$supn_res['supn_sex'] eq '1'" />
+
+                        <td align="right" class="color555">性别：</td>
+                        <td class="color555">
+                          <label class="radio-inline">
+                            <input type="radio" name="supn_sex" id="" value="2"> 保密 
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="supn_sex" id="" value="1" checked> 男士 
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="supn_sex" id="" value="0"> 女士 
+                          </label>
+                        </td>
+
+                      <elseif condition="$supn_res['supn_sex'] eq '2'" />
+
+                        <td align="right" class="color555">性别：</td>
+                        <td class="color555">
+                          <label class="radio-inline">
+                            <input type="radio" name="supn_sex" id="" value="2" checked> 保密 
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="supn_sex" id="" value="1"> 男士 
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="supn_sex" id="" value="0"> 女士 
+                          </label>
+                        </td>
+                      </if>
+                    </tr>
+
+                    <tr>
+                      <td align="right" class="color555">出生年月：</td>
+                      <td class="color555"><input type="date" value="{$supn_res['supn_birthday']}" name="supn_birthday" style="padding-left:5px;height:26px;"></td>
+                    </tr>
+
+                    <tr>
+                      <td></td>
+                      <td align="center" class="color555" style="text-align:left">
+                        <input class="btn btn-success" name="" type="submit" value="保存并修改">
+                      </td>
+                    </tr>
+                  </tbody>
+                </form>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    $('input:text[name="supn_tel"]').focus(function(){
+      $('#msg').css('display','');
+    });
+    $('input:text[name="supn_tel"]').blur(function(){
+      $('#msg').css('display','none');
+    });
+  </script>
+</html>

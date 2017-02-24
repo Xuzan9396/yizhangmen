@@ -1,0 +1,163 @@
+
+
+<include file="Apps/Admin/View/StoreOpen/storeHeader.html" />
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>店铺 <small>分类信息</small></h5>
+					<div class="ibox-tools">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+							<i class="fa fa-wrench"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-user">
+							<li><a href="table_data_tables.html#">选项1</a>
+							</li>
+							<li><a href="table_data_tables.html#">选项2</a>
+							</li>
+						</ul>
+						<a class="close-link">
+							<i class="fa fa-times"></i>
+						</a>
+					</div>
+				</div>
+				<div class="ibox-content">
+
+					<table class="table  table-bordered table-hover dataTables-example">
+						<thead>
+					    	<tr>
+					    		<th>ID</th>
+					            <th >分类名称</th>
+					            <th >上级分类的ID，0：代表顶级</th>
+					            <th>分类级别</th>
+					            <th>路径</th>
+								<th>操作</th>
+					        </tr>
+						</thead>
+						<tbody>
+				        <foreach name="data" key="k" item="v">
+							<tr>
+								<td>{$v['id']}</td>
+								<td>{:str_repeat('-|', 3*$v['level'])}{$v['cate_name']}</td>
+								<td>{$v['parent_id']}</td>
+								<td>
+									<if condition="$v['level'] == 0">
+										顶
+										<else/>
+										{$v['level']+1}
+									</if>
+									级分类</td>
+								<td>{$v['cate_path']}</td>
+						        <td>
+						        	<a href="{:U('cateEdit?id='.$v['id'].'&p='.I('get.p'))}" title="编辑" class="layui-btn">编辑</a>
+					                <a href="javascript:;" onclick="del(this,{$v['id']})" title="移除" class="layui-btn layui-btn-danger">移除</a>
+						        </td>
+					        </tr>
+					      </foreach>
+						</tbody>
+						<tfoot>
+
+						</tfoot>
+						<tr>
+							<td colspan="7" align="center">
+								   <button type="button" class="layui-btn" data-toggle="modal" data-target="#myModal5">
+												  添加
+								  </button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	<!-- 模态框 -->
+
+<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">分类添加</h4>
+                <small class="font-bold">添加顶级或子级分类
+            </div>
+            <div class="modal-body">
+               <!-- form表单 -->
+				<div  class="row">
+					 <div class="col-md-4"></div>
+					 <div class="col-md-4">
+					    <form  method="post"  id="add-form" action="__SELF__">
+					        <table class="table table-bordered">
+								<tr>
+									<td>上级权限</td>
+									<td>
+										<select name="parent_id" class="form-control" style="width:200px">
+											<option value="0">顶级权限</option>
+											<foreach name='parentData' key="k" item="v">
+												<option value="{$v['id']}">{:str_repeat('-', 5*$v['level']).$v['cate_name']}
+												</option>
+											</foreach>
+										</select>
+									</td>
+								</tr>
+					            <tr>
+					                <td>分类名称</td>
+					                <td>
+					                    <input  type="text" name="cate_name" value=""  class="form-control" style="width:200px"/>
+					                </td>
+					            </tr>
+					        </table>
+					    </form>
+				    </div>
+				    <div class="col-md-4"></div>
+				</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="add-keep">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+	$('#add-keep').click(function(){
+			$('#add-form').submit();
+	});
+	function del(obj,id){
+		//询问框
+		layer.confirm('确定要删除？', {
+		  btn: ['删除','取消'] //按钮
+		}, function(){
+		  $.ajax({
+			type: "GET",
+			url: "{:U('admin/StoreCategory/cateDelete')}",
+			data: {'id':id},
+			dataType: "json",
+			success: function(res) {
+				 if(res == '1'){
+				 	layer.msg('删除成功', {icon: 1});
+                    $(obj).parent().parent().remove();
+                }else if(res == '0'){
+                	layer.msg('删除失败', {icon: 2});
+                }else{
+                	layer.msg('有子类不能删除!', {icon: 2});
+                }
+			}
+		});
+		}, function(){
+		});
+	}
+
+</script>
+
+
+<include file="Apps/Admin/View/StoreOpen/storeFooter.html" />

@@ -1,0 +1,57 @@
+.top-nav{
+	background:#1BACEA;
+}
+
+.top-nav a {
+	font-size:18px;
+	font-weight: bold;
+}
+
+ .top-nav .menu{
+	float:left;
+	height:60px;
+	display: inline-block;
+	margin:0;
+}
+
+.top-nav .menu li{
+	float:left;
+    position: relative;
+    z-index: 1;
+    list-style: none;
+
+}
+
+ .top-nav .menu li a{
+	color: #fff;
+	display:inline-block;
+	line-height:60px;
+    font-style: none;
+    font-variant: none;
+    font-stretch: none;
+	font-size:18px;
+	padding: 0px 15px;
+}
+
+.top-nav .menu .line {
+    border-left: 1px solid #000;
+    border-right: 1px solid #fff;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+    vertical-align: middle;
+    margin: 0 -1px;
+    height:60px;
+}
+.navbar-form {
+	float:right;
+}
+
+.container #bs-example-navbar-collapse-1 a{
+	color:#fff;
+}
+
+.container #bs-example-navbar-collapse-1 a:hover{
+	color:#000;
+}
+
+/*用户中心主题内容部分*/

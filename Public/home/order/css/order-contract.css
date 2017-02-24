@@ -1,0 +1,210 @@
+/*独立于orderContract.html'*/
+
+/*合同选项内容*/
+.contract-box{
+	background: #efffef;
+}
+/*标题*/
+.contract-title{
+	text-align: center;
+  	color: white;
+  	font-weight: bold;
+	background: url('../../../image/service/image/contract-title.png') no-repeat center bottom;
+	padding: 10px 0;
+}
+/*合同文件*/
+.contract-file{
+	border: 1px solid #6bbe6c;
+	padding: 0;
+	margin-top: 10px;
+	margin-bottom: 50px;
+}
+/*解释说明*/
+.contract-explain{
+	display: block;
+	float: left;
+	font-size: 14px;
+	color: #333333;
+	font-weight: 700;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.contract-file-dl{
+	width: 100%;
+	display: block;
+	float: left;
+}
+.contract-file-dt{
+	width: 100%;
+	height: 34px;
+	background: #6bbe6c;
+	display: block;
+	float: left;
+	color: white;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 34px;
+	padding-left: 20px;
+}
+.contract-file-dd{
+	width: 130px;
+	float: left;
+	margin-left: 10px;
+	font-size: 16px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+/*dd 第一个公司名*/
+.contract-file-dd1{
+	width: 270px;
+}
+/*dd最后一个下载*/
+.contract-file-dd-last{
+	text-align: right;
+}
+.contract-text{
+	font-size: 14px;
+	color: #333333;
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+/*签署合同去区*/
+.contract-seal{
+	margin-top: 20px;
+	margin-bottom: 80px;
+	font-size: 22px;
+	color: #333333;
+	font-weight: 700;
+	position: relative;
+}
+.contract-seal-img{
+	width: 100px;
+	height: 70px;
+	overflow: hidden;
+	position: absolute;
+	top: 30px;
+	left: 50px;
+}
+.seal-img-no{
+	position: absolute;
+	top: -70px;
+}
+.seal-img-ok{
+	position: absolute;
+	top: 0px;
+}
+
+
+/*合同结束*/
+/*工作台开始*/
+.work-box{
+	padding: 5px;
+}
+.service-work1 p span{
+	font-size: 14px;
+}
+
+/*合同部分*/
+#service-contract p{
+	color: #333333;
+}
+#service-contract .btn{
+	color: #fafafa;
+	font-weight: 800;
+}
+
+/*工作部分*/
+.service-work2{
+	margin-top: 50px;
+	padding: 0;
+	font-size: 16px;
+	color: #333333;
+}
+.service-work2 p{
+	margin-top: 10px;
+	padding-left: 30px;
+}
+/*文件柜文件下载区*/
+.file-dowmload1{
+	height: 25px;
+	border: 1px solid #d2d2d2;
+	line-height: 25px;
+	margin-top: 10px;
+	margin-left: 30px;
+	color: #3195F3;
+}
+/*按钮*/
+.service2-work-btn{
+	margin-top: 20px;
+	margin-left: 15px;
+}
+#contract-button{
+	float: right;
+	margin-right: 200px;
+}
+.service2-work-btn button{
+	background: #62C9FA;
+}
+/*提示信息*/
+.service-work-prompt{
+	font-size: 14px;
+	color: #ffa11a;
+}
+.service-work-prompt a{
+	font-size: 14px;
+	color: #5CB85C;
+}
+/*评价*/
+.evaluate1{
+	margin-top: 50px;
+	padding: 0;
+	font-size: 16px;
+	color: #d2d2d2;
+}
+.evaluate1 p{
+	margin-top: 10px;
+	padding-left: 20px;
+}
+.evaluate-btn{
+	margin-top: 20px;
+	margin-left: 15px;
+}
+/*----------------------------*/
+/*进度条*/
+.speed{
+	height: 800px;
+	padding: 5px;
+}
+/*三种进度球样式通用*/
+.speed-service{
+	width: 46px;
+	height: 46px;
+	margin-left:2px;
+	padding: 0;
+	border-radius: 50%;
+	z-index: 10;
+}
+/*服务进度球*/
+/*.speed-service-box1{
+	background: #516784;
+}*/
+/*合同进度球*/
+.speed-contract-box1{
+	margin-top: 160px;
+	background: #516784;
+}
+/*三种进度名通用*/
+.speed-service{
+	color: #fff;
+	font-size: 16px;
+	line-height: 46px;
+}
+
+.speed-bar-service1{
+	height: 320px;
+	width: 5px;
+	background: #516784;
+}
+.font-color{
+	color:red;
+}

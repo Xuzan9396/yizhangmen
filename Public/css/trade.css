@@ -1,0 +1,116 @@
+.clear{
+	clear:both;
+}
+.service-trade-main h2{
+	margin-left:20px;
+}
+.service-trade-table{
+	margin-top:20px;
+	text-align:center;
+}
+.right-sgtrade-moneyin{
+	width:5px;
+	height:33px;
+	background:#3C8FED;
+	float:left;
+	margin-left:10px;
+}
+.header-name{
+	margin-top:15px;
+}
+th{
+	text-align:center;
+}
+.line{
+	width:98%;
+	margin:0 auto;
+	margin-top:20px;
+	border-bottom:2px dotted #ccc;
+}
+.service-trade-contents{
+
+}
+.start{
+	width:100px;
+}
+#start-time{
+	width:100px;
+}
+#trade-time{
+	width:100px;
+}
+#start{
+	width:100px;
+}
+#end-time{
+	width:100px;
+}
+.float{
+	float:left;
+}
+.trade-title{
+	margin-left:24px;
+	font-size:20px;
+}
+#trade-money{
+	float:left;
+	width:60px;
+	height: 38px;
+	border-radius:5px;
+	border-color:#e6e6e6 !important;
+}
+#trade-flow{
+	height:38px;
+	margin:0px 10px 0px 50px;
+	line-height:38px;
+	float:left;
+	text-align:center;
+}
+.order-search{
+	float:left;
+	margin-left:50px;
+}
+.order-search input{
+	height:38px;
+	width:100px;
+	border-radius:5px;
+	margin-left:10px;
+	border:1px solid #e6e6e6;
+}
+#order-search{
+	float:left;
+	height:38px;
+	font-size:16px;
+	line-height:38px;
+	text-align:center;
+	background:#3C8FED;
+	border-radius:5px;
+	border:1px solid #3C8FED;
+
+}
+.trade-data{
+	border-bottom:1px solid #3C8FED;
+}
+.trade-order-header{
+	margin-top:10px;
+}
+.trade-order-header ul li{
+	float:left;
+	font-size:16px;
+	line-height:40px;
+	text-align:center;
+	height:40px;
+	width:150px;
+}
+.trade-order-data{
+}
+.trade-order-data ul li{
+	float:left;
+	font-size:14px;
+	text-align:center;
+	margin-top:15px;
+	border-bottom:2px dotted #e6e6e6;
+	height:40px;
+	line-height:40px;
+	width:150px;
+}

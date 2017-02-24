@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>服务机构</title>
+	<load href="__PUBLIC__/css/bootstrap.min.css" />
+	<load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+	<load href="__PUBLIC__/js/bootstrap.min.js" />
+	<load href="__PUBLIC__/css/shop.css" />
+	<load href="__PUBLIC__/js/common.js" />
+	<load href="__PUBLIC__/js/tendina.js" />
+  	<load href="__PUBLIC__/js/uploadPreview.js" />
+	<load href="__PUBLIC__/js/home-login.js" />
+
+	<!-- 消息提示框 -->
+	<load href="__PUBLIC__/home/pro/hplus/toastr/toastr.min.css" />
+	<load href="__PUBLIC__/home/pro/hplus/toastr/toastr.min.js" />
+	<!-- 确认框 -->
+	<load href="__PUBLIC__/home/pro/sweetalert/css/sweetalert.css" />
+	<load href="__PUBLIC__/home/pro/sweetalert/js/sweetalert.min.js" />
+	<block name="file"></block>
+
+	<style type="text/css">
+		*{
+			font-family:"SimHei",黑体,"Microsoft YaHei",微软雅黑;
+		}
+
+		body,a,ul,li{
+			transition: color 0.5s;
+			font-size: 14px;
+			text-decoration: none;
+			color:black;
+			list-style: none;
+			padding:0;
+			margin:0;
+		}
+
+		header{
+		}
+		/*a:hover{
+			transition: color 0.5s;
+			color:#3195F3;
+		}*/
+		.left-nav li{
+			float: left;
+		}
+
+		.left-nav li,.right-nav li{
+			/*margin-left: 15px;*/
+		}
+		.right-nav{
+			float:right;
+			/*margin-right: -30px; */
+		}
+
+		.nav-item{
+			line-height: 50px;
+		}
+
+
+		.nav-item li{
+			transition: background 0.5s;
+			width: 90px;
+			margin:0px;
+			padding: 5px;
+			line-height: 20px;
+		}
+
+		.nav-item li:hover{
+			transition: background 0.5s;
+			background: #EEEEEE;
+		}
+		.nav-item a{
+			transition: color 0.5s;
+			text-decoration: none;
+			font-size: 12px;
+		}
+
+		.nav-item a:hover{
+			transition: color 0.5s;
+			color:#3195F3;
+		}
+
+		.right-nav .nav-item{
+			float: left;
+  			margin-left: 15px;
+		}
+
+		.nav-item .nav-item-sub{
+			display: none;
+			position: absolute;
+			z-index: 100;
+			border:1px solid #EEEEEE;
+			background: white;
+			text-align: center;
+		}
+
+		.nav-item:hover .nav-item-sub{
+			display: block;
+		}
+
+		.nav-item:hover .caret{
+			transition: transform 0.5s;
+			transform: rotate(180deg);
+		}
+
+		.caret{
+			transition: transform 0.5s;
+		}
+
+		.line{
+			border-top:1px solid #EEEEEE;
+			margin-bottom: 15px;
+		}
+
+		.footer-link{
+			margin:0 auto;
+			width: 600px;
+			height: 30px;
+		}
+		.footer-link li{
+			float: left;
+			margin:10px;
+
+		}
+
+		.footer-copyright{
+			width: 1120px;
+			height: 50px;
+			display: block;
+			float: left;
+			text-align: center;
+		}
+
+		.search-box{
+			width: 600px;
+			height: 42px;
+			border:3px solid #3195F3 ;
+			margin:0 auto;
+			overflow: hidden;
+		}
+
+		.search-but{
+			width: 100px;
+			height: 38px;
+			cursor: pointer;
+			float: left;
+
+		}
+
+		.search-but div:nth-of-type(1){
+			transition: background 0.5s, font-size 0.5s;
+			width: 100px;
+			height: 40px;
+			background: #EEEEEE;
+			line-height: 40px;
+			text-align: center;
+			float: left;
+		}
+
+		.search-but div:nth-of-type(1):hover{
+			transition: background 0.5s;
+			background: white;
+		}
+
+		.search-but div:nth-of-type(1):hover .caret{
+			transition: transform 0.5s;
+			transform: rotate(180deg);
+		}
+
+		.caret{
+			transition: transform 0.5s;
+		}
+
+		.search-but ul{
+			position: absolute;
+			display: none;
+			background: white;
+			width: 100px;
+			z-index: 100;
+			margin-top: -5px;
+		}
+
+		.search-but li{
+			transition: background 0.5s;
+			line-height: 30px;
+		}
+
+		.search-but li:hover{
+			transition: background 0.5s;
+			background: #EEEEEE;
+		}
+		.search-but:hover ul{
+			display: block;
+		}
+
+		.search-but li a{
+			box-sizing: border-box;
+			margin:0 10px;
+			text-decoration: none;
+		}
+
+		.search-box input{
+			display: block;
+			width: 400px;
+			height: 40px;
+			border:none;
+			outline: none;
+			float: left;
+			margin: 0 5px;
+		}
+
+		.search-box button{
+			transition: background 0.5s;
+			display: block;
+			width: 80px;
+			height: 42px;
+			background:  #3195F3;
+			float: right;
+			border:none;
+			outline: none;
+			color:white;
+			font-weight: bold;
+			font-size: 16px;
+			line-height: 40px;
+			margin-top: -4px;
+
+
+		}
+
+		.search-box button:hover,.publishbut a:hover{
+			transition: background 0.5s;
+			background:  #62C9FA;
+
+		}
+
+
+
+		#Login{
+			width: 600px;
+			margin:0 auto;
+		}
+
+		#myModalLabel{
+			color:#188DC8;
+			text-align:center;
+		}
+
+		#js-error-info{
+			color:red;
+			font-size:12px;
+		}
+
+		.navbar{
+			margin-bottom:5px;
+		}
+
+		#row1 [class*="col-"]{
+
+		margin-bottom: -99999px;
+
+		padding-bottom: 99999px;
+
+		}
+
+		#row1{
+		overflow: hidden;
+		}
+	</style>
+</head>
+
+<body>
+	<header class="header">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container" style="width:1100px">
+				<ul class="left-nav">
+					<li class="nav-item">
+						<a href="{:U('Home/Index/instrument')}" class="nav-item-link"><img src="__PUBLIC__/image/k.png">&nbsp;仪器库</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-item-link"><img src="__PUBLIC__/image/logo_03.png">&nbsp;检测</a>
+					</li>
+					<li class="nav-item">
+						<a href="{:U('Home/Trade/index')}" class="nav-item-link" target="_blank"><img src="__PUBLIC__/image/k_002.png" style="margin-right:7px;">资讯</a>
+					</li>
+				</ul>
+				<ul class="right-nav">
+					<li class="nav-item has-sub">
+						<a href="{:U('Home/Index/index')}" class="nav-item-link "><img src="__PUBLIC__/image/in.png">&nbsp;首页</a>
+					</li>
+
+
+					<!-- 注册登录开始，登录模态框触按钮 -->
+					<if condition="$Think.session.home_user_info eq ''">
+						<li class="nav-item has-sub">
+							<a href="javascript:;" id="js_loginbtn" class="nav-item-link" data-toggle="modal" data-target="#Login">
+								登陆
+							</a>
+						</li>
+						<li class="nav-item" style="display:none">
+							<a href="#"> <i class="fa fa-envelope"></i></a>
+						</li>
+						<li class="nav-item has-sub">
+							<a href="{:U('Home/Login/register')}" class="nav-item-link ">免费注册</a>
+						</li>
+					<else />
+						<li class="nav-item has-sub">
+							<a href="{:U('Home/User/userCenter')}" class="nav-item-link">
+								{$Think.session.home_user_info.user_account}
+							</a>
+						</li>
+						<li class="nav-item" style="display:none">
+							<a href="#"> <i class="fa fa-envelope"></i></a>
+						</li>
+						<li class="nav-item has-sub">
+							<a href="{:U('Home/Login/logOut')}">安全退出</a>
+						</li>
+					</if>
+					<!-- 注册登录结束，登录模态框触按钮 -->
+
+					<li class="nav-item has-sub">
+						<a href="javascript:;" class="nav-item-link ">我是需方
+							<span class="caret"></span>
+						</a>
+						<ul class="nav-item-sub">
+		                    <li><a href="#">找服务机构</a></li>
+		                    <li><a href="#">发布需求</a></li>
+		                    <li><a href="#"><span class="badge"></span>待付款需求</a></li>
+		                    <li><a href="#"><span class="badge"></span>待选方案</a></li>
+		                    <li><a href="#"><span class="badge"></span>待付款服务</a></li>
+		                    <li><a href="#"><span class="badge"></span>待评价</a></li>
+						</ul>
+					</li>
+					<li class="nav-item has-sub">
+						<a href="javascript:;" class="nav-item-link ">我是服务机构<span class="caret"></span></a>
+						<ul class="nav-item-sub">
+		                    <li><a href="#">发布服务</a></li>
+		                    <li><a href="#">我的店铺</a></li>
+		                    <li><a href="#"><span class="badge"></span>新的雇佣</a></li>
+		                    <li><a href="#"><span class="badge"></span>新服务订单 </a></li>
+		                    <li><a href="#"><span class="badge"></span>待评价</a></li>
+						</ul>
+					</li>
+					<li class="nav-item has-sub">
+						<a href="javascript:void(0);" class="nav-item-link">分类导航 <span class="caret"></span></a>
+						<div class="nav-item-sub">
+							<dl>
+								<dt>需求</dt>
+								<dd>
+									<ul>
+										<li><a href="#">分析测试</a></li>
+										<li><a href="#">生命科学</a></li><li><a href="#">实验资源</a></li><li><a href="#">医药临床</a></li><li><a href="#">其它</a></li><li><a href="#">技术需求</a></li>
+									</ul>
+								</dd>
+							</dl>
+							<div class="line"></div>
+							<dl>
+								<dt>服务</dt>
+								<dd>
+									<ul>
+										<li><a href="#">分析测试</a>
+										</li> <li><a href="#">生命科学</a>
+										</li> <li><a href="#">实验资源</a>
+										</li> <li><a href="#">医药临床</a>
+										</li> <li><a href="#">其它</a>
+										</li>
+									 </ul>
+								</dd>
+							</dl>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<style type="text/css">
+			.homeimg{
+				width:200px;
+				height: 70px;
+				float: left;
+				overflow: hidden;
+			}
+
+			.homeimg img{
+				width: 200px;
+				height: 70px;
+			}
+
+			.publishbut{
+				width: 190px;
+				height: 42px;
+				float: right;
+				margin-right: -30px;
+			}
+
+			#HomeForm{
+				float: left;
+				margin-left: 100px;
+			}
+
+			.publishbut a{
+				transition: background 0.5s;
+				width: 92px;
+				height: 42px;
+				background: #3195F3;
+				color: white;
+				text-align: center;
+				line-height: 42px;
+				display: block;
+				float: left;
+				text-decoration: none;
+			}
+
+			.publishbut a:nth-of-type(2){
+				float: right;
+			}
+		</style>
+	</header>
+
+	<script type="text/javascript">
+		$('.search-but li').each(function(){
+			$(this).click(function(){
+				$('.search-but-a').html($(this).find('a').html());
+				$('#HomeForm input[name=table]').val($(this).find('a').attr('value'));
+			})
+		})
+
+		function getCode(obj){
+			obj.src = "{:U('Home/Login/getLoginCode/id/" + Math.random() + "')}";
+		}
+	</script>
+
+<!-- header end-->
+
+<!-- 登录模态框 开始 -->
+	<div class="modal fade" id="Login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h3 class="modal-title" id="myModalLabel">登录</h3>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+					<form id="js_login">
+						<div class="col-md-1"></div>
+							<div class="col-md-10">
+								<div class="form-group">
+									<label for="name">账号:</label>
+									<input type="text" class="form-control" id="name" placeholder="请输入手机/邮箱/账号"
+										<if condition="$Think.cookie.home_login_user_name eq ''">
+											value=""
+										<else />
+											value="{$Think.cookie.home_login_user_name}"
+										</if>
+									>
+								</div>
+								<div class="form-group">
+									<label for="password">密码:</label>
+									<input type="password" class="form-control" id="user_password" placeholder="请输入密码"
+										<if condition="$Think.cookie.home_login_user_password eq ''">
+											value=""
+										<else />
+											value="{$Think.cookie.home_login_user_password}"
+										</if>
+									>
+								</div>
+								<div class="form-group">
+									<label for="code">验证码:</label>
+									<input type="text" class="form-control" id="code" placeholder="请输入验证码">
+								</div>
+								<img src="{:U('Home/Login/getLoginCode')}" style="cursor:pointer;margin-bottom:15px;" onclick="getCode(this)"><br>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="loginstate" id="remember"
+											<input type="checkbox" name="loginstate" id="remember"
+										<if condition="$Think.cookie.home_login_status eq ''">
+											status="0"
+										<else />
+											status="1" checked="checked"
+										</if>
+										> 记住密码
+									</label>
+								</div>
+							</div>
+							<div class="col-md-1"></div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<span id="js-error-info"></span>
+						<a href="{:U('/Home/Login/register')}"><button type="button" class="btn btn-default" style="border:none">没有账号,去注册</button></a>
+						<button type="submit" class="btn btn-primary" style="background-color:#188DC8;" id="submit">　登 录　</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+<!-- 登录模态框 结束 -->
+
+
+	<div class="container width style">
+		<div class="row" id="row1">
+			<div class="col-md-2 bg left-height">
+				<div class="layout_left_menu ">
+			        <ul class="tendina blue" id="menu">
+			            <li class="childUlLi">
+			                <a href="#"> <i class="glyphicon glyphicon-search"></i>&nbsp;寻找商机</a>
+			                <ul class="childUlLi-ul"style="display: none;">
+			                   <li class="style"><a href="{:U('Home/Service/forMyOrder')}" target="">　<i class="glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;适合我的订单</a></li>
+			                    <li class="style"><a href="{:U('Home/Service/officalOrder')}" target="">　<i class="glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;官方推荐订单</a></li>
+			                </ul>
+			            </li>
+			            <li class="childUlLi">
+			                <a href="#"> <i class="glyphicon glyphicon-th-list"></i>&nbsp;服务管理</a>
+			                <ul class="childUlLi-ul"style="display: none;">
+
+			                    <li class="style"><a href="{:U('Home/service/publishServiceOne')}" target="">　<i class="glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;发布服务</a></li>
+			                    <li class="style"><a href="{:U('Home/service/pastService')}" target="">　<i class="glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;已发布的服务</a></li>
+
+			                </ul>
+			            </li>
+			            <li class="childUlLi">
+			                <a href="#"> <i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;交易管理</a>
+			                <ul class="childUlLi-ul"style="display: none;">
+			                    <li class="style"><a href="{:U('Home/service/order')}" target="">　<i class="glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;我的订单</a></li>
+			                    <li class="style"><a href="{:U('home/service/storeComment')}" target="">　<i class="glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;评价管理</a></li>
+			                    <li class="style"><a href="{:U('Home/service/storeRecycle')}"  target="">　<i class="glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;订单回收站</a></li>
+			                </ul>
+			            </li>
+			            <li class="childUlLi">
+			                <a href="#"> <i class="glyphicon glyphicon-home"></i>&nbsp;店铺管理</a>
+			                <ul class="childUlLi-ul"style="display: none;">
+
+			                    <li class="style"><a href="{:U('home/service/storeManagement')}" target="">　<i class="glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;店铺装修</a></li>
+			                    <li class="style"><a href="{:U('home/service/storeRegister1')}" target="">　<i class="glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;店铺基本资料</a></li>
+			                </ul>
+			            </li>
+			            <li class="childUlLi">
+			                <a href="#"> <i class="glyphicon glyphicon-envelope"></i>&nbsp;消息管理</a>
+			                <ul class="childUlLi-ul"style="display: none;">
+			                    <li class="style"><a href="{:U('Home/Service/storeComeboxMessage')}" target="">　<i class="glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;收信箱</a></li>
+			                    <li class="style"><a href="{:U('Home/Service/storeWriteMessage')}" target="">　<i class="glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;写消息</a></li>
+			                    <li class="style"><a href="{:U('Home/Service/storeOutboxMessage')}" target="">　<i class="glyphicon glyphicon glyphicon-hand-right"></i>&nbsp;&nbsp;发信箱</a></li>
+			                </ul>
+			            </li>
+			        </ul>
+    			</div>
+			</div>
+			<div class="col-md-10 style-border"style="min-height:630px;padding:0;margin:0px">
+				<block name="file">
+				</block>
+				<!-- 此处进行内容重写 -->
+				<block name="right1">
+
+				</block>
+			</div>
+		</div>
+	</div>
+<div class="footer">
+	<hr>
+		<div class="container">
+			<br>
+			<ul class="footer-link">
+		        <li><a target="_blank" href="#">关于我们</a></li>
+		        <li><a target="_blank" href="#">加入我们</a></li>
+		        <li><a target="_blank" href="#">官网博客</a></li>
+		        <li><a target="_blank" href="#">帮助中心</a></li>
+		        <li><a target="_blank" href="#">服务条款</a></li>
+		        <li><a target="_blank" href="#">媒体报道</a></li>
+		        <li><a target="_blank" href="#">隐私权政策</a></li>
+			</ul>
+			<!-- footer-link end -->
+			<div class="footer-copyright">
+				<span>Copyright2014-2015 www.yikexue.com All Rights Reserved 京ICP备15013316号-3  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客服热线：400-601-8731
+				</span>
+			</div>
+			<br>
+			<!-- footer-copyright end -->
+			<div class="footer-authentication" style="text-align:center">
+				<!--可信网站图片LOGO安装开始-->
+				<script src="__PUBLIC__/image/seallogo.dll"></script><a href="https://ss.knet.cn/verifyseal.dll?sn=e16022411011462545wlfp000000&amp;ct=df&amp;a=1&amp;pa=0.9956621440622238" target="_blank" kx_type="缩放式" style="display:inline-block;position:relative;width:102px;height:37px;"><img src="__PUBLIC__/image/cnnic.png" h="37" w="102" onmouseover="showFull(this)" onmouseout="showMin(this)" style="left:0;position:absolute;top:0;border:none;" height="37" width="102"></a>
+				<!--可信网站图片LOGO安装结束-->
+			</div>
+
+			<br>
+		</div>
+		<!-- container end -->
+	</div>
+</body>
+</html>

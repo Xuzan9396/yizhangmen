@@ -1,0 +1,137 @@
+<extend name='./Public/template/listBase.html'/>
+
+  <!-- 加载自己的外部文件 -->
+  <block name="listfile">
+    <load href="__PUBLIC__/home/pro/css/threeCss.css" />
+  </block>
+
+  <!-- 这里写内容 -->
+  <block name="listcentent">
+    <!-- 开始 -->
+    <div class="" style="width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;margin-bottom:10px;">
+        <div class="" style="">
+              账号信息(认证信息需要提交认证申请):
+        </div>
+    </div>
+   <div class="my_info_content">
+     <table class="my_info_content_care_table table table-hover" id="tab">
+       <tbody>
+         <tr>
+           <td align="right" class="color555">用户名：</td>
+           <td class="color555">{$userInfo['user_account']}</td>
+         </tr>
+          <tr>
+           <td align="right" class="color555">手机号码：</td>
+           <td class="color555">{$userInfo['user_phone']}</td>
+         </tr>
+         <tr>
+           <td align="right" class="color555">邮箱：</td>
+           <if condition="$userInfo['user_email'] eq ''">
+            <td class="color555">未认证</td>
+           <else />
+            <td class="color555">{$userInfo['user_email']}</td>
+           </if>
+         </tr>
+         <form action="{:U('modifiedData')}" method="post">
+         <tr>
+           <td align="right" class="color555">真实姓名：</td>
+           <td class="color555"><input class="my_info_content_care_table_text" value="{$impuserInfo['impr_realname']}" name="impr_realname" type="text" placeholder="真实姓名"></td>
+         </tr>
+         <tr>
+           <td align="right" class="color555">身份证号：</td>
+           <td class="color555"><input class="my_info_content_care_table_text" value="{$impuserInfo['impr_identity']}" maxlength="18" name="impr_identity" type="text" placeholder="身份证号码"></td>
+         </tr>
+           <tr>
+
+            <if condition="$impuserInfo['impr_sex'] eq '0'">
+
+             <td align="right" class="color555">性别：</td>
+             <td class="color555"><label>
+                 <input type="radio" name="impr_sex" id="" value="2">
+                 保密 </label>
+               <label>
+                 <input type="radio" name="impr_sex" id="" value="1">
+                 男士 </label>
+               <label class="radio-inline">
+                 <input type="radio" name="impr_sex" id="" value="0" checked>
+                 女士 </label></td>
+
+            <elseif condition="$impuserInfo['impr_sex'] eq '1'" />
+
+              <td align="right" class="color555">性别：</td>
+             <td class="color555"><label>
+                 <input type="radio" name="impr_sex" id="" value="2">
+                 保密 </label>
+               <label>
+                 <input type="radio" name="impr_sex" id="" value="1" checked>
+                 男士 </label>
+               <label class="radio-inline">
+                 <input type="radio" name="impr_sex" id="" value="0">
+                 女士 </label></td>
+
+            <elseif condition="$impuserInfo['impr_sex'] eq '2'" />
+
+              <td align="right" class="color555">性别：</td>
+             <td class="color555"><label>
+                 <input type="radio" name="impr_sex" id="" value="2" checked>
+                 保密 </label>
+               <label>
+                 <input type="radio" name="impr_sex" id="" value="1">
+                 男士 </label>
+               <label class="radio-inline">
+                 <input type="radio" name="impr_sex" id="" value="0">
+                 女士 </label></td>
+
+            </if>
+
+           </tr>
+      
+           <tr>
+             <td align="right" class="color555">公司名称：</td>
+             <td class="color555"><input class="my_info_content_care_table_text" value="{$impuserInfo['impr_company']}" name="impr_company" type="text" placeholder="公司名称"></td>
+           </tr>
+
+           <tr>
+             <td align="right" class="color555">工作岗位(职位)：</td>
+             <td class="color555"><input type="text" value="{$impuserInfo['impr_post']}" name="impr_post"></td>
+           </tr>
+
+           <tr>
+             <td align="right" class="color555">出生年月：</td>
+             <td class="color555"><input type="date" value="{$impuserInfo['impr_birthday']}" name="impr_birthday"></td>
+           </tr>
+
+           <tr>
+             <td align="right" class="color555">固定电话：</td>
+             <td class="color555"><input class="my_info_content_care_table_text" value="{$impuserInfo['impr_tel']}" name="impr_tel" type="text" placeholder="家庭/企业固定电话"></td>
+           </tr>
+           <tr>
+             <td align="right" class="color555">所在城市：</td>
+             <td class="color555">
+
+                <div id="store-selector" style="display:none">
+                  <div class="text"><div id="store-show"></div><b></b></div>                   
+                  <div onclick="$('#store-selector').removeClass('hover')" class="close"></div>
+                </div>
+                  
+                 <input type="text" value="{$impuserInfo['impr_region']}" id="store-view" name="impr_region"  placeholder="所在地区">
+
+              </td>
+           </tr>
+           <tr>
+             <td align="right" class="color555">详细地址：</td>
+             <td class="color555"><input class="my_info_content_care_table_text" value="{$impuserInfo['impr_address']}" name="impr_address" type="text" placeholder="详细通讯地址"></td>
+           </tr>
+           <tr>
+             <td></td><td align="center" class="color555" style="text-align:left"><input class="btn btn-primary" name="" type="submit" value="保存并修改"></td>
+           </tr>
+         </form>
+       </tbody>
+     </table>
+   </div>
+
+   <load href="__PUBLIC__/home/pro/js/threeLocation.js" />
+   <load href="__PUBLIC__/home/pro/js/myInfothree.js" />
+
+   <!-- 结束 -->
+  </block>

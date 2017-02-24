@@ -1,0 +1,62 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+	<load href="__PUBLIC__/css/pastService.css"/>
+	<div class="more-main">
+		<div class="more-detail-title">
+			<p>服务详情</p>
+		</div>
+		<if condition="$list['storeName'] neq ''">
+			<div class="more-contents">
+				<table class="table table-hover">
+					<tr>
+						<th>属性名</th>
+						<th>属性值</th>
+					</tr>
+					<tr>
+						<td>服务标题</td>
+						<td>{$list.pubh_title}</td>
+					</tr>
+					<tr>
+						<td>服务分类</td>
+						<td>{$list.firstname}/{$list.secondname}/{$list.thirdname}</td>
+					</tr>
+					<tr>
+						<td>服务价格</td>
+						<td>{$list.pubh_price}</td>
+					</tr>
+					<tr>
+						<td>服务状态</td>
+						<td>{$list.pubh_status}</td>
+					</tr>
+					<tr>
+						<td>服务封面</td>
+						<td><img src="__PUBLIC__/Uploads/{$list.pubh_pic}" width="60px" height="60px"alt=""></td>
+					</tr>
+					<tr>
+						<td>轮播图</td>
+						<td>
+							<img src="__PUBLIC__/Uploads/{$list['carousel'][0]['sere_pic1']}" width="60px"height="60px"alt="">
+							<img src="__PUBLIC__/Uploads/{$list['carousel'][0]['sere_pic2']}" width="60px"height="60px"alt="">
+							<img src="__PUBLIC__/Uploads/{$list['carousel'][0]['sere_pic3']}" width="60px"height="60px"alt="">
+							<img src="__PUBLIC__/Uploads/{$list['carousel'][0]['sere_pic4']}" width="60px"height="60px"alt="">
+						</td>
+					</tr>
+				</table>
+				<div class="service-bototm">
+					<span id="back" onclick="go()">返回</span>
+					<a id="update" href="{:U('Home/Service/updateService',['id'=>$list['id']])}" >修改</a>
+				</div>
+			</div>
+
+		<else/>
+			<div class="empty-tips">
+				<i>很遗憾, 没有发现可用数据 !</i>
+			</div>
+		</if>
+	</div>
+	<script>
+		function go(){
+			history.go(-1);
+		}
+	</script>
+</block>

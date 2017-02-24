@@ -1,0 +1,108 @@
+.modal-order-body{
+	padding: 10px;
+	border-top: 2px solid #3385FF;
+	background: #f0f0f0;
+	height: 180px;
+	margin-bottom: 20px;
+}
+.modal-service-content{
+	float: left;
+	margin-bottom: 10px;
+	width: 465px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.modal-service-name{
+	font-weight: bold;
+	width: 350px;
+}
+.modal-str{
+	margin-top: 15px;
+	margin-bottom: 20px;
+	width: 230px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.modal-pri{
+	margin-bottom: 10px;
+}
+
+.details-buynow:hover{
+	transition: background 0.5s,border-radius 0.3s;
+	cursor:pointer;
+	border-radius: 15px;
+	background: red;
+}
+
+.modal-price,.unit-price{
+	color: #ff7800;
+	margin-left: 5px;
+	font-weight: bold;
+}
+.modal-store{
+	margin-left: 5px;
+	width: 100px;
+	height: 10px;
+	/*background: red;*/
+	font-weight: bold;
+}
+.modal-piece{
+	margin-left: 5px;
+	color: #ff7800;
+	font-weight: bold;
+}
+.modal-left{
+	float: left;
+	width: 200px;
+}
+.modal-right{
+	float: left;
+	margin-left: 15px;
+	width: 200px;
+}
+#js_login{
+	clear: left;
+}
+.form-control-pay{
+	width: 180px;
+}
+.modal-textarea{
+	width: 468px;
+	margin-top: -15px;
+}
+.modal-file{
+	width: 468px;
+	margin-bottom: 10px;
+}
+.modal-money{
+	border: 1px solid #e5e5e5;
+	width: 468px;
+	height: 147px;
+	line-height: 48px;
+}
+.modal-money-top{
+	padding-left:5px;
+}
+.modal-money-bottom{
+	border-top: 1px solid #e5e5e5;
+	padding-left:5px;
+	background: #f6f9fb;
+}
+.money-piece{
+	width: 60px;
+	height: 22px;
+}
+.money-modal input{
+	margin: 10px 5px 0px 10px;
+}
+.unit-price{
+	width: 100px;
+	height: 22px;
+	line-height: 22px;
+	text-align:center;
+}
+.modal-phone{
+	margin-left: 0;
+}

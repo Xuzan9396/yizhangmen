@@ -1,0 +1,142 @@
+<extend name="./Public/template/base.html"/>
+
+<block name="content">
+<div class="main-content">
+	<load href="__PUBLIC__/css/store.css" />
+	<load href="__PUBLIC__/css/service.css" />
+	<include file="./Apps/Home/View/service/publicStoreNav.html"/>
+	<!-- 轮播图开始 -->
+	
+	<div class="store-carousel">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			 <!-- 轮播（Carousel）指标 -->
+		    <ol class="carousel-indicators">
+		        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		        <li data-target="#myCarousel" data-slide-to="1"></li>
+		        <li data-target="#myCarousel" data-slide-to="2"></li>
+		    </ol>   
+			<!-- 轮播（Carousel）项目 -->
+			<if condition="$carouselData eq '' ">
+			    <div class="carousel-inner">
+			        <div class="item active" id="item-img">
+				        <img src="__PUBLIC__/image/service/store-default.png" style="height:500px" alt="Third slide" />
+				    </div> 
+				    <div class="item">
+				        <img src="__PUBLIC__/image/service/store-default.png" style="height:500px" alt="Third slide" />
+				    </div>
+				    <div class="item">
+				        <img src="__PUBLIC__/image/service/store-default.png" style="height:500px" alt="Third slide" />
+				    </div>
+			    </div>
+		    <else />
+		    	<div class="carousel-inner">
+			        <div class="item active" id="item-img" >
+			            <img src="__PUBLIC__/Uploads/{$carouselData['store_pic0']}" style="height:500px;min-width:1349px;" alt="First slide"/>
+			        </div>
+			        <div class="item">
+			            <img src="__PUBLIC__/Uploads/{$carouselData['store_pic1']}" style="height:500px;min-width:1349px;"  alt="Second slide"/>
+			        </div>
+			        <div class="item">
+			            <img src="__PUBLIC__/Uploads/{$carouselData['store_pic2']}" style="height:500px;min-width:1349px;" alt="Third slide"/>
+			        </div>
+			    </div>
+		    </if>
+		    <!-- 轮播（Carousel）导航 -->
+		   <!--  <a class="carousel-control left " href="#myCarousel" 
+		        data-slide="prev">
+		    </a>
+		    <a class="carousel-control right" href="#myCarousel" 
+		        data-slide="next">
+		    </a> -->
+		</div>
+	</div>
+
+	<!-- 轮播图结束 -->
+	<div class="store-description">
+		<!-- 店主上传的店铺宣传片开始 -->
+		<notempty name="showpicture">
+			<div class="store-img">
+				<div class="store-upload-img">
+				<!-- 图片宽度为1100px -->
+					<foreach name="showpicture" item="showimage" key="key">
+						<img src="__PUBLIC__/Uploads/{$showimage}" style="width:1100px;margin-top:5px" alt="">
+					</foreach>
+				</div>
+			</div>
+		</notempty>
+		<!-- 店主上传的店铺宣传片结束 -->
+		<!-- 店铺服务展示开始 -->
+		<notempty name="servicData">
+			<div class="store-showcase" >
+				<h4 style="font-weight:bold;margin-left:10px">推荐服务</h4>
+				<foreach name="servicData" item="serviceData" key="key">
+					<div class="store-onecase">
+						<div class="store-onecase-pic"><a href="{:U('home/service/detail',['sid'=>$serviceData['id'],'storeid'=>$serviceData['pubh_shopid']])}"><img src="__PUBLIC__/Uploads/{$serviceData['pubh_pic']}" width="257" height="257" alt=""></a></div>
+						<p><span>￥{$serviceData['pubh_price']}</span><a href="">成交:{$serviceData['pubh_volume']} 次</a></p>
+						<div class="store-onecase-description"><a href="{:U('home/service/detail',['sid'=>$serviceData['id'],'storeid'=>$serviceData['pubh_shopid']])}">{$serviceData['pubh_title']}</a></div>
+					</div>
+				</foreach>
+			</div>
+		</notempty>
+		<!-- 店铺服务展示结束 -->
+		<!-- 店铺案例展示开始 -->
+		<notempty name="caseData">
+			<div class="store-showcase" >
+				<h4 style="font-weight:bold;margin-left:10px">案例展示</h4>
+				<foreach name="caseData" item="caseVal" key="key">
+					<div class="store-onecase">
+						<div class="store-onecase-pic"><a href="{:U('Home/service/caseDetail',['storeid'=>$caseVal['case_shop'],'caseid'=>$caseVal['id']])}"><img src="__PUBLIC__/Uploads/{$caseVal['case_cover']}" width="257" height="257" alt=""/></a></div>
+						<p style="padding-left:40px">案例成交价 :<span>￥{$caseVal['order_number_price']}</span></p>
+						<div class="store-onecase-description"><a href="{:U('Home/service/caseDetail',['storeid'=>$caseVal['case_shop'],'caseid'=>$caseVal['id']])}">{$caseVal['case_title']}</a></div>
+					</div>
+				</foreach>
+			</div>
+		</notempty>
+		<!-- 店铺案例展示结束 -->
+		
+		<!-- 店铺评价 -->
+		<notempty name="assess">
+		<div class="store-assess">
+			<h4>店铺评价</h4>
+			<div class="store-assess-content">
+			<volist name="assess" id="res" empty="暂时没有数据">
+				<div class="assess-list">
+					<div class="assess-list-pic">
+						<img src="__PUBLIC__/Uploads/headportrait/{$res['impr_picture']}" alt="">
+					</div>
+					<div class="assess-list-name">
+						<p><a href="">{$res['user_account']}</a></p>
+						<p>交易金额：￥{$res['price']}</p>
+						<div><span>评分：</span>
+							<if condition="$res['comment_gmb'] eq 0">
+								<div class="assess-list-div"><span class="assess-xing" style="width:100%"><i></i></span></div>
+							<elseif condition="$res['comment_gmb'] eq 1"/>
+								<div class="assess-list-div"><span class="assess-xing" style="width:80%"><i></i></span></div>
+							<else/>
+								<div class="assess-list-div"><span class="assess-xing" style="width:60%"><i></i></span></div>
+							</if>
+						</div>
+					</div>
+					<div class="assess-list-content">
+						<em>评价：</em><span>{$res['content']}</span>
+					</div>
+					<div class="assess-list-time">
+						<p>{$res['addtime']|date="Y-m-d",###}</p>
+						<p>{$res['addtime']|date="H:i:s",###}</p>
+					</div>
+				</div>
+			</volist>
+				<!-- 分页 -->
+				<div class="clear"></div>
+				<div style="margin-top:30px;margin-bottom:30px;">{$show}</div>
+					
+				<!-- 分页 -->
+				
+			</div>
+			
+		</div>
+		</notempty>
+		<!-- 店铺评价结束 -->
+	</div>
+	</div>
+</block>

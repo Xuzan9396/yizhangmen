@@ -1,0 +1,70 @@
+<extend name='./Public/template/listBase.html'/>
+
+<!-- 加载自己的外部文件 -->
+<block name="listfile">
+	<load href="__PUBLIC__/home/pro/css/identity-email.css"/>
+</block>
+
+<!-- 这里写内容 -->
+<block name="listcentent">
+	<!-- 开始 -->
+	  	<h3>{$approvetype['appe_type']}</h3>
+	  	<hr>
+
+		<if condition="$attestation['attn_status'] eq 1">
+			<!-- 已认证 -->
+			<h4>{$email}&nbsp;&nbsp;&nbsp;<a href="javascript:;" id="update">修改</a></h4>
+			<style>
+				#formAct{
+					display:none;
+				}
+			</style>
+		<else />
+			<!-- 未认证 -->
+			<style>
+				#formAct{
+					display:block;
+				}
+			</style>
+		</if>
+
+		<!-- 第三步 匹配验证码 -->
+      	<form class="form-horizontal" id="formAct" action="{:U('home/User/identityAttestation_emailAct')}" method="post">
+			<div class="form-group">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5" id="hint">
+	            <i class="glyphicon glyphicon-info-sign"></i>&nbsp;{$approvetype['appe_detail']}
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+
+			<div class="form-group">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5">
+	            <input type="text" class="form-control" name="user_mail" id="user_mail" placeholder="请输入需要绑定的邮箱">
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+
+	        <!-- 错误信息 -->
+	        <div class="form-group" id="error">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5">
+	            <div id="error-info"></div>
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+
+	        <!-- 提交按钮 -->
+	        <div class="form-group">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5">
+	            <button type="submit" class="btn-submit" id="formActSub">提交认证</button>
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+      	</form>
+	<!-- 结束 -->
+
+	<load href="__PUBLIC__/home/pro/js/identity-email.js"/>
+</block>

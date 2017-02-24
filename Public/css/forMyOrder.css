@@ -1,0 +1,91 @@
+.suit-order-main{
+	width:100%;
+	padding-left:18px;
+}
+.suit-order-main table td ,.suit-order-main table th{
+	text-align: center;
+}
+.color{
+	color:red;
+}
+.td-hidden{
+	width:260px;
+	height:30px;
+	overflow:hidden;
+}
+.td-hidden:hover{
+	text-decoration:underline;
+}
+.suit-title{
+	font-size:20px;
+	height:30px;
+	margin:10px 0px 20px 0px;
+}
+.office-btm{
+	margin-bottom:20px;
+}
+.suit-order-cate{
+	height:30px;
+	line-height:30px;
+	font-size:16px;
+	margin-bottom:30px;
+	color:#4BB2FF;
+}
+.suit-bottom-line{
+	width:100%;
+	height:10px;
+	margin-top:5px;
+	border-top:2px solid #ccc;
+
+}
+.suit-contents{
+	margin-top:10px;
+	border-bottom:1px dotted #cccccc;
+}
+.suit-contents-main{
+	height:30px;
+}
+.suit-money,.suit-order-request,.suit-order-money,.suit-num,.suit-text,.suit-end-time,.suit-order-request a{
+	display:block;
+	height:30px;
+	line-height:30px;
+	font-size:14px;
+	float:left;
+}
+.suit-money{
+	color:red;
+}
+.suit-order-request,.suit-order-request a{
+	margin-left:10px;
+	overflow:hidden;
+	width:243px;
+	text-align:center;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	
+}
+.suit-order-request a{
+	color:#FF9C00;
+}
+.suit-order-money{
+	width:80px;
+	margin-left:80px;
+	text-align:center;
+}
+.suit-num{
+	margin:0px 2px 0px 80px;
+	color:#FF9C00;
+}
+.suit-end-time{
+	margin-right:100px;
+	float:right;
+}
+.suit-bottom{
+	height:30px;
+	line-height:30px;
+	font-size:14px;
+	width:800px;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}

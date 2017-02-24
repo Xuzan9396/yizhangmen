@@ -1,0 +1,31 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+	<load href="__PUBLIC__/css/forMyOrder.css" />
+	<div class="suit-order-main">
+		<div class="suit-title">适合我的订单</div>
+		<table class="table">
+			<tr>
+				<th>需求名称</th>
+				<th>需求预算</th>
+				<th>状态</th>
+				<th>目前投标数</th>
+				<th>截止时间</th>
+				<th>操作</th>
+			</tr>
+			<foreach name="list" item="val" key="key">
+				<tr>
+					<td class="td-hidden"><a href="{:U('Home/Need/needDisplay',['needid'=>$val['need_id']])}">{$val['need_title']}</a></td>
+					<td class="color">￥{$val['need_budget']}</td>
+					<td>方案征集中</td>
+					<td>{$val['bidNum']} 次</td>
+					<td>{:date('Y-m-d',$val['need_valid_time'])}</td>
+					<td><a href="{:U('Home/Need/needDisplay',['needid'=>$val['need_id']])}">查看</a></td>
+				</tr>
+			</foreach>
+			
+			<tr>
+				<td colspan="6" style="text-align:left;padding-top:30px">{$show}</td>
+			</tr>
+		</table>
+	</div>
+</block>

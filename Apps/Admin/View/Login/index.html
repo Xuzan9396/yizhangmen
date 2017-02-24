@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Document</title>
+        <meta charset='utf-8'/>
+        <load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+	    <load href="__PUBLIC__/js/bootstrap.min.js" />
+	    <load href="__PUBLIC__/css/bootstrap.min.css" />
+	    <load href="__PUBLIC__/layer/layer.js"/>
+		<load href="__PUBLIC__/js/mo.js"/>
+	    <style type="text/css">
+			.tab {
+				margin-top:100px;
+			}
+			.lanren1{
+				margin-bottom:30px;
+				text-align:center;
+				cursor:pointer;
+			}
+			.lanren2{
+				margin-bottom:30px;
+				text-align:center;
+				cursor:pointer;
+			}
+			#logina1{
+				margin-right:20px;
+			}
+			.tab1 {
+				width:96px;
+				height:25px;
+				line-height:25px;
+				float:left;
+				text-align:center;
+				cursor:pointer;
+				color:#FFF;
+			}
+			.tab2 {
+				width:96px;
+				height:25px;
+				line-height:25px;
+				float:left;
+				text-align:center;
+				cursor:pointer;
+				color:#000;
+			}
+
+
+
+			#lanrenzhijia2{
+				transform: rotateY(-90deg);
+				display: none;
+			}
+
+		</style>
+    </head>
+    <body>
+		<!-- 居中的容器 -->
+    	<div class="container">
+	       	<!-- 列需要包含在 row 里面 -->
+	        <div class="row">
+	        	<!-- 4:4:4 -->
+	        	<div class="col-md-4"></div>
+	        	<div class="col-md-4">
+					<div class="tab">
+						<div id="bg" class="lanren1">
+						  	<a class="btn btn-success btn-lg active" id="logina1"><div id="font1" class="tab1" onclick="setTab03Syn(1);document.getElementById('bg').className='lanren1'" style="color:white">管理员登录</div></a>
+						    <a class="btn btn-info" id="logina2"><div id="font2" class="tab2" onclick="setTab03Syn(2);document.getElementById('bg').className='lanren2'" style="color:white">超管登录</div></a>
+						</div>
+						<div id="lanrenzhijia1">
+							<form  onsubmit="return false" id="form1">
+								<div class="form-group">
+									<label for="exampleInputEmail1">管理员帐号/手机号码</label>
+									<input type="text" name="admn_tel" class="form-control" id="exampleInputEmail1" placeholder="请输入管理员帐号或手机号码">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1">密码</label>
+									<input type="password" class="form-control" id="exampleInputPassword1" name="admn_password" placeholder="请输入密码">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1">验证码</label>
+									<input type="text" class="form-control" id="exampleInputPassword1" name="code" placeholder="请输入验证码">
+									<div style="margin-top:10px;">
+										<img style="cursor:pointer;" src="{:U('Admin/Login/code')}" onclick="this.src='{:U('Admin/Login/code')}'" >
+									</div>
+								</div>
+								<button type="submit" class="btn btn-success btn-lg btn-block adsub">登录</button>
+							</form>
+						</div>
+
+						<div id="lanrenzhijia2">
+							<form  onsubmit="return false" id="form2">
+								<div class="form-group">
+									<label for="exampleInputEmail1">超级管理员帐号/手机号码</label>
+									<input type="text" name="supn_tel" class="form-control" id="exampleInputEmail1" placeholder="请输入超级管理员帐号或手机号码">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1">密码</label>
+									<input type="password" class="form-control" id="exampleInputPassword1" name="supn_password" placeholder="请输入密码">
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1">验证码</label>
+									<input type="text" class="form-control" id="exampleInputPassword1" name="code" placeholder="请输入验证码">
+									<div style="margin-top:10px;">
+										<img style="cursor:pointer;" src="{:U('Admin/Login/code')}" onclick="this.src='{:U('Admin/Login/code')}'" >
+									
+									</div>
+								</div>
+								<button type="submit" class="btn btn-success btn-lg btn-block adsub1">登录</button>
+							</form>
+						</div>
+	        		</div>
+	        		<div class="col-md-4"></div>
+	        	</div>
+			</div>
+		</div>
+    </body>
+    <script type="text/javascript">
+		function setTab03Syn ( i )
+		{
+			selectTab03Syn(i);
+		}
+		
+		function selectTab03Syn ( i )
+		{
+			switch(i){
+				case 1:
+					$('#lanrenzhijia2').css({
+						'transform':'rotateY(-90deg)',
+					}).hide();
+					$('#lanrenzhijia1').show();
+
+					setTimeout(function(){
+						$('#lanrenzhijia1').css({
+							'transition':'transform 1s',
+							'transform':'rotateY(0deg)',
+						});
+					},50)
+					
+					document.getElementById("logina1").className="btn btn-success btn-lg active";
+					document.getElementById("logina2").className="btn btn-info";
+
+					break;
+				case 2:
+					$('#lanrenzhijia1').css({
+						'transform':'rotateY(90deg)',
+					}).hide();
+					$('#lanrenzhijia2').show();
+					setTimeout(function(){
+						$('#lanrenzhijia2').css({
+							'transition':'transform 0.5s',
+							'transform':'rotateY(0deg)'
+						});
+
+					},50)
+					document.getElementById("logina1").className="btn btn-info";
+					document.getElementById("logina2").className="btn btn-success btn-lg active";
+					break;
+			}
+		}
+
+		$('.adsub').click(function(){
+			mo.ajax($('#form1').serialize(),"{:U('Admin/Login/proLogin')}",function(res){
+				if(res['status']){
+					layer.msg(res['info'],{icon:6});
+					mo.skip("{:U('Admin/Index/index')}",1);
+				}else{
+					layer.msg(res['info'],{icon:5});
+				}
+			})
+		})
+
+		$('.adsub1').click(function(){
+			mo.ajax($('#form2').serialize(),"{:U('Admin/Login/supnLogin')}",function(res){
+				if(res['status']){
+					layer.msg(res['info'],{icon:6});
+					mo.skip("{:U('Admin/Index/index')}",1);
+				}else{
+					layer.msg(res['info'],{icon:5});
+				}
+			})
+		})
+
+	</script>
+</html>

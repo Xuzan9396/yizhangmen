@@ -1,0 +1,125 @@
+<extend name='./Public/template/listBase.html'/>
+
+<!-- 加载自己的外部文件 -->
+<block name="listfile">
+	<load href="__PUBLIC__/home/pro/css/identity-mobeil.css"/>
+</block>
+
+<!-- 这里写内容 -->
+<block name="listcentent">
+	<!-- 开始 -->
+	  	<h3>{$approvetype['appe_type']}</h3>
+	  	<hr>
+
+		<if condition="$attestation['attn_status'] eq 1">
+			<!-- 已认证 -->
+			<h4>{$Think.session.home_user_info.user_phone}&nbsp;&nbsp;&nbsp;<a href="javascript:;" id="update">修改</a></h4>
+		<else />
+			<!-- 未认证 -->
+		</if>
+
+		<!-- 第一步 验证原手机号码 -->
+		<form class="form-horizontal" id="form">
+			<div class="form-group">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5" class="hint">
+	            <i class="glyphicon glyphicon-info-sign"></i>&nbsp;接收短信验证码，输入新的手机号码。
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+
+	        <div class="form-group">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5">
+	            <h3>{$Think.session.home_user_info.user_phone}</h3>
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+
+	        <div class="form-group">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-3" id="css-phone">
+	            <input type="text" class="form-control" maxlength="6" id="user_code" placeholder="手机验证码" >
+	          </div>
+	          <div class="col-sm-2" id="css-code">
+	            <div id="user_get_code">发送验证码</div>
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+
+			<div class="form-group">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5">
+	            <input type="text" class="form-control" maxlength="11" id="user_phone" placeholder="请输入新的手机号码">
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+
+	        <!-- 错误信息 -->
+	        <div class="form-group" id="error">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5" id="css-phone">
+	            <div id="error-info"></div>
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+
+	        <!-- 提交按钮 -->
+	        <div class="form-group">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5">
+	            <button type="submit" class="btn-submit" id="submit">下一步</button>
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+      	</form>
+	
+		<!-- 第二步 审核新号码 -->
+		<div id="affirm">
+			<div id="update-info"></div>
+			<div id="css-style">
+				<h5 id="error-info-2"><i class="glyphicon glyphicon-info-sign"></i>&nbsp;请认真核对信息，误操作导致绑定错误，请及时联系客服人员进行处理</h5>
+			</div>
+			<button class="btn btn-info" id="updateAct">确认提交,发送验证码</button>
+		</div>
+
+		<!-- 第三步 匹配验证码 -->
+      	<form class="form-horizontal" id="formAct">
+			<div class="form-group">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5" class="hint">
+	            <i class="glyphicon glyphicon-info-sign"></i>&nbsp;为了保证您的账户安全，请验证新号码。
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+
+			<div class="form-group">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5">
+	            <input type="text" class="form-control" maxlength="6" id="re_code" placeholder="请输入验证码">
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+
+	        <!-- 错误信息 -->
+	        <div class="form-group" id="error-3">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5" id="css-phone">
+	            <div id="error-info-3"></div>
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+
+	        <!-- 提交按钮 -->
+	        <div class="form-group">
+	          <label class="col-sm-3"></label>
+	          <div class="col-sm-5">
+	            <button type="submit" class="btn-submit" id="formActSub">确认更改</button>
+	          </div>
+	          <label class="col-sm-3"></label>
+	        </div>
+      	</form>
+	<!-- 结束 -->
+
+	<load href="__PUBLIC__/home/pro/js/identity-mobeil.js"/>
+</block>

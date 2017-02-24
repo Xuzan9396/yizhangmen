@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>查询</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <load href="__PUBLIC__/css/bootstrap.min.css" />
+    <load href="__PUBLIC__/css/dataTables.bootstrap.css" /> 
+    <load href="__PUBLIC__/css/style.min.css" />
+    <load href="__PUBLIC__/admin/css/font-awesome.min.css" />
+    <load href="__PUBLIC__/admin/css/animate.min.css"/>
+
+</head>
+
+<body>        
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                    <div class="ibox-content">
+                        <table class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th colspan="5">
+                                        <a href="{:U('Admin/NeedUser/needReasonAdd')}" class="btn btn btn-info">添加</a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>失败原因内容</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <notempty name="list">
+                                <!-- 遍历数据 -->
+                                <foreach name="list" item="val">
+                                    <tr class="gradeX">
+                                        <td>{$val.ndr_id}</td>
+                                        <td>{$val.ndr_text}</td>
+                                        <if condition="($val['ndr_status'] eq '0')">
+                                            <td>
+                                                已启用
+                                            </td>
+                                        <else />
+                                            <td>
+                                                已禁用
+                                            </td>
+                                        </if>
+                                        <td class="center">
+                                            <a href='{:U("Admin/NeedUser/needReasonSave",["id"=>$val["ndr_id"]])}'class="btn btn btn-info">查看修改</a>
+                                            <a href='{:U("Admin/NeedUser/needReasonDelete",["id"=>$val["ndr_id"]])}'class="btn btn btn-danger">删除</a>
+                                        </td>
+                                    </tr>
+                                </foreach>
+                                <else />
+                                    <tr>
+                                        <td>
+                                            没有数据!
+                                        </td>
+                                    </tr>
+                                </notempty>                               
+                            </tbody>
+                        </table>
+                    </div> 
+            </div>
+        </div>
+    </div>
+    <!-- Mainly scripts -->
+    <load href="__PUBLIC__/js/jquery-2.1.3.min.js"/>
+    <load href="__PUBLIC__/js/bootstrap.min.js"/>
+    <load href="__PUBLIC__/layer/layer.js"/>
+    <load href="__PUBLIC__/js/jquery.dataTables.js"/>
+    <load href="__PUBLIC__/js/dataTables.bootstrap.js"/>
+
+    <script>
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable();
+
+            /* Init DataTables */
+            var oTable = $('#editable').dataTable();
+
+            /* Apply the jEditable handlers to the table */
+            oTable.$('td').editable('../example_ajax.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+
+                "width": "90%",
+                "height": "100%"
+            });
+
+
+        });
+
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+                "Custom row",
+                "New row",
+                "New row",
+                "New row",
+                "New row"]);
+
+        }   
+        
+        function ajax( data, url, callBack){            
+            $.ajax({
+                data:data,
+                type:'post',
+                async:true,
+                url:url,
+                success:function(res){
+                    callBack(res);
+                }
+            })
+        }
+        var p = $('.modal-content').html();
+
+        function test(obj,mid,pname,ppath){
+            var ppath = ppath.split(',');
+            $('#myModal').modal('show');
+            console.log(ppath);
+            if(ppath.length > 3){
+                $('.modal-content').html('<p>错误操作,<b> '+ pname +' </b>为3级分类</p>');
+            }else{
+                $('.modal-content').html(p);
+                $('#modal-pid').html(pname);
+                $('#modal-pid').attr('mid',mid);
+                $('#modal-pid').attr('ppath',ppath);
+
+            }
+
+        }
+
+        function save(){
+            $.ajax({
+                url: "addChild", 
+                data:'id='+$('#modal-pid').attr('mid')+'&cate_path='+$('#modal-pid').attr('ppath')+'&cate_name='+$('#content').val(),
+                success: function(data){
+                    // alert(data);
+                    $('.gradeX:last').after(data);
+                    $('#myModal').modal('hide');
+
+                }
+            });
+        }
+
+        layer.msg('加载成功',{icon:6})
+    </script>
+
+</body>
+
+</html>
+

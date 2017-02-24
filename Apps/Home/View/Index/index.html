@@ -1,0 +1,1571 @@
+<extend name='./Public/template/base.html'/>
+<block name="title"><title>仪掌门-首页</title></block>
+<block name="file"></block>
+<block name="content">
+<style type="text/css">
+	.container{
+		padding:0;
+	}
+
+	.active{
+			background: #3195F3;
+		}
+
+	.nav-bar{
+		width: 1170px;
+		height: 40px;
+		line-height: 40px;
+		background: #62C9FA;
+		margin:10px 0;
+	}
+
+	.nav-bar-ul li,.nav-bar-ul a{
+		transition: background 0.5s;
+		float: left;
+		color: white;
+		padding:0 10px;
+		text-decoration: none;
+		cursor: pointer;
+		font-size: 14px;
+		font-weight: bold;
+	}
+	.nav-bar-ul li:hover{
+		transition: background 0.5s;
+		background: #3195F3;
+
+	}
+
+	.banner{
+		width: 1170px;
+		height: 505px;
+		overflow: hidden;
+	}
+
+	.b-carte{
+		width: 232px;
+		height: 500px;
+		border: 1px solid #EEEEEE;
+		float: left;
+		text-align: center;
+		background: #62C9FA;
+		overflow: hidden;
+	}
+
+	.b-carte-ul{
+		width: 230px;
+		height: auto;
+	}
+
+	.b-carte-ul a{
+		font-size: 14px;
+		color: white;
+		text-decoration: none;
+	}
+
+	.b-carte-ul > li{
+		width: 230px;
+		height: auto;
+		overflow: auto;
+		cursor: pointer;
+		margin-bottom: 7.8px;
+	}
+
+	.b-carte-div{
+		width: 230px;
+		border-bottom: #3195F3 dashed 1px;
+
+	}
+
+	.b-carte-div a{
+		font-size: 16px;
+		text-decoration: none;
+	}
+
+	.b-carte-div a:hover{
+		font-size: 16px;
+		text-decoration: none;
+	}
+
+	.b-carte-subclass-li-a{
+		display: inline-block;
+		width: 65px;
+		height: 18px;
+		float: left;
+		margin:2px 0px;
+		margin-left: 10px;
+		line-height: 18px;
+		text-overflow:ellipsis;
+		overflow: hidden;
+		font-size: 12px;
+		text-align: left;
+
+	}
+
+	.b-carte h4{
+		box-sizing: border-box;
+		width: 230px;
+		height: 40px;
+		background: #3195F3;
+		margin: 0;
+		line-height: 40px;
+		color: white;
+	}
+
+	.b-slide{
+		width: 940px;
+		height: 500px;
+		margin-left: 5px;
+	}
+
+	.item img{
+		width: 940px;
+		height: 500px;
+	}
+
+	.carousel-inner{
+		width: 940px;
+		height: 500px;
+	}
+
+	.b-carte-detail-father{
+		width: 940px;
+		height: 500px;
+		position: absolute;
+		overflow: hidden;
+	    margin-left: 228px;
+	    padding: 0;
+
+	}
+
+	.b-carte-detail-li{
+		width: 220px;
+		height: 200px;
+		float: left;
+		margin: 20px;
+		overflow: hidden;
+	}
+
+	.b-carte-detail-li div{
+		widows: 220px;
+		height: 50px;
+		text-align: center;
+		line-height: 50px;
+		border-bottom: #3195F3 dashed 1px;
+
+	}
+
+	.b-carte-detail-li div>a{
+		box-sizing: border-box;
+		font-size: 20px;
+		font-size: 20px;
+		color: #0881F2;
+		text-decoration: none;
+	}
+
+	.b-carte-detail-li-a{
+		text-decoration: none;
+		display: block;
+		max-width: 100px;
+		float: left;
+		margin:10px 10px;
+		text-align: right;
+		overflow: hidden;
+
+	}
+
+	.b-cate-item{
+		width: 230px;
+		height: auto;
+		overflow: hidden;
+	}
+
+	.b-cate-item li{
+		transition: background 0.5s,margin-left 0.5s;
+		width: 260px;
+		height: 22px;
+		overflow: hidden;
+		text-align: center;
+		margin-left: -5px;
+		padding: 0px 8px; 
+	}
+
+	.b-cate-item li:hover{
+		transition: background 0.5s,margin-left 0.5s;
+		background: white;
+		margin-left: 0px;
+	}
+
+	.b-cate-item li:hover a{
+		color: #2793F7;
+		font-weight: bold;
+	}
+
+	.b-carte-detail-show{
+		width: 940px;
+		height: 500px;
+		overflow:hidden;
+		position: absolute;
+
+	}
+
+	.b-carte-detail-show >li{
+		width: 940px;
+		height: 500px;
+		overflow:hidden;
+		position: absolute;
+	}
+
+	.servicelist{
+		width: 1170px;
+		height: 680px;
+		margin: 20px auto;
+		overflow: hidden;
+	}
+
+	.servicelist-head,.facilitator-head,.expertshow-head,.caseshow-head,.hotdemand-head{
+		width: 1170px;
+		height: 40px;
+		margin-top: 20px;
+	}
+
+	.servicelist-head h2,.facilitator-head h2,.expertshow-head h2,.caseshow-head h2,.hotdemand-head h2{
+		box-sizing: border-box;
+		margin:0 20px;
+		float: left;
+		line-height: 38px;
+
+	}
+
+	.servicelist-head i{
+		background: url('__PUBLIC__/image/pen.png');
+		width: 38px;
+		height: 38px;
+		display: block;
+		float: left;
+	}
+
+	.servicelist-content{
+		width: 1170px;
+		height: 630px;
+		overflow: hidden;
+	}
+
+	.servicelist-content-detail{
+		width: 940px;
+		height: 620px;
+		float: left;
+		overflow: hidden;
+	}
+
+	.servicelist-savant{
+		width: 220px;
+		height: 612px;
+		float: right;
+		background: #F6F6F6;
+	}
+
+	.servicelist-content-head{
+		width: 938px;
+		height: 40px;
+		background: #EEEEEE;
+	}
+
+	.servicelist-content-head span{
+		display: inline-block;
+		line-height: 40px;
+		color: #3195F3;
+		width: 100px;
+		height: 40px;
+		text-align: center;
+		background: #F6F6F6;
+	}
+
+	.servicelist-content-content{
+		width: 938px;
+		height: 572px;
+		background: #F6F6F6;
+		overflow: hidden;
+	}
+
+	.servicelist-content-content li{
+		transition: background 0.5s;
+		width: 460px;
+		height: 190px;
+		padding: 15px;
+		float: left;
+		overflow: hidden;
+		margin-right: 8px;
+	}
+
+	.servicelist-content-content li:hover{
+		transition: background 0.5s;
+		background: #D8EDF5;
+	}
+
+	.servicelist-content-imgs{
+		width: 162px;
+		height: 162px;
+		float: left;
+		border: 1px solid #D6D3D3;
+		background: white;
+	}
+
+	.servicelist-content-imgs img{
+		transition: opacity 0.5s,margin-left 0.5s;
+		width: 166px;
+		height: 162px;
+	}
+
+	.servicelist-content-imgs img:hover{
+		transition: opacity 0.5s,margin-left 0.5s;
+		opacity: 0.8;
+		margin-left: -4px;
+	}
+
+	.servicelist-content-body{
+		width: 250px;
+		height: 162px;
+		float: right;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		overflow: hidden;
+	}
+
+	.servicelist-content-body h4{
+		box-sizing: border-box;
+		width: 250px;
+		height: 40px;
+		overflow: hidden;
+	}
+
+	.servicelist-content-body p:nth-of-type(1){
+		font-size: 15px;
+		color: gray;
+	}
+
+	.servicelist-content-body p:nth-of-type(1) span{
+		color:red;
+		font-size: 18px;
+		font-weight: bold;
+		box-sizing: border-box;
+		margin-right: 20px;
+	}
+
+	.servicelist-content-body p:nth-of-type(2){
+		color: gray;
+		font-size: 10px;
+	}
+
+	.servicelist-content-body-a{
+		transition: color 0.5s,background 0.5s;
+		display: block;
+		width: 60px;
+		height: 25px;
+		line-height: 25px;
+		text-align: center;
+		border: 1px solid #3195F3;
+		background: #E3EDF0;
+		color: #3195F3;
+		font-weight: bold;
+
+	}
+
+	.servicelist-content-body-a:hover{
+		transition: color 0.5s,background 0.5s;
+		color: white;
+		background: #3195F3;
+	}
+
+	.servicelist-content-body a{
+		text-decoration: none;
+	}
+
+	.servicelist-savant-head{
+		width: 220px;
+		height: 40px;
+		background: #EEEEEE;
+		text-align: center;
+		line-height: 40px;
+	}
+
+	.servicelist-savant-content{
+		width: 220px;
+		height: 570px;
+		overflow: hidden;
+
+	}
+
+	.servicelist-savant-content-li{
+		width: 220px;
+		height: 280px;
+		overflow: hidden;
+		padding: 10px 15px;
+
+	}
+
+	.servicelist-savant-content-li img{
+		transition: opacity 0.5s,margin-left 0.5s;
+		width: 190px;
+		height: 190px;
+	}
+
+	.servicelist-savant-content-li img:hover{
+		transition: opacity 0.5s,margin-left 0.5s;
+		opacity: 0.8;
+		margin-left: 4px;
+	}
+
+	.servicelist-savant-content-li a{
+		text-decoration: none;
+	}
+
+	.servicelist-savant-content-li p:nth-of-type(1){
+		font-size: 10px;
+
+	}
+
+	.servicelist-savant-content-li p:nth-of-type(2){
+		color: red;
+	}
+
+	.servicelist-savant-content-li p:nth-of-type(2) span{
+		box-sizing: border-box;
+		float: right;
+		line-height: 20px;
+
+	}
+
+	.servicelist-savant-content-li p:nth-of-type(2) span c{
+		color: gray;
+		font-size: 8px;
+	}
+
+	.servicelist-savant-content-li p:nth-of-type(2) strong{
+		color: orange;
+		font-size: 18px;
+	}
+
+	.facilitator-head i,.caseshow-head i,.hotdemand-head i{
+		background: url('__PUBLIC__/image/index_icon_326604b.png') no-repeat;
+		background-position: -46px -39px;
+		width: 38px;
+		height: 38px;
+		display: block;
+		float: left;
+	}
+
+	.facilitator-content{
+		width: 1170px;
+		height: auto;
+		background: #F9F9F9;
+		padding: 20px;
+		overflow: auto;
+	}
+
+	.facilitator-content-li{
+		transition: background 0.5s,box-shadow 0.5s;
+		width: 200px;
+		height: 360px;
+		float: left;
+		overflow: hidden;
+		margin:0 12px;
+		padding:8px;
+
+	}
+
+	.facilitator-content-li:hover{
+		transition: background 0.5s,box-shadow 0.5s;
+		background: #D8EDF5;
+		box-shadow: 0 0 2px 2px #62C9FA;
+	}
+
+	.facilitator-content-li div{
+		width: 182px;
+	}
+
+	.fshowimgs{
+		transition: width 0.5s,height 0.5s,margin-left 0.5s,margin-top 0.5s;
+		width: 182px;
+		height: 182px;
+	}
+
+	.facilitator-content-lia{
+		width: 182px;
+		height: 182px;
+		overflow: hidden;
+		display: block;
+	}
+
+	.fshowimgs:hover{
+		transition: width 0.5s,height 0.5s,margin-left 0.5s,margin-top 0.5s;
+		width: 188px;
+		height: 188px;
+		margin-left: -2px;
+		margin-top: -2px;
+	}
+
+	.facilitator-content-a{
+		width: 182px;
+		height: 20px;
+		margin: 5px 0px;
+	}
+
+	.facilitator-content-a span{
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		overflow: hidden;
+	}
+
+	.facilitator-content-a span:nth-of-type(1){
+		width: 128px;
+		height: 20px;
+		font-size: 14px;
+	}
+
+	.facilitator-content-a span:nth-of-type(2){
+		width: 40px;
+		height: 20px;
+		font-size: 8px;
+		box-sizing: border-box;
+		float: right;
+	}
+
+	.facilitator-content-c p{
+		color: #999999;
+		margin: 0;
+	}
+
+	.facilitator-content-c span:nth-of-type(1){
+		color:#FE9000;
+		font-weight: bold;
+
+	}
+
+	.facilitator-content-c a{
+		color:gray;
+		box-sizing: border-box;
+		float: right;
+		text-decoration: none;
+		font-size: 8px;
+
+	}
+
+	.facilitator-content-c a:hover{
+		color: #0A0390;
+
+	}
+
+	.facilitator-content-c{
+		margin-top: 5px;
+		font-size: 8px;
+		border-bottom: 1px solid #EEEEEE;
+	}
+
+	.facilitator-content-d{
+		width: 182px;
+		height: auto;
+		overflow: auto;
+		font-size: 8px;
+	}
+
+	.facilitator-content-d span{
+		color: red;
+	}
+
+	.facilitator-content-d a{
+		display: block;
+		font-size: 8px;
+		width: 90px;
+		height: 15px;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		overflow: hidden;
+		float: right;
+		text-decoration: none;
+		text-align: right;
+	}
+
+	.facilitator-content-d p{
+		margin: 0;
+		margin-top: 5px;
+	}
+
+
+
+	.facilitator-content-e a{
+		transition: background 0.5s;
+		display: block;
+		text-decoration: none;
+		width: 182px;
+		height: 35px;
+		color: white;
+		background: #3195F3;
+		text-align: center;
+		line-height: 35px;
+		margin-top: 5px;
+	}
+
+	.facilitator-content-e a:hover{
+		transition: background 0.5s;
+		background: #58C4FA;
+	}
+
+	.facilitator-content-b i{
+		background: url('__PUBLIC__/image/new-window-member.png') no-repeat;
+		background-position: 50 20px;
+		display: inline-block;
+		width: 23px;
+	    height: 21px;
+	    line-height: 21px;
+	    vertical-align: middle;
+	}
+
+	.expertshow{
+		width: 1170px;
+		height: auto;
+		overflow: auto;
+		margin: 20px auto;
+	}
+	.expertshow-head i{
+		background: url('__PUBLIC__/image/index_icon_326604b.png') no-repeat;
+		background-position: -46px -39px;
+		width: 38px;
+		height: 38px;
+		display: block;
+		float: left;
+	}
+
+	.expertshow-content{
+		width: 1170px;
+		height: auto;
+		overflow: auto;
+	}
+
+	.expertshow-content-detail{
+		transition: background 0.5s;
+		width: 582px;
+		height: 160px;
+		overflow: auto;
+		float: left;
+		padding:5px;
+	}
+
+	.expertshow-content-detail:hover{
+		transition: background 0.5s;
+		background: #D8EDF5;
+	}
+
+	.expertshow-content-detail-a{
+		width: 130px;
+		height: 130px;
+		overflow: hidden;
+		float: left;
+		margin-top: 10px;
+	}
+
+	.expertshow-content-detail-a img{
+		transition: opacity 0.5s,width 0.5s,height 0.5s,margin-left 0.5s,margin-top 0.5s;
+		width: 130px;
+		height: 130px;
+	}
+
+	.expertshow-content-detail-a span{
+		transition: height 0.5s,margin-top 0.5s;
+		display: block;
+		width: 130px;
+		height: 0px;
+		text-align: center;
+		background: #EEEEEE;
+		color: #3196F3;
+		line-height: 30px;
+		position: absolute;
+		overflow: hidden;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	.expertshow-content-detail-a span:hover{
+		background: #3196F3;
+		color: white;
+	}
+
+	.expertshow-content-detail-a img:hover{
+		transition: opacity 0.5s,width 0.5s,height 0.5s,margin-left 0.5s,margin-top 0.5s;
+		opacity: 0.8;
+		width: 140px;
+		height: 140px;
+		margin-left: -5px;
+		margin-top: -5px;	
+	}
+
+	.expertshow-content-detail-a:hover.expertshow-content-detail-a span{
+		display: block;
+		transition: height 0.5s,margin-top 0.5s;
+		height: 30px;
+		margin-top: -30px;
+
+	}
+
+	.expertshow-content-detail-b{
+		width: 200px;
+		height: 130px;
+		overflow: hidden;
+		float: left;
+		margin: 10px;
+	}
+
+	.expertshow-content-detail-b h4{
+		width: 200px;
+		height: 20px;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		margin:0;
+		margin-bottom: 10px;
+		color: blue;
+		overflow: hidden;
+	}
+
+	.expertshow-content-detail-b a{
+		text-decoration: none;
+	}
+
+	.expertshow-content-detail-b p{
+		width: 200px;
+		color: gray;
+		font-size: 8px;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		overflow: hidden;
+		cursor: pointer;
+	}
+
+	.expertshow-content-detail-b p span{
+		color: red;
+		font-size: 8px;
+	}
+
+	.expertshow-content-detail-bd{
+		width: 150px;
+		height: 30px;
+		margin-top: 20px;
+	}
+
+	.expertshow-content-detail-bd a{
+		display: block;
+		border: 1px solid #3195F3;
+		width: 70px;
+		height: 25px;
+		line-height: 25px;
+		text-align: center;
+		font-size: 8px;
+		border-radius: 3px;
+		float: left;
+		margin-right: 5px;
+	}
+
+
+	.expertshow-content-detail-bd a:nth-of-type(1){
+		transition: background 0.5s,color 0.5s;
+		background: #B4D8F7;
+	}
+
+	.expertshow-content-detail-bd a:nth-of-type(1):hover{
+		transition: background 0.5s,color 0.5s;
+		background: #3195F3;
+		color: white;
+	}
+
+	.expertshow-content-detail-bd a:nth-of-type(2){
+		transition: background 0.5s,color 0.5s;
+		background: #EEEEEE;
+	}
+
+	.expertshow-content-detail-bd a:nth-of-type(2):hover{
+		transition: background 0.5s,color 0.5s;
+		background: #3195F3;
+		color: white;
+	}
+
+	.expertshow-content-detail-c{
+		border:1px solid #E3E3E3;
+		width: 120px;
+		height: 110px;
+		float: left;
+		text-align: center;
+		margin:17px;
+		font-size: 8px;
+		background: #F9F9F9;
+	}
+
+	.expertshow-content-detail-c div{
+		width: 100px;
+		height: 50px;
+		border-bottom: 1px solid #E3E3E3;
+		margin:10px auto;
+	}
+
+	.expertshow-content-detail-c p{
+		margin:0;
+	}
+
+	.expertshow-content-detail-c div a span{
+		color:red;
+		font-size: 16px;
+
+	}
+
+	.expertshow-content-detail-c div a{
+		text-decoration: none;
+	}
+
+	.expertshow-content-detail-c p:nth-of-type(1) span{
+		color: red;
+		font-size: 14px;
+	}
+
+	.expertshow-content-detail-c p:nth-of-type(2) span{
+		color: blue;
+	}
+
+	.caseshow{
+		width: 1170px;
+		height: auto;
+		overflow: auto;
+	}
+
+	.caseshow-content{
+		width: 1170px;
+		height: auto;
+		overflow: auto;
+	}
+
+	.caseshow-content-left{
+		transition: border 0.5s;
+		width:330px;
+		height: 436px;
+		overflow: hidden;
+		float: left;
+		border: 1px solid white;
+		border-radius: 5px;	
+		margin: 5px;
+	}
+
+	.imgg{
+		transition: border 0.5s,box-shadow 0.5s;
+		width: 300px;
+		height: 260px;
+		overflow: hidden;
+		margin-top: 50px;
+		margin-left: 5px;
+		border: 2px solid white;
+	}
+
+	.imgg:hover{
+		transition: border 0.5s,box-shadow 0.5s;
+		border: 2px solid #3195F3;
+		box-shadow: 0 0 5px 2px gray;
+	}
+
+	.caseshow-content-left span{
+		display: block;
+		width: 100%;
+		text-align: center;
+	}
+
+	.caseshow-content-left a{
+		text-decoration: none;
+	}
+
+	.caseshow-content-left img{
+		transition: opacity 0.5s;
+		width: auto;
+		height: 260px;
+	}
+
+	.caseshow-content-right img:hover{
+		transition: opacity 0.5s;
+		opacity: 0.8;
+	}
+
+	.caseshow-content-right{
+		transition: opacity 0.5s;
+		width: 827px;
+		height: 436px;
+		float: left;
+		overflow: hidden;
+	}
+
+	.caseshow-content-right-li{
+		transition: border 0.5s,box-shadow 0.5s;
+		width: 244px;
+		height: 186px;
+		float: left;
+		border: 2px solid #EEEEEE;
+		overflow: hidden;
+		margin: 15px;
+	}
+
+	.caseshow-content-right-li:hover{
+		transition: border 0.5s,box-shadow 0.5s;
+		border: 2px solid #3195F3;
+		box-shadow: 0 0 10px 1px gray;
+	}
+
+	.caseshow-content-right-li img{
+		height: 150px;
+		left: 0;
+		right: 0;
+		width: auto;
+		margin: auto;
+		display: block;
+	}
+
+	.caseshow-content-right-li div{
+		width: 220px;
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		font-size: 15px;
+	}
+
+	.caseshow-content-right-li a{
+		text-decoration: none;
+	}
+
+	.hotdemand{
+		width: 1170px;
+		height: auto;
+		overflow: auto;
+		margin-top:20px;
+	}
+
+	.hotdemand-content{
+		width: 1170px;
+		height: 400px;
+		overflow: hidden;
+		border-top: 1px solid #E8E8E8;
+		margin-top: 10px;
+	}
+
+	.hotdemand-head a{
+		display: block;
+		width: 60px;
+		height: 20px;
+		line-height: 50px;
+		margin-right: 10px;
+		float: right;
+		text-decoration: none;
+		font-size: 8px;
+	}
+
+	.hotdemand-content-a{
+		width: 952px;
+		height: 400px;
+		overflow: hidden;
+		border-right: 1px solid #E8E8E8;
+		float: left;
+	}
+
+	.hotdemand-content-a ul{
+		width: 950px;
+		height: auto;
+		overflow: auto;
+	}
+
+	.hotdemand-content-a-li{
+		transition: background 0.5s;
+		width: 306px;
+		height: 56px;
+		float: left;
+		overflow: hidden;
+		padding: 10px 0px;
+	}
+
+	.hotdemand-content-a-li:hover{
+		transition: background 0.5s;
+		background: #D8EDF5;
+	}
+
+	.hotdemand-content-a-li p{
+		width: 305px;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		overflow: hidden;
+		font-size: 8px;
+		margin: 0;
+	}
+
+	.hotdemand-content-a-li p:nth-of-type(1) span{
+		color: orange;
+	}
+
+	.hotdemand-content-a-li p:nth-of-type(1) a{
+		text-decoration: none;
+		font-size: 8px;
+	}
+
+	.hotdemand-content-a-li p:nth-of-type(2){
+		color: #9B9B9B;
+	}
+
+	.hotdemand-content-a-li p:nth-of-type(2) a{
+		text-decoration: none;
+		color: #9B9B9B;
+	}
+
+	.hotdemand-content-b{
+		width: 200px;
+		height: 400px;
+		float: right;
+		overflow: hidden;
+	}
+
+	.hotdemand-content-b1{
+		width: 200px;
+		height: 50px;
+		font-size: 10px;
+		color: #999999;
+		margin-top: 10px;
+	}
+
+	.hotdemand-content-b1 strong{
+		font-size: 22px;
+		color: red;
+		font-weight: bold;
+	}
+
+	.hotdemand-content-b2 a{
+		transition: background 0.5s;
+		display: block;
+		width: 200px;
+		height: 40px;
+		line-height: 40px;
+		text-decoration: none;
+		text-align: center;
+		background: #3195F3;
+		color: white;
+	}
+
+	.hotdemand-content-b2 a:hover{
+		transition: background 0.5s;
+		background: #62C9FA;
+	}
+
+	.hotdemand-content-b3 li{
+		width: 200px;
+		height: 74px;
+		font-size: 8px;
+		color: #999999;
+		border-bottom: #E8E8E8 dashed 1px;
+		padding: 5px 0px;
+	}
+
+	.hotdemand-content-b3 li img{
+		width: 40px;
+		height: 34px;
+		float: left;
+		display: block;
+		margin: 5px 5px 8px 0px;
+	}
+
+	.hotdemand-content-b3 li h5{
+		color: black;
+	}
+
+	.hotdemand-bottom{
+		width: 1170px;
+		height: 35px;
+		line-height: 35px;
+		background: #F6F6F6;
+	}
+
+	.hotdemand-bottom dt{
+		display: block;
+		float: left;
+		line-height: 35px;
+		margin-right: 100px;
+
+	}
+
+	.hotdemand-bottom dd{
+		display: block;
+		float: left;
+		line-height: 35px;
+		text-align: right;
+		-webkit-margin-start: 40px;
+	}
+
+	.hotdemand-bottom dd i{
+		font-size: 70px;
+		color: white;
+		box-sizing: border-box;
+		float: right;
+
+	}
+
+</style>
+<if condition="$data['bannerbackground']">
+	<style type="text/css">
+		.b-carte-detail{
+			 width: 940px;
+			 height: 500px;
+			 position: absolute;
+			 border: 1px solid #3195F3;
+			 background:url('__PUBLIC__/Uploads/{$data['bannerbackground']}');
+			 z-index: 5;
+			 display: none;
+			 padding: 0px 70px;
+		}
+	</style>
+<else />
+<style type="text/css">
+		.b-carte-detail{
+			 width: 940px;
+			 height: 500px;
+			 position: absolute;
+			 border: 1px solid #3195F3;
+			 background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#DBEAF2), color-stop(100%,#FCDBE3));
+			 background:-moz-gradient(linear, left top, left bottom, color-stop(0%,#DBEAF2), color-stop(100%,#FCDBE3));
+			 z-index: 5;
+			 display: none;
+			 padding: 0px 70px;
+		}
+	</style>
+
+</if>
+	<div class="container">
+		<!-- 导航栏开始 -->
+		<if condition="$data['homenavigation']">
+		<div class="nav-bar">
+			<ul class="nav-bar-ul" >
+				<li><a href="{:U('Home/Need/needIndex')}">需求大厅</a></li>
+				<li><a href="{:U('home/service/index')}">服务商库</a></li>
+				<li><a href="{:U('Home/Instrument/index')}">仪器库</a></li>
+			</ul>
+		</div>
+		</if>
+		<!-- 导航栏结束 -->
+
+		<if condition="$data['category']" >
+		<div class="banner">
+			<!-- 左侧栏服务类目 -->
+		
+			<div class="b-carte">
+					<h4>企业全程服务</h4>
+				<ul class="b-carte-ul">
+
+					<foreach name="data['category']" item="value">
+						<li>
+							<div class="b-carte-div"><a href="{:U('Home/Service/category?cate_id='.$value['store_category_id'])}">{$value.cate_name}</a></div>
+							<ul class="b-cate-item">
+								<li>
+									<foreach name="value['first']" item="val">
+										<a href="{:U('Home/Service/category?cate_id='.$val['store_category_id'])}" class="b-carte-subclass-li-a">{$val.cate_name}</a>
+									</foreach>
+								</li>
+								<if condition="$value['second']">
+								<li>
+									<foreach name="value['second']" item="val">
+										<a href="{:U('Home/Service/category?cate_id='.$val['store_category_id'])}" class="b-carte-subclass-li-a" class="b-carte-subclass-li-a">{$val.cate_name}</a>
+									</foreach>
+								</li>
+								</if>
+								<if condition="$value['third']">
+								<li>
+									<foreach name="value['third']" item="val">
+										<a href="{:U('Home/Service/category?cate_id='.$val['store_category_id'])}" class="b-carte-subclass-li-a" class="b-carte-subclass-li-a">{$val.cate_name}</a>
+									</foreach>
+								</li>
+								</if>
+							</ul>
+						</li>
+					</foreach>
+
+				</ul>
+			</div>
+
+			<div class="b-carte-detail-father">
+			<ul class="b-carte-detail-show">
+				<foreach name="data['category']" item="value">
+					<li>
+						<ul class="b-carte-detail">
+							<foreach name="value['first']" item="val">
+								<li class="b-carte-detail-li">
+									<div><a href="{:U('Home/Service/category?cate_id='.$val['store_category_id'])}">{$val.cate_name}</a></div>
+									<foreach name="val['son']" item="v">
+										<a href="{:U('Home/Service/category?cate_id='.$v['store_category_id'])}" class="b-carte-detail-li-a">{$v.cate_name}</a>
+									</foreach>									
+								</li>
+							</foreach>
+						</ul>
+
+						<ul class="b-carte-detail">
+							<foreach name="value['second']" item="val">
+								<li class="b-carte-detail-li">
+									<div><a href="{:U('Home/Service/category?cate_id='.$val['store_category_id'])}">{$val.cate_name}</a></div>
+									<foreach name="val['son']" item="v">
+										<a href="{:U('Home/Service/category?cate_id='.$v['store_category_id'])}" class="b-carte-detail-li-a">{$v.cate_name}</a>
+									</foreach>									
+								</li>
+							</foreach>
+						</ul>
+
+						<ul class="b-carte-detail">
+							<foreach name="value['third']" item="val">
+								<li class="b-carte-detail-li">
+									<div><a href="{:U('Home/Service/category?cate_id='.$val['store_category_id'])}">{$val.cate_name}</a></div>
+									<foreach name="val['son']" item="v">
+										<a href="{:U('Home/Service/category?cate_id='.$v['store_category_id'])}" class="b-carte-detail-li-a">{$v.cate_name}</a>
+									</foreach>									
+								</li>
+							</foreach>
+						</ul>
+						
+					</li>
+				</foreach>
+			</ul>
+			
+			<!-- 幻灯片 -->
+			<div class="b-slide">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+				  <!-- Indicators -->
+				  <ol class="carousel-indicators">
+					  <foreach name="data['advert']" item="v">
+					    <li data-target="#carousel-example-generic" data-slide-to="0"></li>
+					  </foreach>
+				  </ol>
+
+				  <!-- Wrapper for slides -->
+				  <div class="carousel-inner" role="listbox">
+				  	<foreach name="data['advert']" item="v">
+					    <div class="item">
+					      <a href="{:U('Home/service/store?storeid='.$v['appt_store_id'])}"><img src="__PUBLIC__/Uploads{$v.appt_pic}" alt="..."></a>
+					      <div class="carousel-caption">
+					        <h3>{$v.appt_title}</h3>
+	    					<p>{$v.store_describe}</p>
+					      </div>
+					    </div>
+					  </foreach>
+				  </div>
+				  
+				  <!-- Controls -->
+				  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+			</div>
+			</div>
+		</div>
+		</if>
+	</div>
+	<!-- banner结束 -->
+
+	<!-- 服务列表开始 -->
+	<if condition="$data['nominate']" >
+	<div class="container">
+		<div class="servicelist">
+			<div class="servicelist-head"><i></i><h2>推荐服务</h2></div>
+			<div class="servicelist-content">
+				<div class="servicelist-content-detail">
+					<div class="servicelist-content-head"><span>服务列表</span></div>
+					<div class="servicelist-content-content">
+						<ul>
+							<foreach name="data['nominate']" item="v">
+							<li>
+								<div class="servicelist-content-imgs">
+									<a href="{:U('Home/Service/detail?sid='.$v['id'].'&storeid='.$v['pubh_shopid'])}"><img src="__PUBLIC__/Uploads/{$v.pubh_pic}" title="{$v.appe_desc}"></a>
+								</div>
+								<div class="servicelist-content-body">
+									<h4><a href="{:U('Home/Service/detail?sid='.$v['id'].'&storeid='.$v['pubh_shopid'])}" title="{$v.pubh_title}">{$v.pubh_title}</a></h4>
+									<p><span>¥{$v.pubh_price}/次</span>成交数量: {$v.pubh_volume}</p>
+									<p>{$v.address}</p>
+									<a href="{:U('Home/Service/detail?sid='.$v['id'].'&storeid='.$v['pubh_shopid'])}" class="servicelist-content-body-a">购买</a>
+								</div>
+							</li>
+							</foreach>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="servicelist-savant">
+					<div class="servicelist-savant-head">热门推荐</div>
+					<div class="servicelist-savant-content">
+						<ul>
+							<foreach name="data['hot']" item="v">
+								<li class="servicelist-savant-content-li" >
+									<a href="{:U('Home/Service/detail?sid='.$v['id'].'&storeid='.$v['pubh_shopid'])}">
+										<img src="__PUBLIC__/Uploads/{$v.pubh_pic}" title="{$v.pubh_title}">
+										<if condition="$v['appe_desc']">
+											<p>{$v.appe_desc}</p>
+										<else />
+											<p>{$v.store_describe}</p>
+										</if>
+										<p>¥ {$v.pubh_price}<span><c>成交</c><strong>{$v.pubh_volume}</strong></span></p>
+									</a>
+								</li>
+							</foreach>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</if>
+	<!-- 服务列表结束 -->
+
+	<!-- 服务商列表开始 -->
+	<if condition="$data['brand']">
+	<div class="container">
+		<div class="facilitator">
+			<div class="facilitator-head"> <i></i><h2>品牌服务商</h2> </div>
+			 <div class="facilitator-content">
+			 	<ul>
+					<foreach name="data['brand']" item="v">
+				 		<li class="facilitator-content-li">
+				 			<a href="{:U('Home/Service/store?storeid='.$v['id'])}" class="facilitator-content-lia"><img src="__PUBLIC__/Uploads/{$v.file_image}" class="fshowimgs" title="{$v.store_describe}"></a>
+				 			<div class="facilitator-content-a"><span>{$v.store_name}</span><span title="{$v.store_address}">{$v.store_address}</span></div>
+				 			<div class="facilitator-content-b">
+				 				<img src="__PUBLIC__/image/tz8.gif" alt="" title="">
+				 				<a href="#"><img src="__PUBLIC__/image/guzhu-20.png"></a>
+				 				<a href="#" class="facilitator-content-b-a" title=""><i></i></a>
+				 			</div>
+				 			<div class="facilitator-content-c">
+				 				<p>好评率:<span>{$v.emp}</span><a>{$v.countorder}成交</a></p>
+				 			</div>
+				 			<div class="facilitator-content-d">
+
+					 			<if condition="$v['publish'][0]">
+				 					<p><span>¥{$v.publish.0.pubh_price}</span><a href="{:U('Home/Service/detail?sid='.$v['publish'][0]['id'].'&storeid='.$v['publish'][0]['pubh_shopid'])}">{$v.publish.0.pubh_title}</a></p>
+				 					<else />
+				 						<p>无服务</p>
+				 				</if>
+
+				 				<if condition="$v['publish'][1]">
+				 					<p><span>¥{$v.publish.1.pubh_price}</span><a href="{:U('Home/Service/detail?sid='.$v['publish'][1]['id'].'&storeid='.$v['publish'][1]['pubh_shopid'])}">{$v.publish.1.pubh_title}</a></p>
+				 					<else />
+				 						<p>-</p>
+				 				</if>
+
+				 			</div>
+				 			<div class="facilitator-content-e"><a href="{:U('Home/Service/store?storeid='.$v['id'])}">找TA服务</a></div>
+				 		</li>
+					</foreach>
+			 	</ul>
+			 </div>
+		</div>
+	</div>
+	</if>
+	<!-- 服务商列表结束 -->
+
+	<!-- 专家展示开始 -->
+	<if condition="$data['expert']" >
+	<div class="container">
+		<div class="expertshow">
+			<div class="expertshow-head">
+				 <i></i><h2>专家展示</h2>
+			</div>
+			<div class="expertshow-content">
+				<ul>
+					<foreach name="data['expert']" item="v">
+						<li class="expertshow-content-detail">
+							<div class="expertshow-content-detail-a">
+								<a href="{:U('Home/Service/store?storeid='.$v['apps_storeid'])}"><img src="__PUBLIC__/Uploads/{$v.file_image}" title="{$v.store_describe}"></a>
+								<span>进入店铺</span>
+							</div>
+							<div class="expertshow-content-detail-b">
+								<a href="{:U('Home/Service/store?storeid='.$v['apps_storeid'])}" title="{$v.store_name}"><h4>{$v.store_name}</h4></a>
+								<p title="TA承诺:{$v.pubtitle},保证金:{$v.pubprice}元">TA承诺:{$v.pubtitle}<a href="#" title="服务商已缴纳保证金，出现问题支持双倍赔付"><img src="__PUBLIC__/image/guzhu-20.png"> </a> 保证金:<span>{$v.pubprice}</span></p>
+								<p title="服务范围：{$v.catename}">服务范围：{$v.catename}</p>
+								<div class="expertshow-content-detail-bd"><a href="{:U('Home/Service/store?storeid='.$v['apps_storeid'])}">进入店铺</a><a href="#">联系我</a></div>
+							</div>
+							<div class="expertshow-content-detail-c">
+								<div>
+									<p>诚信度</p>
+									<a href="#"><span>{$v.emp}</span>分</a>
+								</div>
+								<p><span>{$v.good}</span>好评</p>
+								<p><span>{$v.shopper}</span>位雇主评价</p>
+							</div>
+						</li>
+					</foreach>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</if>
+	<!-- 专家展示结束 -->
+
+	<!-- 案例展示开始 -->
+
+	<if condition="$data['successfulcase']" >
+	<div class="container">
+		<div class="caseshow">
+			<div class="caseshow-head">
+				<i></i><h2>案例展示</h2>
+			</div>
+			<div class="caseshow-content">
+				<div class="caseshow-content-left">
+					<a href="{:U('Home/Service/Detail?sid='.$data['one']['order_serviceid'].'&storeid='.$data['one']['storeid'])}"><div class="imgg"><img src="__PUBLIC__/Uploads/{$data['one']['servicepic']}"></div>
+					<span>{$data['one']['servicetitle']}</span>
+					</a>
+				</div>
+				<div class="caseshow-content-right">
+					<ul>
+						<foreach name="data['successfulcase']" item="v">
+							<li class="caseshow-content-right-li">
+								<a href="{:U('Home/Service/Detail?sid='.$v['order_serviceid'].'&storeid='.$v['storeid'])}"><img src="__PUBLIC__/Uploads/{$v.order_myfile}">
+								<div>{$v.servicetitle}</div></a>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	</if>
+	<!-- 案例展示结束 -->
+
+	<!-- 热门需求开始 -->
+	<if condition="$data['need']">
+	<div class="container">
+		<div class="hotdemand">
+			<div class="hotdemand-head">
+				<i></i><h2>热门需求</h2>
+				<a href="{:U('Home/Need/needIndex')}">更多》</a>
+			</div>
+			<div class="hotdemand-content">
+				<div class="hotdemand-content-a">
+					<ul>
+						<foreach name="data['need']" item="val">
+							<li class="hotdemand-content-a-li" >
+								<p><span>【可议价】</span><a href="{:U('Home/Need/needDisplay',['needid'=>$val['need_id']])}" title="{$val.need_desc}">{$val.need_title}</a></p>
+								<p><span>{$val.need_user} </span> <a href="{:U('Home/Need/needDisplay',['needid'=>$val['need_id']])}"> {$val.num}招标</a></p>
+							</li>
+						</foreach>
+					</ul>
+				</div>
+
+				<div class="hotdemand-content-b">
+					<div class="hotdemand-content-b1">
+						 超过{$data['sernum']}个服务商为您服务 <br>
+						 <strong>{$data['deal']}</strong>
+						 个交易
+					</div>
+					<div class="hotdemand-content-b2">
+						<if condition="$_SESSION['home_user_info']" >
+							<a href="{:U('Home/Need/needCate')}">免费发布需求</a>
+						<else />
+							<a href="javascript:;" onclick="showloginn()">免费发布需求</a>
+						</if>
+					</div>
+					<ul class="hotdemand-content-b3">
+						<li>
+							<img src="__PUBLIC__/image/55fc063e779b5.png">
+							<h5>需求发布后</h5>
+							<p>20分钟收到服务商响应</p>
+						</li>
+						<li>
+							<img src="__PUBLIC__/image/55fc0654ec58c.png">
+							<h5>每个需求</h5>
+							<p>平均有10个服务商参与</p>
+						</li>
+						<li>
+							<img src="__PUBLIC__/image/55fc066a55cad.png">
+							<h5>95%以上需求</h5>
+							<p>得到了圆满解决</p>
+						</li>
+						<li>
+							<img src="__PUBLIC__/image/55fc067c76005.png">
+							<h5>所有需求</h5>
+							<p>专业交易顾问全程跟进</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="hotdemand-bottom">
+			<dl>
+				<dt>如何解决您的需求?</dt>
+				<dd>
+					<em>1</em>
+					<span>描述您的需求</span>
+					<i>></i>
+				</dd>
+				<dd>
+					<em>2</em>
+					<span>获得多个方案</span>
+					<i>></i>
+				</dd>
+				<dd>
+					<em>3</em>
+					<span>选择服务商并托管赏金</span>
+					<i>></i>
+				</dd>
+				<dd>
+					<em>4</em>
+					<span> 服务商工作</span>
+					<i>></i>
+				</dd>
+				<dd>
+					<em>5</em>
+					<span>验收工作并付款</span>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<input type="hidden" id="session" value="{$_SESSION['home_user_info']['user_id']}">
+	<!-- 热门需求结束 -->
+	</if>
+	<script type="text/javascript">
+
+		$('.b-carte-ul > li').each(function(){
+			var bca = $(this);
+			$(this).find('.b-cate-item li').each(function(){
+				$(this).mouseover(function(){				
+					var bcb = $(this);
+					$('.b-carte-detail-show > li').eq(bca.index()).show().siblings().hide();
+					$('.b-carte-detail-show > li').eq(bca.index()).find('.b-carte-detail').eq(bcb.index()).show().siblings().hide();
+				})
+			})
+			
+		})
+
+		$('.banner').mouseleave(function(){
+			$('.b-carte-detail').hide();
+		})
+		
+	  	$('.carousel-inner .item').eq(0).addClass('active');
+	  	$('.carousel-indicators li').eq(0).addClass('active');
+	
+		var timer1;
+		var i = 0;
+
+		function biddingRun(){
+			$('.hotdemand-content-a ul').css({
+				'marginTop' : i + 'px',
+			});
+			i-- ;
+			var ulbottom = $('.hotdemand-content-a ul').offset().top + $('.hotdemand-content-a ul').height();
+			var bottom = $('.hotdemand-content-a').offset().top + $('.hotdemand-content-a').height();
+			if( ulbottom <= bottom ){
+				i = 0;
+			}
+		}
+
+		timer1 = setInterval(biddingRun,100);
+
+		$('.hotdemand-content-a').mouseover(function(){
+			clearInterval(timer1);
+		}).mouseleave(function(){
+			timer1 = setInterval(biddingRun,100);
+		})
+
+	
+	</script>
+
+</block>

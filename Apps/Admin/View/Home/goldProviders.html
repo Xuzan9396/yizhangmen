@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+ 
+    <load href="__PUBLIC__/css/bootstrap.min.css" />
+    <load href="__PUBLIC__/css/dataTables.bootstrap.css" /> 
+    <load href="__PUBLIC__/css/style.min.css" />
+    <load href="__PUBLIC__/css/font-awesome.min.css" />
+    <load href="__PUBLIC__/layui/css/layui.css"  />
+    <load href="__PUBLIC__/admin/css/animate.min.css"  />
+<style type="text/css">
+     .addbut,.cancel{
+        display: block;
+        margin-left:48%;
+        cursor: pointer;
+        position: absolute;
+        z-index: 1;
+      }
+
+
+    .addser{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background: white;
+        display: none;
+        z-index: 2;
+        padding: 20px;
+    }
+
+   .red,.red a{
+        color: red;
+   }
+
+    .blue{
+        color: #3195F3;
+    }
+
+    .blue:hover{
+        color: blue;
+    }
+
+     .img2{
+        width: 50px;
+        height: 50px;
+     }
+
+     .img1{
+        max-width: 150px;
+        height: auto; 
+     }
+
+     .yes{
+        background: green;
+        color: white;
+        border-radius: 5px;
+        font-size: 10px;
+        padding: 2px;
+     }
+
+     .yes:hover{
+        color: red;
+     }
+
+      .no{
+        background: red;
+        color: white;
+        border-radius: 5px;
+        font-size: 10px;
+        padding: 2px;
+     }
+
+     .width{
+        width: 100px;
+        text-align: center;
+     }
+    .sele{
+        width: 65px;
+    }
+
+    b{
+        width: 100px;
+        height: 19.5px;
+        display: block;
+    }
+
+    .gostore{
+        display: inline-block;
+        background: #3195F3;
+        color: white;
+        margin-left: 10px;
+        padding: 5px;
+        border-radius: 3px;
+        text-align: center;
+    }
+
+      .detail{
+        width: 0;
+        min-height: 1000px;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        position: absolute;
+        display: none;
+        background: white;
+        overflow: auto;
+    }
+
+    .detail button{
+        display: block;
+        margin: 0 auto;
+    }
+
+    .det{
+        width: 800px;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .img3{
+        max-width: 300px;
+        margin:5px;
+    }
+
+     .cover{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 999;
+        background-color: rgba(224, 227, 232, 0.8);
+        left: 0;
+        top : 0;
+        display: none;
+    }
+
+    .bigimg{
+        width: 100%;
+        height: auto;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin:auto;
+        z-index: 9999;
+        text-align: center;
+        display: none;
+    }
+
+    .bim{
+        max-width: 1000px;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    .cursor{
+        cursor: pointer;
+    }
+ </style>
+</head>
+
+<body>        
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <button type="button" class="btn btn-primary addbut">添加</button>
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                
+                    <div class="ibox-content">
+
+                        <table class="table table-striped table-bordered table-hover dataTables-example" id="layer-photos-demo">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>店铺图片</th>
+                                    <th>店铺名称</th>
+                                    <th>店铺主人</th>
+                                    <th>好评率</th>
+                                    <th>成交量</th>
+                                    <th>成交总金额</th>
+                                    <th>排序位置</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="data['data']" item="v">
+                                    <tr class="gradeX">
+                                        <td>{$v.apps_id}</td>
+                                        <td><img class="img2 cursor" src="__PUBLIC__/Uploads/{$v.file_image}" layer-src="__PUBLIC__/Uploads/{$v.file_image}"></td>
+                                        <td><a class="cursor blue" onclick="storeDetail('{$v.id}')" title="点击查看店铺详情">{$v.store_name}</a></td>
+                                        <td><a class="cursor blue" title="点击查看主人详情" onclick="detail('{$v.store_userid}')">{$v.store_realname}</a></td>
+                                        <td class="red">{$v.fcomment}%</td>
+                                        <td class="center red">{$v.allvolume}</td>
+                                        <td class="center red"><a onclick="serorder('{$v.store_userid}')" title="点击查看最近销售订单">￥{$v.allprice}</a></td>
+                                        <td class="width">
+                                            <select class="sele" id="{$v.apps_id}" onchange="sele(this)" name="apps_order">
+                                                <foreach name="v['sort']" item="val">
+                                                    {$val}
+                                                </foreach>
+                                             </select>                                            
+                                        <b><b></td>
+                                        <td class="center"> <button type="button" class="btn btn-danger" onclick="del('{$v.apps_id}')">删除</button></td>
+                                    </tr>
+                                </foreach>                               
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row addser">
+        <button type="button" class="btn btn-primary cancel">取消</button>
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                
+                    <div class="ibox-content">
+
+                        <table class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>店铺图片</th>
+                                    <th>店铺名称</th>
+                                    <th>店铺主人</th>
+                                    <th>好评率</th>
+                                    <th>成交量</th>
+                                    <th>成交总价格</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="data['store']" item="v">
+                                    <tr class="gradeX">
+                                        <td>{$v.id}</td>
+                                        <td><img class="img2 cursor" src="__PUBLIC__/Uploads/{$v.file_image}" onclick="showimg(this)"></td>
+                                        <td><a class="cursor blue" onclick="storeDetail('{$v.id}')" title="点击查看店铺详情">{$v.store_name}</a></td>
+                                        <td><a class="cursor blue" title="点击查看主人详情" onclick="detail('{$v.store_userid}')">{$v.store_realname}</a></td>
+                                        <td class="center red">{$v.fcomment}%</td>
+                                        <td class="center red">{$v.allvolume}</td>
+                                        <td class="center red"><a onclick="serorder('{$v.store_userid}')" title="点击查看最近销售订单">￥{$v.allprice}</a></td>
+                                        <td class="center"> <button type="button" class="btn btn-info" onclick="addService('{$v.id}')">添加</button></td>
+                                    </tr>
+                                </foreach>                               
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="detail"><button id="closeDe" class="btn btn-primary">关闭</button><div class="det"></div>
+    <!-- Mainly scripts -->
+    <load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+    <load href="__PUBLIC__/js/bootstrap.min.js" />
+    <load href="__PUBLIC__/layer/layer.js"/>
+    <load href="__PUBLIC__/layui/layui.js" />
+    <load href="__PUBLIC__/js/jquery.dataTables.js" />
+    <load href="__PUBLIC__/js/dataTables.bootstrap.js" />
+    <load href="__PUBLIC__/js/mo.js" />
+    <script>
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable();
+
+            /* Init DataTables */
+            var oTable = $('#editable').dataTable();
+
+            /* Apply the jEditable handlers to the table */
+            oTable.$('td').editable('../example_ajax.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+
+                "width": "90%",
+                "height": "100%"
+            });
+
+
+        });
+
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+                "Custom row",
+                "New row",
+                "New row",
+                "New row",
+                "New row"]);
+
+        }   
+
+        //添加服务切换页面
+        $('.addbut,.cancel').click(function(){
+            $('.addser').slideToggle();
+        })
+
+    
+        function del(id){
+            mo.confirm('你确定要删除吗?',function(){
+                mo.ajax({'apps_id':id},"{:U('Home/delGoldProviders')}",function(res){
+                    if(res['status']){
+                        mo.msg(res['info'],1);
+                    }else{
+                        mo.msg(res['info']);
+                    }
+                })
+            },'注意')
+        }
+ 
+
+        function addService(id){
+
+             mo.mod('你确定要添加为金牌服务商吗？',function(){
+                mo.ajax({'id':id},"{:U('Home/addGoldProviders')}",function(res){
+                    if(res['stauts']){
+                        mo.msg(res['info']);
+                    }else{
+                        mo.msg(res['info']);
+                    }
+                })
+            },'提示')
+        }
+        
+         function storeDetail(id){
+            mo.ajax({'id':id},"{:U('Home/serProSto')}",function(res){
+                if(res){
+                    var str ='';
+                    str += '<table class="table table-hover"><caption>店铺详情</caption><tr><td>店铺名称:'+res['store_name']+' <a href="/shop/Home/Service/store/storeid/'+res['id']+'.html" class="gostore" target="_blank"> 进入店铺</a></td><td></td></tr><tr><td>真实姓名:'+res['store_realname']+'</td><td>店铺类型:'+res['store_type']+'</td></tr><tr><td>身份证号:'+res['store_caid']+'</td><td>手机号:'+res['store_phone']+'</td></tr><tr><td>电子邮箱:'+res['store_email']+'</td><td>联系QQ:'+res['store_qq']+'</td></tr><tr><td>地址:'+res['store_address']+'</td><td>创建时间:'+res['store_addtime']+'</td></tr><tr><td>描述:'+res['store_describe']+'</td></tr><tr><td>身份证或营业直销证书:</td><td></td></tr><tr><td><img src=__PUBLIC__/Uploads/'+res['store_zcaidpic']+' class="imgs1 cursor"  onclick="showimg(this)"><img src=__PUBLIC__/Uploads/'+res['store_fcaidpic']+' class="imgs1 cursor" onclick="showimg(this)"></td></tr></table>';
+
+                    detailShow(str);
+                }
+            })
+        } 
+
+        function serorder(userid){
+            mo.ajax({'user_id':userid},"{:U('Home/searchOrder')}",function(res){
+                if(res){
+                    var str = '';
+                    var i = 1;
+                    for( var k in res ){
+                        str += '<table class="table table-hover"><tr>'+i+'</tr><tr><td>订单号:'+res[k]['order_number']+'</td><td>买家:'+res[k]['order_employerid']+'</td></tr><tr><td>下单时间:'+res[k]['order_time']+'</td><td>结束时间:'+res[k]['order_endtime']+'</td></tr><tr><td>服务相关:'+res[k]['order_serviceid']+'</td><td>订单件数:'+res[k]['order_number_total']+'</td></tr><tr><td>交易金额:'+res[k]['order_number_price']+'</td><td>托管赏金:'+res[k]['order_trusteeship_price']+'</td></tr><tr><td>订单描述:'+res[k]['order_description']+'</td><td></td></tr><tr><td>订单附件:<img class="imgs1" src="__PUBLIC__/Uploads/'+ res[k]['order_myfile']+'" onclick="showimg(this)"></td></tr></table><hr>';
+                        i++;
+                    }
+
+                    mo.mod(str,function(){},'最近销售订单');
+                }
+            })
+        }
+
+         function detail(id){
+            mo.ajax({'user_id':id},"{:U('Home/searchUser')}",function(res){
+                if(res){
+                    var str = '<table class="table table-hover"><tr><td>用户帐号:</td><td>'+res['user_account']+'</td><td></td><td></td></tr><tr><td>用户ID:</td><td>'+res['user_id']+'</td><td>用户类型:</td><td>'+res['user_type']+'</td></tr><tr><td>邮箱:</td><td>'+res['user_email']+'</td><td>手机号:</td><td>'+res['user_phone']+'</td></tr><tr><td>注册时间:</td><td>'+res['user_addtime']+'</td><td>上次登录:</td><td>'+res['user_lasttime']+'</td></tr></table>';
+
+                    mo.mod(str);
+                }
+            });
+        }
+
+        function sele(obj,id){
+            var str = '<a class="yes" onclick="mau(this)" id='+id+'>确定</a><a class="no" onclick="rem(this)">取消</a>';
+            $(obj).next().html(str);
+        }
+
+        //修改排序位置
+        function mau(obj){
+            var sort =  $(obj).parent().prev().val();
+            var id = $(obj).parent().prev().attr('id');
+            mo.ajax({'order':sort,'apps_id':id},"{:U('Home/ajaxMoGoldOrd')}",function(res){
+                if(res['status']){
+                    mo.skip();
+                }else{
+                    mo.msg(res['info']);
+                }
+            })
+
+        }
+
+         //取消
+        function rem(obj){
+            $(obj).parent().children().remove();
+        }
+
+        var timer;
+        function detailShow(str){
+            $("body").animate({
+                'scrollTop' : "0px"
+                },200);
+
+            clearTimeout(timer);
+            $('.detail').show().css({
+                'border':'2px solid #ED5565',
+            }).animate({
+                'width':'100%',
+                'left':'0',
+                'top':'0',
+                'border-radius':'0',
+             },200)
+
+            $('.det').html(str);
+        }
+
+        $('#closeDe').click(function(){
+            $("body").animate({
+                'scrollTop' : "0px"
+                },200);
+           var  num = parseInt(3*Math.random());
+            if( num == 0){
+                $('.detail').animate({
+                    'height':'0px',
+                    'width':'0px',
+                    'left':'500px',
+                    'top':'200px',
+                    'border-radius':'50%',
+                    },300)
+            }else if(num == 1){
+                $('.detail').animate({
+                    'top':'-500px',
+                    'height':'0px',
+                    },300)
+            }else{
+                $('.detail').animate({
+                    'width':'0px',
+                    },300)
+            }
+
+           timer = setTimeout(function(){
+                $('.detail').css('border','none').hide();
+                $('.det').children().remove();
+            },300)
+        })
+
+            //图片预览
+        layer.photos({
+          photos: '#layer-photos-demo'
+          ,anim: 5
+        });
+
+        function showimg(obj){
+            var img = '<div class="bigimg"><img class="bim" src='+$(obj).attr('src')+'></div><div class="cover"></div>';
+            $('body').append(img).children('.bigimg').fadeIn();
+            $('.cover').fadeIn();
+            bigimg();
+        }
+
+        
+
+        function bigimg(){
+            $('.bigimg').click(function(){
+                $('.bigimg').fadeOut();
+                $('.cover').fadeOut();
+                setTimeout(function(){
+                    $('.bigimg').remove();
+                    $('.cover').remove();
+                },500)
+            })
+        }
+
+        bigimg();
+    </script>
+
+</body>
+
+</html>

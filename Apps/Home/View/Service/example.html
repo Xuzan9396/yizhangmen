@@ -1,0 +1,24 @@
+<extend name="./Public/template/base.html"/>
+<block name="content">
+	<load href="__PUBLIC__/css/store.css" />
+	<load href="__PUBLIC__/css/service.css" />
+	<load href="__PUBLIC__/css/assess.css" />
+	<include file="./Apps/Home/View/service/publicStoreNav.html"/>
+		<!-- 案例展示   主体内容-->
+		<div class="deal-assess">
+		<!-- 居中的  1100px -->
+			<div class="deal-assess-content">
+				<ul class="example-ul">
+				<foreach name="case" item="casevalue" key="key">
+					<li>
+						<a href="{:U('Home/service/caseDetail',['caseid'=>$casevalue['id'],'storeid'=>$casevalue['case_shop']])}">
+							<img src="/shop/Public/Uploads/{$casevalue['case_cover']}" alt=""/>
+							<p>{$casevalue['case_title']}</p>
+						</a>
+					</li>
+				</foreach>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+</block>

@@ -1,0 +1,98 @@
+/*独立于orderWorked.html'*/
+/*合同*/
+.contract-seal-img img{
+	position: absolute;
+	top: 0px;
+}
+.service-work-btn2 .btn{
+	font-size: 16px;
+	color: #333333;
+}
+/*工作台开始*/
+.service2-btnbox-a{
+	margin-left: 20px;
+}
+
+/*工作*/
+.service-work2{
+	margin-top: 50px;
+	padding: 0;
+	font-size: 16px;
+	color: #333333;
+}
+.service-work2 p{
+	margin-top: 10px;
+	padding-left: 30px;
+}
+.service-work2-btn{
+	margin-top: 20px;
+}
+/*上传付款凭证*/
+.div-form{
+	font-size: 14px;
+	color: #333333;
+	margin-top: 10px; 
+}
+
+/*文件柜文件下载区*/
+.file-dowmload2{
+	border: 1px solid #d2d2d2;
+	height: 100px;
+	overflow-y:scroll;
+	line-height: 25px;
+	margin-top: 10px;
+	margin-left: 30px;
+}
+.file-span1{
+	color: #3195F3;
+}
+.file-span2{
+	color: #333333;
+	font-size: 13px;
+}
+.file-span2 a{
+	color: #333333;
+	font-size: 13px;
+}
+/*提示信息*/
+.service-work-prompt{
+	font-size: 14px;
+	color: #ffa11a;
+}
+
+.service-work-prompt a{
+	font-size: 12px;
+	color: #5CB85C;
+}
+.service-work-prompt1{
+	font-size: 12px;
+	color: #333333;
+}
+.service-work-prompt1 a{
+	color: #3DBB2B;
+}
+/*按钮*/
+.service-work-btn .btn-info{
+	background: #62C9FA;
+}
+#contract-button{
+	float: right;
+	margin-right: 200px;
+}
+.service-work-btn a{
+	color: #fafafa;
+	font-weight: bold;
+}
+/*----------------------------*/
+/*进度条*/
+
+/*工作进度球*/
+.speed-work-box1{
+	background: #516784;
+}
+.speed-bar-service1{
+	height: 540px;
+	width: 5px;
+	background: #516784;
+}
+

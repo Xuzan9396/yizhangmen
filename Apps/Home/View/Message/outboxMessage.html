@@ -1,0 +1,115 @@
+<extend name='./Public/template/listBase.html'/>
+
+  <!-- 加载自己的外部文件 -->
+  <block name="listfile">
+  </block>
+
+  <!-- 这里写内容 -->
+  <block name="listcentent">
+      <!-- 开始 -->
+      <div class="container-filut">
+        <div class="" style="width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;">
+            <div class="" style="">
+              发件箱
+            </div>
+        </div>
+      </div>
+      <div class="container-filut" style="position:relative;top:0px;left:0px;border:1px solid #ccc;margin-top:10px;">
+        <div class="" style="margin-bottom:100px;border-bottom:1px solid #ccc;width:100%;padding:20px;">
+          <form id="formbox" action="{:U('Home/Message/outboxMessageAct')}" method="post">
+          <table class="table table-hover" style="table-layout:fixed">
+            <tr>
+              <th style="width:10%">选择</th>
+              <th style="width:20%">标题</th>
+              <th style="width:20%">收件人</th>
+              <th style="width:30%">时间</th>
+              <th style="width:20%">操作</th>
+            </tr>
+            <foreach name="mesm_list" key="k" item="val">
+              <tr class="pipt">
+                <td class="aa"><input class="ipt-checked" type="checkbox" name="mesm_id[]" value="{$val['mesm_id']}"/></td>
+                <td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{$val['mesm_title']}</td>
+                <td>{$val['mesm_receiver']}</td>
+                <td>{:date("Y-m-d H:i:s",$val['mesm_sendtime'])}</td>
+                <td>
+                  <a href="{:U('Home/Message/outboxMessageAct',['action'=>'sel','mesm_id'=>$val['mesm_id'],'p'=>$return_p])}" class="">查看</a>
+                  <!-- <a href="{:U('Home/Message/outboxMessageAct',['action'=>'del','mesm_id'=>$val['mesm_id']])}">删除</a> -->
+                  <!-- <button id="btn-sel" class="btn bnt-info" param="{:U('Home/Message/outboxMessageAct',['action'=>'sel','mesm_id'=>$val['mesm_id']])}" type="button" onclick="buttonSel()">查看</button> -->
+                  <a href="javascript:void(0);" class="btn-deleteact" mesmid="{:U('Home/Message/outboxMessageAct',['action'=>'del','mesm_id'=>$val['mesm_id']])}" type="button">删除</a>
+                </td>
+              </tr>
+            </foreach>
+          </table>
+        </div>
+        <div class="" style="position:absolute;bottom:30px;left:0px;width:150px;height:40px;text-align:center;line-height:40px;">
+          <button type="button" id="check-all" class="btn btn-info" status='0' onclick="choose();">全选</button>
+          <!-- <input id="check-del" type="submit"  class="btn btn-info" value="删除"> -->
+          <button id="btn-checkdell" onclick="cklen()" class="btn btn-info" type="button">删除</button>
+        </div>
+        </form>
+        <div class="" style="position:absolute;bottom:30px;right:0px;width:500px;height:40px;text-align:center;line-height:40px;">
+          {$return_page}
+        </div>
+      </div>
+      <!-- 结束 -->
+      <script>
+        // 全选反选
+        function choose(){
+            if($('#check-all').attr('status') == '0'){
+              $('.ipt-checked').map(function(){
+                $(this).prop('checked',true);
+              });
+              $('#check-all').attr('status','1');
+            }else{
+              $('.ipt-checked').map(function(){
+                $(this).prop('checked',false);
+              });
+              $('#check-all').attr('status','0');
+            }
+        }
+
+        $('.btn-deleteact').click(function(){
+           var url=$(this).attr('mesmid');
+               $.get(url);
+               window.location.reload();
+            });
+        });
+
+        function cklen(){
+            var len = $("input[type='checkbox']:checked").length;
+            if(len > 0){
+              swal({
+                title: "你确定要删除吗!",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+               }, function(){
+                   swal();
+                   $('#formbox').submit();
+                });
+            }else{
+              // 弹提示框
+              toastr.options = {
+                  closeButton: false,
+                  debug: false,
+                  progressBar: false,
+                  positionClass: "toast-top-center",
+                  onclick: null,
+                  showDuration: "300",
+                  hideDuration: "1000",
+                  timeOut: "5000",
+                  extendedTimeOut: "1000",
+                  showEasing: "swing",
+                  hideEasing: "linear",
+                  showMethod: "fadeIn",
+                  hideMethod: "fadeOut"
+              };
+
+              var $toast = toastr['warning']('你没有选择操作项');
+            }
+        }
+
+
+      </script>
+  </block>

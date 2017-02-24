@@ -1,0 +1,208 @@
+<extend name='./Public/template/listBase.html'/>
+
+  <!-- 加载自己的外部文件 -->
+  <block name="listfile">
+  </block>
+
+  <!-- 这里写内容 -->
+  <block name="listcentent">
+    <!-- 开始 -->
+    <div class="container-filut">
+      <div class="" style="margin-bottom:10px;width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;">
+          <div class="" style="">
+                我发布的需求
+          </div>
+      </div>
+      <div class="" style="width:100%;;padding:10px;">
+        <div class="">
+          <a type="button" class="btn btn-info" href="{:U('Home/Demander/finishDemander')}" name="button">全部需求</a>
+        </div>
+
+        <div class="" style="height:10px;width:100%;"></div>
+
+        <div class="">
+          <!-- 保持状态可以用session -->
+          <form class="form form-inline" action="{:U('Home/Demander/finishDemander')}" method="get">
+            <table class="table">
+              <tr>
+                <td><input type="text" class="form-control" name="need_id" value="" placeholder="请输入编号" /></td>
+                <td><input type="text" class="form-control" name="need_title" value="" placeholder="请输入需求标题" /></td>
+                <td><input type="hidden" name="need_search" value="1"/></td>
+                <td>
+                  <select class="form-control" name="need_status">
+
+                    <if condition="$needsList['get_param'][need_status][0] gt 'egt'">
+                        <option value="100"  selected="selected">需求状态</option>
+                      <else />
+                        <option value="100">需求状态</option>
+                    </if>
+
+                    <if condition="($needsList['get_param'][need_status][0] eq 'eq') and ($needsList['get_param'][need_status][1] eq '0')">
+                        <option value="0" selected="selected">未完善需求</option>
+                      <else />
+                        <option value="0" >未完善需求</option>
+                    </if>
+
+                    <if condition="($needsList['get_param'][need_status][0] eq 'eq') and ($needsList['get_param'][need_status][1] eq '1')">
+                        <option value="1" selected="selected">以完善需求</option>
+                      <else />
+                        <option value="1" >以完善需求</option>
+                    </if>
+
+                    <if condition="($needsList['get_param'][need_status][0] eq 'eq') and ($needsList['get_param'][need_status][1] eq '2')">
+                        <option value="2" selected="selected">待审核需求</option>
+                      <else />
+                        <option value="2" >待审核需求</option>
+                    </if>
+
+                    <if condition="($needsList['get_param'][need_status][0] eq 'eq') and ($needsList['get_param'][need_status][1] eq '3')">
+                        <option value="3" selected="selected">审核成功</option>
+                      <else />
+                        <option value="3" >审核成功</option>
+                    </if>
+                    <if condition="($needsList['get_param'][need_status][0] eq 'eq') and ($needsList['get_param'][need_status][1] eq '4')">
+                        <option value="4" selected="selected">审核失败</option>
+                      <else />
+                        <option value="4" >审核失败</option>
+                    </if>
+                    <if condition="($needsList['get_param'][need_status][0] eq 'eq') and ($needsList['get_param'][need_status][1] eq '5')">
+                        <option value="5" selected="selected">以中标</option>
+                      <else />
+                        <option value="5" >以中标</option>
+                    </if>
+                  </select></td>
+                <td>
+                  <select class="form-control" name="order">
+
+                    <if condition="$needsList['get_order'] eq 'need_time desc'">
+                        <option value="need_time desc" selected="selected">选择排序</option>
+                      <else />
+                        <option value="need_time desc" >选择排序</option>
+                    </if>
+
+                    <if condition="$needsList['get_order'] eq 'need_id desc'">
+                        <option value="need_id desc" selected="selected">编号降序</option>
+                      <else />
+                        <option value="need_id desc" >编号降序</option>
+                    </if>
+
+                    <if condition="$needsList['get_order'] eq 'need_id asc'">
+                        <option value="need_id asc" selected="selected">编号升序</option>
+                      <else />
+                        <option value="need_id asc" >编号升序</option>
+                    </if>
+
+                    <if condition="$needsList['get_order'] eq 'need_budget desc'">
+                        <option value="need_budget desc" selected="selected">金额降序</option>
+                      <else />
+                        <option value="need_budget desc" >金额降序</option>
+                    </if>
+
+                    <if condition="$needsList['get_order'] eq 'need_budget asc'">
+                        <option value="need_budget asc" selected="selected">金额升序</option>
+                      <else />
+                        <option value="need_budget asc" >金额升序</option>
+                    </if>
+                  </select>
+                </td>
+                <td><input type="submit" class="btn btn-info" name="name" value="搜索"></td>
+              </tr>
+            </table>
+          </form>
+        </div>
+          <div class="" style="height:10px;width:100%;"></div>
+        <div class="">
+          <table class="table table-hover">
+            <tr>
+              <th>编号</th>
+              <th>标题</th>
+              <th>金额(元)</th>
+              <th>发布时间</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+            <foreach name="needsList['list']" item="val">
+              <tr>
+                <td>{$val['need_id']}</td>
+                <td>{$val['need_title']}</td>
+                <td>{$val['need_budget']}</td>
+                <td>{:date('Y-m-d H:i:s',$val['need_time'])}</td>
+                <!-- <td> -->
+                  <switch name="val.need_status">
+                    <case value="0">
+                      <td>未完善需求</td>
+                      <td>
+                        <a class="btn btn-info btn-sm" href="{:U('Home/Demander/finishDetailDemander',['action'=>'sel','need_id'=>$val['need_id']])}">需求详情</a>
+                        <a class="btn btn-info btn-sm" href="{:U('Home/Demander/finishDemanderAct',['need_status'=>$val[need_status],'need_id'=>$val['need_id']])}" target="_top">去完善</a>
+                        <a class="btn btn-info btn-sm" href="{:U('Home/Demander/finishDemanderAct',['need_id'=>$val['need_id']])}">关闭</a>
+                      </td>
+                    </case>
+                    <case value="1">
+                      <td>以完善需求</td>
+                      <td>
+                        <a class="btn btn-info btn-sm" href="{:U('Home/Demander/finishDetailDemander',['action'=>'sel','need_id'=>$val['need_id']])}">需求详情</a>
+                        <a class="btn btn-info btn-sm" href="{:U('Home/Demander/finishDemanderAct',['need_status'=>$val[need_status],'need_id'=>$val['need_id']])}" target="_top">去完善</a>
+                      </td>
+                    </case>
+                    <case value="2">
+                      <td>待审核</td>
+                      <td>
+                        <a class="btn btn-info btn-sm" href="{:U('Home/Demander/finishDetailDemander',['action'=>'sel','need_id'=>$val['need_id']])}">需求详情</a>
+                      </td>
+                    </case>
+                    <case value="3">
+                      <td>审核成功</td>
+                      <td>
+                        <a class="btn btn-info btn-sm" href="{:U('Home/Demander/finishDetailDemander',['action'=>'sel','need_id'=>$val['need_id']])}">需求详情</a>
+                        <a class="btn btn-info btn-sm" href="{:U('Home/Demander/finishDemanderAct',['need_status'=>$val[need_status],'need_id'=>$val['need_id']])}" target="_top">查看方案</a>
+                      </td>
+                    </case>
+                    <case value="4">
+                      <td>审核失败</td>
+                      <td>
+                        <a class="btn btn-info btn-sm" href="{:U('Home/Demander/finishDetailDemander',['action'=>'sel','need_id'=>$val['need_id']])}">需求详情</a>
+                      </td>
+                    </case>
+                    <case value="5">
+                      <td>以中标</td>
+                      <td> 
+                        <a class="btn btn-info btn-sm" href="{:U('Home/Demander/finishDetailDemander',['action'=>'sel','need_id'=>$val['need_id']])}">需求详情</a>
+                        <a class="btn btn-info btn-sm" href="{:U('Home/Demander/finishDemanderAct',['need_status'=>$val[need_status],'need_id'=>$val['need_id']])}">查看订单</a>
+                      </td>
+                    </case>
+                  </switch>
+              </tr>
+            </foreach>
+          </table>
+        </div>
+      <div class="" style="height:10px;width:100%;"></div>
+        <div class="" style="float:left;padding-left:20px;">
+          <!-- 分页 -->
+          共有&nbsp;<span style="color:#337AB7">{$needsList['get_count']}</span>&nbsp;条数据
+        </div>
+        <div class="" style="float:left;padding-left:20px">
+          <!-- 分页 -->
+          {$needsList['show']}
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $('.btn-deleteact').click(function(){
+          var url=$(this).attr('geturl');
+          swal({
+          title: "你确定要删除吗!",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          }, function(){
+            $.get(url,function(data){
+              if(data){
+                  location.reload();
+              }
+            });
+          });
+      });
+    </script>
+    <!-- 结束 -->
+  </block>

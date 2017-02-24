@@ -1,0 +1,257 @@
+<extend name='./Public/template/base.html'/>
+
+<block name="file">
+    <!-- 独立的 -->
+    <load file="__PUBLIC__/home/order/css/bid-order-trusteeship.css"/>
+    <load href="__PUBLIC__/home/need/js/stepBar.js"/>
+    <load file="__PUBLIC__/home/need/js/jquery.easing.1.3.js"/>
+</block>
+<block name="content">
+	<!-- 托管页开始 -->
+	<div class="container">
+		<div class="row">
+			<div class="container-box col-lg-12">
+				<!-- 左边内容 -->
+				<div class="box-left col-lg-9">
+					<!-- 服务信息 -->
+					<div class="service-info">
+						<div class="service-info-box">
+							<!-- 头像 -->
+							<div class="service-info-div">
+								<a href="">
+									<img src="__PUBLIC__/Uploads/headportrait/{$user.impr_picture}">
+								</a>
+							</div>
+							<!-- 购买信息的 -->
+							<div class="service-info-div-title">
+								<span>{$need.need_title}</span>
+							</div>
+							<!-- 托管金额 -->
+							<div class="service-info-con col-lg-10">
+								<div class="service-info-money">
+									<span class="span1">中标价</span>
+									<span class="span2">￥</span>
+									<span id="number-price" class="span3">{$order.order_number_price}</span>
+								</div>
+								<button type="button" class="btn btn-info" id="trusteeship-btn">托管赏金</button>
+								<a href="{:U('Home/StoreOrder/bidOrderTrusteeship',['status'=>six])}" class="btn btn-success">线下交易</a>
+								<a href="{:U('Home/StoreOrder/bidorderRemove',['order_bidid'=>$order['order_bidid'],'order_id'=>$order['id'],'needid'=>$order['order_needid']])}" class="btn btn-warning">取消中标</a>
+							</div>
+							<!-- 魔态框 -->
+							<div class="modal fade" id="bidtrusteeship-modal">
+								<div class="modal-dialog">
+								    <div class="modal-content">
+								      	<div class="modal-header">
+								        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								       		<h4 class="modal-title">请输入赏金</h4>
+								      	</div>
+								      	<div class="row">
+								      		<center>
+										      	<form action="{:U('Home/StoreOrder/bidorderTrusteeship')}" method="post" onsubmit="return orderVerify()">
+										      		<input type="hidden" name="order_number_price" value="{$order.order_number_price}">
+											      	<div class="modal-body">
+											        	<div class="form-group">
+														    <label class="sr-only" for="exampleInputAmount"></label>
+														    <div class="input-group col-lg-8">
+														      	<div class="input-group-addon">￥</div>
+														      	<input type="text" class="form-control" id="exampleInputAmount" placeholder="金额" name="order_trusteeship_price">
+														      	<div class="input-group-addon">.00</div>
+														    </div>
+														</div>
+														<div>
+															<p class="modal-test-p">托管赏金提升您的信誉30%以上</p>
+														</div>
+											      	</div>
+											      	<div class="modal-footer" style="width:598px;">
+											        	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+											        	<button type="submit" class="btn btn-primary">确定托管</button>
+											      	</div>
+										      	</form>
+									      	</center>
+								      	</div>
+								    </div><!-- /.modal-content -->
+								  </div><!-- /.modal-dialog -->
+							</div><!-- /.modal -->
+							<!-- 模态框结束 -->
+							<!-- 解释流程 -->
+							<div class="service-info-con col-lg-10">
+								<button btnurl="{:U('Home/StoreOrder/remindContract')}" type="button" class="btn btn-primary btn-xs" id="bargaining"> 发起议价 </button>
+								<span class="service-info-con-span">中标价若有改动可点击发起议价提醒服务商,议价后请托管,如无议价即可托管.</span>
+							</div>
+						</div>
+					</div>
+					<!-- 服务信息结束 -->
+					<!-- 进度条 -->
+					<div id="stepBar" class="ui-stepBar-wrap col-lg-12">
+						<div class="ui-stepBar">
+							<div class="ui-stepProcess"></div>
+						</div>
+						<div class="ui-stepInfo-wrap">
+							<table class="ui-stepLayout" border="0" cellpadding="0" cellspacing="0">
+								<tr>
+									<td class="ui-stepInfo">
+										<a class="ui-stepSequence">1</a>
+										<p class="ui-stepName">已中标</p>
+									</td>
+									<td class="ui-stepInfo">
+										<a class="ui-stepSequence">2</a>
+										<p class="ui-stepName">赏金托管</p>
+									</td>
+									<td class="ui-stepInfo">
+										<a class="ui-stepSequence">3</a>
+										<p class="ui-stepName">合同上传</p>
+									</td>
+									<td class="ui-stepInfo">
+										<a class="ui-stepSequence">4</a>
+										<p class="ui-stepName">工作中</p>
+									</td>
+									<td class="ui-stepInfo">
+										<a class="ui-stepSequence">5</a>
+										<p class="ui-stepName">评价</p>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!-- 进度条结束 -->
+					<!-- 需求信息 -->
+					<div class="row">
+						<div class="need-box col-lg-12">
+							<p class="need-box-needid">需求号: <span>{$need.need_id}</span></p>
+							<p class="need-box-pdesc">需求描述:</p>	
+							<div class="need-desc">
+								{$need.need_desc}
+							</div>
+							<div class="need-other">
+								<p>发布时间:
+									<span class="need-time">{:date('Y-m-d',$need['need_time'])}</span>
+								</p>
+							</div>
+						</div>
+					</div>
+					<!-- 需求信息结束 -->
+				</div>
+				<!-- 右边服务商信息 -->
+				<div class="box-right col-lg-3">
+					<p class="service-store-title">--服务商--</p>
+					<!-- 服务商店铺信息 -->
+					<div class="service-store">
+						<!-- 店铺图片 -->
+						<a href="">
+							<img class="service-store-img" src="___PUBLIC__/Uploads/{$store['file_image']}">
+						</a>
+						<!-- 店铺名称 -->
+						<p class="service-store-name">{$store.store_name}</p>
+						<!-- 能力等级 -->
+						<p class="service-store-level">
+							<span>建立时间:</span>
+							<span class="level-span">{:date('Y-m-d',$store['store_addtime'])}</span>
+						</p>
+						<!-- 所在地 -->
+						<p class="service-store-level">
+							<span>所在地:</span>
+							<span class="level-span">{$store.store_address}</span>
+						</p>
+					</div>
+					<!-- 最新案例 -->
+					<p class="service-store-title">--他的最新案例--</p>
+					<div class="service-store-case col-lg-12">
+						<!-- 遍历最新成功案例 -->
+						<empty name="case">
+							<p>暂无最新案例!</p>
+						<else/>
+							<foreach name="case" item="val">
+								<p class="col-lg-12">
+									<span class="case-money">￥金额</span>
+									<span class="level-span">{$val.case_title}</span>
+								</p>
+							</foreach>
+						</empty>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<load href="__PUBLIC__/js/mo.js" />
+	<script type="text/javascript">
+		// 模态框
+		$('#trusteeship-btn').click(function(){
+			// 调用模态框
+	   		$('#bidtrusteeship-modal').modal();
+	   		// 位置
+	   		var top = $(window).height()/4
+	   		$('#bidtrusteeship-modal').css('margin-top',top);
+	    });
+	    // 进度条
+	    // 调用进度条js
+		$(function(){
+			stepBar.init("stepBar", {
+				// 目标进度
+				step : 2,
+				// 插件是否被选中
+				change : true,
+				animation : true,
+				// 时间
+				speed : 50
+			});
+		});
+		//提醒服务商上传合同
+	    $('#bargaining').click(function(){
+	    	// 发件人 自己
+	    	var sender = '{$user.user_account}';
+	    	// 收件人 服务商
+	    	var receiver = '{$userb.user_account}';
+	    	// 标题
+	    	var title = '修改中标价';
+	    	// 内容
+	    	var centent = '雇主请求尽快修改中标价';
+	    	//类型
+	    	var type = 1;
+	    	//cd
+	    	var cd = 10
+	    	// 提交地址
+	    	var btnurl = $(this).attr('btnurl');
+	    	$.post(btnurl,{'mesm_sender':sender,'mesm_receiver':receiver,'mesm_title':title,'mesm_centent':centent,'mesm_type':type},function(data){
+	    		if(data){
+	    			// 倒计时
+	    			var timer = setInterval(function(){
+	    				$('#bargaining').html('发送成功'+cd+'s');
+	    				$('#bargaining').attr('disabled',true);
+	    				cd--;
+	    				if(cd == 0){
+	    					clearInterval(timer);
+	    					cd = 10;
+	    					$('#bargaining').html(' 发起议价 ');
+	    					$('#bargaining').attr('disabled',false);
+	    				}
+	    			},1000);
+	    		}else{
+	    			mo.msg('请重新提醒服务商');
+	    		}
+	    	});
+	    });
+
+    	//js验证
+	    function orderVerify(){
+	    	// 赏金
+	    	var reward = $('#exampleInputAmount').val();
+	    	// 总金额
+	    	var moneyprice = parseInt($('#number-price').html());
+
+	    	var pregreward = /^[1-9]\d{1,9}$/;
+	    	if(reward == ''){
+	    		mo.msg('请填写金额');
+	    		return false;
+	    	}else if(!pregreward.test(reward)){
+				mo.msg('请正确输入赏金');
+				return false;
+	    	}else if(reward < parseInt(moneyprice * 3 / 10)){
+	    		mo.msg('赏金小少为总金额的30%');
+	    		return false;
+	    	}else if(reward > moneyprice){
+	    		mo.msg('赏金高于总金额');
+	    		return false;
+	    	}
+	    }
+	</script>
+</block>

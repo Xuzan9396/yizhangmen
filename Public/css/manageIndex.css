@@ -1,0 +1,125 @@
+*{
+	margin:0;
+	padding:0;
+	
+}
+
+
+.clear{
+	clear:both;
+}
+.manage-index-main{
+	width:100%;
+	height:630px;
+	overflow:auto;
+	border-radius:0px 11px 0px 0px;
+	background:#F5F5F5;
+}
+.manage-header{
+	width:98%;
+	height:40px;
+	margin:15px auto;
+	font-size: 18px;
+	text-align:center;
+	line-height:40px;
+	color:#1F6CB0;
+	border-radius:5px;
+	background:white;
+	border:1px solid #cccccc;
+}
+.content-left, .content-mid ,.content-right{
+	width:290px;
+	min-height:420px;
+	max-height:500px;
+	float:left;
+	margin-left:10px;
+	background:white;
+	overflow:hidden;
+	border:1px solid #cccccc;
+}
+.header-title{
+	line-height:30px;
+	font-size:18px;
+	color: #333;
+	padding-left:10px;
+	border-bottom:1px solid #cccccc;
+}
+.portrait{
+	width:60px;
+	height:60px;
+	margin-left:10px;
+	margin-top:10px;
+	border-radius:50%;
+	overflow:hidden;
+	float:left;
+	border:1px solid #cccccc;
+
+}
+.compay{
+	float:left;
+	width:180px;
+	overflow:hidden;
+	margin-top:15px;
+	line-height:28px;
+	font-size:16px;
+	margin-left:5px;
+}
+.rank{
+	width:180px;
+	height:30px;
+	float:left;
+	line-height:28px;
+	margin-left:5px;
+}
+.rank-num{
+	display:block;
+	height:28px;
+	margin-left:10px;
+}
+.rank span{
+	float:left;
+}
+.manage-account{
+	margin-top:15px;
+	margin-left:10px;
+	float:left;
+	width:100%;
+	border-bottom:1px dotted #cccccc;
+}
+
+
+.recharge{
+	display:block;
+	width:80px;
+	height:28px;
+	line-height:28px;
+	color:white;
+	background:#03A9F4;
+	text-align:center;
+	margin:10px 0px 0px 10px;
+	border:1px solid #03A9F4;
+}
+.recharge:hover{
+	color:white;
+	background:#1F95CB;
+}
+.shopman,.store-style{
+	margin:10px 0px 0px 10px;
+	border-bottom:1px dotted #cccccc;
+}
+.content-mid ul{
+	margin-top:10px;
+}
+.content-mid ul li{
+	padding-left:15px;
+	margin-top:15px;
+	border-bottom:1px dotted #cccccc;
+}
+.content-mid ul li a{
+	text-align:center;
+}
+.content-right ul li{
+	padding-left:15px;
+	margin-top:15px;
+	border-bottom:1px dotted #cccccc;
+}

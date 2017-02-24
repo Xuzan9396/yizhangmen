@@ -1,0 +1,493 @@
+<extend name='./Public/template/base1.html'/>
+<block name="title"><title>仪器库-发表口碑</title></block>
+<block name="file">
+	<load href="__PUBLIC__/js/xing.js" />
+	<load href="__PUBLIC__/css/xingxing.css" />
+	<load href="__PUBLIC__/layer/layer.js" />
+</block>
+<block name="content">
+	<style type="text/css">
+		h4{
+			margin: 0;
+			padding: 0;
+		}
+		.publish{
+			margin-top: 25px;
+		}
+		.breadnav a{
+			font-size: 12px;
+		}
+		.row-a{
+			text-align: center;
+			width: 100%;
+			height: auto;
+			border: 1px solid #ccd3e4;
+			margin-left: 0;
+			margin-top: 20px;
+			background: #fafbfc;
+		}
+		.row-img p{
+			font-size: 12px;
+			background: white;
+			width: 900px;
+			height: 40px;
+			color: gray;
+			margin: 0 auto;
+			border-radius: 12px;
+			line-height: 20px;
+		}
+		.instrument{
+			width: 97%;
+			height: auto;
+			margin: 20px auto;
+			background: white;
+			padding: 20px;
+		}
+		.publish-left{
+			float: left;
+			clear: left;
+		}
+		.publish-list{
+			margin: 20px auto;
+			width: 100%;
+			float: left;
+			text-align: center;
+		}
+		.fn-clear{
+			width: 100%;
+			height: 35px;
+			line-height: 35px;
+			text-align: center;
+			margin: 0 auto;
+		}
+		.publish-right{
+			float: left;
+		}
+		.instrument-title{
+			clear: left;
+		}
+		.publish-left{
+			width: 345px;
+			height: 24px;
+			margin-right: 20px;
+			text-align: right;
+		}
+		.publish-right input{
+			height: 20px;
+			margin-right: 10px;
+		}
+		.color-red{
+			font-size: 16px;
+			color: #d60000;
+		}
+		.price-private{
+			font-size: 12px;
+			color: #ccd3e4;
+		}
+		.buy-mudi-span{
+			margin-right: 10px;
+		}
+		.oneword{
+			width: 540px;
+			padding-left: 5px;
+			font-size: 12px;
+			margin-bottom: 15px;
+		}
+		.textarea-manyi{
+			background: #FCFCFC;
+			width: 540px;
+			font-size: 12px;
+			height: 130px;
+			resize:none;
+			line-height: 20px;
+			padding: 5px;
+		}
+		.manyidu{
+			border-top: 1px dotted #ccd3e4;
+			border-bottom: 1px dotted #ccd3e4;
+			padding: 20px 0;
+		}
+		.yiqi_info{
+			width: 250px;
+			font-size: 12px;
+		}
+		.instrument-name{
+			margin-right: 5px;
+		}
+		.otherpurpose{
+			display: none;
+		}
+		.xx-clear{
+			margin: 20px auto;
+		}
+		.btn-upload{
+			border: 1px solid black;
+			background: #3B5998;
+			width: 100px;
+			color: white;
+			line-height: 25px;
+			margin: 0 auto;
+			height: 25px;
+		}
+		.btn-upload:hover{
+			cursor: pointer;
+			background: #5279C1;
+		}
+		.btn-upload input{
+			position: absolute;
+			margin-top: -25px;
+			border: 1px solid red;
+			width: 100px;
+			height: 25px;
+			opacity: 0;
+		}
+		.btn-upload input:hover{
+			cursor: pointer;
+		}
+		.upload-pics{
+			margin-top: 20px;
+			margin-bottom: 20px;
+			margin-left: 150px;
+			width: 80%;
+			height: auto;
+		}
+		.jimg{
+			width: 120px;
+			height: 90px;
+			float: left;
+			padding: 0 10px;
+			margin-right: 15px;
+			margin-bottom: 10px;
+			background: #f9f9f9;
+		}
+		.mouth-submit{
+			width: 200px;
+			height: 30px;
+			border: 0;
+			background: #FFB700;
+			color: white;
+			margin-top: 80px;		
+		}
+		.mouth-submit:hover{
+			background: #FF9700;
+		}
+		.upload-title{
+			font-size: 12px;
+			color: #999999;
+			clear: left;
+			display: block;
+		}
+		.noallowpic{
+			color: red;
+			margin-left: -60px;
+		}
+	</style>
+	<div class="container">
+		<div class="publish">
+			<div class="path">
+				<div class="breadnav">当前位置：<a href="{:U('Home/Instrument/index')}">首页</a> > <a href="{:U('Home/WordOfMouth/index')}">口碑</a> > <a href="#">发表口碑</a></div>
+			</div>
+			<div class="row-a">
+				<div class="row-img">
+					<h2>发表口碑</h2>
+					<p>发表您的仪器口碑可赢取“现金奖赏”，同时还有帮助值和勋章！优秀口碑要求： 文字不少于500 + 上传原创仪器照片 + 完整度达到100%<br>通过审核后被采纳为精华帖即可得到奖励！</p>
+				</div>
+				<form id="myForm" action="{:U('Home/WordOfMouth/toAdd')}" enctype="multipart/form-data" method="post" >
+					<div class="instrument">
+						<h4 class="instrument-title">填写仪器信息</h4>
+						<ul class="publish-list">
+							<li class="fn-clear">
+								<div class="publish-left">请选择仪器<span class="color-red"> * </span>:</div>
+								<div class="publish-right">
+
+									<select class="instrument-name">
+
+										<option value="">--请选择分类--</option>
+									
+									<foreach name="topcate" item="val">
+
+										<option value="{$val.id}">{$val.cate_name}</option>
+
+									</foreach>
+
+									</select>
+
+								</div>
+							</li>
+							<li class="fn-clear">
+								<div class="publish-left">仪器经销商<span class="color-red"> * </span>:</div>
+								<div class="publish-right">
+									<input name="shop_name" class="yiqi_info" type="text" placeholder=" 例如:研思品牌设计">
+								</div>
+							</li>
+							<li class="fn-clear">
+								<div class="publish-left">仪器购买价<span class="color-red"> * </span>:</div>
+								<div class="publish-right">
+									<input name="price" class="yiqi_info" type="text" placeholder=" 例如:1000"><span class="price-private">不填自动保密</span>
+								</div>
+							</li>
+							<li class="fn-clear">
+								<div class="publish-left">购买目的<span class="color-red"> * </span>:</div>
+								<div class="publish-right">
+									<input name="purpose" index="0" checked="checked" class="buy-mudi" type="radio" value="办公用"><span class="buy-mudi-span">办公用</span> 
+									<input name="purpose" index="1" class="buy-mudi" type="radio" value="家庭用"><span class="buy-mudi-span">家庭用</span> 
+									<input name="purpose" index="2" class="buy-mudi" type="radio" value="其它"><span class="buy-mudi-span">其它</span> 
+									<input class="otherpurpose" name="other_purpose" type="text" placeholder="用途">
+								</div>
+							</li>														
+						</ul>
+						<h4 class="instrument-title">使用感受</h4>
+						<ul class="publish-list">
+							<li class="fn-clear">
+								<div class="publish-left">一句话点评<span class="color-red"> * </span>:</div>
+								<div class="publish-right">
+									<input name="oneword" class="oneword" type="text" placeholder="一句话点评仪器（30字以内）">
+								</div>
+							</li>
+							<li class="fn-clear">
+								<div class="publish-left">最满意<span class="color-red"> * </span>:</div>
+								<div class="publish-right">
+									<textarea class="textarea-manyi" name="most_like" id="" cols="30" rows="10" placeholder="该项未填内容,来发表一下看法吧~（不少于20字）"></textarea>
+								</div>
+							</li>
+							<li class="fn-clear">
+								<div class="publish-left">最不满意<span class="color-red"> * </span>:</div>
+								<div class="publish-right">
+									<textarea class="textarea-manyi" name="miss_like" id="" cols="30" rows="10" placeholder="该项未填内容,来发表一下看法吧~（不少于20字）"></textarea>
+								</div>
+							</li>
+							<li class="fn-clear">
+								<div class="publish-left">选择该仪器的理由<span class="color-red"> * </span>:</div>
+								<div class="publish-right">
+									<textarea class="textarea-manyi" name="reason" id="" cols="30" rows="10" placeholder="在选择过程中你都中意过哪几款仪器？最后为什么选择这款？（不少于20字）"></textarea>
+								</div>
+							</li>														
+						</ul>
+
+						<ul class="publish-list manyidu">
+							<li class="fn-clear xx-clear">
+								<div class="publish-left">性价比<span class="color-red"> * </span>:</div>
+								<div class="publish-right">
+									<p>
+										<!--star start-->
+										 <div class="di-body">
+											<div class="ostar" id="astar">
+												<ul>
+													<li><a href="javascript:;">1</a></li>
+													<li><a href="javascript:;">2</a></li>
+													<li><a href="javascript:;">3</a></li>
+													<li><a href="javascript:;">4</a></li>
+													<li><a href="javascript:;">5</a></li>
+												</ul>
+												<span></span>
+												<p class="xingxingfudong"></p>
+											</div>
+										</div>
+										<!-- star end -->
+									</p>
+								</div>
+							</li>
+							<li class="fn-clear xx-clear">
+								<div class="publish-left">使用体验<span class="color-red"> * </span>:</div>
+								<div class="publish-right">
+									<p>
+										<!--star start-->
+										 <div class="di-body">
+											<div class="ostar" id="bstar">
+												<ul>
+													<li><a href="javascript:;">1</a></li>
+													<li><a href="javascript:;">2</a></li>
+													<li><a href="javascript:;">3</a></li>
+													<li><a href="javascript:;">4</a></li>
+													<li><a href="javascript:;">5</a></li>
+												</ul>
+												<span></span>
+												<p class="xingxingfudong"></p>
+											</div>
+										</div>
+										<!-- star end -->
+									</p>
+								</div>
+							</li>
+							<li class="fn-clear xx-clear">
+								<div class="publish-left">售后服务<span class="color-red"> * </span>:</div>
+								<div class="publish-right">
+									<p>
+										<!--star start-->
+										 <div class="di-body">
+											<div class="ostar" id="cstar">
+												<ul>
+													<li><a href="javascript:;">1</a></li>
+													<li><a href="javascript:;">2</a></li>
+													<li><a href="javascript:;">3</a></li>
+													<li><a href="javascript:;">4</a></li>
+													<li><a href="javascript:;">5</a></li>
+												</ul>
+												<span></span>
+												<p class="xingxingfudong"></p>
+											</div>
+										</div>
+										<!-- star end -->
+									</p>
+								</div>
+							</li>					
+						</ul>
+
+						<h4 class="instrument-title">有图有真相</h4>
+						<ul class="publish-list">
+							<li class="fn-clear">
+								<div class="btn-upload">上传图片<input name="myfiles[]" id="exampleInputFile" multiple type="file" click="getObjectURL()"></div>
+								<p class="upload-pics"></p>
+								<span class="upload-title">*上传您的仪器照片有助于提高口碑完整度，更是你成为优秀口碑的必要条件。最多可上传12张，每张大小不超过2M，支持格式jpg、png。</span>
+							</li>
+						</ul>
+						<input class="pf_score" type="hidden" name="xjb_score">
+						<input class="pf_score" type="hidden" name="syty_score">
+						<input class="pf_score" type="hidden" name="shfw_score">
+						<input class="mouth-submit" type="submit" value="提交口碑">									
+					</div>
+				</form>	
+			</div>
+		</div>
+	</div>
+
+	<script>
+
+	// 满意度背景色
+	$('.textarea-manyi').focus(function(){
+		$(this).css('background','white');
+	}).blur(function(){
+		$(this).css('background','');
+	});
+
+	// 阿贾克斯分类开始
+	test();
+
+	function test(){
+
+	$('.instrument-name').change(function(){
+			var ins_name = $(this);
+			if( ins_name.val() != '' ){
+				$.ajax({
+					url:"{:U('home/WordOfMouth/ajaxGetChlid')}",
+					data:'id='+ ins_name.val(),
+					success:function(data){
+						ins_name.nextAll('.instrument-name').remove();
+						ins_name.after(data);
+						test();
+					}
+				})
+			}
+		});
+	}
+	// 阿贾克斯分类结束
+
+	// 购买用途
+	$('.buy-mudi').eq(2).click(function(){
+		$('.otherpurpose').css({'display':'block','float':'right','marginTop':'8px','width':'250px'});
+	});
+	$('.buy-mudi:eq(0),.buy-mudi:eq(1)').click(function(){
+		$('.otherpurpose').css('display','none');
+	});
+	// 购买用途
+
+	// 一句话点评
+	$('.oneword').keyup(function(){
+		if( $(this).val().length >= 30 ){
+			$(this).val( $('.oneword')[0].value.substr(0,30) );
+		}
+	});
+	// 一句话点评
+
+	// 满意度调查
+	$('.textarea-manyi').keyup(function(){
+		if( $(this).val().length < 20 ){
+			$(this).css('color','red');
+		}else{
+			$(this).css('color','');
+		}
+	});
+	// 满意度调查
+
+    //上传图片预览（创建一个URL对象）
+    function getObjectURL(file) {
+        var url = null ; 
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+
+    //实例化对象。把所选择的图片URL放到预览处实现预览
+    var formData;
+
+    $("#exampleInputFile").change(function(){
+
+    	$(".upload-pics").empty();
+
+		formData = new FormData( $('#myForm')[0] );
+
+		if( $("#exampleInputFile").get(0).files.length <= 12){
+
+	        for (var i = 0; i < $("#exampleInputFile").get(0).files.length; i++) {
+
+	        	if(this.files[i].type == 'image/jpeg' || this.files[i].type == 'image/png'){
+			        var objUrl = getObjectURL(this.files[i]);  
+			        if (objUrl) {
+			            $(".upload-pics").append('<img name="my_pics" value="'+ objUrl +'" class="jimg" src="'+ objUrl +'" alt="" />');
+			        }  
+	        	}
+	        }
+		}else{
+            $(".upload-pics").append('<p class="noallowpic">图片上传不能超出12张，请重新上传</p>');
+		}
+    }) ;
+
+    // 获取星星评分
+    $('.ostar').each(function(i){
+    	$(this).click(function(){
+    		$('.pf_score').eq(i).val( $(this).children('span').children('strong').text()[0] );
+    	})
+    });
+
+    // 提交前判断开始
+    $('.mouth-submit').click(function(){
+    	if( !$('.instru-goodsname').val()){
+    		window.scrollTo(0,99);
+    		layer.msg('仪器分类尚未选择',{icon: 2});
+			return false;
+    	}else if( !$('.yiqi_info:eq(0)').val() ){
+    		window.scrollTo(0,299);
+    		layer.msg('仪器经销商不能为空',{icon: 2});
+			return false;
+    	}else if( $('.buy-mudi:checked').attr('index') == 2 && !$('.otherpurpose').val() ){
+    		window.scrollTo(0,299);
+    		layer.msg('其它购买目的不能为空',{icon: 2});
+			return false;
+    	}else if( !$('.oneword').val() || $('.oneword').val().length > 30 ){
+    		window.scrollTo(0,299);
+    		layer.msg('一句话点评不能为空',{icon: 2});
+			return false;
+    	}else if( $('.textarea-manyi:eq(0)').val().length < 20 || $('.textarea-manyi:eq(1)').val().length < 20 || $('.textarea-manyi:eq(2)').val().length < 20){
+    		window.scrollTo(0,399);
+    		layer.msg('最满意/不满意/选择该仪器的理由少于20字',{icon: 2});
+			return false;
+    	}else if( !$('.pf_score').eq(0).val() || !$('.pf_score').eq(1).val() || !$('.pf_score').eq(2).val()   ){
+    		window.scrollTo(0,799);
+    		layer.msg('评分尚未完成',{icon: 2});
+			return false;
+    	}else if( $("#exampleInputFile").get(0).files.length > 12 ){
+    		window.scrollTo(0,899);
+    		layer.msg('图片上传不能超出12张，请重新上传',{icon: 2});
+			return false;
+    	}
+    });
+    // 提交前判断结束
+
+	</script>
+
+</block>

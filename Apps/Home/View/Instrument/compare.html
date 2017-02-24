@@ -1,0 +1,177 @@
+<extend name="./Public/template/base1.html"/>
+<block name="title"><title>仪器库-产品对比</title></block>
+<block name="content">
+	<style>
+		.list-container{
+			width: 1170px;
+			height: auto;
+			margin-top: 20px;
+		}
+
+		.breadcrumb{
+			background: white;
+			margin-left: -15px;
+		}
+		.table td{
+		}
+		
+	</style>
+	<div class="container list-container">
+	<div class="row">
+		<div class="col-sm-6">
+			<ol class="breadcrumb rf-product-category">
+				<li><a href="/shop/Home/Instrument/category.html?gid={$_GET['gid']}">返回</a></li>
+				<li>产品对比</li>
+			</ol>
+		</div>
+	</div>
+	<hr>
+		<table class="table table-striped table-hover">
+			<tbody>
+				<tr>
+					<th width="10%">指标/产品</th>
+					<foreach name="goods" item="v">
+						<th width="24%">{$v.appt_goodsname}</th>
+					</foreach>
+				</tr>
+				<tr>
+					<td>图像</td>
+					<foreach name="goods" item="v">
+						<td><img width="100" height="100" src="__PUBLIC__/Uploads{$v.appt_pic}" alt=""></td>
+					</foreach>
+				</tr>
+				<tr>
+					<td><a href="">产品手册</a></td>
+					<foreach name="goods" item="v">
+						<td><a href="">点击下载该产品手册</a></td>
+					</foreach>
+				</tr>
+				<tr>
+					<td>官网资料</td>
+					<foreach name="goods" item="v">
+						<td><a href="http://{$v.www}" target="_bank">{$v.www}</a></td>
+					</foreach>
+					
+					
+				</tr>
+				<tr>
+					<td>描述</td>
+					<foreach name="goods" item="v">
+						<td>{$v.miaosu}</td>
+					</foreach>
+				</tr>
+				<tr>
+					<td>频率</td>
+					<foreach name="goods" item="v">
+						<td>{$v.pinglv}</td>
+					</foreach>
+				</tr>
+				<if condition="$goods[0]['lianjie']">
+					<tr>
+						<td>连接器类型</td>
+						<foreach name="goods" item="v">
+							<td>{$v.lianjie}</td>
+						</foreach>
+					</tr>
+				</if>
+				<if condition="$goods[0]['zhukang']">
+					<tr>
+						<td>阻抗</td>
+						<foreach name="goods" item="v">
+							<td>{$v.zhukang}</td>
+						</foreach>
+					</tr>
+				</if>
+				<if condition="$goods[0]['bodaochicun']">
+					<tr>
+						<td>波导尺寸</td>
+						<foreach name="goods" item="v">
+							<td>{$v.bodaochicun}</td>
+						</foreach>
+					</tr>
+				</if>
+				<if condition="$goods[0]['shunhao']">
+					<tr>
+						<td>插入损耗</td>
+						<foreach name="goods" item="v">
+							<td>{$v.shunhao}</td>
+						</foreach>
+					</tr>
+				</if>
+				<if condition="$goods[0]['gelidu']">
+					<tr>
+						<td>隔离度</td>
+						<foreach name="goods" item="v">
+							<td>{$v.gelidu}</td>
+						</foreach>
+					</tr>
+				</if>
+				<if condition="$goods[0]['vswr']">
+					<tr>
+						<td>vswr</td>
+						<foreach name="goods" item="v">
+							<td>{$v.vswr}</td>
+						</foreach>
+					</tr>
+				</if>
+				<if condition="$goods[0]['leixin']">
+					<tr>
+						<td>类型</td>
+						<foreach name="goods" item="v">
+							<td>{$v.leixin}</td>
+						</foreach>
+					</tr>
+				</if>
+				<if condition="$goods[0]['tongdao']">
+					<tr>
+						<td>通道数</td>
+						<foreach name="goods" item="v">
+							<td>{$v.tongdao}</td>
+						</foreach>
+					</tr>
+				</if>
+				<if condition="$goods[0]['gonglv']">
+					<tr>
+						<td>功率</td>
+						<foreach name="goods" item="v">
+							<td>{$v.gonglv}</td>
+						</foreach>
+					</tr>
+				</if>
+				<if condition="$goods[0]['kongzidianya']">
+					<tr>
+						<td>控制电压</td>
+						<foreach name="goods" item="v">
+							<td>{$v.kongzidianya}</td>
+						</foreach>
+					</tr>
+				</if>
+				<if condition="$goods[0]['xianlan']">
+					<tr>
+						<td>线缆损耗检测范围</td>
+						<foreach name="goods" item="v">
+							<td>{$v.xianlan}</td>
+						</foreach>
+					</tr>
+				</if>
+				<if condition="$goods[0]['caiyanglv']">
+					<tr>
+						<td>采样率</td>
+						<foreach name="goods" item="v">
+							<td>{$v.caiyanglv}</td>
+						</foreach>
+					</tr>
+				</if>
+				<if condition="$goods[0]['duqv']">
+					<tr>
+						<td>读取速度</td>
+						<foreach name="goods" item="v">
+							<td>{$v.duqv}</td>
+						</foreach>
+					</tr>
+				</if>
+			</tbody>
+
+		</table>
+	</div>
+</block>

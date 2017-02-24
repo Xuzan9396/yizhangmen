@@ -1,0 +1,195 @@
+<extend name="./Public/template/serviceShop.html" />
+<block name="right1">
+	<load href="__PUBLIC__/css/storeRegister1.css" />
+	<link rel="stylesheet" href="__PUBLIC__/css/storecomment.css">
+	<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+	<script src="__PUBLIC__/layui/layui.js"></script>
+
+	<div class="col-free-shop">
+		<p class="free-set-shop">回复雇主</p>
+	</div>
+
+	<!-- 店铺评分 -->
+	<div class="container  col-free-shop">
+		<div class="shop-p">完善对雇主的印象</div>
+		<div>
+			<table class="table table-n">
+				<tr>
+					<th>完成工作的速度：
+						<font class="font-color">{$assess['speed']|default=0}分</font>
+					</th>
+					<th>服务商服务态度：
+						<font class="font-color">{$assess['attitude']|default=0}分</font>
+					</th>
+					<th>作品的完成质量：
+						<font class="font-color">{$assess['quality']|default=0}分</font>
+					</th>
+				</tr>
+				<tr>
+					<td><span>共{$assess['total']|default=0}人打分</span></td>
+					<td><span>共{$assess['total']|default=0}人打分</span></td>
+					<td><span>共{$assess['total']|default=0}人打分</span></td>
+				</tr>
+
+			</table>
+		</div>
+	</div>
+	<div class="clearance"> </div>
+
+	<!-- 评价表格 -->
+	<div class=" col-free-shop total-comment">
+		累计评价
+		<div class="table-border1">
+			<table class="table col2-table">
+				<tr class="color-col2">
+					<th></th>
+					<th>最近1周</th>
+					<th>最近1个月</th>
+					<th>最近3个月</th>
+				</tr>
+				<tr>
+					<td><span class="comment-icon good-comment"></span>好评</td>
+					<td><a href="">{$census['good1']|default=0}</a></td>
+					<td><a href="">{$census['good2']|default=0}</a></td>
+					<td><a href="">{$census['good3']|default=0}</a></td>
+				</tr>
+				<tr>
+					<td><span class="comment-icon middle-comment"></span>中评</td>
+					<td><a href="">{$census['centre1']|default=0}</a></td>
+					<td><a href="">{$census['centre2']|default=0}</a></td>
+					<td><a href="">{$census['centre3']|default=0}</a></td>
+				</tr>
+				<tr>
+					<td><span class="comment-icon bad-comment"></span>差评</td>
+					<td><a href="">{$census['difference1']|default=0}</a></td>
+					<td><a href="">{$census['difference2']|default=0}</a></td>
+					<td><a href="">{$census['difference3']|default=0}</a></td>
+				</tr>
+				<tr>
+					<td><span class="comment-icon all-comment"></span>总计</td>
+					<td><a href="">{$census['hebdomadTotal']|default=0}</a></td>
+					<td><a href="">{$census['oneMonthTotal']|default=0}</a></td>
+					<td><a href="">{$census['trimesterTotal']|default=0}</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="clearance"> </div>
+
+	<div class="class-margin">
+
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs nav-tabs1" role="tablist">
+			<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">我对雇主的印象</a></li>
+			<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" id="se">来自雇主的评价</a></li>
+		</ul>
+
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="home">
+				<div class="row jiben-info2">
+					<empty name="reply">
+					<div class="not-comment">
+						<p>抱歉，目前还没有评价</p>
+					</div>
+					</empty>
+					<!-- 对雇主的评论 -->
+					<notempty name="reply">
+					<volist name="reply" id="data">
+					<div class="e1-comment left">
+						<div class="dis-inline left"><img src="__PUBLIC__/Uploads/headportrait/{$data['pictrue']}" alt=""></div>
+						<div class="left user">
+							<p><font class="font-title">用户</font> ：{$data['name']}</p>
+							<p>
+								<font class="font-title">服务标题：</font> {$data['pubh_title']}</p>
+							<p><font class="font-title">成交金额：</font>￥{$data['price']}</p>
+							<p><font class="font-title">回复雇主：</font>{$data['reply']}</p>
+						</div>
+						<div>
+							<p><font class="font-title">评论时间：</font>{$data['add_time']|date="Y-m-d H:i:s",###}</p>
+						</div>
+					</div>
+					</volist>
+					<div>
+						{$replyshow}
+					</div>
+
+					
+					</notempty>
+				</div>
+			</div>
+
+			<div role="tabpanel" class="tab-pane" id="profile">
+				<div class="row jiben-info2">
+					<div class="clearfix comment-tab-con-wrap">
+						<!-- <div class="filter-comment">
+							<label class="J-selected-radio from-filter">
+								好评
+								<span>(0)</span>
+								<i class="radio-selected selected-radio auth" onclick="selected(this);" id="selected1"></i>
+							</label>
+							<label class="J-selected-radio from-filter">
+								中评
+								<span>(0)</span>
+								<i class="radio-no-selected selected-radio auth" onclick="selected(this);" ></i>
+							</label>
+							<label class="J-selected-radio from-filter">
+								差评
+								<span>(0)</span>
+								<i class="radio-no-selected selected-radio auth" onclick="selected(this);"></i>
+							</label>
+							<span class="filter-comment-recommend">
+
+						</span>
+						</div> -->
+						<empty name="fromHirer">
+						<div class="not-comment not-comment1">
+							<p>抱歉，目前还没有评价</p>
+						</div>
+						</empty>
+					</div>
+
+					<!-- 来自雇主的评论 -->
+					<notempty name="fromHirer">
+					<volist name="fromHirer" id="res">
+					<div class="e1-comment left">
+						<div class="dis-inline left"><img src="__PUBLIC__/Uploads/headportrait/{$res['pictrue']}" alt=""></div>
+						<div class="left user">
+							<p><font class="font-title">用户</font> ：{$res['name']}</p>
+							<p>
+								<font class="font-title">服务标题：</font> {$res['pubh_title']}</p>
+							<p>
+								<font class="font-title">成交金额：</font>￥{$res['price']}</p>
+							<p>
+								<font class="font-title">服务评论：</font>{$res['content']}</p>
+						</div>
+						<div>
+							<p>
+								<font class="font-title">评论时间：</font>{$res['addtime']|date="Y-m-d H:i:s",###}</p>
+						</div>
+						<div class="reply"><a href="{:U('storeReyle',array('id'=>$res['id']))}" class="layui-btn layui-btn-small layui-btn-danger"> 回复</a>
+						</div>
+					</div>
+					</volist>
+					<!-- 分页 -->
+					<div>
+						{$show}
+					</div>
+					<!-- 分页结束 -->
+					</notempty>
+
+				</div>
+			</div>
+		</div>
+		<script>
+			// 中好差评
+			$('#se').trigger('click');
+
+			function selected(obj) {
+				$(obj).removeClass('radio-no-selected').addClass('radio-selected');
+				$('.auth').not($(obj)).removeClass('radio-selected').addClass('radio-no-selected');
+			}
+		</script>
+
+</block>

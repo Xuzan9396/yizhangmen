@@ -1,0 +1,178 @@
+<extend name="./Public/template/base.html"/>
+<block name="content">
+	<load href="__PUBLIC__/css/service.css" />
+	<load href="__PUBLIC__/js/jquery.cookie.js" />
+
+	<!-- 导航栏 -->
+		<div class="menu-nav">
+			<div class="middle">
+				<div class="menu-nav-left">
+					<h3><a href="">服务商库首页</a></h3>
+				</div>
+				<ul class="menu-nav-ul">
+					<!-- <li><a href="{:U('Home/service/index')}">商标版权1</a></li> -->
+				</ul>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<!-- 主体内容 -->
+		
+		<div class="server-content">
+			<div class="middle server-content-bg">
+				<div style="color:#666;margin-bottom:10px;"><a href="{:U('Index/index')}">首页</a>&nbsp;&nbsp;/&nbsp;&nbsp;服务商库</div>
+				<!-- 分类 -->
+				<div class="server-category">
+					<dl class="filter-category">
+						<dt>分<span style="display:inline-block;width:2em;"></span>类:</dt>
+						<dd class="cate-body" >
+							 <a href="{:U('Home/Service/index')}" class="selected">全部</a>
+							 <volist name="category" id="cate">
+							 <a href="{:U('Home/Service/category',array('cate_id'=>$cate['id']))}" target="_blank">{$cate['cate_name']}</a>
+							 </volist>
+						</dd>
+						<dd class="show-more" style="display:block;">更多</dd>
+						<!-- <dd class="show-more">收起</dd> -->
+					</dl>
+					<dl class="filter-category">
+						<dt>服务商类型：</dt>
+						<dd class="cate-body" >
+							<a href="{:U('Home/Service/index')}">全部</a>
+							<!-- javascript href="{:U('Home/Service/index',array('sign'=>0))}" -->
+							<a onclick="$('#form-personal').submit()" href="javascript:void(0)">个人服务商</a>
+							<a onclick="$('#form-company').submit()" href="javascript:void(0)">企业服务商</a>
+							<!-- <a   href="{:U('Home/Service/index',array('sign'=>0))}">个人服务商</a> -->
+							<!-- <a   href="{:U('Home/Service/index',array('sign'=>1))}">企业服务商</a> -->
+							<form  id="form-personal">
+								 <input type="hidden" name="sign" value="0">
+							</form>
+							<form  id="form-company">
+								 <input type="hidden" name="sign" value="1">
+							</form>
+						</dd>
+					</dl>
+				</div>
+				<!-- 分类结束 -->
+
+				<!-- 内容块 -->
+				<div class="server-left">
+					<div class="server-store">
+						<ul>
+							<li id="server-color"><a  href="{:U('Home/Service/index')}">所有店铺</a></li>
+							<li><a href="{:U('Home/service/server')}">所有服务</a></li>
+						</ul>
+					</div>
+					<!-- 搜索条件 -->
+					<div class="server-list-sorttag">
+						<ul id="js-search">
+						<!-- server-list-li:箭头翻转，server-list-a :字体样式 -->
+							<li ><a s="0" id="server-list-a" href="{:U('Service/index',array('sort'=>'id','asc'=>'desc'))}">默认</a><i class="server-list-iconv"></i></li>
+							<li><a s="1" href="{:U('Service/index',array('sort'=>'sales_num','asc'=>'desc'))}">成交数量</a> <i class="server-list-iconv"></i></li>
+							<li><a s="2" href="{:U('Service/index',array('sort'=>'price','asc'=>'desc'))}">收入金额</a><i class="server-list-iconv"></i></li>
+							
+							<li><a s="3" href="{:U('Service/index',array('sort'=>'assess','asc'=>'desc'))}">好评率</a><i class="server-list-iconv"></i></li>
+						</ul>
+					</div>
+
+					<!-- 内容列表，展示 -->
+					<div class="server-list-main">
+						<ul class="server-item-ul">
+						<!-- 遍历所有店铺 -->
+						<volist name="store_list" id="store" empty="暂时没有数据">
+							<li>
+								<div class="provider-left">
+									<img src="__PUBLIC__/Uploads/{$store['file_image']}" alt="">
+								</div>
+								<div class="provider-middle">
+									<p class="title"><a href="{:U('Home/service/store',array('storeid'=>$store['id']))}" target="_blank">{$store['store_name']}</a></p>
+									<p class="provider-depict">
+										服务范围：
+										<volist name="store['f_name']" id="fname">
+											<a href="{:U('Home/service/salerinfo',array('storeid'=>$store['id']))}" target="_blank">{$fname['cate_name']}</a>&nbsp;&nbsp;&nbsp;
+										</volist>
+									</p>
+									<p class="provider-type">{$store['store_address']}&nbsp;|&nbsp;
+									<if condition="$store['store_type'] eq 0">
+										个人
+										<i class="authenticates1"></i>
+									<elseif condition="$store['store_type'] eq 1" />
+										企业
+										<i class="authenticates2"></i>
+									</if>
+									</p>
+									<p class="provider-shop">
+										<a href="{:U('Home/service/store',array('storeid'=>$store['id']))}">进入店铺</a>
+									</p>
+								</div>
+								<div class="provider-right">
+									<p>收入：</p>
+									<p class="right-money">￥{$store['price']|default=0}</p>
+									<p class="" style="color:#888;text-align:center;border-bottom:1px dashed #ccc;">近3个月成交{$store['bargain']}笔</p>
+									<if condition="$store['comment'] gt 0">
+									<p style="color:#3C8FED;text-align:center;margin-top:10px;">{$store['comment']}%好评率</p>
+									<else/>
+									<p style="color:#3C8FED;text-align:center;margin-top:10px;">暂无·好评率</p>
+
+									</if>
+									<p style="color:#888;text-align:center;"><span style="color:#3C8FED;">{$store['tote']|default=0}</span>位雇主评价</p>
+								</div>
+							</li>
+						</volist>
+						<!-- 遍历所有店铺  结束-->
+
+						</ul>
+						<!-- 分页 -->
+						<div class="js-page" style="margin-top:30px;margin-bottom:20px;">{$show}</div>
+
+					</div>
+				</div>
+				<div class="server-right">
+					广告模块
+				</div>
+			</div>
+		</div>
+
+		<script>
+			var sign=true;
+			$('.show-more').click(function(){
+				if(sign){
+					$(this).html('收起');
+					// 动画缓冲
+					// $('.server-category dd').eq(0).animate({'height': '100px'},1000);
+					$('.server-category dd').css({'height': 'auto'});
+					sign=false;
+				}else{
+					$(this).html('更多');
+					$('.server-category dd').css({'height': '25px'});
+					$('dd.show-more').css({'height':'25px'});
+					sign=true;
+				}
+
+			});
+			
+			$(document).ready(function (){
+				$('#js-search li a').each(function(){
+				    if($($(this))[0].href==String(window.location)){
+				    	$("#js-search li").removeClass("server-list-li");
+				    	$('#js-search li a').attr('id',''); 	
+				    	$(this).attr('id','server-list-a');
+				       	res=$(this).attr('s');
+				        $.cookie('cuttent',res);
+				    }
+				});
+				// 点击分页，保持状态
+				$('.js-page a').each(function(){
+				    $('#js-search li a').each(function(){
+					    if($($(this))[0].href!=String(window.location)){
+					    	var num=$.cookie("cuttent");
+					    	// $('#js-search li a').attr('id','');
+					    	$('#js-search li a').eq(num).attr('id','server-list-a');
+							$('#js-search li a').eq(!num).attr('id','');					    	
+					    }
+					});
+				});
+
+
+			});
+			
+		</script>
+</block>

@@ -1,0 +1,75 @@
+<extend name='./Public/template/listBase.html'/>
+
+  <!-- 加载自己的外部文件 -->
+  <block name="listfile">
+  </block>
+
+  <!-- 这里写内容 -->
+  <block name="listcentent">
+    <!-- 开始 -->
+    <div class="container-filut">
+      <div class="" style="margin-bottom:10px;width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;">
+          <div class="" style="">
+                我收藏的店铺
+          </div>
+      </div>
+
+      <div class="" style="width:100%;;padding:10px;">
+
+        <div class="">
+          <form class="form-inline" action="index.html" method="post">
+            <table class="table">
+              <tr>
+                <td><input type="text" class="form-control" name="name" value="请输入编号"/></td>
+                <td><input type="text" class="form-control" name="name" value="请输入名称"/></td>
+                <td>
+                  <select class="form-control" name="">
+                    <option value="100"  selected="selected">收藏编号降序</option>
+                    <option value="0" >收藏编号升序</option>
+                  </select></td>
+                <td>
+                  <select class="form-control" name="">
+                    <option selected="selected">每页10条</option>
+                    <option>每页20条</option>
+                    <option>每页30条</option>
+                    <option>每页40条</option>
+                    <option>每页50条</option>
+                  </select>
+                </td>
+                <td><input type="submit" class="btn btn-info" name="name" value="搜索"></td>
+              </tr>
+            </table>
+          </form>
+        </div>
+
+        <div class="" style="height:10px;width:100%;"></div>
+
+        <div class="">
+          <table class="table table-hover">
+            <tr>
+              <th>编号</th>
+              <th>名称</th>
+              <th>时间</th>
+              <th>操作</th>
+            </tr>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+          </table>
+
+        </div>
+
+        <div class="" style="height:10px;width:100%;"></div>
+
+        <div class="">
+          <!-- 分页 -->
+          共有 N  条数据
+        </div>
+
+      </div>
+    </div>
+    <!-- 结束 -->
+  </block>

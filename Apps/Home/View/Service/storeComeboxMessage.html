@@ -1,0 +1,187 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+<load href="__PUBLIC__/css/storeRegister1.css" />
+			<!-- 开始 -->
+			<div class="container-filut">
+				<div class="" style="width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;">
+						<div class="" style="">
+							我的私信
+						</div>
+				</div>
+			</div>
+			<div class="" style="position:relative;top:0px;left:0px;border:1px solid #ccc;margin-top:10px;">
+				<div class="" style="position:absolute;top:20px;left:40px;text-align:center;line-height:50px;">
+					<form id="form-sel-change" class="" action="{:U('Home/Service/storeComeboxMessage',['action'=>'sel','mesm_id'=>$val['mesm_id'],'sel'=>$return_param['sel']])}" method="get" >
+						<select id="sel-change" class="" name="sel" style="width:80px;height:36px;border:1px solid #ccc;border-radius:3px;">
+							<switch name="return_param['sel']">
+										<case value="all">
+											<option value="all" selected="selected" >全部</option>
+											<option value="0" >未读</option>
+											<option value="1" >已读</option>
+										</case>
+										<case value="0">
+											<option value="all" >全部</option>
+											<option value="0"  selected="selected">未读</option>
+											<option value="1" >已读</option>
+										</case>
+										<case value="1">
+											<option value="all"  >全部</option>
+											<option value="0" >未读</option>
+											<option value="1" selected="selected">已读</option>
+										</case>
+										<default />
+										<option value="all" selected="selected" >全部</option>
+										<option value="0" >未读</option>
+										<option value="1" >已读</option>
+							</switch>
+						</select>
+					</form>
+				</div>
+				<div class="" style="margin:80px 0px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;width:100%;padding:20px;">
+					<table class="table table-hover" style="table-layout:fixed">
+						<tr>
+							<th style="width:10%;">状态</th>
+							<th style="width:20%;">标题</th>
+							<th style="width:20%;">发件人</th>
+							<th style="width:30%;">时间</th>
+							<th style="width:20%;">操作</th>
+						</tr>
+						<form id="form-ipt-checked" class="" action="{:U('Home/Service/storeComeboxMessageAct',['sel'=>$return_param['sel']])}" method="get">
+							<input id="checked-hid" type="hidden" name="act" value="checkedDel"/>
+						<foreach name="mesm_list" key="key" item="val">
+						<tr>
+							<td>
+								<input class="ipt-checked" type="checkbox" name="mesm_id[]" value="{$val['mesm_id']}" />
+								<switch name="val['mesm_status']">
+											<case value="0"><span style="color:red">未读</span></case>
+											<case value="1">已读</case>
+											<default />未知
+								</switch>
+							</td>
+							<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">{$val['mesm_title']}</td>
+							<td>{$val['mesm_sender']}</td>
+							<td>{:date("Y-m-d H:i:s",$val['mesm_sendtime'])}</td>
+							<td>
+								<a href="{:U('Home/Service/storeComeboxMessageAct',['action'=>'sel','mesm_id'=>$val['mesm_id'],'sel'=>$return_param['sel'],'p'=>$return_p])}">查看</a>
+								<!-- <a href="{:U('Home/Message/meMessageAct',['action'=>'del','mesm_id'=>$val['mesm_id'],'sel'=>$return_param['sel']])}">删除</a> -->
+									<a href="javascript:void(0);" class="btn-deleteact" mesmid="{:U('Home/Message/outboxMessageAct',['action'=>'del','mesm_id'=>$val['mesm_id']])}" type="button">删除</a>
+							</td>
+						</tr>
+						</foreach>
+						</form>
+					</table>
+				</div>
+				<div class="" style="position:absolute;bottom:20px;left:0px;width:260px;height:40px;text-align:center;line-height:40px;">
+					<button id="check-all" type="button" class="btn btn-info" status='0' onclick="choose()">全选</button>
+					<button type="button" class="btn btn-info" id="showtoast" onclick="cklenRead()">标记为已读</button>
+					<button type="button" class="btn btn-info" onclick="cklenDel()">删除</button>
+				</div>
+				<div class="" style="position:absolute;bottom:20px;right:0px;width:500px;height:40px;text-align:center;line-height:40px;">
+					{$return_page}
+				</div>
+			</div>
+			<!-- 结束 -->
+			<script type="text/javascript">
+
+					$('#sel-change').change(function(){
+						$('#form-sel-change').submit();
+					});
+
+					function choose(){
+							if($('#check-all').attr('status') == '0'){
+									$('.ipt-checked').map(function(){
+										$(this).prop('checked',true);
+									});
+									$('#check-all').attr('status','1');
+							}else{
+								$('.ipt-checked').map(function(){
+									$(this).prop('checked',false);
+								});
+								$('#check-all').attr('status','0');
+							}
+					}
+
+					$('.btn-deleteact').click(function(){
+						 var url=$(this).attr('mesmid');
+						swal({
+							title: "你确定要删除吗!",
+							// text: "You will not be able to recover this imaginary file!",
+							// type: "warning",
+							showCancelButton: true,
+							confirmButtonColor: "#DD6B55",
+							confirmButtonText: "确定",
+							cancelButtonText: "取消",
+							// closeOnConfirm: false
+						 }, function(){
+								 swal();
+								 $.get(url);
+								 window.location.reload();
+							});
+					});
+
+					function cklenDel(){
+							var len = $("input[type='checkbox']:checked").length;
+							if(len > 0){
+								swal({
+										title: "你确定要删除吗!",
+										// text: "You will not be able to recover this imaginary file!",
+										// type: "warning",
+										showCancelButton: true,
+										confirmButtonColor: "#DD6B55",
+										confirmButtonText: "确定",
+										cancelButtonText: "取消",
+										// closeOnConfirm: false
+									 }, function(){
+									 swal();
+									 $('#form-ipt-checked').submit();
+								 	});
+							}else{
+								// 弹提示框
+								toastr.options = {
+										closeButton: false,
+										debug: false,
+										progressBar: false,
+										positionClass: "toast-top-center",
+										onclick: null,
+										showDuration: "300",
+										hideDuration: "1000",
+										timeOut: "5000",
+										extendedTimeOut: "1000",
+										showEasing: "swing",
+										hideEasing: "linear",
+										showMethod: "fadeIn",
+										hideMethod: "fadeOut"
+								};
+								var $toast = toastr['warning']('你没有选择操作项');
+							}
+					}
+
+					function cklenRead(){
+							var len = $("input[type='checkbox']:checked").length;
+							if(len > 0){
+								$('#checked-hid').attr('value','markRead');
+								$('#form-ipt-checked').submit();
+							}else{
+								// 弹提示框
+								toastr.options = {
+										closeButton: false,
+										debug: false,
+										progressBar: false,
+										positionClass: "toast-top-center",
+										onclick: null,
+										showDuration: "300",
+										hideDuration: "1000",
+										timeOut: "5000",
+										extendedTimeOut: "1000",
+										showEasing: "swing",
+										hideEasing: "linear",
+										showMethod: "fadeIn",
+										hideMethod: "fadeOut"
+								};
+								var $toast = toastr['warning']('你没有选择操作项');
+							}
+					}
+
+			</script>
+
+</block>

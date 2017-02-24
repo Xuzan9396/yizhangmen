@@ -1,0 +1,13 @@
+<style type="text/css"> 
+*{margin:0;padding:0;list-style-type:none;}
+.di-body{color:#666;font:12px/1.5 Arial;}
+/* star */
+.ostar{position:relative;margin-top:-4px;width:600px;height:24px;}
+.ostar ul,#star span{float:left;display:inline;height:19px;line-height:19px;}
+.ostar ul{margin:0 10px;}
+.ostar li{float:left;width:24px;cursor:pointer;text-indent:-9999px;background:url(../image/wordofmouth/xx4.png) no-repeat;}
+.ostar strong{color:#f60;padding-left:10px;}
+.ostar li.on{background-position:0 -28px;}
+.ostar p em{color:#f60;display:block;font-style:normal;}
+.ostar span{float: left;margin-left: 50px;}
+</style>

@@ -1,0 +1,203 @@
+/*设置*/
+body{
+	background: #f0f0f0;
+}
+*{
+	margin: 0px;
+	padding: 0px;
+}
+a{
+	text-decoration: none;
+}
+/*进度条样式*/
+.ui-stepBar-wrap{
+	position: relative;
+	width: 100%;
+	height: 130px;
+	overflow: hidden;
+	z-index: 10;
+}
+.ui-stepBar-wrap .ui-stepBar{
+	position: relative;
+	width: 90%;
+	height: 5px;
+	background: #cccccc;
+	top: 50px;
+	left: 5%;
+	z-index: 11;
+}
+.ui-stepBar-wrap .ui-stepBar .ui-stepProcess{position:relative;
+	width: 0;
+	height: 5px;
+	background: #516784;
+	top: 0;
+	left: 0;
+	z-index: 12;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap{
+	width: 90%;
+	margin: 0 auto;
+	height: 100%;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo{
+	position: relative;
+	float: left;
+	padding-top: 36px;
+	text-align: center;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .ui-stepSequence{
+	position: relative;
+	padding: 4px 8px;
+	border-radius: 50%;
+	z-index: 13;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .ui-stepName{
+	position: relative;
+	line-height: 50px;
+	z-index: 13;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-pre-change,
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-hind-change{
+	cursor: pointer;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-pre-change:hover{
+	box-shadow: 0 0 3px 1px #516784;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-hind-change:hover{
+	box-shadow: 0 0 3px 1px #cccccc;
+}
+.judge-stepSequence-pre{
+	background: #516784;
+	color: #ffffff;
+}
+.judge-stepSequence-hind{
+	background: #cccccc;
+	color: #000000;
+}
+
+.author{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	margin: 40px auto;
+	color: #1569ec;
+	text-shadow: 1px 1px 0 #e7e7e7, 0 1px 7px #fff;
+}
+
+/*分类部分*/
+.box{
+	height: 690px;
+	position: relative;
+	border-radius: 5px 5px 0 0;
+	margin-bottom: 50px;
+}
+/*内容区头部*/
+.box-head{
+	width: 100%;
+	height: 40px;
+	background: #3195F3;
+	line-height: center;
+	border-radius: 5px 5px 0 0;
+
+}
+.box-head p{
+	color: #fafafa;
+	line-height: 40px;
+	text-align: center;
+}
+/*左边的分类表*/
+.box-left{
+	height: 100%;
+	width: 220px;
+	background: #5BC0DE;
+	float: left;
+	margin: 0;
+	padding: 0px; 
+}
+.box-cate{
+	width: 100%;
+	height: 56px;
+	list-style: none;
+	display: block;
+	float: left;
+}
+.box-left-title{
+	display: block;
+	width: 100%;
+	height: 50px;
+	float: left;
+	line-height: 50px;
+	font-size: 18px;
+	font-weight: 700;
+	color: white;
+	background: #2EBFE5;
+	margin: 0;
+}
+.box-cate li{
+	width: 100%;
+	height: 40px;
+	display: block;
+	float: left;
+	color: #fafafa;
+	
+}
+.box-cate li .box-cate-ul-p{
+	cursor: pointer;
+	display: block;
+	height: 40px;
+	width: 80%;
+	line-height: 40px;
+	font-size: 16px;
+	font-weight: 700;
+	border-bottom: 1px dashed #fafafa;
+}
+
+/*隐藏内容*/
+.box-hidden{
+	width: 920px;
+	height: 100%;
+	background: #FAF2E8;
+	position: absolute;
+	top: 40px;
+	left: 220px;
+	display: none;
+	float:left;
+	margin-bottom: 100px;
+	overflow-y:scroll;
+}
+.box-hidden-dl{
+	padding: 10px;
+	background: #FAF2E8;
+	display: block;
+}
+/*标题类*/
+.box-hidden-dt{
+	display: block;
+	height: 20px;
+	width: 100%;
+	float: left;
+	color: #f60;
+	font-weight: 700;
+	margin-top: 10px;
+	font-size: 16px;
+	line-height: 20px;
+	text-align: left;
+	background: #FAEAD6;
+}
+/*内容*/
+.box-hidden-dd{
+	display: block;
+	width: 110px;
+	text-align: center;
+	float: left;
+	margin: 5px 0 0 5px;
+	border-bottom: 1px dashed #ccc;
+}
+.box-hidden-dd a{
+	font-size: 12px;
+}
+
+
+
+

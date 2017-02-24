@@ -1,0 +1,349 @@
+<extend name='./Public/template/base.html'/>
+
+<block name="content">
+	<style>
+		.main .bread{
+			font-family: '微软雅黑';
+
+		}
+		.main .bread a {
+			text-decoration: none;
+		}
+		.side{
+			width: 230px;
+			height: 857px;
+			float: right;
+		}
+		.box-header{
+			width: 230px;
+			height: 35px;
+			background: #fafafa;
+			margin-bottom: -1px;
+			border: 1px solid #eeeeee;
+					
+		}
+		.min-title{
+			line-height: 30px;
+			margin:0 0 0 10px;
+			font-size: 14px;
+			font-weight: bold;
+		}
+		.box-body{
+			width: 230px;
+			height: auto;
+			margin-bottom: 10px;
+			border: 1px solid #eeeeee;			
+		}
+		.min-list{
+			margin-top: 5px;
+		}
+		.min-list li{
+			width: 208px;
+			height: 30px;
+			margin-left: 10px;
+			line-height: 30px;
+			white-space:nowrap;
+			text-overflow:ellipsis; 
+			overflow: hidden;
+		}
+		.min-list li a{
+			font-size: 12px;
+			color: #3195F3;
+
+		}
+		.min-list li a:hover{
+			text-decoration: underline;
+
+		}
+		.record-list li{
+			width: 230px;
+			height: 67px;
+			border-bottom: 1px solid #eeeeee;
+		}
+		.avatar img{
+			width: 50px;
+			height: 50px;
+			margin-top: 10px;
+			margin-left: 10px;
+			float: left;
+		}
+		.avatar-detail{
+			width: 160px;
+			height: 56px;
+			margin-top: 10px;
+			margin-left: 10px;
+			float: left;			
+		}
+		.record-list-title{
+			white-space:nowrap;
+			text-overflow:ellipsis; 
+			overflow: hidden;
+		}
+		.record-list-title a{
+			font-size: 12px;
+
+		}
+		.record-list-meta{
+			font-size: 12px;
+		}
+		.record-list-meta span{
+			color: #bc3023;
+		}
+	
+		.bread-nav{
+			margin-top: 40px;
+			width: 1349px;
+			height: 35px;
+		}
+
+		.bread{
+			width: 1349px;
+			height: 35px;
+			margin: 10px auto;
+
+		}
+		.bread-header{
+			border: 1px #eeeeee solid;
+			height: 35px;
+			width: 1100px;
+			background: #fafafa;
+			margin : 10px auto;
+		}
+		.main{
+			width: 1100px;
+			height: auto;
+			margin:0 auto;
+		}
+		.article-main{
+			width: 858px;
+			height: auto;
+			float: left;
+		}
+		.article{
+			width: 858px;
+			margin-bottom: 20px;
+			
+		}
+		.article-header{
+			width: 858px;
+			height: 80px;
+			margin-bottom: -1px;
+			border: 1px solid #eeeeee;
+			text-align: center;
+			line-height: 30px;
+
+		}
+		.article-body{
+			width: 858px;
+			height: auto;
+			padding: 30px;
+			border: 1px solid #eeeeee;
+		}
+		.ws_break{
+			margin:0;
+			line-height: 40px;
+			font-family: '微软雅黑';
+		}
+		.article-meta{
+			margin-left: 270px;
+		}
+		.article-meta li{
+			float: left;
+			line-height: 30px;
+			margin-left: 20px;
+			font-size: 12px;
+			font-family: '微软雅黑';
+			color: #666666;
+		}
+		.article-meta li a{
+			font-family: '微软雅黑';
+			
+			font-size: 12px;
+		}
+		.bread-crumb{
+			padding: 0;
+			margin:0;			
+		}
+		.bread-crumb li{
+			float: left;
+			font-size: 12px;
+			line-height: 35px;
+			margin-left: 12px;
+
+		}
+		.bread-crumb li a{
+			font-size: 12px;
+			margin-left: 10px;
+		}
+		.adv img{
+			width: 858px;
+		}
+		.article-share{
+			width: 858px;
+			height: 50px;
+			margin-top: -1px;
+			border: 1px solid #eeeeee;
+		}
+		#copy-url{
+			width: 100px;
+		}
+		.clearfix{
+			margin-top: 10px;
+		}
+		.article-footer{
+			width: 858px;
+			margin-top: -1px;
+			border: 1px solid #eeeeee;		
+			background: #fafafa;	
+		}
+		.previous{
+			float: left;
+			margin-left: 10px;
+		}
+		.next{
+			margin-right: 10px;
+
+			float: right;
+		}
+		.comment{
+			width: 858px;
+			height: 240px;
+			margin-top: -1px;
+			padding: 20px;
+			border: 1px #eeeeee solid;
+			position: relative;
+		}
+		.content-txt{
+			width: 600px;
+			heigh: 100px;
+			resize: none;
+		}
+		.tijiao,.chongzhi{
+			margin-top: 10px;
+		}
+		.lr{
+			position: absolute;
+			left: 250px;
+			top: 90px;
+		}
+		.lr a{
+			font-family: '微软雅黑';
+			font-size: 14px;
+			color: #999999;
+		}
+	</style>
+		<div class="bread">
+			<div class="bread-header">
+				<ol class="bread-crumb">
+					<li>您的位置:</li>
+					<li>/<a href="{:U('home/trade/index')}">资讯中心</a></li>
+					<li>/<a href="">行业资讯</a></li>
+				</ol>
+			</div>
+		</div>
+		<div class="container">
+		<div class="main">
+			<div class="article-main">
+				<div class="article">
+					<div class="article-header">
+						<h3 class="ws_break">{$news.apps_title}</h3>
+						<ul class="article-meta">
+							<li>发布时间：<?php echo (date('Y年m月d日',$news['apps_ctime'])); ?></li>
+							<li>分类：<a href="">{$news.apps_cid}</a></li>
+						</ul>
+					</div>
+					<div class="article-body ws_break">
+						<p>{$news.apps_content}</p>
+					</div>
+					<div class="article-share">
+						<div class="col-sm-8 clearfix">
+							<div class="col-sm-10">
+								<div class="input-group input-group-sm ">
+									<span class="input-group-addon">本文链接</span>
+									<input type="text" class="form-control" value="http://trade.yikexue.com/index.php?do=article&id=677">
+								</div>
+							</div>
+							<div class="col-sm-2 col-xs-12 po_re">
+								<button id="copy-url" class="btn btn-default btn-sm btn-block">复制本文链接</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="bdsharebuttonbox bdshare-button-style1-16">
+								<a href="" class="bds_more"></a>
+								<a href="" class="bds_weixin"></a>
+								<a href="" class="bds_tsina"></a>
+								<a href="" class="bds_tqq"></a>
+								<a href="" class="bds_renren"></a>
+								<a href="" class="bds_copy"></a>
+								<a href="" class="bds_print"></a>
+							</div>
+						</div>
+					</div>
+					<div class="article-footer">
+						<ul class="pager">
+							<li class="previous">
+								<a href="">特朗普选定埃克森美孚首席执行官为国务卿</a>
+							</li>
+							<li class="next">
+								<a href="">盘点天价域名不为人知的秘密</a>
+							</li>
+						</ul>
+					</div>
+					<div class="comment">
+						<p>评论</p>
+							<form action="">
+								<textarea class="content-txt" cols="10" rows="5" readonly="true"></textarea><br>
+								<p class="lr"><a href="{:U('home/login/register')}">请先登录</a></p>
+								<input class="btn btn-default tijiao" type="submit" value="发表评论">
+								<input class="btn btn-default chongzhi" type="reset" >
+							</form>
+					</div>
+				</div>
+				<div class="for-advertise">
+					<div class="adv">
+						<a href=""><img src="__PUBLIC__/image/lbt.jpg" alt=""></a>
+					</div>
+				</div>
+			</div>
+
+			<div class="side">
+				<div class="box-header">
+					<h2 class="min-title">热门新闻</h2>
+				</div>
+				<div class="box-body same-type">
+					<ul class="min-list">
+						<for start="1" end="11">
+						<li><a href="" title=" 【4月9日】清华北大“磁遗传”学术纠纷事件，录音证据首次公开"> 【4月9日】清华北大“磁遗传”学术纠纷事件，录音证据首次公开</a></li>
+						</for>
+					</ul>
+				</div>
+				<div class="box-header">
+					<h2 class="min-title">推荐服务机构</h2>
+				</div>
+				<div class="box-body">
+					<ul class="record-list img">
+						
+						<for start="1" end="6">
+						<li>
+							<a href="" class="avatar"><img src="__PUBLIC__/image/q.jpg" alt=""></a>
+							<div class="avatar-detail">
+								<p class="record-list-title"><a href="">北京迈基诺基因科技股份有限公司</a></p>
+								<p class="record-list-meta">提供<span>1项</span>服务</p>
+								<!-- <p><span class="marked marked-tags">生命科学</span><span class="marked marked-tags">高通量测序技术服务</span></p> -->
+							</div>
+						</li>
+						</for>
+
+					</ul>
+				</div>
+			</div> 
+		</div>
+		</div>
+		<script>
+			$('.bread-header').hover(function(){
+				$(this).css('background','#EEEEEE');
+			},function(){
+				$(this).css('background','');
+			});
+		</script>
+</block>

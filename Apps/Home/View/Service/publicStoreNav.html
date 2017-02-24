@@ -1,0 +1,54 @@
+<!-- 店铺信息开始 -->
+	<div class="store" >
+		<div class="store-list">
+			<a href="#"><strong>{$shop[0]['store_name']} | 
+				<if condition="$shop[0]['store_type'] eq 0">
+					个人
+				<elseif condition="$shop[0]['store_type'] eq 1" />
+					企业
+				</if> 
+			</strong></a>
+			<a href="" class="store-iconv"></a>
+			<div class="store-access">
+				&nbsp;&nbsp;质量:<span style="color:#CB2103">{$att}</span>
+				&nbsp;&nbsp;速度:<span style="color:#CB2103">{$speed}</span>
+				&nbsp;&nbsp;态度:<span style="color:#CB2103">{$qua}</span>
+				&nbsp;&nbsp;近三个月收入:<span style="color:#CB2103"> {$price} </span>元<span style="color:#CB2103"> {$bi} </span>笔
+			</div>
+			<div class="store-deal">
+				<span class="glyphicon glyphicon-star-empty"></span>
+				<span class="glyphicon glyphicon-star"></span>
+				<a href=""><span>收藏店铺</span></a>
+			</div>
+		</div>
+	</div>
+	
+		<!-- 店铺信息结束 -->
+	<div class="clear"></div>
+	<!-- 店铺导航条开始 -->
+	<!-- <div class="store-logo-img">
+		<img class="img-responsive" src="__PUBLIC__/image/service/image/11.jpg" alt="">
+	</div> -->
+	<div class="clear"></div>
+	<div class="store-nav">
+		<div class="store-nav-content">
+			<ul class="store-nav-ul">
+				<li><a href="{:U('Home/Service/store',array('storeid'=>$shop[0]['id']))}">首页</a></li>
+				<li class="store-nav-server">
+					<a href="javascript:void(0)">
+					服务<i class="iconfont nav-i"></i>
+					</a>
+					<div class="store-nav-hidden">
+						<foreach name="cate" item="val" key="key">
+						<a href="{:U('Home/Service/CategoryDetail',['id'=>$key,'storeid'=>$shop[0]['id']])}">{$val}</a>
+						</foreach>
+					</div>
+				</li>
+				<li><a href="{:U('Home/Service/assess',array('storeid'=>$shop[0]['id']))}">交易评价</a></li>
+				<li><a href="{:U('Home/Service/example',array('storeid'=>$shop[0]['id']))}">案例展示</a></li>
+				<li><a href="{:U('Home/Service/salerinfo',array('storeid'=>$shop[0]['id']))}">服务商资料</a></li>
+			</ul>
+		</div>
+	</div>
+		<!-- 店铺导航条结束 -->
+	<div class="clear"></div>

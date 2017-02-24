@@ -1,0 +1,51 @@
+<extend name="./Public/template/serviceShop.html" />
+
+<block name="right1">
+	<load href="__PUBLIC__/css/storeRegister1.css" />
+	<script src="__PUBLIC__/js/jquery.raty.js">
+	</script> 
+	
+	<link rel="stylesheet" href="__PUBLIC__/css/storecomment.css">
+	<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+	
+	<script src="__PUBLIC__/layui/layui.js"></script>
+	<div class="col-free-shop">
+		<p class="free-set-shop">评论雇主</p>
+	</div>
+	<!-- 店铺评分 -->
+	<form action="{:U('home/service/storeReyle')}" method="post">
+	<div class="container  col-free-shop">
+		<div class="shop-p">完善您对雇主的印象</div>
+		<div>
+			<table class="table table2-n">
+				<tr>
+					<th>
+						<span class="comment-icon good-comment"></span>
+						<input type="radio" name="comment" checked value="5"><span class="font1">好评</span>
+						<input type="hidden" name="id" value="{$id}">
+					</th>
+					<th>
+						<span class="comment-icon middle-comment"></span>
+						<input type="radio" name="comment" value="3"><span class="font1">中评</span>
+					</th>
+					<th>
+						<span class="comment-icon bad-comment"></span>
+						<input type="radio" name="comment" value="1"><span class="font1">差评</span>
+					</th>
+				</tr>
+				
+			</table>
+		</div>
+		
+		<!-- 简单的描述回复内容 -->
+		<div>
+			<textarea name="content" rows="8" cols="120">请简单回复雇主的问题</textarea>
+		</div>
+		<p class="mini-size">最多回复50字！</p>
+		<div><input type="submit" 	class="layui-btn layui-btn-danger"></div>
+	</div>
+</form>
+
+
+	
+</block>

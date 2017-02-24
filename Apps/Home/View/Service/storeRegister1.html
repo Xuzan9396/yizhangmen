@@ -1,0 +1,679 @@
+<extend name="./Public/template/serviceShop.html" />
+<block name="right1">
+	<load href="__PUBLIC__/css/storeRegister1.css" />
+	<load href="__PUBLIC__/css/city-picker.css" />
+	<!-- 手机验证 -->
+	<script src="__PUBLIC__/js/jquery.cookie.js"></script>
+	<load file="__PUBLIC__/js/register.js" />
+
+	<load href="__PUBLIC__/js/uploadPreview.js" />
+	<load file="__PUBLIC__/css/register-index.css" />
+	<load href="__PUBLIC__/layui/css/layui.css" />
+	<load href="__PUBLIC__/layui/layui.js" />
+	<style>
+		.reg-box .part1,
+		.reg-box .part2,
+		.reg-box .p {
+			padding-left: 0px;
+		}
+
+		.col-xs-12 {
+			margin-bottom: 0px!important;
+			padding-bottom: 0px!important;
+		}
+	</style>
+
+	<div class="col-free-shop">
+		<p class="free-set-shop">{$data['title']}</p>
+	</div>
+	<div class="open-shop-bd">
+		<ul class="ui-step">
+			<li class="ui-step-active">
+				<div class="item-hd">
+					<span class="item-bg"></span>
+					<span class="item-ico">1</span>
+				</div>
+				<div class="shop-ws">
+					店铺完善信息
+				</div>
+			</li>
+
+			<li class="ui-step-active">
+				<div class="item-hd">
+					<span class="item-bg"></span>
+					<span class="item-ico item-ico2">2</span>
+				</div>
+				<div class="shop-ws">
+					技能设置
+				</div>
+			</li>
+			<li class="ui-step-active">
+				<div class="item-hd">
+					<span class="item-ico item-ico2">3</span>
+				</div>
+				<div class="shop-ws">
+					出售服务
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="clear"></div>
+	<div class="row jiben-info">
+		<div><b>基本信息</b></div>
+	</div>
+	<div class="row jiben-info2">
+		<div class="row">
+			<form action="{:U('home/service/storeRegister1Add')}" method="post" class="layui-form" enctype="multipart/form-data">
+				<input type="hidden" name="id" value="{$data['id']}">
+				<table class="shop-table" cellspacing="5px" cellpadding="5px">
+					<tr>
+						<th class="font-table">当前头像：
+							<font class="font-red">*</font>
+						</th>
+						<td class="pad-left">
+							<div class="font-table-img"><img id="imgShow_WU_FILE_0" class="font-table-imgs" <if condition="($data['file_image'] neq '')"> src="/shop/Public/Uploads/{$data['file_image']}"
+								<else /> src="/shop/Public/image/service/test/zhengmian.jpg"</if>
+								alt="图片"></div>
+							<div class="layui-btn layui-btn-mini image-button">上传头像
+								<input id="up_img_WU_FILE_0" lay-verify="touxiang" type="file" name="file_image" class="input-file">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th class="font-table">店铺名称：
+							<font class="font-red">*</font>
+						</th>
+						<td class="pad-left"><input lay-verify="title" class="shop-input" name="store_name" type="text" placeholder="填写店铺名称" value="{$data['store_name']}"><span class="text-primary">提示：店铺的名称在5-20字符之间！</span></td>
+					</tr>
+
+					<tr>
+						<th class="font-table">店铺类型：
+							<font class="font-red">*</font>
+						</th>
+						<td class="pad-left">
+							<input type="radio" id="person-id" class="company-person" name="store_type" value="0" title="个人" <?php if($data[ 'store_type']==0 ) echo 'checked' ?>>
+							<input type="radio" class="company-person" name="store_type" value="1" title="企业" <?php if($data[ 'store_type']==1 ) echo 'checked' ?>>
+						</td>
+					</tr>
+					<tr>
+						<th class="font-table">店铺介绍：</th>
+						<td class="pad-left">
+							<textarea name="store_describe" id="textarea">{$data['store_describe']}</textarea>
+							<span class="text-primary">还剩<font id="two-zero-zero">200</font>字</span>
+						</td>
+					</tr>
+					<tr>
+						<th class="font-table">详细地址：
+							<font class="font-red">*</font>
+						</th>
+						<td class="padding-td pad-left">
+
+							<!-- 代码部分begin -->
+							<div class="docs-methods">
+								<div id="distpicker">
+									<div class="form-group">
+										<div style="position: relative;">
+											<input id="city-picker3" class="form-control" lay-verify="content" name="store_address" readonly type="text" value="" data-toggle="city-picker" style="width:200px">
+										</div>
+									</div>
+									<div class="form-group">
+										<button class="layui-btn layui-btn-mini" id="reset" type="button">重置</button>
+									</div>
+								</div>
+							</div>
+
+						</td>
+					</tr>
+					<tr>
+						<th class="font-table">认证手机：
+							<font class="font-red">*</font>
+						</th>
+						<td class="padding-td pad-left">
+							<if condition="$data['store_phone'] neq '' ">
+								<input type="hidden" name="store_phone" lay-verify="phone" placeholder="请输入手机号码" class="shop-input" value="{$data['store_phone']}">
+								<span class="shop-input" id="toge2">{$data['store_phone']}</span>
+								<button type="button" class="layui-btn layui-btn-mini" data-toggle="modal" data-target="#myModal2">
+                               				修改
+                          	 	</button>
+								<else/>
+
+								<?php  if($_COOKIE['storePhone']): ?>
+								<span class="shop-input">{:$_COOKIE['storePhone']}</span>
+
+								<input type="hidden" name="store_phone" lay-verify="phone" placeholder="请输入手机号码" class="shop-input" value="{:$_COOKIE['storePhone']}">
+								<?php else: ?>
+								<button id="remove" type="button" class="layui-btn layui-btn-mini" data-toggle="modal" data-target="#myModal1">
+										立即绑定
+	                          	 	</button>
+								<span id="show" style="display:none" class="shop-input"></span>
+								<input type="hidden" id="cookie-hidden" name="store_phone" lay-verify="phone" placeholder="请输入手机号码" class="shop-input" value="{:$_COOKIE['storePhone']}">
+								<?php endif; ?>
+
+							</if>
+						</td>
+					</tr>
+					<tr>
+						<th class="font-table">身份证认证：
+							<font class="font-red">*</font>
+						</th>
+						<td class="padding-td pad-left">
+							<input type="text" name="store_caid" class="shop-input" lay-verify="identity" value="{$data['store_caid']}">
+						</td>
+					</tr>
+					<tr>
+						<th class="font-table">真实姓名：
+							<font class="font-red">*</font>
+						</th>
+						<td class="padding-td pad-left">
+							<input type="text" name="store_realname" class="shop-input" lay-verify="realname" value="{$data['store_realname']}">
+						</td>
+					</tr>
+
+					<tr>
+						<th class="font-table" id="identity-z">个人的身份证正面：
+							<font class="font-red">*</font>
+						</th>
+						<td class="padding-td pad-left">
+							<div class="layui-btn layui-btn-normal image-button">点击上传<input type="file" id="up_img_WU_FILE_1" lay-verify="zm" name="store_zcaidpic" class="input-file">
+							</div>
+							<img id="imgShow_WU_FILE_1" class="identity-img1" width="250" height="230" <if condition="($data['store_zcaidpic'] neq '')"> src="/shop/Public/Uploads/{$data['store_zcaidpic']}"
+							<else /> src="/shop/Public/image/service/test/zhengmian.jpg"</if> />
+							<span class="span-prompt glyphicon glyphicon-info-sign text-muted">提示 最佳图片尺寸：1200*280像素</span>
+						</td>
+					</tr>
+					<tr>
+						<th class="font-table" id="identity-f">个人的身份证反面：
+							<font class="font-red">*</font>
+						</th>
+						<td class="padding-td pad-left">
+							<div class="layui-btn layui-btn-normal image-button">点击上传<input type="file" id="up_img_WU_FILE_2" lay-verify="zm" name="store_fcaidpic" class="input-file">
+							</div>
+							<img id="imgShow_WU_FILE_2" width="250" height="230" <if condition="($data['store_fcaidpic'] neq '')"> src="/shop/Public/Uploads/{$data['store_fcaidpic']}"
+							<else /> src="/shop/Public/image/service/test/fanmian.jpeg"</if>
+							/>
+							<span class="span-prompt glyphicon glyphicon-info-sign text-muted">提示 最佳图片尺寸：1200*280像素</span>
+						</td>
+					</tr>
+					<tr>
+						<th class="font-table" id="identity-q">身份证到期时间：
+							<font class="font-red">*</font>
+						</th>
+						<td class="padding-td pad-left">
+							<input class="layui-input lay-ipt" id="LAY_demorange_s" value="{:date('Y-m-d', $data['store_due'])}" lay-verify="date" name="store_due" placeholder="身份证过期日期">
+						</td>
+					</tr>
+					<tr>
+						<th class="font-table">QQ：</th>
+						<td class="padding-td pad-left">
+							<input name="store_qq" class="shop-input" value="{$data['store_qq']}" placeholder="  QQ号码" lay-verify="qq">
+						</td>
+					</tr>
+					<tr>
+						<th class="font-table">邮箱：</th>
+						<td class="padding-td pad-left">
+							<input type="email" name="store_email" class="shop-input" value="{$data['store_email']}" placeholder="请填写邮箱">
+						</td>
+					</tr>
+
+					<tr>
+						<th></th>
+						<td class="padding-td pad-left">
+							<input type="submit" lay-submit="" class="btn btn-info" value="下一步">
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	</div>
+	<ul id="warp" style="display:none;">
+		<li>
+			<input type="file" id="up_img_WU_FILE_0" />
+		</li>
+		<li>
+			<input type="file" id="up_img_WU_FILE_1" />
+		</li>
+		<li>
+			<input type="file" id="up_img_WU_FILE_2" />
+		</li>
+	</ul>
+
+	<!-- 立即绑定step1模态框 -->
+	<div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content animated flipInY">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">绑定手机号码</h4>
+					<small class="font-bold">您正在使用手机验证码验证身份，请完成以下操作
+                        </div>
+                        <div class="modal-body">
+						<div class="reg-box" id="verifyCheck" style="margin-top:20px;">
+							<div class="part1">
+								<div class="alert alert-info" style="width:500px">为了保证信息真实，请验证短信，确保您的手机号真实有效。</div>
+								<div class="item col-xs-12 margg f-mb10" style="height:auto;">
+									<span class="intelligent-label f-fl"><b class="ftx04">*</b>手机号：</span>
+									<div class="f-fl item-ifo">
+										<input type="text" class="txt03 f-r3 required" keycodes="tel" tabindex="2" data-valid="isNonEmpty||isPhone" data-error="手机号码不能为空||手机号码格式不正确" maxlength="11" id="js_phone1" />
+										<span class="ie8 icon-close close hide"></span>
+										<span id="js_phone_error" class="css_status"><label class="icon-sucessfill blank hide"></label></span>
+										<label class="focus">请填写11位有效的手机号码</label>
+										<label class="focus valid" id="label1"></label>
+									</div>
+								</div>
+								<div class="item col-xs-12 margg">
+									<span class="intelligent-label f-fl"><b class="ftx04">*</b>验证码：</span>
+									<div class="f-fl item-ifo">
+										<input type="text" maxlength="6" id="verifyNo1" class="txt03 f-r3 f-fl required" tabindex="4" style="width:167px"/>
+										<button class="layui-btn" id="user_get_code" style="padding:0 6px;">获取验证码</button>
+										<label class="focus"><span id='sms_error'>请查收手机短信，并填写短信中的验证码（此验证码3分钟内有效）</span></label>
+										<label class="focus valid"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+                        </div>
+                        <div class="modal-footer" style="border:none;">
+                            <button id="toge" type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" id="code-phone1">立即绑定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+	<!-- 修改step2模态框 -->
+	<div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content animated flipInY">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">修改手机号码</h4>
+					<small class="font-bold">您正在使用手机验证码验证身份，请完成以下操作
+                        </div>
+                        <div class="modal-body">
+						<div class="reg-box" id="verifyCheck" style="margin-top:20px;">
+							<div class="part1">
+								<div class="alert alert-info" style="width:500px">为了保证信息真实，请验证短信，确保您的手机号真实有效。</div>
+								<div class="item col-xs-12 margg f-mb10" style="height:auto;">
+									<span class="intelligent-label f-fl"><b class="ftx04">*</b>手机号：</span>
+									<div class="f-fl item-ifo">
+										<input type="text" class="txt03 f-r3 required" keycodes="tel" tabindex="2" data-valid="isNonEmpty||isPhone" data-error="手机号码不能为空||手机号码格式不正确" maxlength="11" id="js_phone2"  value="{$data['store_phone']}" disabled />
+										<span class="ie8 icon-close close hide"></span>
+										<span id="js_phone_error" class="css_status"><label class="icon-sucessfill blank hide"></label></span>
+										<label class="focus">请填写11位有效的手机号码</label>
+										<label class="focus valid" id="label2"></label>
+									</div>
+								</div>
+								<div class="item col-xs-12 margg">
+									<span class="intelligent-label f-fl"><b class="ftx04">*</b>验证码：</span>
+									<div class="f-fl item-ifo">
+										<input type="text" maxlength="6" id="verifyNo2" class="txt03 f-r3 f-fl required" tabindex="4" style="width:167px" />
+										<button class="layui-btn" id="user_get_code2" style="padding:0 6px;">获取验证码</button>
+										<label class="focus"><span id='sms_error'>请查收手机短信，并填写短信中的验证码（此验证码3分钟内有效）</span></label>
+										<label class="focus valid"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+                        </div>
+                        <div class="modal-footer" style="border:none;">
+                            <button type="button" class="btn btn-white"  data-dismiss="modal">关闭</button>
+                            <button type="button" id="code-phone2" class="btn btn-primary">下一步</button>
+							<button id="step2" style="display:none" data-toggle="modal" data-target="#myModal3" data-dismiss="modal">
+							 </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			<!-- 修改step3模态框 -->
+			<div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content animated flipInY">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+							<h4 class="modal-title">修改手机号码</h4>
+							<small class="font-bold">您正在使用手机验证码验证身份，请完成以下操作
+		                        </div>
+		                        <div class="modal-body">
+								<div class="reg-box" id="verifyCheck" style="margin-top:20px;">
+									<div class="part1">
+										<div class="alert alert-info" style="width:500px">为了保证信息真实，请验证短信，确保您的手机号真实有效。</div>
+										<div class="item col-xs-12 margg f-mb10 " style="height:auto;">
+											<span class="intelligent-label f-fl"><b class="ftx04">*</b>新手机号：</span>
+											<div class="f-fl item-ifo">
+												<input type="text" class="txt03 f-r3 required auth" keycodes="tel" tabindex="2" data-valid="isNonEmpty||isPhone" data-error="手机号码不能为空||手机号码格式不正确" maxlength="11" id="js_phone3" />
+												<span class="ie8 icon-close close hide"></span>
+												<span id="js_phone_error" class="css_status"><label class="icon-sucessfill blank hide"></label></span>
+												<label class="focus">请填写11位有效的手机号码</label>
+												<label class="focus valid" id="label3"></label>
+											</div>
+										</div>
+										<div class="item col-xs-12 margg">
+											<span class="intelligent-label f-fl"><b class="ftx04">*</b>验证码：</span>
+											<div class="f-fl item-ifo">
+												<input type="text" maxlength="6" id="verifyNo3" class="txt03 f-r3 f-fl required" tabindex="4" style="width:167px"/>
+												<button class="layui-btn" style="padding:0 6px;" id="user_get_code3">获取验证码</button>
+												<label class="focus"><span id='sms_error'>请查收手机短信，并填写短信中的验证码（此验证码3分钟内有效）</span></label>
+												<label class="focus valid" ></label>
+											</div>
+										</div>
+									</div>
+								</div>
+		                        </div>
+		                        <div class="modal-footer" style="border:none;">
+		                            <button id="missid" type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+		                            <button type="button" id="code-phone3" class="btn btn-primary">确认修改</button>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+
+		<script src="__PUBLIC__/js/city-picker.data.js"></script>
+		<script src="__PUBLIC__/js/city-picker.js"></script>
+		<script src="__PUBLIC__/js/main.js"></script>
+		<script>
+		// 立即绑定手机号码
+		var timer1 = null;
+		var cd1 = 59;
+		// 点击验证手机号码，ajax获取验证码
+		$('#user_get_code').click(function(){
+			//正则验证手机号码
+			$(this).attr('disabled', true);
+			var result = $('#js_phone1').val();
+				if(cd1 == 59){
+					$('#user_get_code').html('发送中...');
+					$.post("{:U('sms')}", {'store_phone':result}, function(data){
+						if(data.status){
+							// 发送短信成功，按钮进入倒计时
+							timer1 = setInterval(function(){
+								$('#user_get_code').html('[ ' + cd1 + 's ]重新发送');
+								cd1--;
+								// 倒计时结束，重启按钮
+								if(cd1 == 0){
+									clearInterval(timer1);
+									$('#user_get_code').removeAttr('disabled');
+									$('#user_get_code').html('发送验证码');
+									cd1 = 59;
+								}
+							},1000);
+						}
+					}, 'json');
+				}else{
+					$(this).attr('disabled', true);
+				}
+		});
+
+
+		//修改短信验证第一步
+		var timer = null;
+		var cd = 59;
+		// 点击验证手机号码，ajax获取验证码
+		$('#user_get_code2').click(function(){
+			//正则验证手机号码
+			$(this).attr('disabled', true);
+			var result = $('#js_phone2').val();
+				if(cd == 59){
+					$('#user_get_code2').html('发送中...');
+					$.post("{:U('sms')}", {'store_phone':result}, function(data){
+						if(data.status){
+							// 发送短信成功，按钮进入倒计时
+							timer = setInterval(function(){
+								$('#user_get_code2').html('[ ' + cd + 's ]重新发送');
+								cd--;
+								// 倒计时结束，重启按钮
+								if(cd == 0){
+									clearInterval(timer);
+									$('#user_get_code2').removeAttr('disabled');
+									$('#user_get_code2').html('发送验证码');
+									cd = 59;
+								}
+							},1000);
+						}
+					}, 'json');
+				}else{
+					$(this).attr('disabled', true);
+				}
+		});
+
+		var timer2 = null;
+		var cd2 = 59;
+		// 点击验证手机号码，ajax获取验证码
+		$('#user_get_code3').click(function(){
+			//正则验证手机号码
+			$(this).attr('disabled', true);
+			var result = $('#js_phone3').val();
+				if(cd2 == 59){
+					$('#user_get_code3').html('发送中...');
+					$.post("{:U('sms')}", {'store_phone':result}, function(data){
+						if(data.status){
+							// 发送短信成功，按钮进入倒计时
+							timer2 = setInterval(function(){
+								$('#user_get_code3').html('[ ' + cd2 + 's ]重新发送');
+								cd2--;
+								// 倒计时结束，重启按钮
+								if(cd2 == 0){
+									clearInterval(timer2);
+									$('#user_get_code3').removeAttr('disabled');
+									$('#user_get_code3').html('发送验证码');
+									cd2 = 59;
+								}
+							},1000);
+						}
+					}, 'json');
+				}else{
+					$(this).attr('disabled', true);
+				}
+		});
+
+		// 点击下一步修改手机号码
+		$('#code-phone2').click(function(data){
+			var code2 = $('#verifyNo2').val();
+			$.ajaxSetup({async : false});
+			$.post("{:U('codeRegester2')}", {'code2':code2},function(data){
+				if(data == '1'){
+					$('#step2').trigger('click');
+				}else if(data == '2'){
+					layer.msg('验证码错误！');
+				}
+			},'json');
+		});
+
+		// 修改手机step3
+		$('#code-phone3').click(function(data){
+			$('#js_phone3').blur();
+			if($('.auth').data('xu') == 9) {
+				layer.msg('手机格式不正确！');
+			}else if($('.auth').data('xu') == 8){
+				layer.msg('手机号码已经存在！');
+			}
+			else{
+				if($('.auth').data('xu') == 1){
+					var code3 = $('#verifyNo3').val();
+					var phone3 = $('#js_phone3').val();
+
+					$.post("{:U('codeRegester4')}", {'code3':code3,'phone3':phone3},function(data){
+						if(data == '1'){
+							layer.msg('修改成功!');
+							// location.href = "{:U('home/service/storeRegister1')}";
+							$('#toge2').html(phone3);
+							$('#missid').trigger('click');
+						}else if(data == '2'){
+							layer.msg('验证码错误！');
+						}else if(data == '3'){
+							layer.msg('修改失败!');
+						}
+					},'json');
+				}
+			}
+		});
+
+
+
+		$('#js_phone3').blur(function(data){
+			var phone3 = $(this).val();
+			if(!(/^1[34578]\d{9}$/.test(phone3))){
+				$('.auth').data({'xu':9});
+			}else{
+				$.ajaxSetup({async : false});
+				$.post("{:U('codeRegester3')}", {'phone3':phone3},function(data){
+					if(data == '1'){
+						$('.auth').data({'xu':1});
+						$('#label3').html('');
+					}else if(data == '2'){
+						$('#label3').html('帐号已经存在！');
+						$('.auth').data({'xu':8});
+					}
+
+				},'json');
+			}
+		});
+
+
+
+		// 手机绑定
+		$('#code-phone1').click(function(data){
+			$('#js_phone1').blur();
+
+			if($('.auth').data('xu') == 9) {
+				layer.msg('手机格式不正确！');
+			}else if($('.auth').data('xu') == 8){
+				layer.msg('帐号已经存在！');
+			}else{
+				if($('.auth').data('xu') == 1){
+					var code3 = $('#verifyNo1').val();
+					var phone3 = $('#js_phone1').val();
+					$.ajaxSetup({async : false});
+					$.post("{:U('codeRegester5')}", {'code3':code3,'phone3':phone3},function(data){
+						if(data == '1'){
+							layer.msg('绑定成功!');
+							// location.href = "{:U('home/service/storeRegister1')}";
+
+							var cookie = $.cookie('storePhone');
+							$('#show').css('display','block').html(cookie);
+							$('#remove').remove();
+							$('#cookie-hidden').val(cookie);
+							$('#toge').trigger('click');
+						}else if(data == '2'){
+							layer.msg('验证码错误！');
+						}
+					},'json');
+				}
+			}
+		});
+
+
+
+		$('#js_phone1').blur(function(data){
+			var phone3 = $(this).val();
+			if(!(/^1[34578]\d{9}$/.test(phone3))){
+				$('.auth').data({'xu':9});
+			}else{
+				$.ajaxSetup({async : false});
+				$.post("{:U('codeRegester3')}", {'phone3':phone3},function(data){
+					if(data == '1'){
+						$('.auth').data({'xu':1});
+						$('#label1').html('');
+					}else if(data == '2'){
+						$('.auth').data({'xu':8});
+						$('#label1').html('帐号已经存在！');
+					}
+				},'json');
+			}
+		});
+
+
+			layui.use(['form', 'layedit', 'laydate'], function(){
+				var form = layui.form()
+				,layer = layui.layer;
+
+				form.verify({
+				title: function(value){
+					if(value.length < 5 || value.length >= 20){
+						return '请输入5-20个字符，支持中文、英文';
+					}
+				} ,content: function(value){
+					if(value.length <= 0 ){
+						return '请填写详细的地址';
+					}
+				},zm: function(value){
+					/*if(value == ''){
+						return '上传图片不能为空';
+					}*/
+				},touxiang: function(value){
+					if(value == '' ){
+						return '请上传头像！';
+					}
+				},realname: [/[\u4E00-\u9FA5\uF900-\uFA2D]/, '请填写真实中文姓名'] ,qq:  function(value){
+					if(value != ''){
+
+				// return  [/^[1-9]\d{4,12}$/, 'qq格式不正确'];
+						if(!(/^[1-9]\d{4,12}$/.test(value))){
+							return 'QQ格式不正确！';
+						}
+					}
+				},
+				});
+
+
+				var start = {
+					    min: laydate.now()
+					    ,max: '2099-06-16 23:59:59'
+					    ,istoday: false
+					    ,choose: function(datas){
+					      end.min = datas; //开始日选好后，重置结束日的最小日期
+					      end.start = datas //将结束日的初始值设定为开始日
+					    }
+					  };
+
+					  var end = {
+					    min: laydate.now()
+					    ,max: '2099-06-16 23:59:59'
+					    ,istoday: false
+					    ,choose: function(datas){
+					      start.max = datas; //结束日选好后，重置开始日的最大日期
+					    }
+					  };
+
+					  document.getElementById('LAY_demorange_s').onclick = function(){
+					    start.elem = this;
+					    laydate(start);
+					  }
+
+
+				form.on('radio', function(data){
+					if(data.value == 0){
+						$('#identity-z').html('个人的身份证正面: '+'<font color="red">*</font>' );
+						$('#identity-f').html('个人的身份证反面: '+'<font color="red">*</font>');
+					}else if(data.value == 1){
+						$('#identity-z').html('企业营销执照正面: '+'<font color="red">*</font>');
+						$('#identity-f').html('企业营销执照反面: '+'<font color="red">*</font>');
+					}
+				});
+
+				});
+
+
+		var textarea=document.getElementById('textarea');
+		var itp=document.getElementById('two-zero-zero');
+		textarea.oninput=function(){
+			if(200-this.value.length<0){
+				this.value=this.value.substr(0,200);
+			}else{
+				itp.innerHTML=200-this.value.length;
+			}
+		}
+		var price=document.getElementById('price');
+
+		var preg=/^[\d]{1,10}$/;
+		price.onblur=function(){
+			if(!preg.test(this.value)){
+				var tips=document.getElementById('tips');
+				tips.innerHTML='请输入1~10位数字';
+			}else{
+				tips.innerHTML='';
+			}
+		}
+
+</script>
+</block>

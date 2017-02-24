@@ -1,0 +1,136 @@
+<extend name='./Public/template/base.html'/>
+
+<block name="file">
+    <!-- 独立的 -->
+    <load file="__PUBLIC__/home/need/css/need-orderdetails.css"/>
+    <load file="__PUBLIC__/home/need/js/stepBar.js"/>
+    <load file="__PUBLIC__/home/need/js/jquery.easing.1.3.js"/>
+    <load file="__PUBLIC__/home/need/js/need-orderdetails.js" />
+    <load href="__PUBLIC__/layer/layer.js"/>
+</block>
+<block name="content">
+	<!-- 进度条 -->
+	<div class="container">
+		<div id="stepBar" class="ui-stepBar-wrap col-lg-12">
+			<div class="ui-stepBar">
+				<div class="ui-stepProcess"></div>
+			</div>
+			<div class="ui-stepInfo-wrap">
+				<table class="ui-stepLayout" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">1</a>
+							<p class="ui-stepName">选择类目</p>
+						</td>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">2</a>
+							<p class="ui-stepName">选择交易模式</p>
+						</td>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">3</a>
+							<p class="ui-stepName">描述需求</p>
+						</td>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">4</a>
+							<p class="ui-stepName">核对交易清单</p>
+						</td>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">5</a>
+							<p class="ui-stepName">等待审核需求</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- 进度条结束 -->
+	<!-- 内容区 -->
+	<div class="container">
+		<center>
+			<div class="box col-lg-12">
+				<!-- 订单详情字 -->
+				<h2 class="order-details col-lg-12">订单详情</h2>
+				<!-- 订单详情字结束 -->
+				<!-- 描述部分 -->
+				<div class="description col-lg-12">
+					<!-- 需求描述标题 -->
+					<!-- 遍历需求的信息 -->
+					<div class="description-title col-lg-12">
+						<h3 class="col-lg-12">
+							标题:{$data.need_title}
+							<a class="btn btn-default" href="{:U('Home/Need/needDescription')}" role="button">修改</a>
+						</h3>
+					</div>
+					<!-- 需求描述标题结束 -->
+					<!-- 描述内容 -->
+					<div class="description-con col-lg-12">
+						<ul class="description-release col-lg-12">
+							<li class="release-item">需求模式 : 免费发布</li>
+							<li class="release-item">行业分类:</li>
+							<li class="release-item">附件:{$data.need_upload}个</li>
+						</ul>
+						<div class="release-details col-lg-12">
+							{$data.need_desc}
+						</div>
+						<div class="img-div col-lg-12" id="layer-photos-demo">
+							<p>您的附件</p>
+							<foreach name="list" item="val">
+							<img class="file-img" src="__PUBLIC__/Uploads/{$val['ndf_path']}/{$val['ndf_name']}" layer-src='__PUBLIC__/Uploads/{$val["ndf_path"]}/{$val["ndf_name"]}'>
+							</foreach>
+						</div>
+					</div>
+					<!-- 描述内容结束 -->
+				</div>
+				<!-- 描述结束 -->
+				<!-- 需求助推 -->
+				<div class="need-help col-lg-12">
+					<p>免费会员服务</p>
+				</div>
+				<form action="{:U('Home/Need/needOrderDetails')}" method="post" class="col-lg-12">
+					<div class="table-responsive">
+						<table class="table table-bordered table-hover">
+							<tr>
+								<td class="col-lg-1">
+									<input type="checkbox" name="need_viptype" value="1">
+								</td>
+								<td class="col-lg-2">
+									<span class="marked marked-hot">平台助推</span>
+								</td>
+								<td class="col-lg-5">
+									平台免费为您推广需求,找到更优质的服务商来投标
+								</td>
+							</tr>
+						</table>
+					</div>
+					<!-- 按钮 -->
+					<div class="order-btn col-lg-12">
+						<a href="{:U('Home/Need/needAgain')}" class="btn btn-info">重新发布</a>
+						<a href="{:U('Home/Need/needDescription')}" class="btn btn-info">返回修改</a>
+						<button type="submit" class="btn btn-success">确定提交</button>
+					</div>
+					<!-- 按钮结束 -->
+				</form>
+				<!-- 需求助推结束 -->
+			</div>
+		</center>	
+	</div>
+	<script type="text/javascript">
+	// 调用进度条js
+	$(function(){
+		stepBar.init("stepBar", {
+			// 目标进度
+			step : 4,
+			// 插件是否被选中
+			change : true,
+			animation : true,
+			// 时间
+			speed : 50
+		});
+	});
+	//图片预览
+    layer.photos({
+      photos: '#layer-photos-demo'
+      ,anim: 5
+    });
+</script>
+</block>

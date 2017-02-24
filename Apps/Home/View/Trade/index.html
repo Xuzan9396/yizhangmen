@@ -1,0 +1,265 @@
+<extend name='./Public/template/base.html'/>
+<block name="title"><title>仪器库-口碑详情</title></block>
+<block name="content">
+	<style>
+		.container{
+			font-family: '微软雅黑';
+
+		}
+		.container a{
+			text-decoration: none;
+			
+		}
+		.main{
+			width: 900px;
+			height: 1000px;
+			margin-top: 30px;
+			float: left;
+		}
+		.tab{
+			width: 900px;
+			height: 40px;
+			background: #fafafa;
+			line-height: 40px;
+			border: 1px solid #eeeeee;
+			border-bottom: 4px solid #3195F3;
+			margin-bottom: -1px;
+			text-align: center;
+		}
+		.tab a{
+			float: left;
+			width: 100px;
+			height: 35px;
+			background: #eeeeee;
+		}
+		.list-dl{
+			width: 900px;
+			height: 825px;
+		}
+		.list-item{
+			width: 900px;
+			height: 52px;
+			border: 1px #eeeeee solid;
+			margin-bottom: -1px;		
+		}
+		.w8{
+			line-height: 40px;
+			margin-left: 10px;
+			float: left;
+			font-weight: bold;
+		}
+		.w2{
+			float: right;
+			margin-top:15px;
+			margin-right: 10px; 
+		}
+		.mr_10{
+			font-size: 12px;
+			color: #666666;
+		}
+		.list-page{
+			width:900px;
+			height: 49px;
+			margin-top: 0px;
+			line-height: 40px;
+			font-size: 12px;
+			color: #666666; 
+		}
+		.pagination{
+			float: right;
+			margin-top: 10px;
+		}
+		.adv img{
+			width: 900px;
+		}
+		.side{
+			width: 230px;
+			height: 857px;
+			margin-top: 30px;
+			float: right;
+		}
+		.box-header{
+			width: 230px;
+			height: 35px;
+			background: #fafafa;
+			margin-bottom: -1px;
+			border: 1px solid #eeeeee;
+					
+		}
+		.min-title{
+			line-height: 30px;
+			margin:0 0 0 10px;
+			font-size: 14px;
+			font-weight: bold;
+		}
+		.box-body{
+			width: 230px;
+			height: auto;
+			margin-bottom: 10px;
+			border: 1px solid #eeeeee;			
+		}
+		.min-list{
+			margin-top: 5px;
+		}
+		.min-list li{
+			width: 208px;
+			height: 30px;
+			margin-left: 10px;
+			line-height: 30px;
+			white-space:nowrap;
+			text-overflow:ellipsis; 
+			overflow: hidden;
+		}
+		.min-list li a{
+			font-size: 12px;
+			color: #3195F3;
+
+		}
+		.min-list li a:hover{
+			text-decoration: underline;
+
+		}
+		.record-list li{
+			width: 230px;
+			height: 67px;
+			border-bottom: 1px solid #eeeeee;
+		}
+		.avatar img{
+			width: 50px;
+			height: 50px;
+			margin-top: 10px;
+			margin-left: 10px;
+			float: left;
+		}
+		.avatar-detail{
+			width: 160px;
+			height: 56px;
+			margin-top: 10px;
+			margin-left: 10px;
+			float: left;			
+		}
+		.record-list-title{
+			white-space:nowrap;
+			text-overflow:ellipsis; 
+			overflow: hidden;
+		}
+		.record-list-title a{
+			font-size: 12px;
+
+		}
+		.record-list-meta{
+			font-size: 12px;
+		}
+		.record-list-meta span{
+			color: #bc3023;
+		}
+		.js_tab .selected{
+			background: #3195F3;
+			color: white;
+			font-weight: bold;
+		}
+	</style>
+	<div class="container">
+		<div class="main">
+			<div class="tab tab-darken js_tab">
+				<a href="" class="selected" onclick="showList(1);">行业资讯</a>
+				<a href="" onclick="showList(2);">平台动态</a>
+				<a href="" onclick="showList(3);">商家活动</a>
+			</div>
+			<div class="list list-dl">
+				<dl class="list-body">
+
+				<foreach name="news" key="key" item="val">
+					<dd class="list-item">
+						<ul class="list-item-body">
+							<li class="w8"><a href="{:U('home/trade/article?id='.$val['apps_id'])}" class="list-title" title="{$val.apps_summary}">
+							{$val.apps_title}</a></li>
+							<li class="w2 text-right"><time class="mr_10"><?php echo date('Y-m-d H:i:s',$val['apps_ctime']); ?></time></li>
+						</ul>
+					</dd>
+				</foreach>
+
+				</dl>
+			</div>
+			<div class="list-page">
+				<div class="page-tips pull-left">显示1~20 项 共 281 条新闻</div>
+				<ul class="pagination pagination-sm pull-right">
+					<li class="active"><a href="">1</a></li>
+					<for start="2" end="10">
+					<li class=""><a href="">{$i}</a></li>
+					</for>
+				</ul>
+			</div>
+			<div class="for-advertise">
+				<div class="adv">
+					<a href=""><img src="__PUBLIC__/image/lbt.jpg" alt=""></a>
+				</div>
+			</div>
+		</div>
+		<div class="side">
+			<div class="box-header">
+				<h2 class="min-title">热门新闻</h2>
+			</div>
+			<div class="box-body same-type">
+				<ul class="min-list">
+					<for start="1" end="11">
+					<li><a href="" title=" 【4月9日】清华北大“磁遗传”学术纠纷事件，录音证据首次公开"> 【4月9日】清华北大“磁遗传”学术纠纷事件，录音证据首次公开</a></li>
+					</for>
+				</ul>
+			</div>
+			<div class="box-header">
+				<h2 class="min-title">推荐服务机构</h2>
+			</div>
+			<div class="box-body">
+				<ul class="record-list img">
+					
+					<for start="1" end="6">
+					<li>
+						<a href="" class="avatar"><img src="__PUBLIC__/image/q.jpg" alt=""></a>
+						<div class="avatar-detail">
+							<p class="record-list-title"><a href="">北京迈基诺基因科技股份有限公司</a></p>
+							<p class="record-list-meta">提供<span>1项</span>服务</p>
+							<!-- <p><span class="marked marked-tags">生命科学</span><span class="marked marked-tags">高通量测序技术服务</span></p> -->
+						</div>
+					</li>
+					</for>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script>
+
+		$('.js_tab').children().mouseenter(function(){
+			if(!($(this).hasClass('selected'))){
+				$(this).css('background','white');
+			}
+		}).mouseleave(function(){
+			if(!($(this).hasClass('selected'))) {
+				$(this).css('background','');
+			}else{
+				$(this).css('background','#3195F3');
+			}
+		});
+
+		$('.js_tab').children().click(function(){
+			$(this).siblings().removeClass('selected').css('background','');
+			$(this).addClass('selected');
+			$(this).css('background','#3195F3');
+			return false;
+		});
+
+		$('.list-item').hover(function(){
+			$(this).css('background','#fafafa');
+		},
+		function(){
+			$(this).css('background','');
+		});
+
+		function showList(cid){
+			$.get('ajax',{'cid':cid},function(data){
+				$('.list-dl').html(data);
+			});
+		}
+	</script>
+</block>

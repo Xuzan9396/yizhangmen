@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<load href='__PUBLIC__/admin/css/bootstrap.min.css' />
+	    <load href="__PUBLIC__/css/style.min.css" />
+	    <load href="__PUBLIC__/css/font-awesome.min.css" />
+	    <load href="__PUBLIC__/admin/css/animate.min.css" />
+	    <load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+	    <load href="__PUBLIC__/js/bootstrap.min.js" />
+	    <load href="__PUBLIC__/layer/layer.js" />
+
+		<style>
+			*{font-family:'Microsoft YaHei';}
+			tr{text-align:center;}
+		</style>
+	</head>
+	<body>
+		<div class='row' style="width:100%">
+			<div class="col-md-3"></div>
+
+			<div class="col-md-5">
+				<table class="table table-hover">
+					<tr><td colspan="2"><img src="__PUBLIC__/Uploads/headportrait/{$impuser_info['impr_picture']}" width="200px"></td></tr>
+					<tr><td>用户名</td><td>{$user_info['user_account']}</td></tr>
+					<tr><td>真实姓名</td><td>{$impuser_info['impr_realname']}</td></tr>
+					<tr><td>身份证号</td><td>{$impuser_info['impr_identity']}</td></tr>
+					<tr><td>注册时间</td><td>{$user_info['user_addtime']}</td></tr>
+					<tr><td>上次登录时间</td><td>{$user_info['user_lasttime']}</td></tr>
+					<tr><td>会员类型</td><td>{$user_info['user_type']}</td></tr>
+					<tr>
+						<td>会员状态</td><td>
+							{$user_info['user_status']} 
+							<if condition="$user_info['user_status'] eq '启用'">
+                                <span id="setStatus" i="{$user_info['user_id']}" s="0">
+                                	<button type="button" class="btn btn-danger">设为禁用</button>
+                                </span>
+                            <else />
+                                <span id="setStatus" i="{$user_info['user_id']}" s="1">
+                                    <button type="button" class="btn">设为启用</button>
+                                </span>
+                            </if>
+						</td>
+					</tr>
+					<tr><td>出生年月</td><td>{:date('Y-m-d' , $impuser_info['impr_birthday'])}</td></tr>
+					<tr><td>手机号码</td><td>{$user_info['user_phone']}</td></tr>
+					<tr><td>邮箱</td><td>{$user_info['user_email']}</td></tr>
+					<tr><td>性别</td><td>{$impuser_info['impr_sex']}</td></tr>
+					<tr><td>固定电话</td><td>{$impuser_info['impr_tel']}</td></tr>
+					<tr><td>所在城市</td><td>{$impuser_info['impr_region']}</td></tr>
+					<tr><td>详细地址</td><td>{$impuser_info['impr_address']}</td></tr>
+					<tr><td>公司名称</td><td>{$impuser_info['impr_company']}</td></tr>
+					<tr><td>工作岗位(职位)</td><td>{$impuser_info['impr_post']}</td></tr>
+				</table>
+			</div>
+
+			<div class="col-md-3"></div>
+		</div>
+
+		<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+	        <div class="modal-dialog">
+	            <div class="modal-content animated bounceInRight">
+	                <div class="modal-header">
+	                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" onclick="$('#myModal').fadeOut('slow');">&times;</span><span class="sr-only">关闭</span>
+	                    </button>
+	                    <i class="fa fa-laptop modal-icon"></i>
+	                    <h4 class="modal-title">确认更改用户状态?</h4>
+	                </div>
+	                <div class="modal-footer" style='text-align:center'>
+	                    <button type="button" id="save" class="btn btn-primary">确认更改</button>
+	                    <button type="button" class="btn btn-white" data-dismiss="modal" onclick="$('#myModal').fadeOut('slow');">取消更改</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+
+		<script>
+	        var id = null;
+	        var status = null;
+	        var btn = null;
+
+	        $('#setStatus').click(function(){
+                $('#myModal').show();
+                
+                btn = $(this).children().last();
+
+                id = $(this).attr('i');
+                status = $(this).attr('s');
+	        });
+
+	        $('#save').click(function(){
+	            $.post("{:U('/Admin/User/setStatus')}" , {'id':id , 'status':status} , function(data){
+	                if(data['status']){
+	                    layer.msg(data.error_info,{icon:6});
+	                    $('#myModal').fadeOut("slow");
+
+	                    if(btn.parent().attr('s') == '0'){
+	                        btn.attr('class' , 'btn').html('设为启用');
+	                        btn.parent().attr('s' , '1');
+	                    }else{
+	                        btn.attr('class' , 'btn btn-danger').html('设为禁用');
+	                        btn.parent().attr('s' , '0');
+	                    }
+	                    
+	                }else{
+	                    layer.msg(data.error_info,{icon:5});
+	                }
+	            });
+	        });
+
+	        layer.msg('加载成功',{icon:6});
+
+	    </script>
+	</body>
+</html>

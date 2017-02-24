@@ -1,0 +1,155 @@
+<extend name="./Public/template/serviceShop.html" />
+<block name="right1">
+	<load href="__PUBLIC__/css/storeRegister1.css" />
+	<script src="__PUBLIC__/layer/layer.js">
+	</script>
+	<div class="col-free-shop">
+		<p class="free-set-shop">免费开店</p>
+	</div>
+	<div class="open-shop-bd">
+		<ul class="ui-step">
+			<li class="ui-step-active">
+				<div class="item-hd">
+					<span class="item-bg item-bg2"></span>
+					<span class="item-ico">√</span>
+				</div>
+				<div class="shop-ws">
+					店铺完善信息
+				</div>
+			</li>
+
+			<li class="ui-step-active">
+				<div class="item-hd">
+					<span class="item-bg"></span>
+					<span class="item-ico item-ico3">2</span>
+				</div>
+				<div class="shop-ws">
+					技能设置
+				</div>
+			</li>
+
+			<li class="ui-step-active">
+				<div class="item-hd">
+					<span class="item-ico item-ico2">3</span>
+				</div>
+				<div class="shop-ws">
+					出售服务
+				</div>
+			</li>
+
+		</ul>
+	</div>
+
+	<div class="clear"></div>
+
+	<div class="row jiben-info">
+		<div><b>温馨提示</b></div>
+	</div>
+	<div class="row shop-rule">
+		<ul>
+			<li>规则一:aaaaaaaaaaaaaaaaaaaaaaa</li>
+			<li>规则一:bbbbbbbbbbbbbbbbbbbbbbb</li>
+			<li>规则一:ccccccccccccccccccccccc</li>
+			<li>规则一:ddddddddddddddddddddddd</li>
+			<li>规则一:eeeeeeeeeeeeeeeeeeeeeee</li>
+			<li>规则一</li>
+			<li>规则一</li>
+		</ul>
+	</div>
+	<div class="row shop-rule">
+
+		<form id="formid" action="{:U('Home/Service/storecateAdd')}" method="post">
+			<input type="hidden" name="id" value="{$sign}">
+			<div class="publish-cate">
+				<div class="publish-first"><strong class="item-label text-primary">选择你想入住的一级类目：</strong> &nbsp;&nbsp;&nbsp;
+				</div>
+				<div class="publish-choose-cate">
+					<select class="form-control select-first-category" name="firstCate" id="pro">
+						<option value="">一级类目</option>
+						<foreach name="data" item="val" key="k">
+							<option value="{$val['id']}">{$val['cate_name']}</option>
+						</foreach>
+					</select>
+					<select class="form-control select-first-category" name="firstCate2" id="pro2">
+						<option value="">--请选择二级目录--</option>
+					</select>
+
+				</div>
+			</div>
+			<div class="clear"></div>
+			<!-- 遍历三级分类 -->
+			<div class="two-category-shop" id="cate_three"></div>
+			<div class="up-down-step">
+				<a href="{:U('home/service/storeRegister1')}" class="btn btn-default">上一步</a>
+				<input type="submit" class="btn btn-warning" value="下一步">
+			</div>
+		</form>
+		<div class="clear"></div>
+		<script>
+			// 1.一级类目的对象
+			$('document').ready(function() {
+
+
+				$('#pro').change(function() {
+					var value1 = $(this).val();
+
+					$.post("{:U('home/service/storeRegisterAjax2')}", {
+						'id': value1
+					}, function(data) {
+						// ajax拿第二次数据
+						$('#cate_three').html('');
+						$('#pro2')[0].length = 1;
+						$(data).each(function() {
+							var content2 = $(this).attr('cate_name');
+							var value2 = $(this).attr('id');
+							$('<option></option>').val(value2).html(content2).appendTo($('#pro2'));
+						});
+
+					}, 'json');
+				});
+
+				$('#pro2').change(function() {
+					var value2 = $(this).val();
+					$.post("{:U('home/service/storeRegisterAjax2')}", {
+						'id': value2
+					}, function(data) {
+						// ajax拿第二次数据
+						// $('#pro3')[0].length = 1;
+						$('#cate_three').html('');
+						var list = [];
+						// var list =
+						$(data).each(function(i) {
+							var content2 = $(this).attr('cate_name');
+							var value2 = $(this).attr('id');
+							$('<input type="checkbox" />').val(value2).addClass('checkboxcate').attr('name', 'firstCate3[]').appendTo($('#cate_three')).after(content2).css({
+								'margin-top': '10px',
+								'margin-left': '10px'
+							});
+							list[i] = value2;
+						});
+						if (list.length != 0) {
+							$('#formid').data({
+								'xu': 1
+							});
+						}
+					}, 'json');
+				});
+
+				$('#formid').submit(function() {
+					// 判断复选框有没有选中
+					// alert( $('.checkboxcate').is(':checked'));return false;
+					if ($(this).data('xu') != 1 || !$('.checkboxcate').is(':checked')) {
+						layer.alert('请填写完整的店铺分类!', {
+							skin: 'layui-layer-lan' //样式类名
+								,
+							closeBtn: 0,
+							anim: 4 //动画类型
+						});
+						return false;
+					}
+
+				});
+			});
+		</script>
+
+</block>

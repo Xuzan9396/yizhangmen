@@ -1,0 +1,682 @@
+<extend name='./Public/template/base1.html'/>
+
+<block name="file">
+    <!-- 独立的 -->
+    <load href="__PUBLIC__/css/bootstrap.min.css" />
+    <load href="__PUBLIC__/needhall/need-display.css"/>
+    <load href="__PUBLIC__/needhall/docs.min.js" />
+ 	<load href="__PUBLIC__/needhall/jquery.min.js"/>
+	<load href="__PUBLIC__/needhall/bootstrap.min.js"/>
+    
+</block>
+<block name="content">
+	<style type="text/css">
+	.container {
+		padding: 0px;
+	}
+	.row{
+		margin:0;
+		padding:0;
+	}
+	</style>
+	<div class="container">
+		<!-- 导航栏 -->
+		<div class="nav-bar">
+			<div class="row" >
+				<ul class="nav-bar-ul">
+					<li class="nav-li"><a href="{:U('Home/Index/index')}">首页</a></li>
+					<li class="active"><a href="{:U('Home/Need/needIndex')}">需求大厅</a></li>
+					<li><a href="#">服务商库</a></li>
+					<li><a href="{:U('Home/Index/instrument')}">仪器库</a></li>
+				</ul>
+			</div>
+			<!-- 面包线显示 -->
+			<div class="row" >
+				<ol class="breadcrumb crumb-line">
+				   <li >您的位置</li>
+				   <li><a href="#">需求大厅</a></li>
+				   <!-- <li class="active">寻紫外光电子能谱</li> -->
+				</ol>
+			</div>
+			<!-- 导航栏结束 -->
+		</div>
+		<div class="container" style="margin-top:30px;float:left;height:1px;background:#F5F5F5;"></div>
+		<div class="container">
+			<!-- 左则内容栏 -->
+			
+			<div style="width:930px;float:left;">
+				<div style="border:1px solid blue;height:2px;margin-top:10px;"></div>
+				<div style="border:1px solid #F5F5F5;">
+					<div class="content-head">
+						<div class="content-head1">
+						    <if condition="$needlist['user'] eq 0">
+							<img src="__PUBLIC__/image/man_middle.jpg" alt="">
+							<else/>
+							<img src="__PUBLIC__/Uploads/headportrait/{$needlist['user'][0]['impr_picture']}" alt="" width="100" height="100">
+							</if>
+						</div>
+						<div class="content-head2">
+							<h3 style="color:red;">￥{$needlist[0]['need_budget']}</h3><h3>{$needlist[0]['need_title']}</h3>
+							
+							<if condition="$needInfo['home_user_info'] eq 0">
+								<div class="toubiao-btn"><a id="js_loginbtn" data-toggle="modal" data-target="#Login" class="btn btn-info">我要提交方案</a></div>
+							<else/>
+								<?php  $checkuser=0 ;?>
+								<for start="0" end="$bid_projectnum" comparison="lt" step="1" name="i" >
+									<if condition="$needInfo['home_user_info']['user_id'] eq $bidlist[$i]['bid_serviceid'] ">
+										<?php  $checkuser+=1; ?>
+									</if>
+								</for>
+								<if condition="($checkuser eq 0) AND ($needlist[0]['need_userid'] neq $needInfo['home_user_info']['user_id'])">
+										<div class="toubiao-btn"><a href="{:U('Home/Need/needAnswer',['needid'=>$needlist[0]['need_id']])}" class="btn btn-info">我要提交方案</a></div>
+									
+								</if>
+							</if>
+							<div class="content-head2-v1">
+								<div class="popover-demo">
+									<a id="example1"  data-container="body"  data-placement="bottom" data-content="雇主选择中标者后，交易将在线下完成，雇主确认后，需求完成">
+								  	免费发布模式
+									<span class="caret"></span></a> 
+								</div>
+								<div class="popover-next">
+									免网站服务费
+								</div>
+							</div>
+							<div class="content-head2-v2">
+								<a class="btn btn-info">进入店铺</a>
+							</div>
+						</div>
+					</div>
+					<!-- 项目进度 -->
+					<div class="project-rate" style="height:170px;background:#f5f5f5;">
+						<h4>项目进度</h4>
+						<ul class="step step6"  step="{$needlist[0]['need_prostepe']}">
+							<li class="step-item  ">
+								<span class="step-num">1</span>
+								<!-- <span class="glyphicon glyphicon-ok"></span> -->
+								<div class="step-text step-bottom">
+									<p><strong class="step-title">发布需求</strong></p>
+									<p>{$needlist[0]['need_time']|date="Y-m-d",###}</p>
+								</div>
+							</li>
+							<li class="step-item  ">
+							 	<span class="step-num"> 2</span>
+								 <div class="step-text step-bottom">
+									<p><strong class="step-title">供方提交方案</strong></p>
+									<p>{$needlist[0]['need_valid_time']|date="Y-m-d",###}</p>
+								</div>
+								<div class="step-text step-top" url="{:U('Home/Bid/getBidstatus')}" urlhref="{:U('Home/need/needIndex')}">
+									<p>距离方案提交结束时间</p>
+									<p>
+										<span class="red d_time" ed="{$needlist[0]['need_valid_time']}"></span>
+									</p>
+								</div>
+							</li> 
+							<li class="step-item "><span class="step-num"> 3</span>
+								<div class="step-text step-bottom">
+									<p><strong class="step-title">需方选择方案</strong></p>
+								</div> 
+							</li> 
+							<li class="step-item "><span class="step-num"> 4</span>
+								<div class="step-text step-bottom">
+									<p><strong class="step-title">工作中</strong></p>
+								</div>
+							</li>
+							<li class="step-item "><span class="step-num"> 5</span>
+								<div class="step-text step-bottom">
+									<p><strong class="step-title">交付中</strong></p>
+								</div>
+							</li> 
+							<li class="step-item "><span class="step-num"> 6</span>
+								<div class="step-text step-bottom">
+									<p><strong class="step-title">需求结束</strong></p>
+								</div>
+							</li> 
+						</ul>
+					</div>
+					<!-- 描述 -->
+					<div class="need-disc" style="min-height:100px;">
+						<h4>需求描述</h4>
+						<p>{$needlist[0]['need_desc']|strip_tags}
+						</p>
+					</div>
+					<!-- 发布人信息 -->
+					<div class="need-user" style="height:40px; background:#F5F5F5;">
+						<p>雇主:</p><p style="color:red;">{$needlist[0]['need_user']}</p>
+						<p><i class="glyphicon glyphicon-time"></i>发布时间:</p><p>{$needlist[0]['need_time']|date="Y-m-d H-i-s",###}</p>
+						<p>地点:</p><p></p>
+						<p>编号:</p><p id="axneedid" ept="{$needlist[0]['need_id']}">#{$needlist[0]['need_id']}</p>
+					</div>
+				</div>
+				<!-- 左则中间广告栏 -->
+				<div style="width:930px;height:80px;margin:15px 0">
+					<img src="__PUBLIC__/image/13721672095854a3c30bdfd.jpg" alt="" width="930" height="80">
+				</div>
+				<!-- =====================留言版=========================== -->
+				<div style="min-height:150px;border:1px solid #f5f5f5;">
+					<div class="message-head">
+						<div class="message-head-v1">
+							<p>留言</p>
+							<p>{$bid_messagenum}</p>
+						</div>
+						<div class="message-head-v2"></div>
+					</div>
+					<!-- 判断留言 登录不显示 -->
+					<if condition="$needInfo['home_user_info'] eq 0 ">
+					<div  class="message-head-m">
+						<h3 style="color:red;"><span class="glyphicon glyphicon-magnet"></span>您暂未登录，无法留言</h3>
+					</div>
+					<else/>
+					<!-- 留言模版 登录则显示-->
+					<div style="margin-top:15px;">
+						<!-- 会员留言 -->
+						<ul class="media-list">
+						  	<li class="media">
+							    <a class="media-left" href="#">
+							    	<if condition="$needInfo['user'] eq 0">
+							      	<img data-src="holder.js/100x100" src="..." alt="...">
+							      	<else/>
+							      	<img src="__PUBLIC__/Uploads/headportrait/{$needInfo['user'][0]['impr_picture']}" alt="..."width="100"height="100">
+							      	<!-- {$needInfo['user'][0]['impr_picture']} -->
+							      	</if>
+							      	<h4 class="media-heading-user">{$needInfo['home_user_info']['user_account']}</h4>
+							      	<h5 class="media-heading-time">{$needInfo['time']|date="Y-m-d H:i:s",###}</h5>
+							    </a>
+							    <form class="media-body media-body-question" action="{:U('Home/BidMessage/index')}" method="post">
+							    	<div class="media-up-lead">
+							    		<h5 class="media-heading">留言不得超过100字</h5>
+										<button class="meida-heading-fa  btn btn-info">发表留言</button>
+							    	</div>
+							    	<input type="hidden" name="needuser" value="{$needlist[0]['need_id']}">
+							    	<input type="hidden" name="mesuser" value="{$needInfo['home_user_info']['user_id']}">
+							    	<input type="hidden" name="messfloo" value="0">
+									<textarea name="messcont"  cols="113" rows="6"  style="height:120px;width:818px;resize: none;"></textarea>
+							    </form>
+						 	</li>
+						 </ul>
+					</div>
+					</if>
+					<!-- 有留言则显示 -->
+					<if condition="$bid_messagenum neq 0">
+					<foreach name="needmesg" item="needval">
+					<div style="margin-top:15px;">
+						<!-- 会员留言与回复   开始-->
+						<ul class="media-list" >
+						  	<li class="media">
+							    <a class="media-left" href="#">
+							      	<img src="__PUBLIC__/Uploads/headportrait/{$needval['impr_picture']}" alt="..." width="100" height="100">
+							      	<h4 class="media-heading-user">{$needval['user_account']}</h4>
+							      	<h5 class="media-heading-time">{$needval['bidm_messagetime'|date="Y-m-d H:i:s",###]}</h5>
+							    </a>
+							    <div class="media-body media-body-question" action="javascript:"2>
+							    	<div class="media-up-lead" 1>
+							    		<h5 class="media-heading">标 题</h5>
+							    		<if condition="$needInfo['home_user_info'] neq 0 ">
+							    		<a class="meida-heading-fa  btn btn-info answer-meida">回复</a>
+							    		</if>
+							    	</div>
+									<div name="media_Name"  cols="113" rows="6"  style="height:120px;width:818px;resize: none;">
+										<h5>{$needval['bidm_messagecont']}</h5>
+									</div>
+							    </div>
+						 	</li>
+							<!-- 有回复则显显 -->
+							<foreach name="needval['replay']" item="answer">
+						 	<li class="media media-answer">
+							    <a class="media-left" href="#">
+							      	<img src="__PUBLIC__/Uploads/headportrait/{$answer['impr_picture']}" alt="..." width="100" height="100">
+							      	<h4 class="media-heading-user">{$answer['user_account']}</h4>
+							      	<h5 class="media-heading-time">{$answer['bidm_messagetime'|date="Y-m-d H:i:s",###]}</h5>
+							    </a>
+							    <div class="media-body media-body-answer" action="javascript:">
+							    	<div class="media-up-lead-answer">
+							    		<h5 class="media-heading">标题</h5>
+							    		<!-- 没有登录则不显示 -->
+							    		<if condition="$needInfo['home_user_info'] neq 0 ">
+							    		<a class="meida-heading-fa  btn btn-info answer-meida">回复</a>
+							    		</if>
+							    	</div>
+
+									<div name="media_Name"  cols="113" rows="6"  style="height:120px;width:718px;resize: none;">
+										<h5>{$answer['bidm_messagecont']}</h5>
+									</div>
+							    </div>
+						 	</li>
+						 	</foreach>
+						 	<!-- 回复 -->
+						 	<!-- 没有登录则不显示 -->
+				    		<if condition="$needInfo['home_user_info'] neq 0 ">
+							<li class="media media-answer To-answer" style="display:none">
+							    <a class="media-left" href="#">
+							      	<img src="__PUBLIC__/Uploads/headportrait/{$needInfo['user'][0]['impr_picture']}" alt="..."width="100"height="100">
+							      	<h4 class="media-heading-user">{$needInfo['home_user_info']['user_account']}</h4>
+							      	<h5 class="media-heading-time">{$needInfo['time']|date="Y-m-d H:i:s",###}</h5>
+							    </a>
+							    <form class="media-body media-body-answer" action="{:U('Home/BidMessage/answer')}" method="post">
+							    	<div class="media-up-lead-answer">
+							    		<h5 class="media-heading">回复不得超过100字</h5>
+							    		<button class="meida-heading-fa  btn btn-info">提交回复</button>
+							    	</div>
+							    	<input type="hidden" name="needuser" value="{$needlist[0]['need_id']}">
+							    	<input type="hidden" name="mesuser" value="{$needInfo['home_user_info']['user_id']}">
+							    	<input type="hidden" name="messfloo" value="{$needval['bidm_id']}">
+									<textarea name="messcont"  cols="113" rows="6"  style="height:120px;width:718px;resize: none;"></textarea>
+							    </form>
+						 	</li>
+						 	</if>
+						</ul>
+						<!-- 会员留言与回复   结束 -->
+					</div>
+					</foreach>
+					</if>
+				</div>
+				<!-- ======================方案版 =======================-->
+				<div style="min-height:300px;border:1px solid #f5f5f5;margin:15px 0 0 0;">
+					<div class="message-head">
+						<div class="message-head-v1">
+							<p>方案</p>
+							<p>{$bid_projectnum}</p>
+						</div>
+						<div class="message-head-v2"></div>
+					</div>
+					<!-- 方案状态 -->
+					<div class="object-state">
+						<ul >
+							<li><a class="btn btn-default   chose">所有的</a></li>
+							<li><a class="btn btn-default">未浏览的</a></li>
+							<li><a class="btn btn-default">中标的</a></li>
+							<li><a class="btn btn-default">淘汰的</a></li>
+							<li><a class="btn btn-default">我的</a></li>
+						</ul>
+					</div>
+					<!-- 判断方案 登录不显示 -->
+					<if condition="$needInfo['home_user_info'] eq 0 ">
+					<div  class="message-head-m">
+						<h3 style="color:red;"><span class="glyphicon glyphicon-magnet"></span>您暂未登录，无法发表方案</h3>
+					</div>
+					</if>
+					<!-- 方案模版 -->
+					<if condition="$bid_projectnum eq 0">
+					<div  class="message-head-m">
+						<h3 style="color:red;"><span class="glyphicon glyphicon-magnet"></span>暂时还没有方案发表</h3>
+					</div>
+					<else />
+						<div style="margin-top:15px;">
+							<foreach name="bidlist" item="bidval">
+							<if condition="$bidval['cate_status'] eq 1">
+							<ul class="media-list" style="margin-bottom:10px;">
+							  	<li class="media">
+							  	   
+								    <div class="media-left media-project" >
+								      	<img src="__PUBLIC__/Uploads/{$bidval['file_image']}" alt="..." width="100" height="120">
+								      	<a class="media-heading-user btn btn-info" href="{:U('Home/service/store',['storeid'=>$bidval['id']])}" style="text-decoration:none;display:block;">进入我的店铺</a><br>
+								      	<a class="media-heading-user btn btn-info"style="text-decoration: none;display:block;">联系我</a>
+								    </div>
+								    <div class="media-body" action="javascript:">
+								    	<div class="media-up-lead">
+								    		<h5 class="media-heading">投标人：</h5>
+								    		<h5 class="media-heading">{$bidval['store_name']}</h5>
+											<h5 class="project-heading">一级</h5>
+											<!-- 如果不是需求发布人则不显示 -->
+											<if condition="$needlist[0]['need_userid'] eq $needInfo['home_user_info']['user_id']">
+												<if condition="$bidval['bid_projectwill'] gt 0">
+													<h5 class="project-function1 btn btn-warning example2 disabled" data-container="body"  data-placement="bottom" data-content="雇主点击中意后，方案提供者将会看到您的电话号码">意向
+													</h5>
+												<else/>
+													<h5 class="project-function1 btn btn-warning example2" data-container="body"  data-placement="bottom" data-content="雇主点击中意后，方案提供者将会看到您的电话号码" id="{$bidval['bid_id']}" url="{:U('Home/Bid/setBidWill')}">意向
+													</h5>
+												</if>
+
+												<!-- 发布需求者看到 -->
+												<if condition="($bidval['bid_projecwin'] eq 1) OR ($bidval['bid_projectwill'] eq 2)">
+													<h5 class="project-function2 btn btn-danger disabled">中标</h5>
+												<else/>
+													<a class="project-function2 btn btn-danger"id="{$bidval['bid_id']}" url="{:U('Home/Bid/setBidWin')}"href="{:U('Home/Bid/setBidWin',['setId'=>$bidval['bid_id']])}" >中标</a>
+													<!-- href="{:U('Home/StoreOrder/bidOrderTrusteeship',['needid'=>$needlist[0]['need_userid'],'bidid'=>$bidval['bid_id']])}" -->
+												</if>
+											</if>
+											<if condition="$bidval['bid_projecwin'] eq 1">
+													<h3 class="project-heading-fa">已中标</h3>
+											</if>
+								    	</div>
+								    	<!-- 隐藏方案不可见 只有需求方可见 -->
+								    	<if condition="($bidval['bid_projecthide'] eq 0) OR ($needInfo['home_user_info']['user_id'] eq $bidval['store_userid']) OR ($needlist[0]['need_userid'] eq $needInfo['home_user_info']['user_id'])">
+										<div class="container project_Status"  style="min-height:120px;width:818px;">
+											<table class="" border="1" width="816" height="40">
+												<tr>
+													<td class="col-md-2 project_row"><b>投标金额</b></td>
+													<td class="col-md-10 project_row">￥{$bidval['bid_projectprice']}</td>
+												</tr>
+												<tr>
+													<td class="col-md-2 project_row"><b>工作周期</b></td>
+													<td class="col-md-10 project_row">{$bidval['bid_projectcyc']}天</td>
+												</tr>
+												<tr>
+													<td class="col-md-2 project_row"><b>投标内容</b></td>
+													<td class="col-md-10 project_row_cont">{$bidval['bid_projectdis']}
+													<if condition="$bidval['bid_projectfile'] neq ''">
+													<?php $urldata=implode("And",explode('/',$bidval['bid_projectfile'])); ?>
+													 <a href="{:U('Home/Bid/downLoad',['downfile'=>$urldata])}" style="color:red;">附件下载</a>
+													 </if>
+													</td>
+												</tr>
+												<tr>
+													<td class="col-md-2 project_row"><b>投标地点</b></td>
+													<td class="col-md-10 project_row">{$bidval['bid_projectplace']}</td>
+												</tr>
+												<if condition="($needInfo['home_user_info']['user_id'] eq $bidval['store_userid']) AND ($bidval['bid_projectwill'] eq 1)">
+												<tr style="color:red;">
+													<td class="col-md-2 project_row"><b>需求方意向</b></td>
+													<td class="col-md-10 project_row">需求方对您的方案有意向,请按下面的联系方式和对方联系 {$needlist[0]['need_phone']}</td>
+												</tr>
+												</if>
+											</table>
+										</div>
+										<else/>
+										<div class="container project_Status"  style="min-height:120px;width:818px;position:relative;">
+											<table class="tabHide" border="1" width="816" height="40" >
+												<tr>
+													<td class="col-md-2 project_row"><b>投标金额</b></td>
+													<td class="col-md-10 project_row"></td>
+												</tr>
+												<tr>
+													<td class="col-md-2 project_row"><b>工作周期</b></td>
+													<td class="col-md-10 project_row"></td>
+												</tr>
+												<tr>
+													<td class="col-md-2 project_row"><b>投标内容</b></td>
+													<td class="col-md-10 project_row_cont">
+													</td>
+												</tr>
+												<tr>
+													<td class="col-md-2 project_row"><b>投标地点</b></td>
+													<td class="col-md-10 project_row"></td>
+												</tr>
+												
+											</table>
+											<div style="position:absolute;left:400px;top:5px;">
+												<h5 style="color:red;margin:0;padding:0;">对方已经设置为隐藏</h5>
+												<img src="__PUBLIC__/image/jinzhi.jpg" width="100" height="100" style="opacity:0.5;">
+												
+											</div>
+										</div>
+										</if>
+										<div style="height:30px;width:818px;background:#f5f5f5;">
+											<h4 class="project-cont-fool">编号：</h4>
+								    		<h4 class="project-cont-fool">#{$bidval['bid_id']}</h4>
+											<h4 class="project-cont-fool">方案时间</h4>
+											<h4 class="project-cont-fool">{$bidval['bid_projecttime']|date="Y-m-d H:i:s",###}</h4>
+											<!-- 如果是需求发布人则不显示 -->
+											<if condition="$needlist[0]['need_userid'] neq $needInfo['home_user_info']['user_id']">
+												<if condition="$bidval['bid_projectlook'] eq 1">
+												<h4 class="project-cont-fool chose">需方已浏览</h4>
+												<else/>
+												<h4 class="project-cont-fool nochose">需方未浏览</h4>
+												</if>
+											</if>
+										</div>
+								    </div>
+							 	 </li>
+							</ul>
+							</if>
+							</foreach>
+							<div class="project-fool"><p>显示 1<code>~</code> {$bid_projectnum} 项 共 {$bid_projectnum} 个方案</p></div>
+						</div>
+						
+					</if>
+				</div>
+			</div>
+			<!-- 右则广告栏 -->
+			<div style="min-height:800px;width:235px;float:right;margin-top:10px;">
+				<!-- logo -->
+				<div class="logo">
+					<h4>诚信科技服务，交易更放心</h2>
+					<ul>
+						<li><img data-src="holder.js/58x58" width="58" height="58"></li>
+						<li><img data-src="holder.js/58x58" width="58" height="58"></li>
+						<li><img data-src="holder.js/58x58" width="58" height="58"></li>
+					</ul>
+					<p>担保交易</p>
+					<p>诚信保障</p>
+					<p>商家认证</p>
+				</div>
+				<!-- 同类需求 -->
+				<div class="same-need">
+					<div class="same-need-head">
+						<i></i>
+						<p>同类需求</p>
+					</div>
+					<div class="same-need-content">
+						<ul>
+							<li><a href="">￥1- ￥1000 偏振光显微镜、低脉冲核磁共振</a></li>
+							<li><a href="">￥1- ￥1000 偏振光显微镜、低脉冲核磁共振</a></li>
+							<li><a href="">￥1- ￥1000 偏振光显微镜、低脉冲核磁共振</a></li>
+							<li><a href="">￥1- ￥1000 偏振光显微镜、低脉冲核磁共振</a></li>
+							<li><a href="">￥1- ￥1000 偏振光显微镜、低脉冲核磁共振</a></li>
+							<li><a href="">￥1- ￥1000 偏振光显微镜、低脉冲核磁共振</a></li>
+							<li><a href="">￥1- ￥1000 偏振光显微镜、低脉冲核磁共振</a></li>
+							<li><a href="">￥1- ￥1000 偏振光显微镜、低脉冲核磁共振</a></li>
+							<li><a href="">￥1- ￥1000 偏振光显微镜、低脉冲核磁共振</a></li>
+							<li><a href="">￥1- ￥1000 偏振光显微镜、低脉冲核磁共振</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- 推荐机构 -->
+				<div class="same-company">
+					<div class="same-need-head">
+						<i></i>
+						<p>推荐服务机构</p>
+					</div>
+					<div class="same-company-content">
+						<ul>
+							<li>
+								<a href=""><img data-src="holder.js/58x58"src="" width="58" height="58"></a>
+								<div class="same-company-detail">
+									<p class="same-company-detail-name"><a href="">清华大学分析中心</a></p>
+									<p class="same-company-detail-name">提供<span class="strong">26项</span>服务</p>
+									<p class="same-company-detail-disc"></p>
+									<p class="same-company-detail-disc"></p>
+								</div>
+							</li>
+							<li>
+								<a href=""><img data-src="holder.js/58x58"src="" width="58" height="58"></a>
+								<div class="same-company-detail">
+									<p class="same-company-detail-name"><a href="">北京迟基诺基因科技股份有限公司</a></p>
+									<p class="same-company-detail-name">提供<span class="strong">26项</span>服务</p>
+									<p class="same-company-detail-disc">生命科学</p>
+									<p class="same-company-detail-disc">高通量测序技术</p>
+								</div>
+							</li>
+							<li>
+								<a href=""><img data-src="holder.js/58x58"src="" width="58" height="58"></a>
+								<div class="same-company-detail">
+									<p class="same-company-detail-name"><a href="">北京迟基诺基因科技股份有限公司</a></p>
+									<p class="same-company-detail-name">提供<span class="strong">26项</span>服务</p>
+									<p class="same-company-detail-disc">生命科学</p>
+									<p class="same-company-detail-disc">高通量测序技术</p>
+								</div>
+							</li>
+							<li>
+								<a href=""><img data-src="holder.js/58x58"src="" width="58" height="58"></a>
+								<div class="same-company-detail">
+									<p class="same-company-detail-name"><a href="">北京迟基诺基因科技股份有限公司</a></p>
+									<p class="same-company-detail-name">提供<span class="strong">26项</span>服务</p>
+									<p class="same-company-detail-disc">生命科学</p>
+									<p class="same-company-detail-disc">高通量测序技术</p>
+								</div>
+							</li>
+							<li>
+								<a href=""><img data-src="holder.js/58x58"src="" width="58" height="58"></a>
+								<div class="same-company-detail">
+									<p class="same-company-detail-name"><a href="">北京迟基诺基因科技股份有限公司</a></p>
+									<p class="same-company-detail-name">提供<span class="strong">26项</span>服务</p>
+									<p class="same-company-detail-disc">生命科学</p>
+									<p class="same-company-detail-disc">高通量测序技术</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script>
+	/**
+	 * [description] 免费发布模式弹框
+	 * @param  { 鼠标经过则显示，过去消失 }
+	 * @auther  {闻中华} 
+	 * @emailTo {wenzhonghua@163.com} 
+	 */
+	$('#example1').hover(function(){
+		$(this).popover('show');
+	},function(){
+		$(this).popover('hide');
+	});
+	//意向提示
+	$('.example2').hover(function(){
+		$(this).popover('show');
+	},function(){
+		$(this).popover('hide');
+	});
+	//意向点击后失去效果
+	$('.project-function1').click(function(){
+		id=$(this).attr('id');
+		$obj=$(this)
+		url=$(this).attr('url');
+		$.post(url,{'setId':id},function(data){
+			if(data=='1'){
+				$obj.addClass('disabled');
+				//改变进度条状态
+				$('.step-top').remove();
+				$('.step-item').eq(2).css({'background':'blue'}).children(':first').html('').addClass('step-num-action').append('<span class="glyphicon glyphicon-ok"></span>');
+			}
+		})
+	});
+	//中标
+	// $('.project-function2').click(function(){
+	// 	id=$(this).attr('id');
+	// 	url=$(this).attr('url');
+	// 	$obj=$(this)
+	// 	$.post(url,{'setId':id},function(data){
+	// 		if(data=='1'){
+	// 			$('.project-function2').addClass('disabled');
+	// 			$('.project-function1').addClass('disabled');
+	// 			$obj.after('<h3 class="project-heading-fa">已中标</h3>')
+	// 			//改变进度条状态
+	// 			$('.step-top').remove();
+	// 			$('.step-item').eq(2).css({'background':'blue'}).children(':first').html('').addClass('step-num-action').append('<span class="glyphicon glyphicon-ok"></span>');
+	// 			$('.step-item').eq(3).css({'background':'blue'}).children(':first').html('').addClass('step-num-action').append('<span class="glyphicon glyphicon-ok"></span>');
+	// 		}
+	// 	})
+	// });
+	//方案表隐藏样式
+	// $('.tabHide').attr({'background':'red'});
+	//<i class="glyphicon glyphicon-ok"></i>
+	//---------评论回复-----------------------
+	//在哪里回复出现哪个下面
+	$("body").delegate(".answer-meida","click",function(){
+		var temp=$(this).parent().parent().parent().parent().children().last().toggle();//$('.To-answer').toggle(500);
+	});
+	/**
+	 * [description]需求进度条
+	 * @auther  {闻中华}
+	 * @emailTo {wenzhonghua@163.com}
+	 */
+	$(function(){
+		var step=parseInt($('.step6').attr('step'));
+		if(isNaN(step) || step==0){
+			$('.step-item').eq(0).css({'background':'blue'}).children(':first').html('').addClass('step-num-action').append('<span class="glyphicon glyphicon-ok"></span>');
+			$('.step-item').eq(1).css({'background':'blue'}).children(':first').html('').addClass('step-num-action').append('<span class="glyphicon glyphicon-ok"></span>');
+		}
+		else{
+			for(var i=0;i<=step+1;i++)
+			{
+				$('.step-item').eq(i).css({'background':'blue'}).children(':first').html('').addClass('step-num-action').append('<span class="glyphicon glyphicon-ok"></span>');
+			}	
+		}
+		//=======================================================================
+		/**
+		 * 倒计时
+		 * @type {[type]}
+		 */
+		if (step>=1){
+			$('.step-top').remove();
+		}else{
+			var timevlue=parseInt($('.d_time').attr('ed'));
+			var d = new Date();
+			var timesecond=timevlue-parseInt(d.getTime()/1000);
+			if(timesecond>=0)
+			{
+				var date=parseInt(timesecond/(60*24*60));
+				var hour=parseInt((timesecond-date*60*24*60)/(60*60));
+				var mute=parseInt((timesecond-date*60*24*60-hour*60*60)/60);
+				var second=timesecond-date*60*24*60-hour*60*60-mute*60;
+				var time=setInterval(function(){
+						if (second==0) 
+						{
+							second=59;
+							if (mute==0)
+							{
+								mute=59;
+								if(hour==0){
+									hour=23;
+									if (date==0) 
+									{
+										clearInterval(time);
+										var needid=parseInt($('#axneedid').attr('ept'));
+										var url=$('.step-top').attr('url');	
+										var urlhref=$('.step-top').attr('urlhref');
+										$.post(url,{'needid':needid},function(data){
+												if(data==1){
+													$('.step-top').remove();
+													$('.step-item').eq(2).css({'background':'blue'}).children(':first').html('').addClass('step-num-action').append('<span class="glyphicon glyphicon-ok"></span>');
+												}else{
+													$('.step-top').remove();
+													location.href=urlhref;
+												}
+										});
+									}else{
+										date-=1;
+									}
+								}else{
+									hour-=1;
+								}
+							}else{
+								mute-=1;
+							}
+						}else{
+							second-=1;
+						};
+						if (second==0&&mute==0&&hour==0&&date==0) {
+							
+						}else{
+							$('.d_time').html(date+'天'+hour+'时'+mute+'分'+second+'秒');
+						}
+				},1000);
+			}
+		}
+	});
+	
+
+	//
+		
+		
+	// $('.step-top').click(function(){
+	// 	var needid=parseInt($('#axneedid').attr('ept'));	
+	// 	var url=$('.step-top').attr('url');	
+	// 	var urlhref=$('.step-top').attr('urlhref');
+	// 	$.post(url,{'needid':needid},function(data){
+	// 			if(data==1){
+	// 				$('.step-top').remove();
+	// 				$('.step-item').eq(2).css({'background':'blue'}).children(':first').html('').addClass('step-num-action').append('<span class="glyphicon glyphicon-ok"></span>');
+	// 			}else{
+	// 				$('.step-top').remove();
+	// 				location.href=urlhref;
+	// 			}
+	// 	});
+	// });
+	// $('.step6').load(function(){
+
+	// });
+</script>
+</block>

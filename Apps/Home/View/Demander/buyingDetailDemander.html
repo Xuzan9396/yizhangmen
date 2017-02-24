@@ -1,0 +1,57 @@
+<extend name='./Public/template/listBase.html'/>
+
+  <!-- 加载自己的外部文件 -->
+  <block name="listfile">
+  </block>
+
+  <!-- 这里写内容 -->
+  <block name="listcentent">
+      <!-- 开始 -->
+      <div class="container-filut">
+        <div class="" style="width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;">
+            <div class="" style="">
+              订单详情
+            </div>
+        </div>
+      </div>
+      <div class="" style="position:relative;top:0px;left:0px;border:1px solid #ccc;margin-top:10px;">
+       <div class="" style="position:absolute;top:5px;left:20px;text-align:center;">
+          <button onclick="history.go(-1)" class="btn btn-info">返回</button>
+        </div>
+        <div class="" style="margin-top:46px;margin-bottom:46px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;width:100%;padding:20px;">
+          <form id="formbox" action="{:U('Home/Message/outboxMessageAct')}" method="post">
+          <table class="table table-hover">
+            <tr>
+              <th style="width:200px;">需求标题:</th>
+              <td >{$orderOneList['id']}</td>
+            </tr>
+            <tr>
+              <th style="width:200px;">发布时间:</th>
+              <td >{:date('Y-m-d H:i:s',$orderOneList['need_time'])}</td>
+            </tr>
+            <tr>
+              <th style="width:200px;">完成时间:</th>
+              <td >{:date('Y-m-d H:i:s',$orderOneList['need_valid_time'])}</td>
+            </tr>
+            <tr>
+              <th style="width:200px;">需求描述:</th>
+              <td >{$orderOneList['id']}</td>
+            </tr>
+            <tr>
+              <th style="width:200px;">需求状态:</th>
+              <td >
+                <switch name="orderOneList['order_status']">
+                  <case value="0"><b style="color:orange">未完善需求</b></case>
+                  <case value="1"><b style="color:orange">以完善需求</b></case>
+                  <case value="2"><b style="color:orange">待审核需求</b></case>
+                  <case value="3"><b style="color:orange">审核成功</b></case>
+                  <case value="4"><b style="color:orange">审核失败</b></case>
+                  <case value="5"><b style="color:orange">方案征集中</b></case> 
+                </switch>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!-- 结束 -->
+  </block>

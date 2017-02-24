@@ -1,0 +1,93 @@
+<extend name='./Public/template/listBase.html'/>
+
+  <!-- 加载自己的外部文件 -->
+  <block name="listfile">
+  </block>
+
+  <!-- 这里写内容 -->
+  <block name="listcentent">
+  <!-- 开始 -->
+  <div class="container-filut">
+    <div class="" style="margin-bottom:10px;width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;">
+        <div class="" style="">
+              我卖出的服务
+        </div>
+    </div>
+    <div class="" style="width:100%;;padding:10px;">
+      <div class="">
+        <!-- ajax请求 -->
+        <button type="button" class="btn btn-info" name="button">全部</button>
+        <button type="button" class="btn btn-info" name="button">免费发布</button>
+      </div>
+        <div class="" style="height:10px;width:100%;"></div>
+      <div class="">
+        <form class="form-inline" action="index.html" method="post">
+          <table class="table">
+            <tr>
+              <td><input type="text" class="form-control" name="name" value="请输入编号"/></td>
+              <td><input type="text" class="form-control" name="name" value="请输入名称"/></td>
+              <td>
+                <select class="form-control" name="">
+                  <option value="100"  selected="selected">需求状态</option>
+                  <option value="0" >未付款</option>
+                  <option value="1" >待审核</option>
+                  <option value="2" >方案提交中</option>
+                  <option value="p2" >投标中</option>
+                  <option value="d2" >竞标中</option>
+                  <option value="3" >方案选择</option>
+                  <option value="p3" >选标中</option>
+                  <option value="4" >发起投票</option>
+                  <option value="p4" >工作中</option>
+                  <option value="d4" >待托管</option>
+                  <option value="5" >公示中</option>
+                  <option value="6" >交付中</option>
+                  <option value="7" >冻结中</option>
+                  <option value="8" >结束</option>
+                  <option value="9" >失败</option>
+                  <option value="10" >审核失败</option>
+                  <option value="11" >仲裁中</option>
+                  <option value="13" >交付冻结</option>
+                </select></td>
+              <td>
+                <select class="form-control" name="">
+                  <option selected="selected">编号降序</option>
+                  <option>编号升序</option>
+                  <option>金额降序</option>
+                  <option>金额升序</option>
+                </select>
+              </td>
+              <td><input type="submit" class="btn btn-info" name="name" value="搜索"></td>
+            </tr>
+          </table>
+        </form>
+    </div>
+      <div class="" style="height:10px;width:100%;"></div>
+    <div class="">
+        <table class="table table-hover">
+          <tr>
+            <th>编号</th>
+            <th>标题</th>
+            <th>金额(元)</th>
+            <th>发布时间</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+          <tr>
+            <td>--</td>
+            <td>--</td>
+            <td>--</td>
+            <td>--</td>
+            <td>--</td>
+            <td>--</td>
+          </tr>
+        </table>
+    </div>
+    <div class="" style="height:10px;width:100%;"></div>
+      <div class="">
+        <!-- 分页 -->
+        共有 N  条数据
+      </div>
+    </div>
+  </div>
+  <!-- 结束 -->
+  </block>

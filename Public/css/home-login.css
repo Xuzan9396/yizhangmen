@@ -1,0 +1,15 @@
+#css-login-box{
+	background-image:url('/shop/Public/image/Login/c13f5bf11759f3b42610d55fabf4c74b1.jpg');
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+
+#css-select-pass{
+	border:1px solid lightgrey;
+	margin-left:25px;
+}
+
+#submit{
+	background-color:#188DC8;
+	margin-right:50px;
+}

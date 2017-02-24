@@ -1,0 +1,361 @@
+<extend name="./Public/template/base.html" />
+<block name="content">
+	<script src="__PUBLIC__/layer/layer.js"></script>
+	<script src="__PUBLIC__/js/jquery.raty.js"></script>
+	<load href="__PUBLIC__/css/store.css" />
+	<load href="__PUBLIC__/css/service.css" />
+	<load href="__PUBLIC__/css/pay.css" />
+	<load href="__PUBLIC__/css/details.css" />
+	<include file="./Apps/Home/View/service/publicStoreNav.html" />
+	<!-- 店铺导航条结束 -->
+
+	<!-- 主体内容 -->
+	<div class="container">
+		<div class="server-content">
+			<div class="middle server-content-bg">
+				<div class="details-content">
+					<!-- 轮播图开始 -->
+					<div class="details-carousel ">
+						<div id="myCarousel" class="carousel slide carousel-size" data-ride="carousel">
+							<!-- 轮播（Carousel）指标 -->
+							<ol class="carousel-indicators">
+								<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+								<li data-target="#myCarousel" data-slide-to="1"></li>
+								<li data-target="#myCarousel" data-slide-to="2"></li>
+								<li data-target="#myCarousel" data-slide-to="3"></li>
+							</ol>
+							<!-- 轮播（Carousel）项目 -->
+							<div class="carousel-inner carousel-size">
+								<div class="item active active-service img-size">
+									<img src="{$carousel['sere_pic1']}" alt="First slide">
+								</div>
+								<div class="item img-size">
+									<img src="{$carousel['sere_pic2']}" alt="Second slide">
+								</div>
+								<div class="item img-size">
+									<img src="{$carousel['sere_pic3']}" alt="Third slide">
+								</div>
+								<div class="item img-size">
+									<img src="{$carousel['sere_pic4']}" alt="Third slide">
+								</div>
+							</div>
+							<!-- 轮播（Carousel）导航 -->
+							<a class="carousel-control left " href="#myCarousel" data-slide="prev">
+							</a>
+							<a class="carousel-control right" href="#myCarousel" data-slide="next">
+							</a>
+						</div>
+					</div>
+
+					
+					<!-- 轮播图结束 -->
+					<div class="details-right-buyinfo">
+						<div class="details-right-header">
+							<p>{$detail_info.pubh_title}</p>
+						</div>
+						<div class="details-server-info">
+							<div class="details-access">
+								<p id="details-status">商家态度:<span>&nbsp;&nbsp;{$comment['a']}分</span></p>
+								<p>工作速度:<span>&nbsp;&nbsp;{$comment['b']}分</span></p>
+								<p>工作质量:<span>&nbsp;&nbsp;{$comment['c']}分</span></p>
+							</div>
+							<div class="details-deal">
+								<p id="details-haoping">好评率:<span>&nbsp;&nbsp;{$comment['order_goods']}</span></p>
+								<p>累计评论:<span>&nbsp;&nbsp;{$number}次</span></p>
+							</div>
+							<div class="clear"></div>
+							<div class="details-price">
+								价格: <span>￥</span><span class="details-price-unit">{$detail_info.pubh_price}</span>
+							</div>
+							<div class="details-server-buynum">
+								<span>数量</span> &nbsp;&nbsp;
+								<span id="details-decr-num">－</span>&nbsp;<input id="details-input" type="text" value="1">
+								<span id="details-incre-num">＋</span>&nbsp;&nbsp;件 　　　　　已成交:
+								<span> {$detail_info.pubh_volume} 件</span>
+							</div>
+							<if condition="$Think.session.home_user_info eq ''">
+								<a id="js_loginbtn" class="details-buynow modal-login" data-toggle="modal" data-target="#Login">立即购买</a>
+								<else/>
+								<if condition="($empuser_sign eq 0)">
+									<a class="details-buynow modal-pay" data-target="#Pay">立即购买</a>
+									<elseif condition="($empuser_sign eq 1)" />
+									<a class="details-buynow">自己店铺</a>
+								</if>
+							</if>
+						</div>
+					</div>
+					<div class="clear"></div>
+
+					<div class="details-tab">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#home" role="tab" data-toggle="tab">服务详情</a></li>
+							<li role="presentation"><a href="#profile" role="tab" data-toggle="tab" id="presentid">累计评价{$number}</a></li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="home">
+								<div style="font-size:20px;padding:10px">服务详情</div>
+								{:html_entity_decode($describe['serl_contents'])}
+
+							</div>
+							<div role="tabpanel" class="tab-pane assess" id="profile">
+								<div class="assess-left">
+									<p style="font-size:16px;">推荐人数</p>
+									<p style="font-size:16px;font-weight:bold;color:#f60">5</p>
+								</div>
+								<div class="assess-colligate">
+									<p>服务态度：<span style="color:#f60;">94.00%</span></p>
+									<p>工作态度：<span style="color:#f60;">94.00%</span></p>
+									<p>完成质量：<span style="color:#f60;">94.00%</span></p>
+								</div>
+								<div class="assess-pleased">
+									<p>满意度：</p>
+									<p style="font-size:40px;font-weight:bold;color:#f60;">{$comment['goods']}</p>
+								</div>
+								<!-- 清除浮动 -->
+								<div class="clear"></div>
+								<!-- Nav tabs -->
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs" role="tablist" style="margin-top:20px;">
+									<li role="presentation" class="active"><a href="javasctipt:void(0)" role="tab" data-toggle="tab">全部评价（{$number}）</a></li>
+								</ul>
+
+								<!-- Tab panes -->
+								<div class="tab-content">
+									<div role="tabpanel" class="tab-pane active" id="opinion">
+										<!-- ajax分页 -->
+										<div id="comment_page">
+											<a style="margin:0 auto;display:block;background:#009688;text-align:center;color:#fff;width:200px;heigth:70px;font-size:20px;" id="a_load_more" onclick="ajaxGetCommentByPageNum();" href="javascript:void(0);">加载更多...</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="foot-right-contents">
+						<div class="foot-right-other">本店其他</div>
+						<foreach name="otherData" item="otherVal" key="key">
+							<div class="foot-right-other-server">
+								<div class="otherserver-img">
+									<a href="{:U('home/service/detail',['sid'=>$otherVal['id'],'storeid'=>$otherVal['pubh_shopid']])}"><img src="/shop/Public/Uploads/{$otherVal['pubh_pic']}" width="240px" height="240px"alt=""></a>
+								</div>
+								<div class="othersever-description"><a href="{:U('home/service/detail',['sid'=>$otherVal['id'],'storeid'=>$otherVal['pubh_shopid']])}">{$otherVal['pubh_title']}</a></div>
+								<div class="otherserver-volume"><span class="number">￥&nbsp;{$otherVal['pubh_price']} </span><span>成交次数:&nbsp;{$otherVal['pubh_volume']}</span></div>
+							</div>
+						</foreach>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 支付模态框 开始 -->
+		<div class="modal fade" id="Pay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h3 class="modal-title" id="myModalLabel">您的账单</h3>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<form id="js_login" action="{:U('home/pay/order')}" method="post" enctype="multipart/form-data">
+								<input type="hidden" value="">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
+									<div class="modal-order-body">
+										<p class="modal-service-content"><span class="modal-service-name">工业设计 产品设计 外观设计 3D建模效果图 休闲代步工具</span></p>
+										<div class="modal-left" >
+											<img width="200px" height="138px"; src="__PUBLIC__/image/service/image/10.jpg" alt="">
+										</div>
+										<div class="modal-right">
+											<p class="modal-str">服务商 <span class="modal-store"></span></p>
+											<p class="modal-pri">服务单价 ¥<span class="modal-price money-price"></span> </p>
+											<p class="modal-pie">购买数量 <span class="modal-piece"></span> 件</p>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="name">留下您的联系方式，服务商可以更快的与您沟通</label>
+										<input type="text" class="form-control form-control-pay modal-phone" name="order_phone" placeholder="请输入手机">
+									</div>
+									<div class="form-group">
+										<label for="name"></label>
+										<textarea type="text" class="form-control form-control-pay modal-textarea" cols="80" rows="5" name="order_description" placeholder="告诉服务商您的具体要求..."></textarea>
+									</div>
+									<div class="form-group">
+										<label for="code">上传附件,进一步说明要求:</label>
+										<input type="file" class="form-control form-control-pay modal-file" value="123" name="order_myfile" multiple="multiple">
+									</div>
+									<div class="modal-money">
+										<input type="hidden" name="order_serviceid" value="{:I('get.sid',1)}">
+										<div class="modal-money-top">支付赏金： <input name="order_trusteeship_price" class="unit-price" type="text"> 元 ×
+											<select name="order_number_total" class="money-piece">
+												<for start="1" end="2000+1" >
+												<option value="{$i}">{$i}</option>
+												</for>
+											</select> 件
+										</div>
+
+										<div class="modal-money-bottom">总计：<span class="modal-price money-total"></span>元</div>
+									</div>
+								</div>
+								<div class="col-md-1"></div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<span id="js-error-info"></span>
+						<button type="submit" class="btn btn-primary" style="background-color:#188DC8;" id="submit">　确认无误,去结算　</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- 支付模态框 结束 -->
+	</div>
+	<script>
+		// 星星评分
+
+		// 模态框下拉框事件
+		$('.money-piece').change(function() {
+			$('.money-total').text($('.unit-price').val() * $(this).val());
+			$('.modal-piece').text($(this).val());
+		});
+
+		// 增加减少件数按钮开始
+		$('#details-input').css({
+			'textAlign': 'center',
+			'width': '50px'
+		});
+
+		$('#details-decr-num').mousedown(function() {
+			$(this).css('background', '#cccccc');
+		}).mouseup(function() {
+			$(this).css('background', '');
+		}).click(function() {
+			if ($('#details-input').val() > 1) {
+				$('#details-input').val(parseInt($('#details-input').val()) - 1);
+			}
+		});
+
+		$('#details-incre-num').mousedown(function() {
+			$(this).css('background', '#cccccc');
+		}).mouseup(function() {
+			$(this).css('background', '');
+		}).click(function() {
+			if ($('#details-input').val() < 2000) {
+				$('#details-input').val(parseInt($('#details-input').val()) + 1);
+			}
+		});
+		// 增加减少件数按钮结束
+		$('#presentid').trigger('click');
+		// 获取session中的用户手机号
+		var user_phone = <?php echo $user_info['user_phone']; ?>;
+
+		// 初始化模态框数据
+		$('.modal-pay').click(function() {
+			$('.modal-service-name').text($('.details-right-header p').text());
+			$('.modal-price').text($('.details-price-unit').text());
+			$('.unit-price').val($('.details-price-unit').text());
+			$('.modal-store').text($('.store-name').text());
+			$('.modal-piece').text($('#details-input').val());
+			$('.money-piece').val($('#details-input').val());
+			$('.money-total').text($('.unit-price').val() * $('.money-piece').val());
+			$('.modal-left img').attr('src', $('.active-service img').attr('src'));
+			$('.modal-phone').val(user_phone);
+			$('#Pay').modal('show');
+		});
+
+		// 赏金不低于50%
+		var checkNum = /^[0-9]*$/;
+		var checkPrice = /^[0-9\.]*$/;
+		$('#details-input').blur(function() {
+			if (!checkNum.test($(this).val())) {
+				alert('非法字符');
+				$(this).val(1);
+			}
+		});
+
+		$('.unit-price').blur(function() {
+			if (!checkPrice.test($(this).val())) {
+				alert('非法字符');
+				$(this).val($('.money-price').text() * 0.5);
+			} else if (parseInt($(this).val()) < parseInt($('.money-price').text() * 0.5)) {
+				alert('赏金不得低于50%');
+				$(this).val($('.money-price').text() * 0.5);
+			} else if (parseInt($(this).val()) > parseInt($('.money-price').text())) {
+				alert('赏金不得高于单价');
+				$(this).val($('.money-price').text());
+			}
+			$('.money-total').text($(this).val() * $('.money-piece').val());
+		});
+
+
+
+		// ****************ajax请求分页（xuzan）*******************
+		var pending = 0;
+		var a_load_more = $('#a_load_more');
+		var current_comment_page = 1;
+
+		function ajaxGetCommentByPageNum() {
+			var servicePrice = "{$detail_info['pubh_price']}";
+			// layer.load(2);
+			var index = layer.load(0, {
+				shade: false
+			});
+			$.ajax({
+				type: "GET",
+				dataType: 'json',
+				async: 'false',
+				url: "{:U('home/service/ajaxEemployerComment','', false)}/p/" + current_comment_page + "/id/" + "{$detail_info['id']}",
+				success: function(data) {
+					// 循环
+				// console.dir(data);
+					var arr = [];
+					var num = 0;
+					var html = '<div style="display:none">';
+					$(data).each(function(key, val) {
+						html += '<div class="assess-list"><div class="assess-list-pic"><img src="' + val.impr_picture + '" alt=""></div><div class="assess-list-name"><p><a href="">' + val.user_account + '</a></p><p>交易金额：￥' + servicePrice +
+							'</p></div><div class="assess-list-content"> 评价：<span>' + val.content + '</span> </div> <div class="assess-list-time"> <p>' + val[0] + '</p><p>' + val[1] + '</p> </div><div class="fff"></div> </div>';
+						// 	 num +=key;
+						// arr[num] = val['attr'];
+					});
+					html += "</div>";
+					html = $(html);
+					$('#comment_page').before(html);
+					current_comment_page++;
+					html.fadeIn(1500);
+					if (data.length == 0) {
+						// 如果没有评论的数据取消请求
+						$(window).unbind("scroll");
+						a_load_more.remove();
+					}
+					pending = 0;
+					layer.closeAll('loading');
+				}
+			});
+		}
+
+		// 窗口高度
+		var widHeight = $(window).height();
+		// 滚动条事件
+		$(window).scroll(function() {
+			// 如果是1 不发送请求
+			if (pending == 1) {
+				return;
+			}
+			// 按钮位置
+			var offset = a_load_more.offset();
+			if (offset == 0) {
+				return;
+			}
+			// 滚动条height
+			var sHeight = $(window).scrollTop();
+			if ((sHeight + widHeight - 200) > offset.top) {
+				pending = 1;
+				a_load_more.trigger('click');
+			}
+
+
+		});
+	</script>
+</block>

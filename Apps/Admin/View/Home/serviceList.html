@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+ 
+    <load href="__PUBLIC__/css/bootstrap.min.css" />
+    <load href="__PUBLIC__/css/dataTables.bootstrap.css" /> 
+    <load href="__PUBLIC__/css/style.min.css" />
+    <load href="__PUBLIC__/css/font-awesome.min.css" />
+    <load href="__PUBLIC__/layui/css/layui.css"  />
+    <load href="__PUBLIC__/admin/css/animate.min.css"  />
+<style type="text/css">
+     .addbut,.cancel{
+        display: block;
+        margin-left:48%;
+        cursor: pointer;
+        position: absolute;
+        z-index: 1;
+      }
+
+
+    .addser{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background: white;
+        display: none;
+        z-index: 2;
+        padding: 20px;
+    }
+
+    .img1{
+        width: 50px;
+        height: 50px;
+    }
+
+    .font{
+        width: 200px;
+    }
+
+    .font1{
+        font-size: 8px;
+        width: 200px;
+    }
+
+    .tipred{
+        color: red;
+    }
+
+    .tipgre{
+        color : green;
+    }
+
+    .imgs1{
+         max-width: 120px;
+         height: auto;
+   }
+
+     .cursor{
+        cursor: pointer;
+     }
+
+    .width{
+        width: 500px;
+    }
+
+    .blue{
+        color: #3195F3;
+    }
+
+    .blue:hover{
+        color: blue;
+    }
+
+    .money{
+        color: red;
+   }
+
+
+    .detail{
+        width: 0;
+        min-height: 1000px;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        position: absolute;
+        display: none;
+        background: white;
+        overflow: auto;
+    }
+
+    .detail button{
+        display: block;
+        margin: 0 auto;
+    }
+
+    .det{
+        width: 800px;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .img3{
+        max-width: 300px;
+        margin:5px;
+    }
+
+    .gostore{
+        display: inline-block;
+        background: #3195F3;
+        color: white;
+        margin-left: 10px;
+        padding: 5px;
+        border-radius: 3px;
+        text-align: center;
+    }
+
+
+    .cover{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 999;
+        background-color: rgba(224, 227, 232, 0.8);
+        left: 0;
+        top : 0;
+        display: none;
+    }
+
+    .bigimg{
+        width: 100%;
+        height: auto;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin:auto;
+        z-index: 9999;
+        text-align: center;
+        display: none;
+    }
+
+    .bim{
+        max-width: 1000px;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+ </style>
+</head>
+
+<body>        
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <button type="button" class="btn btn-primary addbut">添加</button>
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                
+                    <div class="ibox-content">
+
+                        <table class="table table-striped table-bordered table-hover dataTables-example" id="layer-photos-demo">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>图片</th>
+                                    <th>店铺名称</th>
+                                    <th>服务名称</th>
+                                    <th>描述</th>
+                                    <th>价格</th>
+                                    <th>位置</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="data['data']" item="v">
+                                    <tr class="gradeX">
+                                        <td>{$v.appe_id}</td>
+                                        <td><img class="img1 cursor" src="__PUBLIC__/Uploads/{$v.pubh_pic}" layer-src="__PUBLIC__/Uploads/{$v.pubh_pic}"></td>
+                                        <td><a class="cursor blue" onclick="storeDetail('{$v.pubh_shopid}')" title="点击查看店铺详情">{$v.store_name}</a></td>
+                                        <td class="center font"><a class="blue" title="点击查看服务详情" onclick="pubDetail('{$v.appe_service_id}')">{$v.pubh_title}</a></td>
+                                        <td class="center font1">{$v.appe_desc}</td>
+                                        <td class="center money">￥{$v.pubh_price}</td>
+                                        <td class="center">{$v.appe_order}</td>
+                                        <td class="center">{$v.status}</td>
+                                        <td class="center"> <button type="button" class="btn btn-info" onclick="modify('{$v.appe_id}')">修改</button> <button type="button" class="btn btn-danger" onclick="del('{$v.appe_id}')">删除</button></td>
+                                    </tr>
+                                </foreach>                               
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row addser">
+        <button type="button" class="btn btn-primary cancel">取消</button>
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                
+                    <div class="ibox-content">
+
+                        <table class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>图片</th>
+                                    <th>店铺名称</th>
+                                    <th>服务名称</th>
+                                    <th>价格</th>
+                                    <th>成交量</th>
+                                    <th>时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="data['service']" item="v">
+                                    <tr class="gradeX">
+                                        <td>{$v.id}</td>
+                                        <td><img class="img1 cursor" src="__PUBLIC__/Uploads/{$v.pubh_pic}"  onclick="showimg(this)"></td>
+                                        <td><a class="cursor blue" onclick="storeDetail('{$v.pubh_shopid}')" title="点击查看店铺详情">{$v.store_name}</a></td>
+                                        <td class="center"><a class="blue" title="点击查看服务详情" onclick="pubDetail('{$v.id}')">{$v.pubh_title}</a></td>
+                                        <td class="center money">￥{$v.pubh_price}</td>
+                                        <td class="center money">{$v.pubh_volume}</td>
+                                        <td class="center">{$v.pubh_time}</td>
+                                        <td class="center"> <button type="button" class="btn btn-info" onclick="addService('{$v.id}')">添加</button></td>
+                                    </tr>
+                                </foreach>                               
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="detail"><button id="closeDe" class="btn btn-primary">关闭</button><div class="det"></div></div>   
+    <!-- Mainly scripts -->
+    <load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+    <load href="__PUBLIC__/js/bootstrap.min.js" />
+    <load href="__PUBLIC__/layer/layer.js"/>
+    <load href="__PUBLIC__/layui/layui.js" />
+    <load href="__PUBLIC__/js/jquery.dataTables.js" />
+    <load href="__PUBLIC__/js/dataTables.bootstrap.js" />
+    <load href="__PUBLIC__/js/mo.js" />
+    <script>
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable();
+
+            /* Init DataTables */
+            var oTable = $('#editable').dataTable();
+
+            /* Apply the jEditable handlers to the table */
+            oTable.$('td').editable('../example_ajax.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+
+                "width": "90%",
+                "height": "100%"
+            });
+
+
+        });
+
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+                "Custom row",
+                "New row",
+                "New row",
+                "New row",
+                "New row"]);
+
+        }   
+
+        //添加服务切换页面
+        $('.addbut,.cancel').click(function(){
+            $('.addser').slideToggle();
+        })
+
+        //删除服务
+        function del(id){
+            mo.confirm('你确定要删除吗?',function(){
+                mo.ajax({'appe_id':id},"{:U('Home/delShowservice')}",function(res){
+                    if(res['status']){
+                        mo.msg(res['info'],1);
+                    }else{
+                        mo.msg(res['info']);
+                    }
+                })
+            },'注意')
+        }
+ 
+
+        //添加服务
+        function addService(id){
+            var str = '';
+            str += '<form id="myForm" class="form-group has-success" role="form"><input type="hidden" name="appe_service_id" value='+id+'>描述:</label><textarea class="form-control" rows="3" name="appe_desc" placeholder="请填写描述"></textarea> </div></form>';
+
+             mo.mod(str,function(){
+                mo.ajax($('#myForm').serialize(),"{:U('Home/addShowService')}",function(res){
+                    if(res['stauts']){
+                        mo.msg(res['info']);
+                    }else{
+                        mo.msg(res['info']);
+                    }
+                })
+            },'提示')
+        }
+        
+        //修改服务
+        function modify(id){
+            mo.ajax({'appe_id':id},"{:U('Home/ajaxSearSer')}",function(res){
+                if(res){
+                    var str = '';
+
+                    str += '<form id="myForm1" class="form-group has-success" role="form"><input type="hidden" name="appe_id" value='+id+'><div class="form-group"><label for="">请选择位置:</label><select name="appe_order" class="form-control" onchange="servchange(this)"><option value="">--请选择--</option><option value="0" '+res['order'][0]+'>推荐服务0</option><option value="1" '+res['order'][1]+'>推荐服务1</option><option value="2" '+res['order'][2]+'>推荐服务2</option><option value="3" '+res['order'][3]+'>推荐服务3</option><option value="4" '+res['order'][4]+'>推荐服务4</option><option value="5" '+res['order'][5]+'>推荐服务5</option><option value="6" '+res['order'][6]+'>热门推荐0</option><option value="7" '+res['order'][7]+'>热门推荐1</option></select><span>推荐服务分(0-5)6个位置,热门推荐分为(0-1)2个位置,选择其中一个位置</span></div><div class="form-group"><label for="">显示状态:</label><select name="appe_status" class="form-control"><option value="">--请选择--</option><option value="0" '+res['status'][0]+'>不显示</option><option value="1" '+res['status'][1]+'>显示</option></select> </div><div class="form-group"><label for="">描述:</label><textarea class="form-control" rows="3" name="appe_desc" placeholder="请填写描述">'+res['appe_desc']+'</textarea> </div></form>';
+
+                    mo.mod(str,function(){
+                        mo.ajax($('#myForm1').serialize(),"{:U('Home/ajaxmodser')}",function(res){
+                            if(res['status']){
+                                mo.msg(res['info'],1);
+                            }else{
+                                mo.msg(res['info']);
+                            }
+                        })
+
+                    },'请修改');
+                }
+            })
+
+        }
+
+        //ajax查询服务位置
+        function servchange(obj){
+            if($(obj).val()){
+                mo.ajax({'appe_order':$(obj).val()},"{:U('Home/ajaxSerPosition')}",function(res){
+                    if(res){
+                        $(obj).next().html('<span class="tipred">将替换原来的位置:'+res['pubh_title']+'--'+res['appe_order']+'</span>');
+                    }else{
+                         $(obj).next().html('<span class="tipgre">已选择:'+$(obj).val()+'</span>');
+                    }
+                })
+            }else{
+                $(obj).next().html('推荐服务分(0-5)6个位置,热门推荐分为(0-1)2个位置,选择其中一个位置');
+            }
+            
+        }
+
+        function storeDetail(id){
+            mo.ajax({'id':id},"{:U('Home/serProSto')}",function(res){
+                if(res){
+                    var str ='';
+                    str += '<table class="table table-hover"><caption>店铺详情</caption><tr><td>店铺名称:'+res['store_name']+' <a href="/shop/Home/Service/store/storeid/'+res['id']+'.html" class="gostore" target="_blank"> 进入店铺</a></td><td></td></tr><tr><td>真实姓名:'+res['store_realname']+'</td><td>店铺类型:'+res['store_type']+'</td></tr><tr><td>身份证号:'+res['store_caid']+'</td><td>手机号:'+res['store_phone']+'</td></tr><tr><td>电子邮箱:'+res['store_email']+'</td><td>联系QQ:'+res['store_qq']+'</td></tr><tr><td>地址:'+res['store_address']+'</td><td>创建时间:'+res['store_addtime']+'</td></tr><tr><td>描述:'+res['store_describe']+'</td></tr><tr><td>身份证或营业直销证书:</td><td></td></tr><tr><td><img src=__PUBLIC__/Uploads/'+res['store_zcaidpic']+' class="imgs1 cursor"  onclick="showimg(this)"><img src=__PUBLIC__/Uploads/'+res['store_fcaidpic']+' class="imgs1 cursor" onclick="showimg(this)"></td></tr></table>';
+
+                    detailShow(str);
+                }
+            })
+        } 
+
+         function pubDetail(id){
+            mo.ajax({'id':id},"{:U('Home/ajaxPubDetail')}",function(res){
+                if(res){
+                    var str = '<table class="table table-hover"><opcation>服务信息</opcation><tr><td>服务名称:'+res['pubh_title']+'<a href="/shop/Home/Service/detail/sid/'+res['id']+'/storeid/16.html" class="gostore" target="_blank"> 进入店铺</a></td><td></td><tr><tr><td>服务分类:'+res['catename']+'</td><td>状态:'+res['pubh_status']+'</td></tr><tr><td>价格:￥'+res['pubh_price']+'</td><td>成交量:'+res['pubh_volume']+'</td></tr><tr><td>发布时间:'+res['pubh_time']+'</td></tr><tr><td>配图:</td><td></td></tr></table>';
+                    
+                    for(var k in res['pic']){
+                        str += '<img class="img3 cursor" src="__PUBLIC__/Uploads/'+res['pic'][k]+'" onclick="showimg(this)">';
+                    }
+                    detailShow(str);
+                }else{
+                    mo.msg('无数据');
+                }
+            })
+        }  
+
+        var timer;
+        function detailShow(str){
+            $("body").animate({
+                'scrollTop' : "0px"
+                },200);
+
+            clearTimeout(timer);
+            $('.detail').show().css({
+                'border':'2px solid #ED5565',
+            }).animate({
+                'width':'100%',
+                'left':'0',
+                'top':'0',
+                'border-radius':'0',
+             },200)
+
+            $('.det').html(str);
+        }
+
+        $('#closeDe').click(function(){
+            $("body").animate({
+                'scrollTop' : "0px"
+                },200);
+           var  num = parseInt(3*Math.random());
+            if( num == 0){
+                $('.detail').animate({
+                    'height':'0px',
+                    'width':'0px',
+                    'left':'500px',
+                    'top':'200px',
+                    'border-radius':'50%',
+                    },300)
+            }else if(num == 1){
+                $('.detail').animate({
+                    'top':'-500px',
+                    'height':'0px',
+                    },300)
+            }else{
+                $('.detail').animate({
+                    'width':'0px',
+                    },300)
+            }
+
+           timer = setTimeout(function(){
+                $('.detail').css('border','none').hide();
+                $('.det').children().remove();
+            },300)
+        })
+
+         //图片预览
+        layer.photos({
+          photos: '#layer-photos-demo'
+          ,anim: 5
+        });
+
+        function showimg(obj){
+            var img = '<div class="bigimg"><img class="bim" src='+$(obj).attr('src')+'></div><div class="cover"></div>';
+            $('body').append(img).children('.bigimg').fadeIn();
+            $('.cover').fadeIn();
+            bigimg();
+        }
+
+        
+
+        function bigimg(){
+            $('.bigimg').click(function(){
+                $('.bigimg').fadeOut();
+                $('.cover').fadeOut();
+                setTimeout(function(){
+                    $('.bigimg').remove();
+                    $('.cover').remove();
+                },500)
+            })
+        }
+
+        bigimg();
+
+    </script>
+
+</body>
+
+</html>

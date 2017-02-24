@@ -1,0 +1,26 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+	<load href="__PUBLIC__/css/forMyOrder.css" />
+	<div class="suit-order-main">
+		<div class="suit-title office-btm">官方推荐订单</div>
+			<table class="table table-hover">
+				<tr>
+					<th>需求名称</th>	
+					<th>需求预算</th>
+					<th>雇主</th>
+					<th>申请时间</th>
+					<th>详情</th>
+				</tr>
+				<foreach name="data" item="val" key="key">
+					<tr>
+						<td>{$val['need_title']}</td>
+						<td style="color:red">￥{$val['need_budget']}</td>
+						<td>{$val['need_user']}</td>
+						<td>{:date('Y/m/d H:i:s',$val['need_time'])}</td>
+						<td><a href="{:U('Home/Service/officalOrderDetail',['id'=>$val['need_id']])}">查看</a></td>
+					</tr>
+				</foreach>
+			</table>
+		
+	</div>
+</block>

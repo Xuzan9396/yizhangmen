@@ -1,0 +1,227 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+<script src="__PUBLIC__/layer/layer.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+	<load href="__PUBLIC__/css/publishService.css" />
+	<load href="__PUBLIC__/js/uploadPreview.js" />
+	<load href="__PUBLIC__/editor/kindeditor.js"/>
+	<load href="__PUBLIC__/editor/lang/zh_CN.js"/>
+	<script src="__PUBLIC__/layui/layui.js"></script>
+	<div class="service-publish-main">
+		<div class="header-name">
+			<div class="left-line"></div>
+			<div class="publishService-title">发布服务</div>
+		</div>
+		<div class="line-top"></div>
+		<!--进度条 -->
+		<div class="publish-stepbar">
+			<div class="stepbar-middle">
+				<div class="first-step2">1.选择服务类目</div>
+				<div class="second-step2">2.填写服务信息</div>
+				<div class="third-step2">3.发布成功,审核中</div>
+			</div>
+		</div>
+		<div class="publish-base-info">
+			<div class="publish-base-description">
+				<p>服务基本信息:</p>
+				<span>完善的信息可以提高雇主的认可</span>
+			</div>
+			
+			<div class="publish-service-form">
+				<form class="layui-form" id="second-form"action="{:U('Home/Service/publishServiceTwo')}" enctype="multipart/form-data" method="post">
+					<div class="publish-service-title">
+						<div class="publish-service-title-tips">
+							<p>服务标题</p>
+							<span>*</span>
+							<input id="title" class="public"type="text" lay-verify="title" class="shop-input" placeholder="服务标题必须为3~30个字符,中英文都可以"name="pubh_title"><span></span>
+						</div>
+					</div>
+					<div class="publish-service-price">
+						<div class="publish-service-price-tips">
+							<p>服务价格</p>
+							<span>*</span>
+							<input id="price" class="public" lay-verify="price" class="shop-input"type="text" placeholder="请输入服务价格"name="pubh_price"><span id="tips"></span>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="publish-service-picture">
+						<div class="publish-service-picture-tips">
+							<p>服务图片</p>
+							<span>*</span>
+							<div class="clear"></div>
+							<div class="service-picture">
+								<ul id="warp">
+								  	<li>
+								  		<img id="imgShow_WU_FILE_0" />
+								    	<div class="file-botton">
+								    		<input class="public" type="file" name="pic[]" id="up_img_WU_FILE_0" class="input-file" lay-verify="pic"/><span></span>
+								    		<div class="up-botton">上传服务展示图
+								    		</div>
+								    	</div>
+								  	</li>
+								  	<div class="clear"></div>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="third-tips">
+						<div class="glyphicon glyphicon-pushpin">温馨提示:</div>
+						<p>1.轮播图至少上传1张,最多4张</p>
+						<p>2.轮播图片尺寸最好为600*375,大小不超过800K</p>
+						<p>3.服务图片尺寸不低于258*258,大小不超过800K</p>
+						<p>4.上传的图片应尽量清晰</p>
+					</div>
+					<div class="service-video">	
+						<p>轮播图</p><span style="color:red">*</span>
+						<input type="file" class="public" id="carousel"lay-verify="carousel" class="input-file"name="file[]" multiple/><span></span>
+					</div>
+					<div class="clear"></div>
+					<div id="textarea">
+						<p>服务详情 : 完善的服务详情可以让雇主对服务有更好的了解</p>
+						<textarea id="editor_id" name="content" style="width:860px;height:360px;"></textarea>  
+						
+					</div>
+					<div class="clear"></div>
+					<input id="publish-now" lay-submit="" type="submit" value="立即发布">
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		// var res="{$result['msg']}";
+		// var num="{$result['errornum']}";
+		// if(num>0){
+		// 	// layer.alert(res, {
+		// 	// 	skin: 'layui-layer-molv' 
+		// 	// 	,closeBtn: 0
+		// 	// });
+		// }
+	</script>
+	<script>
+		$('#title').blur(function(){
+			if($(this).val().length<3 || $(this).val().length>30){
+				$(this).data({'num':0});
+				$(this).next().html(function(){
+					return '服务标题不合法';
+				});
+			}else{
+				$(this).data({'num':1});
+				$(this).next().html(function(){
+					return '';
+				});
+				console.log($(this).data('num'));
+			}
+		});
+		$('#price').blur(function(){
+			var preg=/[\d]{1,10}/;
+			if(!preg.test($(this).val())){
+				$(this).data({'num':0});
+				$(this).next().html(function(){
+					return '请输入正确格式';
+				});
+				console.log($(this).data('num'));
+			}else{
+				$(this).data({'num':1});
+				$(this).next().html(function(){
+					return '';
+				});
+				console.log($(this).data('num'));
+
+			}
+		});
+
+
+		$('#second-form').submit(function(){
+			$('#title').blur();
+			$('#price').blur();
+			console.log($('#second-form input').eq(3).prop('files').length);
+			if($('#second-form input').eq(3).prop('files').length!=4){
+				$("#carousel").data({'num':0});
+				$("#carousel").next().html(function(){
+					return '服务轮播图必须上传4张';
+				});
+			}else{
+				$("#carousel").data({'num':1});
+				$("#carousel").next().html(function(){
+					return '';
+				});
+			}
+
+			if($('#up_img_WU_FILE_0').val()!=''){
+				$('#up_img_WU_FILE_0').data({'num':1});
+				$('#up_img_WU_FILE_0').next().html(function(){
+					return '';
+				});
+			}else{
+				$('#up_img_WU_FILE_0').data({'num':0});
+				$('#up_img_WU_FILE_0').next().html(function(){
+					return '服务图片不能为空';
+				});
+			}
+			var total=0;
+			$('.public').each(function(){
+				total+=$(this).data('num');
+			});
+			if(total!=4){
+				return false;
+			}else{
+				return true;
+			}
+		});
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<script>
+	    KindEditor.ready(function(K) {
+	            window.editor = K.create('#editor_id');
+	        });
+	        var options = {
+	        cssPath : '/css/index.css',
+	        filterMode : true
+		};
+		var editor = K.create('textarea[name="content"]', options);
+
+		// 取得HTML内容
+		html = editor.html();
+
+		// 同步数据后可以直接取得textarea的value
+		editor.sync();
+		html = document.getElementById('editor_id').value; // 原生API
+		html = K('#editor_id').val(); // KindEditor Node API
+		html = $('#editor_id').val(); // jQuery
+
+		// 设置HTML内容
+		editor.html('HTML内容');
+</script>
+</block>

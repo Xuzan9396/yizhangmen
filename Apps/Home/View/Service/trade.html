@@ -1,0 +1,107 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+	<load href="__PUBLIC__/layui/css/layui.css" />
+	<load href="__PUBLIC__/css/trade.css" />
+	<load href="__PUBLIC__/layui/layui.js" />
+	<div class="service-trade-main">
+		<div class="header-name">
+			<div class="right-sgin"></div>
+			<div class="trade-title">收支明细</div>
+		</div>
+		<div class="line"></div>
+		<div class="service-trade-contents">
+			<form>
+				<div class="layui-form-pane" style="margin-top:15px;">
+				  	<div class="layui-form-item float">
+					    <label class="layui-form-label" id="trade-time">交易时间</label>
+					    <!-- 开始时间 -->
+				    	<div class="layui-inline" id="start-time">
+							<input class="layui-input start" name="startTime" placeholder="开始时间" onclick="layui.laydate({elem: this, festival: true})">
+						</div>
+					    <!-- 结束时间 -->
+					    <div class="layui-inline"  id="end-time">
+  							<input class="layui-input" name="endTime" placeholder="截止时间" onclick="layui.laydate({elem: this, festival: true})">
+						</div>
+				  	</div>
+				  	<div id="trade-flow">资金流向</div>
+				  	<div class="trade-money">
+				  		<select name="tradeMoney" id="trade-money">
+				  			<option value="0">全部</option>
+				  			<option value="1">支出</option>
+				  			<option value="2">收入</option>
+				  		</select>
+				  	</div>
+				  	<div class="order-search">
+				  		订单号:<input type="text" />
+				  	</div>
+				</div>
+				<input type="submit" class="layui-btn layui-btn-normal"id="order-search" value="搜索">   
+			</form>
+		</div>
+		<div class="clear"></div>
+		<div class="trade-data">
+			<div class="trade-order-header">
+				<ul>
+					<li>订单号</li>
+					<li>交易名称</li>
+					<li>交易账号</li>
+					<li>收入</li>
+					<li>交易时间</li>
+					<li>回收站</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+			<div class="trade-order-data">
+				<ul>
+					<li>订单号</li>
+					<li>名称</li>
+					<li>账号</li>
+					<li>支出</li>
+					<li>时间</li>
+					<li><a class="layui-icon" href="#">&#xe640;</a></li>
+				</ul>
+			</div>
+			<div class="trade-order-data">
+				<ul>
+					<li>订单号</li>
+					<li>名称</li>
+					<li>账号</li>
+					<li>支出</li>
+					<li>时间</li>
+					<li><a class="layui-icon" href="">&#xe640;</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script>
+		layui.use('laydate', function(){
+		  var laydate = layui.laydate;
+		  var start = {
+		    min: laydate.now()
+		    ,max: '2099-06-16 23:59:59'
+		    ,istoday: false
+		    ,choose: function(datas){
+		      end.min = datas; //开始日选好后，重置结束日的最小日期
+		      end.start = datas //将结束日的初始值设定为开始日
+		    }
+		  };
+		var end = {
+		    min: laydate.now()
+		    ,max: '2099-06-16 23:59:59'
+		    ,istoday: false
+		    ,choose: function(datas){
+		      start.max = datas; //结束日选好后，重置开始日的最大日期
+		    }
+		  };
+		document.getElementById('LAY_demorange_s').onclick = function(){
+		    start.elem = this;
+		    laydate(start);
+		  }
+		document.getElementById('LAY_demorange_e').onclick = function(){
+		    end.elem = this
+		    laydate(end);
+		  }
+		});
+	</script>
+
+</block>

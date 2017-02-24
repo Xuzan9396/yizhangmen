@@ -1,0 +1,148 @@
+<extend name="./Public/template/serviceShop.html" />
+<block name="right1">
+	<load href="__PUBLIC__/css/storeRegister1.css" />
+
+	<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+	<script src="__PUBLIC__/layui/layui.js"></script>
+	<div class="col-free-shop">
+		<p class="free-set-shop">编辑案例</p>
+	</div>
+	<div class="row jiben-info2">
+		<form action="{:U('home/service/storeCase')}" method="post" enctype="multipart/form-data" >
+			<input type="hidden" name="id" value="{$data['id']}">
+			<input type="hidden" name="case_shop" value="{:session('store_id')}">
+			<input type="hidden" name="case_orderid" value="{:I('get.id')}">
+			<table class="table">
+				<tr>
+					<th class="case-tr">案例标题
+						<font class="font-color">*</font>
+					</th>
+					<td><input type="text" name="case_title"  lay-verify="title" class="form-control store-case" value="{$data['case_title']}"></td>
+				</tr>
+				<tr>
+					<th class="case-tr">设计费用
+						<font class="font-color">*</font>
+					</th>
+					<td><input type="text" class="form-control store-case" value="{:I('price')}" readonly></td>
+				</tr>
+				<tr>
+					<th class="case-tr">案例封面
+						<font class="font-color">*</font>
+					</th>
+					<td>
+						<div>
+							<div class="case-upload">
+								<img 
+								<if condition="($data['case_cover'] neq '') ">
+									src="/shop/Public/Uploads/{$data['case_cover']}"
+								</if>	
+								 height="100" width="100" id="imgShow_WU_FILE_0" alt="">
+							</div>
+							<div class="cong-upload case-upload">
+								<div class="layui-btn layui-btn-danger layui-btn-radius">重新上传</div>
+								<input id="up_img_WU_FILE_0" type="file" name="case_cover" value="上传图片" class="chong-upload">
+							</div>
+							<div class="font-span">图片尺寸520*314，大小不超过500kb</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th class="case-tr">案例图片
+						<font class="font-color">*</font>
+					</th>
+					<td>
+						<div>
+							<input name="case_images[]" type="file" multiple value="上传图片" style="opacity:1;">
+						</div>
+						<div class="fifteen">最多上传8张案例图片</div>
+						<div></div>
+					</td>
+				</tr>
+				<tr>
+					<th class="case-tr">设计方案
+						<font class="font-color">*</font>
+					</th>
+					<td><textarea required name="case_scheme" id="" cols="40" rows="10" style="resize:none">{$data['case_scheme']}</textarea></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td><input type="submit" value="提交" class="layui-btn layui-btn-danger layui-btn-radius"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<ul id="warp" style="display:none;">
+		<li>
+			<input type="file" id="up_img_WU_FILE_0" />
+		</li>
+	</ul>
+	<script>
+		layui.use(['form', 'layedit', 'laydate'], function() {
+			var form = layui.form(),
+				layer = layui.layer;
+
+			form.verify({
+				title: function(value) {
+					if (value.length < 5 || value.length >= 20) {
+						return '请输入5-20个字符，支持中文、英文';
+					}
+				},
+				content: function(value) {
+					if (value.length <= 0) {
+						return '请填写详细的地址';
+					}
+				},
+				zm: function(value) {
+					if (value == '') {
+						return '上传图片不能为空';
+					}
+				},
+				touxiang: function(value) {
+					if (value == '') {
+						return '请上传头像！';
+					}
+				},
+				realname: [/[\u4E00-\u9FA5\uF900-\uFA2D]/, '请填写真实中文姓名'],
+				qq: [/^[1-9]\d{4,12}$/, 'qq格式不正确'],
+			});
+
+
+			var start = {
+				min: laydate.now(),
+				max: '2099-06-16 23:59:59',
+				istoday: false,
+				choose: function(datas) {
+					end.min = datas; //开始日选好后，重置结束日的最小日期
+					end.start = datas //将结束日的初始值设定为开始日
+				}
+			};
+
+			var end = {
+				min: laydate.now(),
+				max: '2099-06-16 23:59:59',
+				istoday: false,
+				choose: function(datas) {
+					start.max = datas; //结束日选好后，重置开始日的最大日期
+				}
+			};
+
+			document.getElementById('LAY_demorange_s').onclick = function() {
+				start.elem = this;
+				laydate(start);
+			}
+
+
+			form.on('radio', function(data) {
+				if (data.value == 0) {
+					$('#identity-z').html('个人的身份证正面: ' + '<font color="red">*</font>');
+					$('#identity-f').html('个人的身份证反面: ' + '<font color="red">*</font>');
+				} else if (data.value == 1) {
+					$('#identity-z').html('企业营销执照正面: ' + '<font color="red">*</font>');
+					$('#identity-f').html('企业营销执照反面: ' + '<font color="red">*</font>');
+				}
+			});
+
+		});
+	</script>
+</block>

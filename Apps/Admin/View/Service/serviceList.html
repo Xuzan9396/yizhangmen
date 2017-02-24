@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<load href="__PUBLIC__/layui/css/layui.css" />
+	<load href="__PUBLIC__/css/bootstrap.min.css" />
+	<load href="__PUBLIC__/layui/layui.js" />
+	<load href="__PUBLIC__/js/bootstrap.min.js" />
+  <load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+	<style>
+
+		#width{
+			width:120px;
+		}
+		.padd-left{
+			padding-left: 20px;
+			padding-top:5px;
+			border:1px solid #e6e6e6;
+		}
+		.float{
+			float:left;
+		}
+		.clear{
+			clear:both;
+		}
+		.trade-status{
+			margin-top:15px;
+			margin-left: 30px;
+			border:1px solid #e6e6e6;
+		}
+		.trade-select{
+			min-width:80px;
+			height:36px;
+			border-left:1px solid #e6e6e6;
+			border-right:0px solid #ccc;
+			border-top:0px solid #ccc;
+			border-bottom:0px solid #ccc;
+		}
+		.trade-title{
+			width:50px;
+			height:36px;
+			text-align: center;
+		}
+		.trade-title p{
+			margin-top:10px;
+		}
+		.search-content{
+			height:36px;
+			margin-top:15px;
+			margin-left:30px;
+		}
+		.search-page,.search-page select{
+			width:50px;
+			height:36px;
+			float:left;
+			margin-top:8px;
+			margin-right:30px;
+		}
+		.search-page{
+			border:none;
+		}
+		.search-page select{
+			border:1px solid #e6e6e6;
+		}
+		.a-bg{
+			background:#34A8FF;
+			color:white;
+			text-decoration: none;
+		}
+		.a-bg:hover{
+			color:white;
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="main-search padd-left">
+		<form action="{:U('Admin/Service/serviceList')}" method="get">
+			<div class="search-page">
+		  		<select name="mypage" id="">
+		  			<option value="10" <if condition="(I('get.mypage',10) eq 10)"> selected </if>>10</option>
+		  			<option value="20" <if condition="I('get.mypage',10) eq 20"> selected </if>>20</option>
+		  			<option value="50" <if condition="I('get.mypage',10) eq 50"> selected </if>>50</option>
+		  			<option value="100" <if condition="I('get.mypage,10') eq 100"> selsected </if>>100</option>
+		  		</select>
+		  	</div>
+			<div class="layui-form-pane float" style="margin-top: 15px;">
+			    <div class="layui-form-item">
+			    	<label class="layui-form-label" id="trade-time">时间</label>
+				    <div class="layui-input-inline" id="width">
+				       	<input class="layui-input" value="{:I('get.startTime')}"name="startTime"placeholder="开始日" onclick="layui.laydate({elem: this, festival: true})">
+				    </div>
+				    <div class="layui-input-inline" id="width">
+				      	<input class="layui-input" value="{:I('get.endTime')}"name="endTime"placeholder="截止日" onclick="layui.laydate({elem: this, festival: true})">
+				    </div>
+			   </div>
+			</div>
+			<div class="trade-status float">
+				<div class="trade-title float"><p>状态</p></div>
+		  		<select name="tradeStatus" class="trade-select">
+		  			<option value="3" <if condition = "(I('get.tradeStatus',3) eq 3)"> selected </if>>全部</option>
+		  			<option value="2" <if condition = "(I('get.tradeStatus',3) eq 2)"> selected </if>>已通过</option>
+		  			<option value="0" <if condition = "(I('get.tradeStatus',3) eq 0)"> selected </if>>待审核</option>
+		  			<option value="1" <if condition = "(I('get.tradeStatus',3) eq 1)"> selected </if> >未通过</option>
+		  		</select>
+		  	</div>
+		  	<div class="search-content float">
+		  		<div class="form-group float">
+				    <div class="input-group">
+				      	<input type="text" name="pubh_title"value="{:I('get.pubh_title')}" class="form-control" id="exampleInputAmount" placeholder="标题查询">
+				    </div>
+			  	</div>
+			  	<button type="submit" class="btn btn-primary float">搜索</button>
+		  	</div>
+
+		  	</form>
+
+		  	<div class="clear"></div>
+		</div>
+		<table class="table table-hover table-striped">
+			<tr>
+				<th>服务ID</th>
+				<th>店铺ID</th>
+				<th>标题</th>
+				<th>价格</th>
+				<th>状态</th>
+				<th>时间</th>
+				<th>详情</th>
+			</tr>
+			<foreach name="list" item="val" key="key">
+			<tr>
+				<td>{$val['id']}</td>
+				<td>{$val['pubh_shopid']}</td>
+				<td>{$val['pubh_title']}</td>
+				<td>{$val['pubh_price']}</td>
+				<td>{$val['pubh_status']}</td>
+				<td>{:date('Y-m-d H:i:s',$val['pubh_time'])}</td>
+				<td>
+					<a class="layui-btn layui-btn-primary layui-btn-small a-bg" href="{:U('Admin/Service/serviceDetail',['id'=>$val['id']])}">详情</a>
+				</td>
+			</tr>
+			</foreach>
+			<tr>
+				<td colspan="7">{$show}</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
+<script>
+		layui.use('laydate', function(){
+		  var laydate = layui.laydate;
+		  var start = {
+		    min: laydate.now()
+		    ,max: '2099-06-16 23:59:59'
+		    ,istoday: false
+		    ,choose: function(datas){
+		      end.min = datas; //开始日选好后，重置结束日的最小日期
+		      end.start = datas //将结束日的初始值设定为开始日
+		    }
+		  };
+		var end = {
+		    min: laydate.now()
+		    ,max: '2099-06-16 23:59:59'
+		    ,istoday: false
+		    ,choose: function(datas){
+		      start.max = datas; //结束日选好后，重置开始日的最大日期
+		    }
+		  };
+		document.getElementById('LAY_demorange_s').onclick = function(){
+		    start.elem = this;
+		    laydate(start);
+		  }
+		document.getElementById('LAY_demorange_e').onclick = function(){
+		    end.elem = this
+		    laydate(end);
+		  }
+		});
+	</script>

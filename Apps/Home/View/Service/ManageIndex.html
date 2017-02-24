@@ -1,0 +1,42 @@
+<extend name="./Public/template/serviceShop.html" />
+<block name="right1">
+	<load href="__PUBLIC__/css/manageIndex.css"/>
+	<div class="manage-index-main">
+		<div class="manage-header">
+			<p>你好 ! 欢迎来到店铺</p>
+		</div>
+
+		<div class="content-left">
+			<p class="header-title">店铺信息</p>
+			<div class="portrait"><img src="/shop/Public/Uploads/{$storeinfo['file_image']}" width="60px" height="60px"alt=""></div>
+			<p class="compay">{$storeinfo['store_name']}</p>
+			<div class="rank">
+				<span>等级 :</span>
+				<span class="rank-num">砖石</span>
+			</div>
+			<div class="clear"></div>
+			<p class="store-style">店铺类型 :　<if condition="$storeinfo['store_type'] eq 0">个人 <else/> 企业 </if></p>
+			<p class="shopman">店&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主 :&nbsp;&nbsp; {$storeinfo['store_realname']}</p>
+			<p class="manage-account">注册时间 : <span>{:date('Y/m/d',$storeinfo['store_addtime'])}</span></p>
+			<div class="clear"></div>
+		</div>
+		<div class="content-mid">
+			<p class="header-title">今日数据</p>
+			<ul>
+				<li>成交量 :　 {$storeinfo['ordernum']} </li>
+				<li>发布服务 :　 {$storeinfo['pubhnum']} </li>
+				<li>评价数量 :　 {$storeinfo['comnum']} </li>
+				<li>退单数量 :  0 </li>
+			</ul>
+		</div>
+		<div class="content-right">
+			<p class="header-title">信息公告</p>
+			<ul>
+				<li><a href="">信息公告信息公告</a></li>
+				<li><a href="">信息公告信息公告</a></li>
+				<li><a href="">信息公告信息公告</a></li>
+				<li><a href="">信息公告信息公告</a></li>
+			</ul>
+		</div>
+	</div>
+</block>

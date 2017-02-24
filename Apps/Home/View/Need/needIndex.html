@@ -1,0 +1,363 @@
+<extend name='./Public/template/base1.html'/>
+
+<block name="file">
+    <!-- 独立的 -->
+    <load href="__PUBLIC__/css/bootstrap.min.css" />
+    <load file="__PUBLIC__/home/need/css/need-index.css"/>
+</block>
+<block name="content">
+	<style type="text/css">
+	.container {
+		padding: 0px;
+	}
+	</style>
+	<div class="container">
+		<!-- 导航栏 -->
+		<div class="nav-barwen">
+			<div>
+				<ul class="nav-bar-ul">
+					<li >首页</li>
+					<li class="nav-li active"><a href="{:U('Home/Need/needIndex')}">需求大厅</a></li>
+					<li><a href="{:U('home/service/index')}">服务商库</a></li>
+					<li><a href="{:U('Home/Index/instrument')}">仪器库</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- banner开始 -->
+		<div class="banner row" style=" margin:0">
+			<!-- 左侧栏服务类目 -->
+			<div class="b-carte col-md-2" style="margin-right:0;padding:0;">
+				<p href="javascript:void(0)" class="b-carte-a">
+					<i class="glyphicon glyphicon-list"></i>
+					分类
+					<i class="glyphicon glyphicon-chevron-down"></i>
+				</p>
+			<foreach  name="bidcatelist" item="bidcateval">
+				<ul class="b-carte-ul">
+					<li><h4>{$bidcateval['cate_name']}</h4><i class="glyphicon glyphicon-chevron-right"></i></li>
+				</ul>
+				<foreach name="bidcateval['son']" item="bidson">
+				<div class="b-carte-detail">
+					<ul>
+						<a href="#">{$bidson['cate_name']}</a>
+					</ul>
+				</div>
+				</foreach>
+			</foreach>
+			</div>
+			
+
+			<!-- 幻灯片 -->
+			<div class="b-slide col-md-10" style="margin:0 0 0 5px;padding:0;">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:930px;height:352px;">
+			<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					<div class="item active">
+						<a href="#"><img src="__PUBLIC__/image/1.jpg" alt="First slide" title="1" ></a>
+					</div>
+					<div class="item">
+						<a href="#"><img src="__PUBLIC__/image/2.jpg" alt="Second slide" title="2"></a>
+					</div>
+					<div class="item">
+						<a href="#"><img src="__PUBLIC__/image/3.jpg" alt="Third slide" title="3"></a>
+					</div>
+				</div>
+				<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active" style="background:lightblue;"></li>
+					<li data-target="#myCarousel" data-slide-to="1" style="background:lightblue;"></li>
+					<li data-target="#myCarousel" data-slide-to="2" style="background:lightblue;"></li>
+				</ol>
+				<!-- Controls -->
+				<a class="left carousel-control" href="#myCarousel"  data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					<!-- <span class="sr-only">Previous</span> -->
+				</a>
+				<a class="right carousel-control" href="#myCarousel"  data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+					<!-- <span class="sr-only">Next</span> -->
+				</a>
+			</div>
+			</div>
+		</div>
+	</div>
+	<!-- banner结束 -->
+	<!-- 广告栏 -->
+	<div class="container" style="padding:0;">
+		<div class="adcolumn row"style="margin-top:15px;padding:0;">
+			<a href="#" >
+				<img src="__PUBLIC__/image/need/needindex1.png" >
+			</a>
+		</div>
+	</div>
+	<!-- 广告栏结束 -->
+	<!-- 最新需求动态  中标通知-->
+	<div class="container" style="">
+		<div class="demand row" style=" margin:0;float:left;z-index:2; position:relative;">
+			<!-- 中标通知 -->
+			<div class="demand-bidding col-md-2" style="margin:0;padding:0;">
+				<div class="demand-bidding-head"><span class="glyphicon glyphicon-list-alt"></span> 中标通知</div>
+				<div class="demand-bidding-content">
+					<ul >
+					<foreach name="bidlist" item="bidval">
+						<li class="demand-bidding-content-li">
+							<p>
+								<a href="{:U('Home/Need/needDisplay',['needid'=>$bidval['need_id']])}" class="need_name"><img src="__PUBLIC__/Uploads/{$bidval['file_image']}" width="40" height="40">	<span>{$bidval['need_title']}</span>
+								</a>
+							</p>
+							<p><span>中标公司：</span><a href="#" style="font-size:15px;">{$bidval['store_name']}</a></p>
+						</li>
+					</foreach>
+					</ul>
+				</div>
+			</div>
+			<!-- 中标通知结束 -->
+			<!-- 最新需求 -->
+			<div class="demand-new col-md-10" style="margin:0;padding:0;">
+				<div class="demand-new-head">
+					<div class="demand-new-head1">
+						<a href="javascript:" style="font-size: 20px;text-decoration: none;color:white;" >
+							<i class="glyphicon glyphicon-list"></i>
+							<span>最新需求动态</span> &nbsp;
+							<i class="glyphicon glyphicon-chevron-down"></i>
+						</a>
+					</div>
+					<div class="demand-new-head2"><a href="{:U('Home/Need/forMoreNeed')}">更多需求 >> </a></div>
+				</div>
+				<!-- 分类 -->
+				<div class="demand-lead">
+					<div style="height:35px;margin:0px 0 0 5px;padding-top:10px;font-size:16px;">
+						<div style="float:left;display:inline-block;">需求模式:</div>
+						<a  class="demand-lead-1">全部</a>
+						<a  class="demand-lead-2">免费发布</a>
+					</div>
+					<div style="height:30px;margin:5px 0 0 5px;font-size:16px;">
+						<div style="float:left;display:inline-block;">需求状态:</div>
+						<a class="demand-lead-1">全部</a>
+						<a class="demand-lead-2">方案征集中</a>
+						<a class="demand-lead-2">工作中</a>
+						<a class="demand-lead-2">已完成/已结束</a>
+					</div>
+				</div>
+				<!--  -->
+				<!-- 需求分类列表 -->
+				<div style="border:1px solid #62C9FA;"></div>
+				<div class="demand-couent" style="margin:0;padding:0;">
+					<ul style="font-size:18px;clear:both;margin-left:5px;height:37px;padding-top:6px;font-weight:bold;">
+						<li class="demand-couent-3">名称</li>
+						<li class="demand-couent-2 " style="">地区</li>
+						<li class="demand-couent-2 " style="">预算</li>
+						<li class="demand-couent-1 " style="">模式</li>
+						<li class="demand-couent-1 "style="">查看/方案</li>
+						<li class="demand-couent-1 "style="">状态</li>
+						<li class="demand-couent-1 "style="">收藏</li>
+					</ul>
+				</div>
+				<!-- 分界线 -->
+				<div class="col-md-12"style="border:1px solid #EEEEEE;clear:both;"></div>
+				<!-- 一行展示开始 -->
+				<foreach name="needlist" item="value">
+					<div class="need_list" style="margin:0;padding:0px 0 0 0;border-bottom:1px solid #EEEEEE;">
+						<ul style="margin-top:8px;height:50px;">
+							<li class="demand-couent-3">
+							 	<a href="{:U('Home/Need/needDisplay',['needid'=>$value['need_id']])}" class="need_name">{$value.need_title}</a>
+							</li>
+							<li class="demand-couent-2 demand-new-style">&nbsp</li>
+							<li class="demand-couent-2 demand-new-style" style="color:red;">{$value.need_budget}</li>
+							<li class="demand-couent-1 demand-new-style">免费发布</li>
+							<li class="demand-couent-1 demand-new-style">123/6</li>
+							<li class="demand-couent-1 demand-new-style">方案征集中</li>
+							<li class="demand-couent-1 demand-new-style"><a class="need_name_add"><span class="glyphicon glyphicon-star-empty"></span></a></li>
+						</ul>
+						<div class="need_hove_dis">
+							<span class="need_disc">{$value.need_desc|strip_tags}
+							</span>
+							<a href="{:U('Home/Need/needBudget')}" class="btn btn-primary need_fabu">发布一个类似需求</a>
+						</div>
+					</div>
+				</foreach>
+				<!-- 一行展示结束 -->
+			</div>
+		</div>
+	</div>
+	<!-- 需求动态结束 -->
+	<div style="height:1px;clear:both;"></div>
+	<!-- 广告栏 -->
+	<div class="container">
+		<div class="adcolumn">
+			<a href="#" ><img src="__PUBLIC__/image/adcolumn.jpg" ></a>
+		</div>
+	</div>
+	<!-- 广告栏结束 -->
+
+	<!-- 最新服务开始 -->
+	<div class="container">
+		<div class="service row"  style="margin:0;padding:0;">
+			<div class="recommend col-md-12" style="margin:0;padding:0;">
+				<div class="recommend-head-0">
+					<div class="recommend-head">
+						<span class="glyphicon glyphicon-th-list"></span> 最新服务
+					</div>
+					<div style="float:right; width:200px;margin-top:15px;">
+						<a style="text-decoration:none;display:inline-block;float:right;font-size:10px;cursor:pointer;margin-right:10px;">更多服务 >> </a>
+					</div>
+				</div>
+				<!-- 最新服务列表 -->
+				<div class="recommend-content">
+					<ul>
+						<li>
+							<a href="#">
+								<img src="__PUBLIC__/image/tou.jpg" width="50" height="50">
+								<div class="recommend-detail">
+									<p>北京迈基诺基因科技股份有限公司</p>
+									<p>提供<span>555项</span>服务</p>
+									<p><span>生命科学</span><span>高通量测序技术服务</span></p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="__PUBLIC__/image/tou.jpg">
+								<div class="recommend-detail">
+									<p>北京迈基诺基因科技股份有限公司</p>
+									<p>提供<span>555项</span>服务</p>
+									<p><span>生命科学</span><span>高通量测序技术服务</span></p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="__PUBLIC__/image/tou.jpg">
+								<div class="recommend-detail">
+									<p>北京迈基诺基因科技股份有限公司</p>
+									<p>提供<span>555项</span>服务</p>
+									<p><span>生命科学</span><span>高通量测序技术服务</span></p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="__PUBLIC__/image/tou.jpg">
+								<div class="recommend-detail">
+									<p>北京迈基诺基因科技股份有限公司</p>
+									<p>提供<span>555项</span>服务</p>
+									<p><span>生命科学</span><span>高通量测序技术服务</span></p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="__PUBLIC__/image/tou.jpg">
+								<div class="recommend-detail">
+									<p>北京迈基诺基因科技股份有限公司</p>
+									<p>提供<span>555项</span>服务</p>
+									<p><span>生命科学</span><span>高通量测序技术服务</span></p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="__PUBLIC__/image/tou.jpg">
+								<div class="recommend-detail">
+									<p>北京迈基诺基因科技股份有限公司</p>
+									<p>提供<span>555项</span>服务</p>
+									<p><span>生命科学</span><span>高通量测序技术服务</span></p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<img src="__PUBLIC__/image/tou.jpg">
+								<div class="recommend-detail">
+									<p>北京迈基诺基因科技股份有限公司</p>
+									<p>提供<span>555项</span>服务</p>
+									<p><span>生命科学</span><span>高通量测序技术服务</span></p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<!-- 最新服务广告 -->
+				<div class="recommend-content-2">
+					<img src="__PUBLIC__/image/filehelper.jpg" alt="" width="280" height="162">
+					<img src="__PUBLIC__/image/filehelper.jpg" alt="" width="280" height="162">
+					<img src="__PUBLIC__/image/filehelper.jpg" alt="" width="280" height="162">
+					<img src="__PUBLIC__/image/filehelper.jpg" alt="" width="280" height="162">
+					<img src="__PUBLIC__/image/filehelper.jpg" alt="" width="280" height="162">
+					<img src="__PUBLIC__/image/filehelper.jpg" alt="" width="280" height="162">
+					<img src="__PUBLIC__/image/filehelper.jpg" alt="" width="280" height="162">
+					<img src="__PUBLIC__/image/filehelper.jpg" alt="" width="280" height="162">
+					<img src="__PUBLIC__/image/filehelper.jpg" alt="" width="280" height="162">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 服务类目结束 -->
+	<script type="text/javascript">
+
+		var timer;
+		//console.log(1);
+		// var top1 = $('.b-carte').offset().top;
+		$('.b-carte-ul').each(function(data){
+			//console.log(data);
+			
+			$(this).mouseover(function(){
+				// console.log(data);
+				$('.b-carte-ul').eq(data).children().css({'background':'#62C9FA','border-color':'#3195F3','color':'white'});
+				$('.b-carte-detail:eq('+data+')').slice().hide();
+				$('.b-carte-detail:eq('+data+')').show().mouseover(function(){
+					$('.b-carte-ul').eq(data).children().css({'background':'#62C9FA','border-color':'#3195F3','color':'white'});
+					$(this).show();					
+				}).mouseout(function(){
+					$('.b-carte-ul').eq(data).children().css({'background':'#FAFAFA','color':'black','border-color':''});
+					$(this).hide();
+				});
+			}).mouseout(function(){
+				$('.b-carte-ul').eq(data).children().css({'background':'#FAFAFA','color':'black','border-color':''});
+				$('.b-carte-detail:eq('+data+')').hide();
+			});
+		 });
+		/**
+		 * [每100ms检测一次是否被选中,如果选中,则改变颜色为blue,没有选中,则颜色为lightblue]
+		 * @param  {String} ){$(".carousel-indicators >li[class [轮播图指示灯class]
+		 * @param  {[type]} 100 [每100ms检测一次]
+		 * 闻中华   wenzhonghua@163.com
+		 */
+		setInterval(function(){
+			$(".carousel-indicators > li[class='active']").css('background','blue');
+			$(".carousel-indicators > li:not([class='active'])").css('background','lightblue');
+		},100);
+		/**
+		 * [最新需求列表展示]
+		 * @param  {description){	显示最新需求描述	}
+		 * @param  {闻中华	} [description]
+		 * @return {wenzhonghua@163.com}[description]
+		 */
+		$('.need_list').hover(function(){
+			$(this).css({'background':'#62C9FA'});
+			$(this).children().eq(0).next().show();
+		},function(){
+			$(this).css({'background':''});
+			$(this).children().eq(0).next().hide();
+		});
+		// var timer1;
+		// var i = 0;
+
+		// function biddingRun(){
+		// 		$('.demand-bidding-content').scrollTop(i);
+		// 		i++ ;
+		// 		if( i >= $('.demand-bidding-content').height() ){
+		// 			i = 0;
+		// 		}
+		// }
+
+		// timer1 = setInterval(biddingRun,100);
+
+		// $('.demand-bidding-content').mouseover(function(){
+		// 	clearInterval(timer1);
+		// }).mouseleave(function(){
+		// 	timer1 = setInterval(biddingRun,100);
+		// })
+
+	</script>
+</block>

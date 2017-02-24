@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+ 
+    <load href="__PUBLIC__/css/bootstrap.min.css" />
+    <load href="__PUBLIC__/css/dataTables.bootstrap.css" /> 
+    <load href="__PUBLIC__/css/style.min.css" />
+    <load href="__PUBLIC__/css/font-awesome.min.css" />
+    <load href="__PUBLIC__/layui/css/layui.css"  />
+    <load href="__PUBLIC__/admin/css/animate.min.css" />
+
+
+</head>
+    <style type="text/css">
+           .addbut{
+        display: block;
+        margin-left:48%;
+        cursor: pointer;
+        position: absolute;
+        z-index: 1;
+      }
+
+      img{
+        cursor: pointer;
+      }
+     
+      .layui-form-select{
+        display: none;
+      }
+
+      #appt-desc{
+        width: 150px;
+        height: 30px;
+      }
+
+    .addadvetr{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background: white;
+        display: none;
+        z-index: 2;
+        padding: 100px;
+    }
+
+    #myForm{
+        width: 500px;
+        height: 500px;
+        float: left;
+
+    }
+
+    .imgd{
+        width: 300px;
+        margin-right: 50px;
+        height: auto;
+        float: left;
+    }
+
+    .imgd img{
+        width: 300px;
+    }
+
+    .show{
+        width: 100%;
+        height: auto;
+        text-align: center;
+    }
+
+    .show span{
+        color: red;
+        font-size: 16px;
+    }
+
+    .content{
+        outline:none;
+        width: 300px;
+        height: 40px;
+        border: 1px solid #EEEEEE;
+        line-height: 40px;
+        padding: 0px 10px;
+
+    }
+
+    #stotese{
+        width: 300px;
+        height: 35px;
+    }
+
+    .selectul{
+        width: auto;
+        height: auto;
+        border: 1px solid #EEEEEE;
+        position: absolute;
+        background: white;
+         display: none;
+    } 
+
+    .selectul li{
+        transition: background 0.5s;
+        width: 498px;
+        padding: 2px 10px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+     .selectul li:hover{
+        transition: background 0.5s;
+        background: #EEE;
+     }
+
+    .cursor{
+        cursor: pointer;
+     }
+
+     .blue{
+        color: #3195F3;
+    }
+
+    .blue:hover{
+        color: blue;
+    }
+
+    .width{
+        width: 500px;
+    }
+
+    .imgs1{
+    width: 100px;
+   }
+    </style>
+<body>        
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <!-- 图片信息开始 -->
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">               
+                    <div class="ibox-content">
+                    <button type="button" class="btn btn-primary addbut">添加</button>
+                        <table class="table table-striped table-bordered table-hover dataTables-example" id="layer-photos-demo">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>略缩图</th>
+                                    <th>店铺名称</th>
+                                    <th>启用位置</th>
+                                    <th>标题</th>
+                                    <th>描述</th>
+                                    <th>添加时间</th>
+                                    <th>修改时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="arr" item="v">
+                                    <tr>
+                                        <td>{$v.appt_id}</td>
+                                        <td><img src="__PUBLIC__/Uploads{$v.appt_zoom}" layer-pid="{$v.appt_where}/{$v.appt_store_id}" layer-src="__PUBLIC__/Uploads{$v.appt_pic}"></td>
+                                        <td ><a class="cursor blue" onclick="storeDetail('{$v.appt_store_id}')" title="点击查看店铺详情">{$v.appt_store_name}</a></td>
+                                        <td>{$v.appt_where}</td>
+                                        <td><span class="appt-desc">{$v.appt_title}</span></td>
+                                        <td><span class="appt-desc">{$v.appt_desc}</span></td>
+                                        <td>{$v.appt_create_time}</td>
+                                        <td>{$v.appt_mod_time}</td>
+                                        <td class="center"><button type="button" class="btn btn-primary"  onclick="modify('{$v.appt_id}')" >修改</button> <button type="button" class="btn btn-danger" onclick="del('{$v.appt_id}')">删除</button></td>
+                                    </tr>
+                                </foreach>                               
+                            </tbody>
+                        </table>
+                         <div class="show">
+                               首页已轮播图启用<span>{$count[1]}</span>张图<br>
+                               分类背景启用<span>{$count[4]}</span>张图<br>
+                               需求大厅已启用<span>{$count[2]}</span>张图<br>
+                               服务大厅已启用<span>{$count[3]}</span>张图<br>
+                               还有<span>{$count[0]}</span>张图未启用
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 图片信息结束 -->
+
+            <!-- 添加图片区域开始 -->
+             <div class="addadvetr">
+                    <div class="container">
+                        <div class="row">
+                             <div class="imgd"><h3>图片预览</h3><img src="" id="jimg"></div>
+                            <form role="form" method="post" enctype="multipart/form-data" id="myForm" onsubmit="return false" >
+
+                             <!-- Split button -->
+                            <div class="form-group">
+                                <div class="btn-group">
+                                    <input type="hidden" name="appt_where" value="">
+                                      <button type="button" class="btn btn-info" id="bannerposition" appt_where="">选择播放位</button>
+                                      <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                      </button>
+                                      <ul class="dropdown-menu" role="menu" id="bannerwhere">
+                                        <li><a href="javascript:;" appt_where="1">首页</a></li>                               
+                                        <li><a href="javascript:;" appt_where="2">需求大厅</a></li>                          
+                                        <li><a href="javascript:;" appt_where="3">服务机构</a></li>                                
+                                        <li><a href="javascript:;" appt_where="4">banner背景</a></li>                                
+                                        <li><a href="javascript:;" appt_where="0">不启用</a></li>                                
+                                      </ul>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">选择店铺</label>
+                                <input type="text" class="form-control input-lg"  oninput="searchstore(this)" value="" id="selectstoreinp"  autocomplete="off" placeholder="请填写店铺首字，然后选择店铺">
+                                <input type="hidden" name="appt_store_id" value="">
+                                 <div class="btn-group selectul">
+                                      <ul>
+                                         <li></li>
+                                      </ul>
+                                 </div>
+                            </div>
+
+                             <div class="form-group">
+                                <label for="exampleInputt">标题</label>
+                                <input type="text" name="appt_title" class="form-control input-lg" id="exampleInputt" placeholder="请填写标题">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInpud">描述</label>
+                                <input type="text" name="appt_desc" class="form-control input-lg" id="exampleInputd" placeholder="请填写描述">
+                            </div>
+
+                            <div class="form-group">
+                                 <label for="exampleInputFile"></label>
+                                 <input type="file" id="exampleInputFile" name="pic">
+                                 <p class="help-block">请选择图片文件<br>首页轮播图最佳尺寸为940*500</p>
+                                 <p>不支持bmp等格式图片，请谨慎选择</p>
+                             </div>                           
+                              <button type="submit" class="btn btn-default cancel">取消</button>
+                              <button type="submit" class="btn btn-primary save">上传</button> 
+                            </form>    
+                        </div>
+                    </div>
+                </div>
+                <!-- 添加图片结束 -->
+        </div>
+    </div>
+          
+    <!-- Mainly scripts -->
+    <load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+    <load href="__PUBLIC__/js/bootstrap.min.js" />
+    <load href="__PUBLIC__/layer/layer.js"/>
+    <load href="__PUBLIC__/js/mo.js" />
+    <load href="__PUBLIC__/js/jquery.dataTables.js" />
+    <load href="__PUBLIC__/js/dataTables.bootstrap.js" />
+    <load href="__PUBLIC__/layui/layui.js" />
+    <script>
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable();
+
+            /* Init DataTables */
+            var oTable = $('#editable').dataTable();
+
+            /* Apply the jEditable handlers to the table */
+            oTable.$('td').editable('../example_ajax.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+
+                "width": "90%",
+                "height": "100%"
+            });
+
+        });
+
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+                "Custom row",
+                "New row",
+                "New row",
+                "New row",
+                "New row"]);
+
+        }   
+            
+        //添加图片切换页面
+        $('.addbut,.cancel').click(function(){
+            $('.addadvetr').slideToggle();
+        })
+
+        //上传图片预览（创建一个URL对象）
+        function getObjectURL(file) {
+            var url = null ; 
+            if (window.createObjectURL!=undefined) { // basic
+                url = window.createObjectURL(file) ;
+            } else if (window.URL!=undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file) ;
+            } else if (window.webkitURL!=undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file) ;
+            }
+            return url ;
+        }
+
+        //实例化对象。把所选择的图片URL放到预览处实现预览
+        var formData;
+        $("#exampleInputFile").change(function(){
+            var objUrl = getObjectURL(this.files[0]);
+            formData = new FormData($('#myForm')[0]);
+            console.log("objUrl = "+objUrl);
+            if (objUrl) {
+                $("#jimg").attr("src", objUrl);
+            }
+            
+        }) ;
+
+
+        // 上传图片时保存结果
+        $('.save').click(function(){  
+           mo.ajaxUp(formData,"{:U('Home/uploadFile')}",function(res){
+                if(res['status']){
+                    mo.msg('上传成功','通知',1);
+                }else{
+                    mo.msg(res['info']);
+                }
+
+           })
+        })
+
+        // 删除图片confirm并返回删除结果。删除成功便刷新
+        function del(appt_id){
+            mo.confirm('你确定要删除吗?',function(){
+               mo.ajax({'appt_id':appt_id},"{:U('Home/ajaxDel')}",function(res){
+                    if(res['status']){
+                        mo.msg('删除成功','通知',1);
+                    }else{
+                        mo.msg('删除失败');
+                    }
+                })
+            })
+        }
+
+        //点击选择要上传图片所要轮播的页面（首页、需求大厅、服务大厅、不启用）
+        $('#bannerwhere li').each(function(){
+            $(this).click(function(){
+                $('#bannerposition').html($(this).html()).attr('appt_where',$(this).find('a').attr('appt_where'));
+                $('#myForm input[name=appt_where]').val($(this).find('a').attr('appt_where'));
+            })
+          })
+
+
+        //激活查询出来的店铺信息选项
+        $('#selectstoreinp').focus(function(){
+            $('.selectul').fadeIn();
+        }).blur(function(){
+           $('.selectul').fadeOut();
+        })
+
+        //需要输入触动ajax查询图片所属店铺名称和id
+        function searchstore(obj){
+            mo.ajax({'data':$(obj).val()},"{:U('Home/ajaxSearchStore')}",function(res){
+                if(res){
+                    var str = '';
+                    for( var k in res){
+                         str += '<li appt_store_id="'+res[k]['id']+'" store_name='+res[k]['store_name']+'>'+res[k]['store_name']+'</li>';
+                    }
+                    $('.selectul ul').html(str);
+                     build();
+                }
+            })
+        }
+             
+        //选择ajax所查询出来的店铺信息并准备好串行化数据
+        function build(){
+             $('.selectul ul li').each(function(){
+                $(this).click(function(){
+                    $('#selectstoreinp').val($(this).html());
+                    $('#selectstoreinp').next().val($(this).attr('appt_store_id'));
+                })
+            })
+        }
+        build();
+
+        //修改操作，用ajax查询相关信息遍历到modal
+        function modify(id){
+           mo.ajax({'appt_id':id},"{:U('Home/ajaxSearchAdvertInfo')}",function(res){
+                if(res){
+                    var info = '';
+
+                   for(var k in res){
+                         info += '<form role="form" id="myForm1"> <div class="form-group"> <label for="exampleInput1">ID</label> <input type="text" class="form-control" id="exampleInput1" name="appt_id"  readonly value="'+res[k]['appt_id']+'"> </div> <div class="form-group"> <label for="exampleInput2">店铺名称</label> <input type="text" class="form-control" id="exampleInput2" readonly value="'+res[k]['appt_store_id']+'"> </div> <div class="form-group"> <label for="exampleInput3">请选择启用位置</label>  <select class="form-control" name="appt_where" id="exampleInput3"> <option value="1" '+res[k]['where'][1]+'>首页</option> <option value="2" '+res[k]['where'][2]+'>需求大厅</option> <option value="3" '+res[k]['where'][3]+'>服务机构</option><option value="4" '+res[k]['where'][4]+'>banner背景</option> <option value="0" '+res[k]['where'][0]+' >不启用</option> </select> </div> <div class="form-group"> <label for="exampleInput">标题</label> <input type="text" name="appt_title" class="form-control input-lg" placeholder="请填写标题" value="'+res[k]['appt_title']+'"> <label for="exampleInputm">描述</label> <input type="text" name="appt_desc" class="form-control input-lg" placeholder="请填写描述" value="'+res[k]['appt_desc']+'"> </div> </form>';
+                         }
+
+                        //串行化form表单，用ajax提交处理
+                   mo.mod(info,function(){
+                        mo.ajax($('#myForm1').serialize(),"{:U('Admin/Home/ajaxSave')}",function(res){
+                            if(res){
+                                mo.msg(res['info'],1);
+                            }else{
+                                mo.msg(res['info']);
+                            }
+                        })
+                   },'提示')
+                }
+           })
+        }
+
+        function storeDetail(id){
+            mo.ajax({'id':id},"{:U('Home/serProSto')}",function(res){
+                if(res){
+                    var str ='';
+                    str += '<table class="table table-hover"><tr><td>店铺名称:'+res['store_name']+'</td><td></td></tr><tr><td>真实姓名:'+res['store_realname']+'</td><td>店铺类型:'+res['store_type']+'</td></tr><tr><td>身份证号:'+res['store_caid']+'</td><td>手机号:'+res['store_phone']+'</td></tr><tr><td>电子邮箱:'+res['store_email']+'</td><td>联系QQ:'+res['store_qq']+'</td></tr><tr><td>身份证或营业直销证书:</td><td></td></tr><tr><td><img src=__PUBLIC__/Uploads/'+res['store_zcaidpic']+' class="imgs1 cursor"  onclick="showimg(this)"><img src=__PUBLIC__/Uploads/'+res['store_fcaidpic']+' class="imgs1 cursor" onclick="showimg(this)"></td></tr><tr><td>地址:'+res['store_address']+'</td><td>创建时间:'+res['store_addtime']+'</td></tr></table>';
+
+                    mo.mod(str);
+                }
+            })
+        }
+
+        //图片预览
+        layer.photos({
+          photos: '#layer-photos-demo'
+          ,anim: 5
+        });
+
+        //form表单事件监听
+    layui.use(['form', 'layedit', 'laydate'], function(){
+          var form = layui.form()
+          ,layer = layui.layer
+          ,layedit = layui.layedit
+          ,laydate = layui.laydate;
+  
+    });
+   
+    </script>
+
+</body>
+
+</html>

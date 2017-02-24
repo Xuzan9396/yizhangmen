@@ -1,0 +1,246 @@
+<include file="Apps/Admin/View/StoreOpen/storeHeader.html" />
+<div>
+
+	<!-- Nav tabs选项卡 -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">店铺的基本信息</a></li>
+		<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">店铺的所属分类</a></li>
+		<li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">发布的服务</a></li>
+		<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">待定</a></li>
+	</ul>
+
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="home">
+			<div class="wrapper wrapper-content animated fadeInRight">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="ibox float-e-margins">
+							<div class="ibox-title">
+								<h5>店铺 <small>基本信息</small></h5>
+								<div class="ibox-tools">
+									<a class="collapse-link">
+										<i class="fa fa-chevron-up"></i>
+									</a>
+									<a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+										<i class="fa fa-wrench"></i>
+									</a>
+									<ul class="dropdown-menu dropdown-user">
+										<li><a href="table_data_tables.html#">选项1</a>
+										</li>
+										<li><a href="table_data_tables.html#">选项2</a>
+										</li>
+									</ul>
+									<a class="close-link">
+										<i class="fa fa-times"></i>
+									</a>
+								</div>
+							</div>
+							<div class="ibox-content">
+
+								<table class="table  table-bordered table-hover dataTables-example" id="layer-photos-demo">
+									<thead>
+										<tr>
+											<th>店铺的名称</th>
+											<th>店铺类型</th>
+											<th>店铺的头像</th>
+											<th>状态</th>
+											<th>认证手机</th>
+											<th>真实姓名</th>
+											<th>详情</th>
+											<th>回收站</th>
+											<th>审核通过</th>
+										</tr>
+									</thead>
+									<tbody>
+										<foreach name="data" item="val">
+											<tr>
+												<th>{$val.store_name}</th>
+												<th>{$val.store_type}</th>
+												<th>
+													<?php showImage($val["file_image"], 50, 50); ?>
+												</th>
+												<th>{$val.cate_status}</th>
+												<th>{$val.store_phone}</th>
+												<th>{$val.store_realname}</th>
+												<th><a onclick='select("{$val.id}");' href="javascript:;" class="layui-btn layui-btn-small" data-toggle="modal" data-target="#myModal53">详情</a></th>
+												<th><a href="javascript:;" class="layui-btn layui-btn-small">删除</a></th>
+												<th>
+													<a href="javascript:;" id="{$val.id}" onclick="status(this,'{$val.id}','{$val.store_email}')" class="layui-btn layui-btn-small">
+														<if condition="$val.cate_status eq '下架'">关闭状态
+															<else/>审核通过
+														</if>
+													</a>
+												</th>
+											</tr>
+										</foreach>
+									</tbody>
+									<tfoot>
+									</tfoot>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="profile">..2.</div>
+		<div role="tabpanel" class="tab-pane" id="messages">..3.</div>
+		<div role="tabpanel" class="tab-pane" id="settings">.4..</div>
+	</div>
+
+</div>
+
+
+<!-- 店铺的详情 -->
+<div class="modal inmodal fade" id="myModal53" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">店铺信息</h4>
+				<small class="font-bold">个人店铺详细信息
+                </div>
+                <div class="modal-body">
+                   <div class="row">
+                   		<div class="col-md-2"></div>
+                   		<div class="col-md-8" id="colmd">
+
+                   		</div>
+                   		<div class="col-md-2"></div>
+                   </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <script>
+                function select(eid)
+                {
+                      $.ajax({
+                        type: "post",
+                        url:"{:U('Admin/StoreOpen/storeList')}",
+                        data: {'id':eid},
+                        dataType: "json",
+                        async: true,
+                        success: function(data) {
+                            // 拼接表格
+                            var type = ['个人', '企业'];
+							var imgzf = data['store_zcaidpic'];
+							var imgfz = data['store_fcaidpic']
+							imgzf = '/shop/Public/Uploads/' + imgzf;
+							imgfz= '/shop/Public/Uploads/' + imgfz;
+                            var status = ['下架', '上架'];
+                            var tab = '';
+                            tab += '<table class="table" style="border:none;">';
+                                tab += '<tr>';
+                                tab += '<th>店铺名称：</th>';
+                                tab += '<td>'+ data['store_name'] +'</td>';
+                                tab += '</tr>';
+                                tab += '<tr>';
+                                tab += '<th>店铺类型：</th>';
+                                tab += '<td>'+ type[data['store_type']] +'</td>';
+                                tab += '</tr>';
+                                tab += '<tr>';
+                                tab += '<th>真实姓名：</th>';
+                                tab += '<td>'+ data['store_realname'] +'</td>';
+                                tab += '</tr>';
+                                tab += '<tr>';
+                                tab += '<tr>';
+                                tab += '<th>性别：</th>';
+                                tab += '<td>'+ data['store_realname'] +'</td>';
+                                tab += '</tr>';
+                                tab += '<tr>';
+                                tab += '<th>身份证号：</th>';
+                                tab += '<td>'+ data['store_caid'] +'</td>';
+                                tab += '</tr>';
+                                tab += '<tr>';
+                                tab += '<th>身份证到期时间：</th>';
+                                tab += '<td>'+ data['store_due'] +'</td>';
+                                tab += '</tr>';
+                                tab += '<tr>';
+                                tab += '<th>手机号码：</th>';
+                                tab += '<td>'+ data['store_phone'] +'</td>';
+                                tab += '</tr>';
+                                tab += '<tr>';
+                                tab += '<th>用户邮箱：</th>';
+                                tab += '<td>'+ data['store_email'] +'</td>';
+                                tab += '</tr>';
+                                tab += '<tr>';
+                                tab += '<th>用户QQ：</th>';
+                                tab += '<td>'+ data['store_qq'] +'</td>';
+                                tab += '</tr>';
+                                tab += '<tr>';
+                                tab += '<th>详细地址：</th>';
+                                tab += '<td>'+ data['store_address'] +'</td>';
+                                tab += '</tr>';
+                                tab += '<tr>';
+                                tab += '<th>开店时间：</th>';
+                                tab += '<td>'+ data['store_addtime'] +'</td>';
+                                tab += '</tr>';
+                                tab += '<tr>';
+                                tab += '<th>店铺是否上架</th>';
+                                tab += '<td>'+ status[data['store_status']] +'</td>';
+                                tab += '</tr>';
+                                tab += '<tr>';
+                                tab += '<th>店铺的描述</th>';
+                                tab += '<td>'+ data['store_describe'] +'</td>';
+                                tab += '</tr>';
+								tab += '<tr>';
+                                tab += '<th>照片的正面</th>';
+                                tab += '<td>'+ '<img src="'+imgzf+'" alt="" width="200" />' +'</td>';
+                                tab += '</tr>';
+								tab += '<th>照片的反面</th>';
+                                tab += '<td>'+ '<img src="'+imgzf+'" alt="" width="200" />' +'</td>';
+                                tab += '</tr>';
+                            tab += '</table>';
+                            $('#colmd').html(tab);
+                        }
+                    });
+                }
+                function status(obj,eid,email)
+                {
+
+					//询问框
+						layer.confirm('审核店铺', {
+						  btn: ['确定','取消'] //按钮
+						}, function(){
+						  layer.msg('操作成功', {icon: 1});
+						  $.get("{:U('admin/StoreOpen/storeStatus')}",{'id':eid,'email':email},function(data){
+  								if(data.t == 1){
+  									$(obj).parent().parent().children().eq(3).html(data.s);
+  									$(obj).html('审核通过');
+
+  								}else if( data.t == 0){
+  									$(obj).parent().parent().children().eq(3).html(data.s);
+  									$(obj).html('关闭店铺');
+
+  								}
+  						},'json');
+						}, function(){
+
+						});
+
+
+
+
+
+
+
+
+
+                }
+
+				//图片预览
+				layer.photos({
+				  photos: '#layer-photos-demo'
+				  ,anim: 5
+				});
+
+        </script>
+
+	<include file="Apps/Admin/View/StoreOpen/storeFooter.html" />

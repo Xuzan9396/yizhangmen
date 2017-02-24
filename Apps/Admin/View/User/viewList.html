@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+ 
+    <load href="__PUBLIC__/css/bootstrap.min.css" />
+    <load href="__PUBLIC__/css/dataTables.bootstrap.css" /> 
+    <load href="__PUBLIC__/css/style.min.css" />
+    <load href="__PUBLIC__/css/font-awesome.min.css" />
+    <load href="__PUBLIC__/admin/css/animate.min.css" />
+    <style>
+        *{font-family:'Microsoft YaHei';}
+        tr{text-align:center;}
+    </style>
+</head>
+
+<body class="gray-bg">    
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                
+                    <div class="ibox-content">
+
+                        <table class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>用户名</th>
+                                    <th>手机号码</th>
+                                    <th>电子邮箱</th>
+                                    <th>注册时间</th>
+                                    <th>上次登录时间</th>
+                                    <th>用户类型</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="list" item="val">
+                                    <tr class="gradeX">
+                                        <td id="user_id">{$val['user_id']}</td>
+                                        <td>{$val['user_account']}</td>
+                                        <td>{$val['user_phone']}</td>
+                                        <td>{$val['user_email']}</td>
+                                        <td>{$val['user_addtime']}</td>
+                                        <td>{$val['user_lasttime']}</td>
+                                        <td>{$val['user_type']}</td>
+                                        <td>{$val['user_status']}</td>
+                                        <td style="text-align:center">
+                                            <if condition="$val['user_status'] eq '启用'">
+                                                <span class="detail" to="{:U('Admin/User/getImpUserInfo')}" uid="{$val['user_id']}" account="{$val['user_account']}"><button class="btn btn-info">详细信息</button></span>
+                                                <span class="setStatus" i="{$val['user_id']}" s="0">
+                                                <button type="button" class="btn btn-danger">禁用</button>
+                                                </span>
+                                            <else />
+                                                <span class="detail" to="{:U('Admin/User/getImpUserInfo')}" uid="{$val['user_id']}" account="{$val['user_account']}"><button class="btn btn-info">详细信息</button></span>
+                                                <span class="setStatus" i="{$val['user_id']}" s="1">
+                                                    <button type="button" class="btn">启用</button>
+                                                </span>
+                                            </if>
+                                        </td>
+                                    </tr>
+                                </foreach>                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+           
+    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" onclick="$('#myModal').fadeOut('slow');">&times;</span><span class="sr-only">关闭</span>
+                    </button>
+                    <i class="fa fa-laptop modal-icon"></i>
+                    <h4 class="modal-title">确认更改用户状态?</h4>
+                </div>
+                <div class="modal-footer" style='text-align:center'>
+                    <button type="button" id="save" class="btn btn-primary">确认更改</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal" onclick="$('#myModal').fadeOut('slow');">取消更改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 详情模态框 -->
+    <div class="modal inmodal" id="UserModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" onclick="$('#UserModal').fadeOut('slow');">&times;</span><span class="sr-only">关闭</span>
+                    </button>
+                    <h4 class="modal-title" id="account">用户详细信息</h4>
+                </div>
+                <div class="modal-content">
+                    <div class='row' style="width:100%">
+                        <div class="col-md-2"></div>
+
+                        <div class="col-md-8">
+                            <table class="table table-hover">
+                                <tr><td colspan="2"><img id="impr_picture" src="" width="100px"></td></tr>
+                                <tr><td>真实姓名</td><td id="impr_realname"></td></tr>
+                                <tr><td>身份证号</td><td id="impr_identity"></td></tr>
+                                <tr><td>出生年月</td><td id="impr_birthday"></td></tr>
+                                <tr><td>性别</td><td id="impr_sex"></td></tr>
+                                <tr><td>固定电话</td><td id="impr_tel"></td></tr>
+                                <tr><td>所在城市</td><td id="impr_region"></td></tr>
+                                <tr><td>详细地址</td><td id="impr_address"></td></tr>
+                                <tr><td>公司名称</td><td id="impr_company"></td></tr>
+                                <tr><td>工作岗位(职位)</td><td id="impr_post"></td></tr>
+                            </table>
+                        </div>
+
+                        <div class="col-md-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 修改状态模态框 -->
+    <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" onclick="$('#myModal').fadeOut('slow');">&times;</span><span class="sr-only">关闭</span>
+                    </button>
+                    <i class="fa fa-laptop modal-icon"></i>
+                    <h4 class="modal-title">确认更改用户状态?</h4>
+                </div>
+                <div class="modal-footer" style='text-align:center'>
+                    <button type="button" id="save" class="btn btn-primary">确认更改</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal" onclick="$('#myModal').fadeOut('slow');">取消更改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+    <load href="__PUBLIC__/js/bootstrap.min.js" />
+    <load href="__PUBLIC__/layer/layer.js" />
+
+    <load href="__PUBLIC__/js/jquery.dataTables.js" />
+    <load href="__PUBLIC__/js/dataTables.bootstrap.js" />
+
+    <script>
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable();
+
+            /* Init DataTables */
+            var oTable = $('#editable').dataTable();
+
+            /* Apply the jEditable handlers to the table */
+            oTable.$('td').editable('../example_ajax.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+                "width": "90%",
+                "height": "100%"
+            });
+        });
+
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+                "Custom row",
+                "New row",
+                "New row",
+                "New row",
+                "New row"]);
+        }
+
+        var id = null;
+        var status = null;
+        var btn = null;
+
+        $('#setStatus').click(function(){
+            $('#myModal').show();
+            
+            btn = $(this).children().last();
+
+            id = $(this).attr('i');
+            status = $(this).attr('s');
+        });
+
+        $('.setStatus').each(function(){
+            $(this).click(function(){
+                $('#myModal').show();
+                
+                btn = $(this).children().last();
+
+                id = $(this).attr('i');
+                status = $(this).attr('s');
+            });
+        });
+
+        $('#save').click(function(){
+            $.post("{:U('/Admin/User/setStatus')}" , {'id':id , 'status':status} , function(data){
+                if(data['status']){
+                    layer.msg(data.error_info,{icon:6});
+                    $('#myModal').fadeOut("slow");
+
+                    if(btn.parent().attr('s') == '0'){
+                        btn.attr('class' , 'btn').html('启用');
+                        btn.parent().attr('s' , '1');
+                    }else{
+                        btn.attr('class' , 'btn btn-danger').html('禁用');
+                        btn.parent().attr('s' , '0');
+                    }
+                    
+                }else{
+                    layer.msg(data.error_info,{icon:5});
+                }
+            });
+        });
+
+        layer.msg('加载成功',{icon:6});
+
+        $('.detail').each(function(){
+            $(this).click(function(){
+                $('#UserModal').show();
+
+                var to = $(this).attr('to');
+                var uid = $(this).attr('uid');
+                var account = $(this).attr('account');
+
+                $.post(to , {'user_id':uid} , function(data){
+                    $('#account').html(account + ' 详细信息');
+                    $('#impr_picture').attr('src' , '__PUBLIC__/Uploads/headportrait/' + data.impr_picture);
+                    $('#impr_realname').html(data.impr_realname);
+                    $('#impr_identity').html(data.impr_identity);
+                    $('#impr_birthday').html(data.impr_birthday);
+                    $('#impr_sex').html(data.impr_sex);
+                    $('#impr_tel').html(data.impr_tel);
+                    $('#impr_region').html(data.impr_region);
+                    $('#impr_address').html(data.impr_address);
+                    $('#impr_company').html(data.impr_company);
+                    $('#impr_post').html(data.impr_post);
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

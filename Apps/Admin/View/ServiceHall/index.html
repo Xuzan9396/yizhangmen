@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>类管理</title>
+	<load href="__PUBLIC__/css/bootstrap.min.css"/>
+	<!-- <load href="__PUBLIC__/needhall/bootstrap.css" /> -->
+	<!-- <load href="__PUBLIC__/needhallbootstrap.js"/> -->
+	<!-- <load href="__PUBLIC__/js/jquery-2.1.3.min.js"/> -->
+	<load href="__PUBLIC__/needhall/jquery.min.js"/>
+	<load href="__PUBLIC__/needhall/docs.min.js"/>
+	<load href="__PUBLIC__/needhall/bootstrap.min.js"/>
+	<!-- //<load href="__PUBLIC__/css/needhall.css"/>	 -->
+	<!-- <load href="__PUBLIC__/css/bootstrap.css" /> -->
+	<!-- <load href="__PUBLIC__/css/bootstrap.min.css" /> -->
+	<!-- <load href="__PUBLIC__/js/jquery-2.1.3.min.js" /> -->
+	<!-- <load href="__PUBLIC__/js/bootstrap.js" /> -->
+    <!-- <load href="__PUBLIC__/js/bootstrap.min.js" /> -->
+    <!-- <load href="__PUBLIC__/js/needhall.js"/> -->
+<!-- <load href="__PUBLIC__/js/tendina.js" />
+<load href="__PUBLIC__/js/common.js" /> -->
+</head>
+<body  style="background-color:rgb(245,245,245);">
+	<!-- {*<p>{$test}</p>*} -->
+	
+	<div class="container" style="background-color:rgb(245,245,245);border:1px solid rgb(200,245,245);border-radius:5px;">
+		<div class="row">
+			<div class="col-md-12" style="margin:15px 0 15px 0;color:blue;">后台首页 / 服务管理 / 服务分类{$max}</div>
+		</div>
+		<div class="row" style="background-color:rgb(200,240,245);">
+			<!-- <h2 class="needhall_h2">服务分类管理</h2> -->
+			<div class="row" style="height:40px;background-color:lightblue;display:block;padding-top:3px;border-radius:5px;margin:15px 15px 15px 15px;">
+				<div class="col-md-3"><h4>服务分类管理</h4></div>
+				<div  class="col-md-3  col-md-offset-6"><a href="__URL__/addDisplay" class="btn btn-primary ;"><i class="glyphicon glyphicon-plus"></i> 添加分类</a>
+				</div>
+			</div>	
+			<!--  -->
+			<!--  -->
+			<div class="row" style="height:2px;background-color:blue;margin:15px 15px 15px 15px;"></div>
+			<div id="son_class" class="row" style="background-color:white;margin:15px 15px 15px 15px;border-radius:5px;min-height:400px;">
+				<!-- 分类头 -->
+				<div class="panel panel-default" style="min-height:400px;">
+					<div class="panel-heading row" style="margin:0px 0px 0px 0px;">    <div class="col-md-1">分类ID</div>
+						<div class="col-md-4">分类名称</div>
+						<div class="col-md-1">显示名称</div>
+						<div class="col-md-1" style="text-align:center;">是否推荐</div>
+						<div class="col-md-1" style="text-align:center;">是否显示</div>
+						<div class="col-md-1" >分组</div>
+						<div class="col-md-1">排序</div>
+						<div class="col-md-2">操作</div>
+					</div>
+					<!-- 遍历分类 -->
+					<foreach name="list_max" item="val" key="k">
+						<div  id="{$val.sere_id}">
+							<div class="panel-body row grad1" style="margin:0;">
+								<div class="col-md-1">{$val.sere_id}</div>
+								<div class="col-md-4 A1" style="cursor:pointer;"><span num="1" class="glyphicon glyphicon-plus" style="color:lightblue;"></span> &nbsp;{$val.sere_name}
+								</div>
+								<div class="col-md-1">{$val.sere_name}</div>
+								<div class="col-md-1" style="text-align:center;cursor:pointer;">
+									<img src="" width="20" height="20">
+								</div>
+								<div class="col-md-1"style="text-align:center;cursor:pointer;">
+									<input type="checkbox" id="blankCheckbox" value="option1">
+								</div>
+								<div class="col-md-1"><input type="text" size="2" placeholder="0"></div>
+								<div class="col-md-1"><input type="text" size="2" placeholder="50"></div>
+								<div class="col-md-2">
+									<a href="__URL__/editDiplay?sav_id={$val.sere_id}">
+										<button class="btn-info" >修改</button>
+									</a>
+										<button onclick="javascript:void( tr_del({$val.sere_id},this,'{:U('Admin/ServiceHall/del')}','{:U('Admin/ServiceHall/getData')}'))"  class="btn-danger">删除 
+										</button>
+								</div>
+							</div>
+							<!-- 第二级 -->
+							<foreach name="val['son']" item="val2" key="k2">
+								<div id="{$val2.sere_id}" style="">
+									<div class="panel-body row grad2" style="margin:0;">
+										<div class="col-md-1">{$val2.sere_id}</div>
+										<div class="col-md-1"></div>
+										<div class="col-md-3 A1"style="cursor:pointer;"><span num="1" class="glyphicon glyphicon-plus" style="color:lightblue;"></span>&nbsp;{$val2.sere_name}
+										</div>
+										<div class="col-md-1">{$val2.sere_name}</div>
+										<div class="col-md-1" style="text-align:center;cursor:pointer;">
+											<img src="" width="20" height="20">
+										</div>
+										<div class="col-md-1"style="text-align:center;cursor:pointer;">
+											<input type="checkbox" id="blankCheckbox" value="option1">
+										</div>
+										<div class="col-md-1"><input type="text" size="2" placeholder="0"></div>
+										<div class="col-md-1"><input type="text" size="2" placeholder="50"></div>
+										<div class="col-md-2">
+											<a href="__URL__/editDiplay?sav_id={$val2.sere_id}">
+												<button class="btn-info" >修改</button>
+											</a>
+												<button onclick="javascript:void( tr_del({$val2.sere_id},this,'{:U('Admin/ServiceHall/del')}','{:U('Admin/ServiceHall/getData')}'))"  class="btn-danger">删除 
+												</button>
+										</div>
+									</div>
+									<!-- 第三级 -->
+									<foreach   name="val2['son']" item="val3">
+										<div id="{$val3.sere_id}" style="">
+											<div class="panel-body row grad3" style="margin:0;">
+												<div class="col-md-1">{$val3.sere_id}</div>
+												<div class="col-md-2"></div>
+												<div class="col-md-2 A1"style="cursor:pointer;">
+												<span num="1" class="glyphicon glyphicon-plus" style="color:lightblue;"></span> &nbsp;{$val3.sere_name}
+												</div>
+												<div class="col-md-1">{$val3.sere_name}</div>
+												<div class="col-md-1" style="text-align:center;cursor:pointer;">
+													<img src="" width="20" height="20">
+												</div>
+												<div class="col-md-1"style="text-align:center;cursor:pointer;">
+													<input type="checkbox" id="blankCheckbox" value="option1">
+												</div>
+												<div class="col-md-1"><input type="text" size="2" placeholder="0"></div>
+												<div class="col-md-1"><input type="text" size="2" placeholder="50"></div>
+												<div class="col-md-2">
+													<a href="__URL__/editDiplay?sav_id={$val3.sere_id}">
+														<button class="btn-info" >修改</button>
+													</a>
+														<button onclick="javascript:void( tr_del({$val3.sere_id},this,'{:U('Admin/ServiceHall/del')}','{:U('Admin/ServiceHall/getData')}'))"  class="btn-danger">删除 
+														</button>
+												</div>
+											</div>
+										</div>
+									</foreach>
+								</div>
+							</foreach>
+						</div>	
+					</foreach>
+				</div>
+			</div>
+			<!--  -->
+			<!-- <div style="height:2px;weight:800px;background-color:blue;"></div> -->
+			<!--  -->
+			<div class="row" style="height:40px;weight:800px;background-color:lightblue;display:block;padding-top:5px;margin:15px 15px 15px 15px;border-radius:5px;">
+				<b id="page_class"  style="font-size:25px; display:block;text-align:center;padding-top:2px;height:35px;">{$page}</b>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	/**
+	 * [td_click 当类点击中出现子类]
+	 * @param  {[type]} id   [点击类的ID]
+	 * @param  {[type]} pid  [点击类的PID]
+	 * @param  {[type]} path [点击类的PATH]
+	 * @param  {[type]} obj  [this]
+	 * @param  {[type]} url  [查询控制器]
+	 * @return {[type]}      [void]
+	 */
+	// $('.panel-body').children(':eq(1)').children(':first').attr({'num':1});
+	// $(".grad2").parent().hide();
+	// $(".grad3").parent().hide();
+	$(".grad1 > div:nth-child(2)").click(function(){
+		$(this).parent().next().toggle(500);
+		var num=$(this).children(':first').attr("num");
+		if(num==1){
+			$(this).children(':first').attr({"num":0});
+			$(this).children(':first').attr({"class":"glyphicon glyphicon-minus"});
+		}
+		else
+		{
+			$(this).children(':first').attr({"num":1});
+			$(this).children(':first').attr({"class":"glyphicon glyphicon-plus"});
+			//
+			
+			$('.grad2 >div:nth-child(3)').children(':first').attr({"num":1});
+			$('.grad2 >div:nth-child(3)').children(':first').attr({"class":"glyphicon glyphicon-plus"});
+			//
+			$('.grad3 >div:nth-child(3)').parent().parent().hide();
+			$('.grad3 >div:nth-child(3)').children(':first').attr({"num":1});
+			$('.grad3 >div:nth-child(3)').children(':first').attr({"class":"glyphicon glyphicon-plus"});
+
+		}
+	});
+	//
+	$(".grad2 > div:nth-child(3)").click(function(){
+		$(this).parent().next().toggle(500);
+		var num=$(this).children(':first').attr("num");
+		if(num==1){
+			$(this).children(':first').attr({"num":0});
+			$(this).children(':first').attr({"class":"glyphicon glyphicon-minus"});
+			
+		}
+		else
+		{
+			$(this).children(':first').attr({"num":1});
+			$(this).children(':first').attr({"class":"glyphicon glyphicon-plus"});
+			//$(this).parent().next().hide();
+		}
+	});
+	//
+	$(".grad3 > div:nth-child(3)").click(function(){
+		//$(this).parent().next().toggle(500);
+		var num=$(this).children(':first').attr("num");
+		if(num==1){
+			$(this).children(':first').attr({"num":0});
+			$(this).children(':first').attr({"class":"glyphicon glyphicon-minus"});
+		}
+		else
+		{
+			$(this).children(':first').attr({"num":1});
+			$(this).children(':first').attr({"class":"glyphicon glyphicon-plus"});
+		}
+	});
+	/**
+	 * [del 删除类]
+	 * @param  {[type]} id   [description]
+	 * @param  {[type]} obj  [description]
+	 * @param  {[type]} url1 [description]
+	 * @param  {[type]} url2 [description]
+	 * @return {[type]}      [0:无效操作,1:有数据,不能删除;2:成功删除;3:删除失败]
+	 */
+	function tr_del(id,obj,url1,url2)
+	{
+			//console.log(id+':'+url1)
+			
+			$.post(url1,{'del_id':id},function(data){
+				if(data==1){
+					alert('有数据,不能删除');
+				}else if(data==2){
+					var rel=confirm('确定删除？');
+					//var get_data='';
+					if(rel){
+						alert('删除成功');
+						$(obj).parent().parent().remove();
+					}
+				}else if (data==3){
+					alert('删除失败');
+				}else{
+					alert('无效操作');
+				}
+			});
+	}
+</script>
+</html>

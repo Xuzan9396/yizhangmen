@@ -1,0 +1,413 @@
+.iconfont{
+	border-top:8px solid #ffffff;
+	border-bottom:8px solid transparent;
+	border-left:8px solid transparent;
+	border-right:8px solid transparent;
+}
+
+.clear{
+	clear:both;
+}
+.header-logo{
+	width:100%;
+	height:40px;
+}
+a:hover{
+	text-decoration:none;
+}
+.store-total{
+	width: 100%;
+	position:relative;
+}
+.store{
+	height:28px;
+	width:1100px;
+	margin:0 auto;
+}
+.store-list{
+	height:28px;
+	padding-left:30px;
+	margin-top: 10px;
+}
+.store-list a{
+	display:block;
+	float:left;
+	padding-left: 15px;
+	color:#666;
+	line-height:28px;
+}
+.store-list a:hover{
+	text-decoration: none;
+}
+.store-level{
+	font-size:12px;
+}
+.store-iconv{
+	width:28px;
+	height:28px;
+}
+.store-access{
+	height:28px;
+	line-height:28px;
+	float:left;
+	font-size: 12px;
+	color:#555;
+}
+.store-deal{
+	padding-right: 20px;
+	float:right;
+}
+.glyphicon-star{
+	font-size:16px;
+	line-height:28px;
+}
+.store-deal a span{
+	line-height:28px;
+	padding:0px 6px;
+}
+
+.store-logo-img{
+	height:85px;
+}
+.store-logo-img img{
+	margin:0px auto;
+}
+.store-nav{
+	height:40px;
+	width:100%;
+	position:relative;
+	background:#3385FF;
+}
+.store-nav-content{
+	width:1100px;
+	height:40px;
+	margin:0 auto;
+}
+.store-nav-ul{
+	list-style:none;
+	/*height: 40px;*/
+}
+.store-nav-ul li{
+	width:120px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	float:left;
+}
+/*.store-nav-ul li:last-child{
+	background: #FF7A1A;
+}*/
+
+.store-nav-ul li a{
+	display: block;
+	width: 120px;
+	height: 40px;
+	font-weight:600;
+	line-height:40px;
+	font-size:16px;
+	color:white;
+	padding:0px 5px 0px 5px;
+}
+.store-nav-ul li:hover{
+	
+	background:#084BAD;
+}
+.store-nav-server{
+	position: relative;
+}
+.store-nav-server i{
+	position: absolute;
+	top:18px;
+	right:10px;
+}
+.store-nav-server:hover i{
+	transform: rotate(180deg);
+	transition:transform 0.5s;
+	top:10px;
+}
+
+.store-nav-hidden{
+	position:absolute;
+	width: 100%;
+	background: #084BAD;
+	border:1px solid #084BAD;
+	display: none;
+}
+
+.store-nav-hidden a{
+	display: block;
+	font-size:10px;
+}
+.store-nav-hidden a:hover{
+	background: #3385FF;
+
+}
+.store-nav-server:hover .store-nav-hidden{
+	display:block;
+	z-index: 100;
+}
+#carousel-left{
+	position:absolute;
+	top:50px;
+
+}
+.carousel{
+	margin:0 auto;
+}
+.store-carousel{
+	width: 100%;
+	/*width:1394px;*/
+	margin:0 auto;
+	height: 500px;
+	
+}
+
+.store-description{
+	width:1100px;
+	margin:2px auto;
+	overflow: hidden;
+}
+.store-img{
+	width:1100px;
+}
+.store-upload-img{
+	text-align: center;
+	width:1100px;
+
+}
+.store-upload-img img{
+	margin:5px 0px;
+}
+.store-showcase{
+	width:1100px; 
+	margin-top: 30px;
+	overflow: hidden;
+}
+.store-onecase{
+	width:260px;
+	height:330px;
+	float:left;
+	margin:10px 0px 0px 11px;
+	border:1px solid #3385FF;
+}
+
+.store-onecase-pic{
+	width:260px;
+	height:260px;
+	float:left;
+}
+.store-onecase-pic img{
+	width: 258px;
+	height: 258px;
+	overflow: hidden;
+
+}
+.store-onecase p span{
+	color:red;
+	font-size:16px;
+	margin-left:10px;
+}
+.store-onecase p a{
+	float:right;
+	font-size:16px;
+	padding-right:10px;
+}
+
+.store-onecase-description{
+	width:100%;
+	height:30px;
+	margin-top:5px;
+	font-size:16px;
+	text-align:center;
+	line-height:30px;
+}
+.store-onecase-description a{
+	color: #333;
+	font-size: 14px;
+	font-weight: bold;
+}
+.store-onecase-description a:hover{
+	color:#3385FF;
+}
+/*店铺评价*/
+.store-assess{
+	width:1100px;
+	overflow: hidden;
+	/*padding-top: 30px;*/
+	margin-top: 30px;
+}
+.store-assess h4{
+	font-size: 16px;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+.store-assess-content{
+	/*height: 700px;*/
+	border:1px solid #e3e3e3;
+	padding-left: 20px;
+	min-height: 100px;
+}
+/*评分列表*/
+.assess-list{
+	/*width: 750px;*/
+	/*min-height:100px;*/
+	height: auto;	
+	border-bottom: 1px solid #ccc;
+	overflow: hidden;
+	margin-top: 20px;
+}
+.assess-list-pic{
+	width: 60px;
+	height: 60px;
+	float: left;
+
+}
+.assess-list-pic img{
+	width: 60px;
+	height: 60px;
+}
+.assess-list-name{
+	width:150px;
+	float: left;
+	margin-left: 20px;
+}
+.assess-list-name p a{
+	color:#3C8FED;
+	font-size: 14px;
+	font-weight: bold;
+	word-wrap:break-word;
+}
+.assess-list-name p{
+	margin-top: 10px;
+}
+.assess-list-content{
+	float: left;
+	width: 420px;
+	color:#666;
+	font-size: 16px;
+	margin-top: 10px;
+	word-wrap:break-word;
+}
+
+
+.assess-list-time{
+	float: right;
+	width: 80px;
+	height: 60px;
+	text-align: center;
+	color: #888;
+	font-size: 12px;
+	margin-top: 10px;
+}
+.assess-list-div{
+	display: inline-block;
+	width: 54px;
+	height: 9px;
+}
+.assess-xing{
+	display: inline-block;
+	/*width: 90%;*/
+	/*width: 30px;*/
+	height: 9px;
+	background: #FF7A1A;
+	position: relative;
+}
+.assess-xing i{
+	display: inline-block;
+	width: 54px;
+	height: 9px;
+	position: absolute;
+	left:0;
+	top: 0;
+	background: url('../image/service/image/service-icon.png') no-repeat 0 -167px;
+}
+/*店铺评价*/
+
+/*footer 底部*/
+.server-footer{
+	width: 100%;
+	height:500px;
+	background: #363636;
+	float:left;
+}
+/*上部分*/
+.server-footer-top{
+	height:350px;
+	background: #363636;
+}
+
+.server-footer-top ul {
+	float: left;
+	width:250px;
+	line-height: 35px;
+	color:#ccc;
+	margin-top: 30px;
+	text-align:center;
+	margin-right: 10px;
+}
+.server-footer-top ul h4{
+	margin-bottom: 10px;
+}
+.server-footer-top ul li a{
+	color: #ccc;
+	font-size: 12px;
+}
+/*下部分*/
+
+.server-footer-bottom{
+	height:150px;
+	background: #fff;
+	padding-top: 30px;
+}
+.bottom-link a{
+	padding-right:10px; 
+	padding-left:10px; 
+	color: #666;
+	font-size: 12px;
+}
+.ui-footer-copyright{
+	color:#666;
+	font-size: 12px;
+	margin-left: 30px;
+}
+
+
+/*******雇佣他***********/
+.modal-body-store{
+	width: 800px;
+	height: 250px;
+	margin: 0 auto;
+	background: #F5F5F5;
+}
+.modal-store-left{
+	float: left;
+	padding: 20px;
+}
+.modal-store-left img{
+	width: 94px;
+	height: 94px;
+}
+.modal-store-right{
+	float: left;
+	padding: 20px;
+}
+.modal-store-right p{
+	margin-bottom: 20px;
+}
+.modal-store-right p .num{
+	color: #FF7A1A;
+	font-weight: bold;
+}
+.modal-body-touch{
+	padding: 20px;
+}
+.touch-yzm{
+	display: block;
+	width: 120px;
+	height: 28px;
+	background: #ccc;
+	line-height: 28px;
+	text-align: center;
+	color: #888;
+	text-decoration: none;
+}

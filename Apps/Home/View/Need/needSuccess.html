@@ -1,0 +1,77 @@
+<extend name='./Public/template/base.html'/>
+
+<block name="file">
+    <!-- 独立的 -->
+    <load file="__PUBLIC__/home/need/css/need-success.css"/>
+    <load file="__PUBLIC__/home/need/js/stepBar.js"/>
+    <load file="__PUBLIC__/home/need/js/jquery.easing.1.3.js"/>
+</block>
+<block name="content">
+	<!-- 进度条 -->
+	<div class="container">
+		<div id="stepBar" class="ui-stepBar-wrap col-lg-12">
+			<div class="ui-stepBar">
+				<div class="ui-stepProcess"></div>
+			</div>
+			<div class="ui-stepInfo-wrap">
+				<table class="ui-stepLayout" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">1</a>
+							<p class="ui-stepName">选择类目</p>
+						</td>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">2</a>
+							<p class="ui-stepName">选择交易模式</p>
+						</td>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">3</a>
+							<p class="ui-stepName">描述需求</p>
+						</td>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">4</a>
+							<p class="ui-stepName">核对交易清单</p>
+						</td>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">5</a>
+							<p class="ui-stepName">等待审核需求</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- 进度条结束 -->
+	<!-- 内容区 -->
+	<div class="container">
+		<center>
+			<div class="box col-lg-12">
+				<p class="succes-p">
+					<span>您的需求订单已提交，该订单不需支付</span>
+					<a href="{:U('Home/Demander/isDemander/mod/finishDemander')}">查看需求</a>
+				</p>
+				<p class="succes-p">
+					<span> 请等待后台审核 </span>
+				</p>
+				<div class="succes-div">
+					<a href="{:U('Home/Need/needIndex')}" class="btn btn-info">确定</a>
+					<a href="{:U('Home/Demander/isDemander/mod/finishDemander')}" class="btn btn-default">到会员中心查看详情</a>
+				</div>
+			</div>
+		</center>	
+	</div>
+	<script type="text/javascript">
+	// 调用进度条js
+	$(function(){
+		stepBar.init("stepBar", {
+			// 目标进度
+			step : 5,
+			// 插件是否被选中
+			change : true,
+			animation : true,
+			// 时间
+			speed : 50
+		});
+	});
+</script>
+</block>

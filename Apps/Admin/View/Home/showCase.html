@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="renderer" content="webkit">
+ 
+    <load href="__PUBLIC__/css/bootstrap.min.css" />
+    <load href="__PUBLIC__/css/dataTables.bootstrap.css" /> 
+    <load href="__PUBLIC__/css/style.min.css" />
+    <load href="__PUBLIC__/css/font-awesome.min.css" />
+    <load href="__PUBLIC__/layui/css/layui.css"  />
+    <load href="__PUBLIC__/admin/css/animate.min.css"  />
+<style type="text/css">
+     .addbut,.cancel{
+        display: block;
+        margin-left:48%;
+        cursor: pointer;
+        position: absolute;
+        z-index: 1;
+      }
+
+
+    .addser{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background: white;
+        display: none;
+        z-index: 2;
+        padding: 20px;
+    }
+
+   .red,.red a{
+        color: red;
+   }
+
+    .blue{
+        color: #3195F3;
+    }
+
+    .blue:hover{
+        color: blue;
+    }
+
+     .img1{
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+     }
+
+     .img2{
+        width: 100px;
+        height: auto;
+     }
+
+     b{
+        width: 100px;
+        height: 19.5px;
+        display: block;
+     }
+
+     .yes{
+        border: 1px solid gray;
+        background: green;
+        color: white;
+        border-radius: 5px;
+        font-size: 10px;
+        padding: 2px;
+      
+     }
+
+     .yes:hover{
+        color: red;
+     }
+
+     .no{
+        border: 1px solid gray;
+        background: red;
+        color: white;
+        border-radius: 5px;
+        font-size: 10px;
+        padding: 2px;
+     }
+
+     .width{
+        width: 100px;
+        text-align: center;
+     }
+
+    .detail{
+        width: 0;
+        height: 1000px;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        position: absolute;
+        display: none;
+        background: white;
+        overflow: hidden;
+    }
+
+    .detail button{
+        display: block;
+        margin: 0 auto;
+    }
+
+    .det{
+        width: 600px;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .img3{
+        max-width: 600px;
+    }
+
+ </style>
+</head>
+
+<body>        
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+        <button type="button" class="btn btn-primary addbut">添加</button>
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                
+                    <div class="ibox-content">
+
+                        <table class="table table-striped table-bordered table-hover dataTables-example" id="layer-photos-demo">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>投标信息</th>
+                                    <th>需求信息</th>
+                                    <th>服务名称</th>
+                                    <th>买家</th>
+                                    <th>卖家</th>
+                                    <th>订单编号</th>
+                                    <th>订单附件</th>
+                                    <th>成交金额</th>
+                                    <th>排序位置</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="data['mycases']" item="v">
+                                    <tr class="gradeX">
+                                        <td>{$v.id}</td>
+                                        <td><button class=" btn-info" onclick="bidDetail('{$v.order_bidid}')">点击查看</button></td>
+                                        <td><button class="btn-info" onclick="needDetail('{$v.order_needid}')">点击查看</button></td>
+                                        <td><a class="blue" title="点击查看服务详情" onclick="pubDetail('{$v.order_serviceid}')">{$v.pubname}</a></td>
+                                        <td><a class="cursor blue" onclick="detail('{$v.order_employerid}')" title="点击查看买家信息">{$v.shopper}</a></td>
+                                        <td><a class="cursor blue" title="点击查看店铺信息" onclick="storeDetail('{$v.order_serviceuserid}')">{$v.master}</td>
+                                        <td>{$v.order_number}</td>
+                                        <td><img class="img1" src="__PUBLIC__/Uploads/{$v.order_myfile}" layer-src="__PUBLIC__/Uploads/{$v.order_myfile}"></td>
+                                        <td><a class="red">￥{$v.order_number_price}</a></td>
+                                        <td class="width">
+                                            <select class="sele" id="{$v.id}" onchange="sele(this)">
+                                                <foreach name="v['sort']" item="val">
+                                                    {$val}
+                                                </foreach>
+                                             </select>
+                                        <b><b></td>
+                                        <td class="center"> <button type="button" class="btn btn-danger" onclick="del('{$v.id}')">删除</button></td>
+                                    </tr>
+                                </foreach>                               
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row addser">
+        <button type="button" class="btn btn-primary cancel">取消</button>
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                
+                    <div class="ibox-content">
+
+                        <table class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>投标信息</th>
+                                    <th>需求信息</th>
+                                    <th>服务名称</th>
+                                    <th>买家</th>
+                                    <th>卖家</th>
+                                    <th>订单编号</th>
+                                    <th>订单附件</th>
+                                    <th>成交金额</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="data['cases']" item="v">
+                                    <tr class="gradeX">
+                                        <td>{$v.id}</td>
+                                        <td>
+                                            <button class=" btn-info" onclick="bidDetail('{$v.order_bidid}')">点击查看</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn-info" onclick="needDetail('{$v.order_needid}')">点击查看</button>
+                                        </td>
+                                        <td ><a class="blue" title="点击查看服务详情" onclick="pubDetail('{$v.order_serviceid}')">{$v.pubname}</a></td>
+                                        <td>
+                                            <a class="cursor blue" onclick="detail('{$v.order_employerid}')" title="点击查看买家信息">{$v.shopper}</a>
+                                        </td>
+                                        <td>
+                                            <a class="cursor blue" title="点击查看主人详情" onclick="storeDetail('{$v.order_serviceuserid}')">{$v.master}</a>
+                                        </td>
+                                        <td class="center">{$v.order_number}</td>
+                                        <td class="center"><img img class="img1" src="__PUBLIC__/Uploads/{$v.order_myfile}"></td>
+                                        <td class="center red"><a >￥{$v.order_number_price}</a></td>
+                                        <td class="center"> 
+                                            <button type="button" class="btn btn-info" onclick="addCase('{$v.id}')">添加</button>
+                                        </td>
+                                    </tr>
+                                </foreach>                               
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="detail"><div class="det"></div><button id="closeDe" class="btn btn-primary">关闭</button></div>  
+    <!-- Mainly scripts -->
+    <load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+    <load href="__PUBLIC__/js/bootstrap.min.js" />
+    <load href="__PUBLIC__/layer/layer.js"/>
+    <load href="__PUBLIC__/layui/layui.js" />
+    <load href="__PUBLIC__/js/jquery.dataTables.js" />
+    <load href="__PUBLIC__/js/dataTables.bootstrap.js" />
+    <load href="__PUBLIC__/js/mo.js" />
+    <script>
+        $(document).ready(function () {
+            $('.dataTables-example').dataTable();
+
+            /* Init DataTables */
+            var oTable = $('#editable').dataTable();
+
+            /* Apply the jEditable handlers to the table */
+            oTable.$('td').editable('../example_ajax.php', {
+                "callback": function (sValue, y) {
+                    var aPos = oTable.fnGetPosition(this);
+                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
+                },
+                "submitdata": function (value, settings) {
+                    return {
+                        "row_id": this.parentNode.getAttribute('id'),
+                        "column": oTable.fnGetPosition(this)[2]
+                    };
+                },
+
+                "width": "90%",
+                "height": "100%"
+            });
+
+
+        });
+
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+                "Custom row",
+                "New row",
+                "New row",
+                "New row",
+                "New row"]);
+
+        }   
+
+        //添加服务切换页面
+        $('.addbut,.cancel').click(function(){
+            $('.addser').slideToggle();
+        })
+
+    
+        function del(id){
+            mo.confirm('你确定要删除吗?',function(){
+                mo.ajax({'id':id},"{:U('Home/ajaxDelCase')}",function(res){
+                    if(res['status']){
+                        mo.msg(res['info'],1);
+                    }else{
+                        mo.msg(res['info']);
+                    }
+                })
+            },'注意')
+        }
+ 
+
+        function addCase(id){
+
+             mo.mod('你确定要添加到管理名单吗？',function(){
+                mo.ajax({'id':id},"{:U('Home/ajaxAddCase')}",function(res){
+                    if(res['stauts']){
+                        mo.msg(res['info']);
+                    }else{
+                        mo.msg(res['info']);
+                    }
+                })
+            },'提示')
+        }
+        
+          function storeDetail(id){
+            mo.ajax({'id':id},"{:U('Home/serCasesSto')}",function(res){
+                if(res){
+                    var str ='';
+                    str += '<table class="table table-hover"><tr><td>店铺名称:'+res['store_name']+'</td><td></td></tr><tr><td>真实姓名:'+res['store_realname']+'</td><td>店铺类型:'+res['store_type']+'</td></tr><tr><td>身份证号:'+res['store_caid']+'</td><td>手机号:'+res['store_phone']+'</td></tr><tr><td>电子邮箱:'+res['store_email']+'</td><td>联系QQ:'+res['store_qq']+'</td></tr><tr><td>身份证或营业直销证书:</td><td></td></tr><tr><td><img src=__PUBLIC__/Uploads/'+res['store_zcaidpic']+' class="img2 cursor"  onclick="showimg(this)"><img src=__PUBLIC__/Uploads/'+res['store_fcaidpic']+' class="img2 cursor" onclick="showimg(this)"></td></tr><tr><td>地址:'+res['store_address']+'</td><td>创建时间:'+res['store_addtime']+'</td></tr></table>';
+
+                    mo.mod(str,function(){
+
+                    },'店铺信息');
+                }
+            })
+        }
+
+         function detail(id){
+            mo.ajax({'user_id':id},"{:U('Home/searchUser')}",function(res){
+                if(res){
+                    var str = '<table class="table table-hover"><tr><td>用户帐号:</td><td>'+res['user_account']+'</td><td></td><td></td></tr><tr><td>用户ID:</td><td>'+res['user_id']+'</td><td>用户类型:</td><td>'+res['user_type']+'</td></tr><tr><td>邮箱:</td><td>'+res['user_email']+'</td><td>手机号:</td><td>'+res['user_phone']+'</td></tr><tr><td>注册时间:</td><td>'+res['user_addtime']+'</td><td>上次登录:</td><td>'+res['user_lasttime']+'</td></tr></table>';
+
+                    mo.mod(str,function(){
+
+                    },'买家信息');
+                }
+            });
+        }
+
+        //下拉框
+        function sele(obj){
+            var str = '<a class="yes" onclick="mau(this)">确定</a><a class="no" onclick="rem(this)">取消</a>';
+            $(obj).next().html(str);
+        }
+
+        //修改排序位置
+        function mau(obj){
+            var sort =  $(obj).parent().prev().val();
+            var id = $(obj).parent().prev().attr('id');
+            mo.ajax({'rank':sort,'id':id},"{:U('Home/ajaxModCaseRank')}",function(res){
+                if(res['status']){
+                    mo.skip();
+                }else{
+                    mo.msg(res['info']);
+                }
+            })
+
+        }
+
+        //取消
+        function rem(obj){
+            $(obj).parent().children().remove();
+        }
+
+        function bidDetail(id){
+            mo.ajax({'id':id},"{:U('Home/ajaxBidDetail')}",function(res){
+                if(res){
+                    var bid = res['bid'];
+                    var need = res['need'];
+                    var str = '<table class="table table-hover"><opcation>中标信息</opcation><tr><td>需求名称:'+need['need_title']+'</td><td>意向:'+bid['bid_projectwill']+'</td></tr><tr><td>报价方案:￥'+bid['bid_projectprice']+'</td><td>方案周期:'+bid['bid_projectcyc']+'天</td></tr><tr><td>发布方式:'+bid['bid_projecthide']+'</td><td>是否中标:'+bid['bid_projecwin']+'</td></tr><tr><td>是否浏览:'+bid['bid_projectlook']+'</td><td>留言:'+bid['bid_messagenum']+'</td></tr><tr><td>需求发布模式:'+bid['bid_mod']+'<td></tr><tr><td>需求状态:'+bid['bid_projectstatus']+'</td><td>方案提交时间:'+bid['bid_projecttime']+'</td></tr><tr><td>方案地点:'+bid['bid_projectplace']+'</td></tr><tr><td>方案描述:'+bid['bid_projectdis']+'</td></tr><tr><td>上传附件:<img src="__PUBLIC__'+bid['bid_projectfile']+'"></td></tr></table>';
+                   detailShow(str);
+                    
+                }else{
+                    mo.msg('无数据');
+                }
+            })
+        }
+
+        function needDetail(id){
+             mo.ajax({'id':id},"{:U('Home/ajaxNeedDetail')}",function(res){
+                if(res){
+                    var str = '<table class="table table-hover"><opcation>需求信息</opcation><tr><td>需求名称:'+res['need_title']+'</td><td>发布用户:'+res['need_user']+'</td></tr><tr><td>需求进度:'+res['need_prostepe']+'</td><td>服务分类:'+res['catename']+'</td></tr><tr><td>发布时间:'+res['need_time']+'</td><td>有效时间:'+res['need_valid_time']+'</td></tr><tr><td>电话:'+res['need_phone']+'</td><td>预算金:￥'+res['need_budget']+'</td></tr><tr><td>需求状态:'+res['need_status']+'</td><td>有效期:'+res['need_valid_status']+'</td></tr><tr><td>推荐状态:'+res['need_office_sign']+'</td><td>VIP:'+res['need_viptype']+'</td></tr><tr><td>后台推送:'+res['need_shopid']+'</td><td>点击量:'+res['need_view']+'</td></tr><tr><td>有无方案:'+res['need_prostaue']+'</td><td>文件个数:'+res['need_upload']+'个</td></tr><tr><td>描述:'+res['need_desc']+'</td></tr></table>';
+                    detailShow(str);
+                    
+                }else{
+                    mo.msg('无数据');
+                }
+            })
+        }
+
+        function pubDetail(id){
+            mo.ajax({'id':id},"{:U('Home/ajaxPubDetail')}",function(res){
+                if(res){
+                    var str = '<table class="table table-hover"><opcation>服务信息</opcation><tr><td>服务名称:'+res['pubh_title']+'</td><td>服务分类:'+res['catename']+'</td><tr><tr><td>发布时间:'+res['pubh_time']+'</td><td>状态:'+res['pubh_status']+'</td></tr><tr><td>价格:￥'+res['pubh_price']+'</td><td>成交量:'+res['pubh_volume']+'</td></tr><tr><td>配图:</td><td></td></tr></table><img class="img3" src="__PUBLIC__/Uploads/'+res['pubh_pic']+'">';
+                    
+                    detailShow(str);
+                }else{
+                    mo.msg('无数据');
+                }
+            })
+        }
+
+        function detailShow(str){
+            $('.detail').show().css('border','2px solid #ED5565').animate({
+                'width':'100%',
+                'height':'1200px',
+                'left':'0',
+                'top':'0',
+                'border-radius':'0',
+             },200)
+
+            $('.det').html(str);
+        }
+
+        $('#closeDe').click(function(){
+           var  num = parseInt(3*Math.random());
+            if( num == 0){
+                $('.detail').animate({
+                    'height':'0px',
+                    'width':'0px',
+                    'left':'500px',
+                    'top':'200px',
+                    'border-radius':'50%',
+                    },300)
+            }else if(num == 1){
+                $('.detail').animate({
+                    'height':'0px',
+                    },300)
+            }else{
+                $('.detail').animate({
+                    'width':'0px',
+                    },300)
+            }
+
+            
+           
+            setTimeout(function(){
+                $('.detail').css('border','none').hide();
+                $('.det').children().remove();
+            },300)
+        })
+
+         //图片预览
+        layer.photos({
+          photos: '#layer-photos-demo'
+          ,anim: 5
+        });
+
+    </script>
+
+</body>
+
+</html>

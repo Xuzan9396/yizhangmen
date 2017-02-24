@@ -1,0 +1,110 @@
+<extend name='./Public/template/base.html'/>
+
+<block name="file">
+    <!-- 独立的 -->
+    <load file="__PUBLIC__/home/need/css/need-cate.css"/>
+    <load file="__PUBLIC__/home/need/js/stepBar.js"/>
+    <load file="__PUBLIC__/home/need/js/jquery.easing.1.3.js"/>
+    <load file="__PUBLIC__/home/need/js/need-cate.js" />
+</block>
+<block name="content">
+	<!-- 进度条 -->
+	<div class="container">
+		<div class="row">
+			<div id="stepBar" class="ui-stepBar-wrap col-lg-12">
+				<div class="ui-stepBar">
+					<div class="ui-stepProcess"></div>
+				</div>
+				<div class="ui-stepInfo-wrap">
+					<table class="ui-stepLayout" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td class="ui-stepInfo">
+								<a class="ui-stepSequence">1</a>
+								<p class="ui-stepName">选择类目</p>
+							</td>
+							<td class="ui-stepInfo">
+								<a class="ui-stepSequence">2</a>
+								<p class="ui-stepName">选择交易模式</p>
+							</td>
+							<td class="ui-stepInfo">
+								<a class="ui-stepSequence">3</a>
+								<p class="ui-stepName">描述需求</p>
+							</td>
+							<td class="ui-stepInfo">
+								<a class="ui-stepSequence">4</a>
+								<p class="ui-stepName">核对交易清单</p>
+							</td>
+							<td class="ui-stepInfo">
+								<a class="ui-stepSequence">5</a>
+								<p class="ui-stepName">等待审核需求</p>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 进度条结束 -->
+	<!-- 内容区 -->
+	<div class="container">
+		<center class="col-lg-12">
+			<div class="box">
+				<!-- 头部 -->
+				<div class="box-head col-lg-12">
+					<p>官方提供线上担保交易，保障您的资金安全，且不会收取您任何佣金。</p>
+				</div>
+				<!-- 头部结束 -->
+				<!-- 分类栏 -->
+				<div class="box-left col-lg-3">
+					<p class="box-left-title">需求分类</p>
+					<ul class="box-cate">
+						<!-- 遍历一级类目 -->
+						<foreach name="list" item="valOne">
+							<li class="jbox-cate-li">
+								<p class="box-cate-ul-p">{$valOne.cate_name}</p>	
+							</li>
+						</foreach>
+						<!-- 一级类目结束 -->
+					</ul>	
+				</div>
+				<!-- 分类栏结束 -->
+				<!-- 隐藏内容区 -->
+				<!-- 先遍历一级 -->
+				<foreach name="list" item="valOne">
+					<div class="box-hidden col-lg-12">
+						<dl class="box-hidden-dl">
+							<!-- 遍历二级 -->
+							<foreach name="valOne.son" item="valTwo">
+								<dt class="box-hidden-dt">{$valTwo.cate_name}</dt>
+								<!-- 遍历三级 -->
+								<foreach name="valTwo.son" item="valThree">
+									<dd class="box-hidden-dd">
+										<a href='{:U("Home/Need/needBudget",["id"=>$valThree["id"],"pid"=>$valThree["parent_id"]])}'>{$valThree.cate_name}</a>
+									</dd>
+								</foreach>
+								<!-- 三级结束 -->
+							</foreach>
+							<!-- 二级结束 -->
+						</dl>
+					</div>	
+				</foreach>
+				<!-- 一级结束 -->
+				<!-- 隐藏内容区结束 -->
+			</div>
+		</center>	
+	</div>
+	<script type="text/javascript">
+	// 调用进度条js
+	$(function(){
+		stepBar.init("stepBar", {
+			// 目标进度
+			step : 1,
+			// 插件是否被选中
+			change : true,
+			animation : true,
+			// 时间
+			speed : 50
+		});
+	});
+	</script>
+</block>

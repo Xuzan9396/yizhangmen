@@ -1,0 +1,79 @@
+<include file="Apps/Admin/View/StoreOpen/storeHeader.html" />
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>店铺 <small>分类信息</small></h5>
+					<div class="ibox-tools">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+							<i class="fa fa-wrench"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-user">
+							<li><a href="table_data_tables.html#">选项1</a>
+							</li>
+							<li><a href="table_data_tables.html#">选项2</a>
+							</li>
+						</ul>
+						<a class="close-link">
+							<i class="fa fa-times"></i>
+						</a>
+					</div>
+				</div>
+				<div class="ibox-content">
+
+					<table class="table  table-bordered table-hover dataTables-example">
+						<thead>
+					    	<tr>
+					    		<th>ID</th>
+					            <th >订单号</th>
+					            <th >雇主用户id</th>
+					            <th>服务商id</th>
+								<th>服务id</th>
+					            <th>数量</th>
+								<th>价格</th>
+								<th>订单状态</th>
+								<th>下单时间</th>
+								<th>成交时间</th>
+					        </tr>
+						</thead>
+						<tbody>
+							<?php echo date('')?>
+				        <foreach name="list" key="k" item="v">
+							<tr>
+								<td>{$v['id']}</td>
+								<td>{$v['order_number']}</td>
+								<td>{$v['order_employerid']}</td>
+								<td>{$v['order_serviceuserid']}</td>
+								<td>{$v['order_serviceid']}</td>
+								<td>{$v['order_number_total']}</td>
+								<td>
+									{$v['order_number_price']}
+								</td>
+								<td>{$v['order_status']}</td>
+								<td>{:date('Y-m-d',$v['order_time'])}</td>
+								<?php if($v['order_endtime'] == 0):?>
+								<td>——</td>
+								<?php else:?>
+								<td>{:date('Y-m-d',$v['order_endtime'])}</td>
+							<?php endif;?>
+					        </tr>
+					      </foreach>
+						</tbody>
+						<tfoot>
+
+						</tfoot>
+						<tr>
+
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<include file="Apps/Admin/View/StoreOpen/storeFooter.html" />

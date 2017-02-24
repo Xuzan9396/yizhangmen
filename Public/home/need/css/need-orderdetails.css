@@ -1,0 +1,220 @@
+body{
+	background: #f0f0f0;
+}
+*{
+	margin: 0px;
+	padding: 0px;
+}
+a{
+	text-decoration: none;
+}
+
+/*进度条样式*/
+.ui-stepBar-wrap{
+	position: relative;
+	width: 100%;
+	height: 130px;
+	overflow: hidden;
+	z-index: 10;
+}
+.ui-stepBar-wrap .ui-stepBar{
+	position: relative;
+	width: 90%;
+	height: 5px;
+	background: #cccccc;
+	top: 50px;
+	left: 5%;
+	z-index: 11;
+}
+.ui-stepBar-wrap .ui-stepBar .ui-stepProcess{position:relative;
+	width: 0;
+	height: 5px;
+	background: #516784;
+	top: 0;
+	left: 0;
+	z-index: 12;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap{
+	width: 90%;
+	margin: 0 auto;
+	height: 100%;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo{
+	position: relative;
+	float: left;
+	padding-top: 36px;
+	text-align: center;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .ui-stepSequence{
+	position: relative;
+	padding: 4px 8px;
+	border-radius: 50%;
+	z-index: 13;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .ui-stepName{
+	position: relative;
+	line-height: 50px;
+	z-index: 13;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-pre-change,
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-hind-change{
+	cursor: pointer;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-pre-change:hover{
+	box-shadow: 0 0 3px 1px #516784;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-hind-change:hover{
+	box-shadow: 0 0 3px 1px #cccccc;
+}
+.judge-stepSequence-pre{
+	background: #516784;
+	color: #ffffff;
+}
+.judge-stepSequence-hind{
+	background: #cccccc;
+	color: #000000;
+}
+
+.author{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	margin: 40px auto;
+	color: #1569ec;
+	text-shadow: 1px 1px 0 #e7e7e7, 0 1px 7px #fff;
+}
+/*进度条结束*/
+/*box 内容*/
+.box{
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding-bottom: 10px;
+	background: #FAF2E8;
+}
+/*标题*/
+.order-details{
+	text-align: left;
+	font-size: 14px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding-left: 15px;
+}
+/*描述*/
+
+/*描述标题栏*/
+.description-title{
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding: 10px 15px;
+	line-height: 24px;
+	background: #5BC0DE;
+	
+}
+.description-title h3{
+	display: block;
+	text-align: left;
+	font-size: 22px;
+	font-weight: bold;
+	color: #fafafa;
+}
+/*右边money*/
+.title-right{
+	display: block;
+	float: right;
+}
+
+.money{
+	font-size: 18px;
+	color: red;
+}
+/*描述部分*/
+.description-con{
+	padding: 15px;
+	font-size: 14px;
+	color: #333333;
+	float: left;
+
+}
+/*需求模式*/
+.description-release{
+	list-style: none;
+	display: block;
+	float: left;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #ccc;
+}
+.release-item{
+	display: block;
+	float: left;
+	margin-right: 15px;
+}
+/*文本*/
+.release-details{
+	margin-top: 10px;
+	text-align: left;
+	border-bottom: 1px solid #ccc;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 30px;
+}
+.release-details p{
+	display: block;
+	
+}
+/*附件遍历*/
+.img-div{
+	margin-top: 10px;
+	text-align: left;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 30px;
+	background: #f9f9f9;
+	border-radius: 5px;
+}
+
+.file-img{
+	margin-right:20px;
+	margin-bottom: 10px;
+	height: 200px;
+}
+.need-help{
+	text-align: left;
+	font-size: 18px;
+	font-weight: bold;
+}
+.need-help p{
+	display: block;
+}
+/*居中*/
+.table td{
+	text-align: center;
+	vertical-align: middle !important;
+}
+/*功能*/
+.marked{
+	font-size: 16px;
+	color: #ffffff;
+	font-weight: bold;
+	display: block;
+	padding: 3px;
+	width: 80px;
+	margin: 20px auto;
+}
+.marked-hot{
+	background: #5CB85C;
+}
+#text-day{
+	display: none;
+}
+
+/*按妞*/
+.order-btn{
+	margin-top: 10px;
+	text-align: right;
+}
+.order-btn a{
+	color: #fafafa;
+}
+
+

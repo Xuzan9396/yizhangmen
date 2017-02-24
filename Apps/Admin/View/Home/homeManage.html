@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<load href="__PUBLIC__/css/bootstrap.min.css" />
+    <load href="__PUBLIC__/css/style.min.css" />
+    <load href="__PUBLIC__/css/font-awesome.min.css" />
+    <load href="__PUBLIC__/admin/css/animate.min.css"  />
+    <style type="text/css">
+    	h2{
+    		text-align: center;
+    		font-weight: bold;
+    	}
+
+    	h5{
+    		text-align: center;
+
+    	}
+
+    	b{
+    		color: red;
+    	}
+
+	    form{
+	    	width: 600px;
+	    	height: auto;
+	    	margin: 0 auto;
+	    	text-align: center;
+	    }
+
+	    .green{
+	    	color: #1AEA0F;
+	    }
+
+	    .red{
+	    	color: red;
+	    }
+
+	    .blue{
+	    	color: #3195F3;
+	    }
+
+	   hr{
+	   	margin:0;
+	   }
+    </style>
+</head>
+<body>
+	<div class="container">
+		<h2>首页显示方式管理</h2>
+		<h5>'搜索框' 为即时显示，其他为缓存显示，默认缓存周期为1天(每天0:00自动更新),如需立即更新，需手动清除缓存<b>*</b></h5>
+		<form class="form-horizontal" onsubmit="return false">
+			<input type="hidden" name="id" value="{$data['id']}">
+		<hr>
+		<div class="form-group">
+		  
+		    <label for="" class="col-sm-2 ">搜索框:</label>
+		      <label>
+		      	<if condition="$data['search'] == '0'">
+				  <input type="radio" name="search" checked value="0">
+				  	<a class="blue">默认显示</a>
+				<else />
+					<input type="radio" name="search" value="0">默认显示 
+				</if>
+				  
+			  </label>
+
+			  <label>
+			  	<if condition="$data['search'] == '1'">
+			  		<input type="radio" name="search" checked value="1">
+			  		<a class="green">管理显示 </a>
+			  	<else />
+				  <input type="radio" name="search" value="1">
+				  	管理显示 
+				</if>
+				  
+			  </label>
+
+			  <label >
+			  	<if condition="$data['search'] == '2'">
+			  		<input type="radio" name="search" checked value="2">
+			  		<a class="red">关闭模块</a> 
+			  	<else />
+				  <input type="radio" name="search" value="2">
+				  关闭模块 
+				</if>
+				  
+			  </label>
+		  </div>
+		  <hr>
+		<div class="form-group">
+		  
+		    <label for="" class="col-sm-2 ">导航条:</label>
+		      <label>
+		      	<if condition="$data['navigation'] == '0'">
+				  <input type="radio" name="navigation" checked value="0">
+				  <a class="blue">默认显示 </a>
+				<else />
+					<input type="radio" name="navigation" value="0">默认显示 
+				</if>
+				  
+			  </label>
+
+			  <label>
+			  	<if condition="$data['navigation'] == '1'">
+			  		<input type="radio" name="navigation" checked value="1">
+			  		<a class="green">管理显示 </a>
+			  	<else />
+				  <input type="radio" name="navigation" value="1">管理显示 
+				</if>
+				  
+			  </label>
+
+			  <label>
+			  	<if condition="$data['navigation'] == '2'">
+			  		<input type="radio" name="navigation" checked value="2">
+			  		<a class="red">关闭模块 </a>
+			  	<else />
+				  <input type="radio" name="navigation" value="2">关闭模块 
+				</if>
+				  
+			  </label>
+		  </div>
+		  <hr>
+			<div class="form-group">
+		  
+		    <label for="" class="col-sm-2 ">分类banner:</label>
+		      <label>
+		      	<if condition="$data['banner'] == '0'">
+				  <input type="radio" name="banner" checked value="0">
+				  <a class="blue">默认显示 </a>
+				<else />
+					<input type="radio" name="banner" value="0">默认显示 
+				</if>
+				  
+			  </label>
+
+			  <label>
+			  	<if condition="$data['banner'] == '1'">
+			  		<input type="radio" name="banner" checked value="1">
+			  		<a class="green">管理显示 </a>
+			  	<else />
+				  <input type="radio" name="banner" value="1">管理显示 
+				</if>
+				  
+			  </label>
+
+			  <label>
+			  	<if condition="$data['banner'] == '2'">
+			  		<input type="radio" name="banner" checked value="2">
+			  		<a class="red">关闭模块 </a>
+			  	<else />
+				  <input type="radio" name="banner" value="2">关闭模块 
+				</if>
+				  
+			  </label>
+			
+		  </div>
+		  <hr>
+		  <div class="form-group">
+		  
+		    <label for="" class="col-sm-2 ">推荐服务:</label>
+		      <label>
+		      	<if condition="$data['showservice'] == '0'">
+				  <input type="radio" name="showservice" checked value="0">
+				  <a class="blue"> 默认显示</a>
+				<else />
+					<input type="radio" name="showservice" value="0">默认显示
+				</if>
+				  
+			  </label>
+
+			  <label>
+			  	<if condition="$data['showservice'] == '1'">
+			  		<input type="radio" name="showservice" checked value="1">
+			  		<a class="green">管理显示</a>
+			  	<else />
+				  <input type="radio" name="showservice" value="1">管理显示
+				</if>
+				   
+			  </label>
+
+			  <label>
+			  	<if condition="$data['showservice'] == '2'">
+			  		<input type="radio" name="showservice" checked value="2">
+			  		<a class="red">关闭模块 </a>
+			  	<else />
+				  <input type="radio" name="showservice" value="2">关闭模块 
+				</if>
+				  
+			  </label>
+			
+		  </div> 
+		  <hr>
+		   <div class="form-group">
+		   	
+			    <label for="" class="col-sm-2 ">品牌服务商:</label>
+			      <label>
+			      	<if condition="$data['goldproviders'] == '0'">
+					  <input type="radio" name="goldproviders" value="0" checked>
+					  <a class="blue">默认显示</a>
+					<else />
+					  <input type="radio" name="goldproviders" value="0">默认显示
+					</if>
+					   
+				  </label>
+
+				  <label>
+				  	<if condition="$data['goldproviders'] == '1'">
+					  <input type="radio" name="goldproviders" value="1" checked>
+					  <a class="green">管理显示</a>
+				  	<else />
+					  <input type="radio" name="goldproviders" value="1">管理显示
+				  	</if>
+					   
+				  </label>
+
+				  <label>
+				  	<if condition="$data['goldproviders'] == '2'">
+					  <input type="radio" name="goldproviders" value="2" checked>
+					  <a class="red"> 关闭模块 </a>
+				  	<else />
+					  <input type="radio" name="goldproviders" value="2"> 关闭模块 
+				  	</if>
+					 
+				  </label>
+			
+		  </div>
+		  <hr>
+		   <div class="form-group">
+		   	
+			    <label for="" class="col-sm-2 ">专家展示:</label>
+			      <label>
+			      	<if condition="$data['professional'] == '0'">
+					  <input type="radio" name="professional" value="0" checked>
+					  <a class="blue">默认显示 </a>
+					<else />
+					  <input type="radio" name="professional" value="0">默认显示 
+					</if>
+					  
+				  </label>
+
+				  <label>
+				  	<if condition="$data['professional'] == '1'">
+					  <input type="radio" name="professional" value="1" checked>
+					  <a class="green">管理显示 </a>
+				  	<else />
+					  <input type="radio" name="professional" value="1">管理显示 
+				  	</if>
+					  
+				  </label>
+
+				  <label>
+				  	<if condition="$data['professional'] == '2'">
+					  <input type="radio" name="professional" value="2" checked>
+					  <a class="red">关闭模块</a>
+				  	<else />
+					  <input type="radio" name="professional" value="2">关闭模块
+				  	</if>
+					   
+				  </label>
+			
+		  </div>
+		  <hr>
+		   <div class="form-group">
+		   	
+			    <label for="" class="col-sm-2 ">案例展示:</label>
+			      <label>
+			      	<if condition="$data['case'] == '0'">
+					  <input type="radio" name="case" value="0" checked>
+					  <a class="blue">默认显示</a>
+					<else />
+					  <input type="radio" name="case" value="0">默认显示
+					</if>
+					   
+				  </label>
+
+				  <label>
+				  	<if condition="$data['case'] == '1'">
+					  <input type="radio" name="case" value="1" checked>
+					  <a class="green">管理显示</a>
+				  	<else />
+					  <input type="radio" name="case" value="1">管理显示
+				  	</if>
+					  
+				  </label>
+
+				  <label>
+				  	<if condition="$data['case'] == '2'">
+					  <input type="radio" name="case" value="2" checked>
+					  <a class="red">关闭模块 </a>
+				  	<else />
+					  <input type="radio" name="case" value="2">关闭模块 
+				  	</if>
+					  
+				  </label>
+			
+		  </div>
+		    <hr>
+		   <div class="form-group">
+		   	
+			    <label for="" class="col-sm-2 ">热门需求:</label>
+			      <label>
+			      	<if condition="$data['need'] == '0'">
+					  <input type="radio" name="need" value="0" checked>
+					  <a class="blue">默认显示 </a>
+					<else />
+					  <input type="radio" name="need" value="0">默认显示 
+					</if>
+					  
+				  </label>
+
+				  <label>
+				  	<if condition="$data['need'] == '1'">
+					  <input type="radio" name="need" value="1" checked>
+					  <a class="green">管理显示</a>
+				  	<else />
+					  <input type="radio" name="need" value="1">管理显示
+				  	</if>
+					   
+				  </label>
+
+				  <label>
+				  	<if condition="$data['need'] == '2'">
+					  <input type="radio" name="need" value="2" checked>
+					  <a class="red">关闭模块 </a>
+				  	<else />
+					  <input type="radio" name="need" value="2">关闭模块 
+				  	</if>
+					  
+				  </label>
+			
+		  </div>
+		  <hr>
+		   <div class="form-group">
+		   	
+			    <label for="" class="col-sm-2 ">首页缓存表:</label>
+			      <label>
+			      	<if condition="$res">
+					 	<a id="you">缓存个数:{$count},上次缓存时间:{$res['addtime']},缓存内容长度:{$len}</a>
+					<else />
+					  	<a id="you">无缓存</a>
+					</if>
+				  </label>
+
+			      <label>
+					  	<button title="点击清除缓存表" class="btn btn-info" id="clear">清除</button>
+				  </label>
+				</label>
+			
+		  </div> 
+		  <hr>
+		  <div class="form-group">
+	    	<div class="col-sm-offset-2 col-sm-10">
+		      <button type="submit" class="btn btn-primary sub">确定</button>
+		    </div>
+		  </div>  
+		</form>
+	</div>
+</body>
+	<load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+    <load href="__PUBLIC__/js/bootstrap.min.js" />
+    <load href="__PUBLIC__/layer/layer.js"/>
+    <load href="__PUBLIC__/layui/layui.js" />
+    <load href="__PUBLIC__/js/mo.js" />
+    <script type="text/javascript">
+    	$('.sub').click(function(){
+    		if( $('form').serialize() ){
+    			mo.ajax($('form').serialize(),"{:U('Home/ajaxModHomePage')}",function(res){
+    				mo.msg(res,1);
+    			})
+    		}
+    	})
+
+    	$('#clear').click(function(){
+
+    		mo.ajax(1,"{:U('Home/ajaxClearHome')}",function(res){
+    			if(res){
+    				mo.msg('清除成功');
+		    		$('#you').html('无缓存');
+    			}else{
+    				mo.msg('清除失败');
+    			}
+    		})
+    	})
+    </script>
+</html>

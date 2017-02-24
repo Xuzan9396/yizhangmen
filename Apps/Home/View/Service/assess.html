@@ -1,0 +1,181 @@
+<extend name="./Public/template/base.html"/>
+<block name="content">
+	<load href="__PUBLIC__/css/store.css" />
+	<load href="__PUBLIC__/css/service.css" />
+	<load href="__PUBLIC__/css/assess.css" />
+	<include file="./Apps/Home/View/service/publicStoreNav.html"/>
+		<!-- 交易评价 的主体内容-->
+		<div class="deal-assess">
+			<div class="deal-assess-content">
+				<!-- 左边内容 -->
+				<div class="deal-assess-left">
+					<div class="deal-assess-brand">
+						<div class="deal-brand-top">
+							<img src="__PUBLIC__/Uploads/{$shop[0]['file_image']}" alt="">
+						</div>
+						
+					
+					</div>
+
+				</div>
+				<!-- 右边内容 -->
+				<div class="deal-assess-right">
+					<div class="deal-assess-right-top">
+						<div class="deal-assess-right-title">
+							店铺综合评分
+						</div>
+						<div class="deal-assess-right-content">
+							<p><span class="deal-assess-right-txt">完成质量：</span> <span class="deal-assess-right-num">4.97分</span> </p>
+							<p><span class="deal-assess-right-txt">工作速度：</span> <span class="deal-assess-right-num">5.00分</span></p>
+							<p><span class="deal-assess-right-txt">服务态度：</span> <span class="deal-assess-right-num">4.97分</span> </p>
+						</div>
+						<!-- 店铺综合评分 星星 -->
+						<div class="deal-assess-icon">
+							<div class="assess-list-icon">
+								<span class="xing-1"><i style="width:80%"></i></span>
+								<span class="num"><span style="color: #FF7A1A;">4.98</span>分 共1000人</span>
+							</div>
+							<ul class="xingxing">
+
+								<li>
+									<i class="star-1 f1"></i>
+									<p class="f1"><span>1</span>&nbsp;分&nbsp;&nbsp;<span>|&nbsp;0.22%</span></p>
+								</li>
+								<li>
+									<i class="star-2 f1"></i>
+									<p class="f1"><span>1</span>&nbsp;分&nbsp;&nbsp;<span>|&nbsp;0.22%</span></p>
+								</li>
+								<li>
+									<i class="star-3 f1"></i>
+									<p class="f1"><span>1</span>&nbsp;分&nbsp;&nbsp;<span>|&nbsp;0.22%</span></p>
+								</li>
+								<li>
+									<i class="star-4 f1"></i>
+									<p class="f1"><span>1</span>&nbsp;分&nbsp;&nbsp;<span>|&nbsp;0.22%</span></p>
+								</li>
+								<li>
+									<i class="star-5 f1"></i>
+									<p class="f1"><span>1</span>&nbsp;分&nbsp;&nbsp;<span>|&nbsp;0.22%</span></p>
+								</li>
+							</ul>
+						</div>
+						<!-- 店铺综合评分 星星结束 -->
+					</div>
+					<div class="clear"></div>
+					
+					<!-- 服务情况 -->
+					<div class="store-server-situation">
+						<div class="deal-assess-right-title">
+							店铺服务情况
+						</div>
+						<div class="store-situation-content">
+							<table  width="400" class="store-table">
+								<tr>
+									<td></td>
+									<td class="store-situation-title">本月交易</td>
+									<td class="store-situation-title">近90天</td>
+								</tr>
+								<tr>
+									<td class="td1">成功交易:</td>
+									<td class="store-td-num">100笔</td>
+									<td >222笔</td>
+								</tr>
+								<tr>
+									<td class="td1">退款笔数:</td>
+									<td class="store-td-num">2笔</td>
+									<td >13笔</td>
+								</tr>
+								<tr>
+									<td class="td1">退款率:</td>
+									<td class="store-td-num">0.06%</td>
+									<td >0.39%</td>
+								</tr>
+								
+								<tr>
+									<td class="td1">受处罚数:</td>
+									<td class="store-td-num">0笔</td>
+									<td>0笔</td>
+								</tr>
+							</table>
+						</div>
+						<div class="store-situation-btm">
+							<!-- <span>当前诚信度： 100分</span>
+							<span>诚信度状态：良好</span> -->
+						</div>
+					</div>
+					<!-- 服务情况结束 -->
+					<!-- 评价内容 -->
+					<div class="store-evaluate">
+						<div class="store-evaluate-title">
+							<span>评价人</span>
+							<span>评价内容</span>
+						</div>
+						<div class="store-assess-content">
+							<div class="assess-list">
+								<div class="assess-list-pic">
+									<img src="image/tou.jpg" alt="">
+								</div>
+								<div class="assess-list-name">
+									<p><a href="">Bairen</a></p>
+									<p>交易金额：￥100.00</p>
+									<div><span>评分：</span>
+										<div class="assess-list-div"><span class="assess-xing" style="width:100%"><i></i></span></div>
+									</div>
+								</div>
+								<div class="assess-list-content">
+									评价：<span>sdfasdfhsd flkdsajflds fldsfklds拉萨发了看电视 拉风dasdf
+									啊浪费多少了地方算了的方式理发师法律水电费
+									啊发了的说法都是浪费撒点粉独守空房萨连科地方的萨	</span>
+								</div>
+								<div class="assess-list-time">
+									<p>2016-12-16</p>
+									<p>19:12:11</p>
+								</div>
+							</div>
+							<div class="assess-list">
+								<div class="assess-list-pic">
+									<img src="image/tou.jpg" alt="">
+								</div>
+								<div class="assess-list-name">
+									<p><a href="">Bairen</a></p>
+									<p>交易金额：￥100.00</p>
+									<div><span>评分：</span>
+										<div class="assess-list-div"><span class="assess-xing" style="width:50%"><i></i></span></div>
+									</div>
+								</div>
+								<div class="assess-list-content">
+									评价：<span>sdfasdfhsd flkdsajflds fldsfklds拉萨发了看电视 拉风dasdf
+									啊浪费多少了地方算了的方式理发师法律水电费
+									啊发了的说法都是浪费撒点粉独守空房萨连科地方的萨	</span>
+								</div>
+								<div class="assess-list-time">
+									<p>2016-12-16</p>
+									<p>19:12:11</p>
+								</div>
+							</div>
+							<!-- 分页 -->
+							<div>
+								<nav>
+								  <ul class="pagination">
+								    <li><a href="#">&laquo;</a></li>
+								    <li class="active"><a href="#">1</a></li>
+								    <li><a href="#">2</a></li>
+								    <li><a href="#">3</a></li>
+								    <li><a href="#">4</a></li>
+								    <li><a href="#">5</a></li>
+								    <li><a href="#">&raquo;</a></li>
+								  </ul>
+								</nav>
+							</div>
+							<!-- 分页 -->
+						</div>
+
+					</div>
+					<!-- 评价结束 -->
+
+
+				</div>
+
+			</div>
+		</div>
+</block>

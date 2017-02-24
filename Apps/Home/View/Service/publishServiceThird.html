@@ -1,0 +1,34 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+<load href="__PUBLIC__/css/publishService.css" />
+<load href="__PUBLIC__/js/uploadPreview.js" />
+	<div class="service-publish-main">
+		<div class="header-name">
+			<div class="left-line"></div>
+			<div class="publishService-title">发布服务</div>
+		</div>
+		<div class="line-top"></div>
+		<!--进度条 -->
+		<div class="publish-stepbar">
+			<div class="stepbar-middle">
+				<div class="first-step2">1.选择服务类目</div>
+				<div class="second-step2">2.填写服务信息</div>
+				<div class="third-step2"style="background:#34A8FF;color:white">3.发布成功,审核中</div>
+			</div>
+		</div>
+		<div class="success-tips">
+			<div class="tips-contents">
+				<div class="draw-out">
+					<span class="glyphicon glyphicon-ok draw"></span>
+				</div>
+				<div class="tips">
+					发布成功!请等待审核
+				</div>
+				<div class="back-tips">
+					点击<a href="{:U('Home/Service/publishServiceOne')}">继续发布服务</a>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</block>

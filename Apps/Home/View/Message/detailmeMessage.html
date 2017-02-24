@@ -1,0 +1,38 @@
+<extend name='./Public/template/listBase.html'/>
+
+  <!-- 加载自己的外部文件 -->
+  <block name="listfile">
+  </block>
+
+  <!-- 这里写内容 -->
+  <block name="listcentent">
+      <!-- 开始 -->
+      <div class="container-filut">
+        <div class="" style="width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;">
+            <div class="" style="">
+              私信内容
+            </div>
+        </div>
+      </div>
+      <div class="" style="position:relative;top:0px;left:0px;border:1px solid #ccc;margin-top:10px;">
+       <div class="" style="position:absolute;top:5px;left:20px;text-align:center;">
+          <a href="{:U('Home/Message/meMessage',['sel'=>$return_param['sel'],'p'=>$return_p])}" class="btn btn-info" >返回</a>
+          <a href="{:U('Home/message/meMessageAct',['action'=>'del','mesm_id'=>$mesm_list['mesm_id']])}" class="btn btn-info" >删除</a>
+        </div>
+        <div class="" style="margin-top:46px;margin-bottom:46px;border-top:1px solid #ccc;border-bottom:1px solid #ccc;width:100%;padding:20px;">
+          <form id="formbox" action="{:U('Home/Message/outboxMessageAct')}" method="post">
+          <table class="table table-hover">
+            <tr>
+              <th>{$mesm_list['mesm_title']}</th>
+            </tr>
+            <tr>
+              <td style="word-break:break-all;overflow:auto;">{$mesm_list['mesm_centent']}</td>
+            </tr>
+            <tr>
+              <td>收件人:{$mesm_list['mesm_receiver']}&nbsp;&nbsp;时间:{$mesm_list['mesm_sendtime']}&nbsp;&nbsp;来自:{$mesm_list['mesm_sender']}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <!-- 结束 -->
+  </block>

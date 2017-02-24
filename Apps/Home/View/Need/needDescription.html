@@ -1,0 +1,342 @@
+<extend name='./Public/template/base.html'/>
+
+<block name="file">
+    <!-- 独立的 -->
+    <load href="__PUBLIC__/home/need/css/need-description.css"/>
+    <load href="__PUBLIC__/home/need/js/stepBar.js"/>
+    <load href="__PUBLIC__/home/need/js/jquery.easing.1.3.js"/>
+    <load href="__PUBLIC__/home/need/js/need-description.js" />
+    <load href="__PUBLIC__/ueditor/ueditor.config.js"/>
+	<load href="__PUBLIC__/ueditor/ueditor.all.js"/>
+</block>
+<block name="content">
+	<style>
+		.oll li p{
+			width: 560px;
+		}
+	</style>
+	<!-- 进度条 -->
+	<div class="container">
+		<div id="stepBar" class="ui-stepBar-wrap col-lg-12">
+			<div class="ui-stepBar">
+				<div class="ui-stepProcess"></div>
+			</div>
+			<div class="ui-stepInfo-wrap">
+				<table class="ui-stepLayout" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">1</a>
+							<p class="ui-stepName">选择类目</p>
+						</td>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">2</a>
+							<p class="ui-stepName">选择交易模式</p>
+						</td>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">3</a>
+							<p class="ui-stepName">描述需求</p>
+						</td>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">4</a>
+							<p class="ui-stepName">核对交易清单</p>
+						</td>
+						<td class="ui-stepInfo">
+							<a class="ui-stepSequence">5</a>
+							<p class="ui-stepName">等待审核需求</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- 进度条结束 -->
+	<!-- 内容区 -->
+	<div class="container">
+		<center>
+			<div class="box col-lg-12">
+				<form action="{:U('Home/Need/needDescription')}" method="post" enctype="multipart/form-data" onsubmit="return descVerify()" id="form">
+					<!-- 模板部分 -->
+					<div class="box-row col-lg-12">
+						<div class="box-modal">
+							<span>不会写?有模板哦!</span>
+							<button id="box-template-btn" type="button" class="btn btn-default">点击插入模板</button>
+						</div>
+					</div>
+					<!-- 模板部分结束 -->
+					<!-- 魔态框 -->
+					<div class="container">
+						<div id="box-template" class="modal fade">
+						    <div class="modal-dialog">
+						        <div class="modal-content">
+							        <div class="modal-header">
+							            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+							            <h4 class="modal-title">插入模板</h4>
+							        </div>
+							        <div class="modal-body">
+							            <div id="modal-body-con">
+							                <ul id="modal-title-ul">
+							                	<!-- 遍历模板 -->
+							                	<foreach name="list" item="val">
+								                    <li>
+								                    	<span>{$val.ndm_title}</span>
+								                    </li>
+							                    </foreach>
+							                </ul>
+							                <div id="modal-con">
+							                    <ol id="modal-con-ol" class="oll">
+							                    	<foreach name="list" item="val1">
+							                        <li>
+							                        	{$val1.ndm_text}
+													</li>
+													</foreach>
+							                    </ol>
+							                </div>
+			            				</div>
+						          	</div>
+							        <div class="modal-footer">
+							          	<button type="button" class="btn btn-primary" data-dismiss="modal" id="modal-insert">插入</button>
+
+							        </div>
+						        </div><!-- /.modal-content -->
+						    </div><!-- /.modal-dialog -->
+					    </div><!-- /.modal -->
+				    </div>
+					<!-- 模态框结束 -->
+					<!-- 标题部分开始 -->
+					<div class="form-group col-lg-12">
+						<label class="left-label col-lg-3" for="input-title">标题<span>*</span>:</label>
+						<div class="col-lg-6">
+    						<input type="text" class="form-control" id="input-title" placeholder="标题" name="need_title" value="{$data.need_title}">
+    					</div>
+    					<div class="right-span col-lg-3">
+							<span>标题最多50个字符</span>
+						</div>
+					</div>
+					<!-- 标题部分结束 -->
+					<!-- 描述部分 -->
+					<div class="form-group col-lg-12">
+						<label class="left-label col-lg-3">描述<span>*</span>:</label>
+						<div class="col-lg-6" style="z-index: 10">
+							<textarea name="need_desc" id="myEditor">{$data.need_desc}</textarea>  
+							<script type="text/javascript"> 
+								var editor = new baidu.editor.ui.Editor({
+							        textarea:'introduction'
+									, toolbars: [[
+										'source', '|', 'undo', 'redo', '|',
+										'bold', 'italic', 'underline',  'superscript', 'subscript', 'removeformat',  'pasteplain', '|', 'forecolor', 'backcolor', 'cleardoc', '|',
+										'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+											'touppercase', 'tolowercase', '|',
+										'emotion'
+									]]
+
+							    });
+							    editor.render("myEditor");
+	
+							</script>  
+			            </div>
+			            <div class="right-span col-lg-3">
+							<span>描述不少于20字</span>
+						</div>
+					</div>
+					<!-- 描述部分结束 -->
+					<!-- 文件上传部分 -->
+					<div class="form-group col-lg-12 form-file">
+						<label class="left-label col-lg-3">上传附件</label>
+						<div class="col-lg-6">
+    						<input type="file" class="form-file" multiple name="myfile[]" id="input-file">
+    					</div>
+    					<div class="right-span col-lg-3">
+							<span>最多5个文件不超过2M</span>
+						</div>
+					</div>
+					<!-- 文件上传部分结束 -->
+					<!-- 手机部分 -->
+					<div class="form-group col-lg-12">
+						<div class="col-lg-7 radio">
+							<input type="radio" name="need_phone" id="optionsRadios1" value="{:session('home_user_info')['user_phone']}" checked>
+							<span>{:session('home_user_info')['user_phone']}</span>
+    					</div>
+    					<div class="col-lg-7 radio other-phone">
+    						 <input type="radio" name="need_phone" id="optionsRadios2" value="">
+    						 <span>使用其他号码</span>
+    					</div>
+					</div>
+					<!-- 输入验证手机部分 -->
+					<div id="hidden-phone" descurl="{:U('Home/Need/phoneCode')}">
+						<div class="form-group col-lg-12">
+							<div class="col-lg-3 input-phone">
+	    						<input type="text" class="form-control" name="hidden_phone" id="input-tel">
+	    					</div>
+						</div>
+						<div class="form-group col-lg-12">
+							<div class="col-lg-3 input-phone">
+	    						<input type="text" class="form-control" name="user_code" id="input-code">
+	    					</div>
+	    					<div class="right-span col-lg-3">
+								<span id="code-msg" class="btn btn-default" codeurl="{:U('Home/Need/sms')}" disabled>获取验证码</span>
+							</div>
+						</div>
+					</div>
+					<!-- 手机部分结束 -->
+					<!-- 跳转按钮 -->
+					<div class="form-group col-lg-8">
+						<a href='{:U("Home/Need/needBudget")}' class="btn btn-info last-page">上一页</a>
+						<button type="submit" class="btn btn-success" id="desc-submit">下一页</button>
+					</div>
+					<!-- 跳转按钮结束 -->
+					<div class="form-group col-lg-8">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" id="input-check" checked> 同意 
+							</label>
+							<a id="box-hidden-a" href="javascript:void();">《需求发布协议》</a>
+						</div>
+					</div>
+				</form>
+				<div id="box-hidden" class="col-lg-12">
+					<h3>需求协议</h3>
+					<hr>
+					<div class="box-hidden-con col-lg-12">
+						<p>
+							请您在发布任务前仔细阅读任务发布规则：
+							一、总则：
+							1、用户应当遵守国家法律、法规、行政规章的规定。对任何涉嫌违反法律、法规、行政规章的行为，本规则已有规定的，适用本规则；本规则尚无规定的，易科学网有权酌情处理。易科学网对用户的处理不免除其应当承担的法律责任。 
+							2、用户在易科学网上的全部行为仅代表其个人或法人，不代表易科学网，基于该行为的全部责任应当由用户自行承担。在易科学网上完成的交易，除法律规定不能转让或会员另有约定外，相关的知识产权全部转让于需方所有。 
+							3、用户在易科学网注册成为会员时起，应当接受并同意本规则，否则不能使用易科学网交易平台的各项服务。易科学网有权随时修改本规则并在网站上予以公告。自公告之日起，若会员不同意相关修改的，应当立即停止使用易科学网的相关服务或产品；若继续使用的，则视为接受修改后的规则。
+
+							二、任务发布规则： 
+							1、任务发布者自由定价、选择任务发布模式、确定结束时间、发布任务要求，自主确定中标会员和中标方案。
+							2、任务发布者在悬赏模式需求时，选标前，需100%托管任务赏金到网站，让竞标者坚信您的诚意和诚信。
+							3、每个任务最终都必须选定至少一个服务方案中标，至少一个竞标者获得赏金。若发布需求任务者选择多人中标的，只能向一等奖任务赏金获得者索取源文件。源文件的交接形式由双方自行约定，可通过易科学网进行，也可以通过其他方式进行。
+							4、任务发布者若未征集到满意作品，可以加价延期征集，也可让会员修改。如遇任务结果不满意，发布者可选择加价延期任务。任务共有3次加价延期机会，延期任务每次加价金额不能低于现有任务总金额的20%且加价金额不低于50元。每次延期不能超过7天。高价悬赏任务加价，网站作为个案处理可适当加长。
+							5、为公平起见，任务发布者所在组织的任何人均不能以任何形式参加自己所发布的任务，一经发现则视为发布者委托易科学网按照网站规则进行托管选则方案。
+							6、如果供方以交接源文件为借口要挟任务发布者，将被扣除供方相关信用值，并取消其中标资格，同时任务将免费延长相应的时间继续征集服务方案。
+							7、发布者与投标会员，应严格按照每个任务的“任务要求”所描述的内容执行。如果发布者提出超出“任务要求”范围的要求，会员有权拒绝，发布者也不得以此为理由拒绝选出中标方案或退款。
+							8、如果您需与中标会员签定知识产权转让协议，我们将全力协助您与会员签定相关协议。
+							9、发布者有下列情形之一，视为作弊：
+							①发布者以任何形式参与自己发布的任务，并被选择为中标方案的；
+							②发布者的亲属、朋友、同事、邻居等参与自己发布的任务，并被选择为中标方案的；
+							③其它破坏公平竞争的行为。
+							10、供方有下列情形之一，其提交的稿件视为作弊：
+							①供方与发布者属同一组织、亲属、朋友的；
+							②供方与发布者使用相同IP地址登录的；
+							③供方与发布者为同一人的；
+							④供方使用虚假、不真实信息注册的；
+							⑤其他违规行为。
+							11、发布者有下列情形之一，易科学网有权拒绝发布其任务；若该任务已发布的，易科学网有权撤销。由此造成的一切损失，由发布者自行承担：
+							①假借发布任务，恶意炒作、欺骗的；
+							②故意隐瞒与发布任务有关的重要事实或者提供虚假情况，情节严重的；
+							③在任务过程中采用欺诈、胁迫的手段，损害国家利益的；
+							④与供方恶意串通，损害国家、集体或者第三人利益的；
+							⑤其他违反法律、法规、行政规章的强制性规定。
+							12、会员有以下情况之一，给予封号处理：
+							①已托管赏金的招标任务，供方在交易过程中失去联系累计达3次及以上的；
+							②已托管赏金的招标任务，发布者增加工作量累计达3次及以上的。
+							13、任务需求描述具体要求：
+							①任务需求描述需要准确、完整；
+							②一个任务只能进行一件事物的处理；
+							③不同任务类型禁止合并发布，一个任务只能有一项具体事务。
+
+							三、附加条款： 
+							1、凡是发布任务的易科学供方会员即视为同意本协议。
+							2、发布者对于任务发布，有权利选择隐藏任务。
+							①未选择隐藏任务的中标方案，易科学网具有将获奖方案在成功案例等网站页面板块进行展示的权利。
+							②未选择隐藏任务的中标作品被百度、谷歌等搜索引擎收录，易科学网不承担因为搜索引擎收录，导致方案信息被盗用等而引起的任何纠纷问题。
+						</p>
+					</div>
+				</div>
+			</div>
+		</center>	
+	</div>
+	<!-- 提示输入 -->
+	<load href="__PUBLIC__/js/mo.js" />
+	<script type="text/javascript">
+		function descVerify(){
+			//防止恶心点击按钮
+			$('#desc-submit').attr('disabled',true);
+	    	setTimeout(function(){
+				$('#desc-submit').attr('disabled',false);
+			},1000);
+			//标题
+			var title = $('#input-title').val();
+			// 描述
+			var desc = editor.getContentTxt();
+			//文件
+			var fileDom = $('#input-file');
+			// 协议
+			var check = $('#input-check').is(':checked');
+			// 正则
+			// 标题的
+			var pregTitle = /^[\u4E00-\u9FA5a-zA-Z\s]{0,50}$/;
+			// 手机的
+			var pregTel = /^1[34578]\d{9}$/;
+			//标题验证
+			if(title == ''){
+				// alert(1);
+				mo.msg('请填写标题');
+
+				return false;
+			}else if(!pregTitle.test(title)){
+					mo.msg('请正确输入标题');
+					return false;
+				}
+			//描述验证
+			if(desc == ''){
+				mo.msg('请填写描述');
+				return false;
+			}else if(desc.length < 50){
+				mo.msg('描述不能少于50字节');
+				return false;
+			}
+			//文件个数判断
+			//获取文件个数
+			var list = fileDom.prop('files').length;
+			if(list > 5){
+				mo.msg('文件超过五个');
+				return false;
+			}
+			// 协议验证
+			if(check == false){
+				mo.msg('请仔细阅读协议');
+				return false;
+			}
+			//验证 手机
+			if($('#optionsRadios2').is(':checked')){
+				//手机号码获取
+				var tel = $('#input-tel').val();
+				// 验证码
+				var user_code = $('#input-code').val();
+				// url地址
+				var codeurl = $('#hidden-phone').attr('descurl');
+				//手机验证
+				if(tel == ''){
+					mo.msg('请填写电话');
+					return false;
+				}else if(!pregTel.test(tel)){
+						mo.msg('请正确填写电话');
+						return false;
+					}
+				//验证码不能为空
+				if(user_code == ''){
+					mo.msg('请填写验证码');
+					return false;
+				}
+				// 同步
+				$.ajaxSetup({async : false});
+				//ajax请求
+		    	$.post(codeurl,{'need_phone':tel,'user_code':user_code},function(data){
+		    		// 返回假就是有误
+					if(!data){
+						$('#optionsRadios2').data({'code':1});
+					}
+				}); 
+				// 如果 等于1 就说明失败
+				if($('#optionsRadios2').data('code') == 1){
+					mo.msg('验证有误');
+					return false;
+				}
+			}
+			
+    	}
+	</script>
+</block>

@@ -1,0 +1,130 @@
+<extend name='./Public/template/listBase.html'/>
+
+  <!-- 加载自己的外部文件 -->
+  <block name="listfile">
+  </block>
+
+  <!-- 这里写内容 -->
+  <block name="listcentent">
+
+    <style>
+      #atteinfo tr td{
+        line-height:60px;
+      }
+    </style>
+
+    <!-- 开始 -->
+    <div class="container-filut">
+      <div class="" style="width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;">
+          <div class="" style="">
+                账号信息:
+          </div>
+      </div>
+
+      <div class="" style="width:100%;height:130px;padding:10px;">
+          <div class=""  style="width:15%;float:left;text-align:center;height:130px;">
+            <div class="" style="border:1px solid #CCC;height:102px;width:102px">
+                <img src="__PUBLIC__/Uploads/headportrait/{$home_user_info['impr_picture']}" height="100"/>
+            </div>
+            <div class="" style="hieght:20px;margin:0 auto">
+                <p style="font-size:20px;color:#111111;font-weight:bold;">{$home_user_info['user_account']}</p>
+            </div>
+          </div>
+
+          <div class="" style="width:35%;float:left;font-size:14px;margin:0 10px;">
+          <!-- </p>登录账号:&nbsp;&nbsp;{$user_list['user_account']} <a href="#" style="padding-left:20px;">修改资料</a></p>
+          </p>注册时间:&nbsp;&nbsp;{$user_list['user_addtime']}</p>
+          </p>信息1:&nbsp;&nbsp;信息1 <a href="#" style="padding-left:20px;">去死吧</a></p>
+          </p>信息1:&nbsp;&nbsp;信息1 <a href="#" style="padding-left:20px;">去死吧</a></p>
+          </p>信息1:&nbsp;&nbsp;信息1 <a href="#" style="padding-left:20px;">去死吧</a></p> -->
+          <table style="text-align:left">
+            <tr>
+              <td>登录账号:</td>
+              <td>{$home_user_info['user_account']}</td>
+            </tr>
+            <tr>
+              <td>注册时间:</td>
+              <td>{$home_user_info['user_addtime']}</td>
+              <td> </td>
+            </tr>
+            <tr>
+            <td>绑定手机:</td>
+            <td>{$home_user_info['user_phone']}</td>
+            <td style="text-align:right;"> <a href="{:U('Home/User/myInfo')}">完善资料</a></td>
+            </tr>
+            <tr>
+            <td>上次登录:</td>
+            <if condition="$home_user_info['user_last_time'] eq '1970-01-01 08:00'">
+              <td>{$home_user_info['user_addtime']}</td>
+            <else/>
+              <td>{$home_user_info['user_lasttime']}</td>
+            </if>
+
+            <td> </td>
+            </tr>
+            <tr>
+            <td>商家店铺:</td>
+              <if condition="($home_user_info['user_type'] eq '2' || $home_user_info['user_type'] eq '3')">
+                  <td>已有店铺</td>
+                  <td style="text-align:right;"> <a href="{:U('home/service/ManageIndex')}" target="_top">去我的店铺</a></td>
+                <else />
+                  <td>暂无店铺</td>
+                  <td style="text-align:right;"> <a href="{:U('home/service/storeRegister1')}" target="_top">去开张</a></td>
+              </if>
+            </tr>
+          </table>
+          </div>
+
+          <div class="" style="width:30%;float:left;font-size:14px;margin:0 10px;">
+            <table>
+              <!-- <tr>
+                <td>现金:</td>
+                <td><b>&yen;0.00元</b></td>
+                <td><a href="#">提现</a></td>
+                <td><a href="#">充值</a></td>
+              </tr> -->
+              <tr>
+                <td><b>安全信息</b></td>
+              </tr>
+              <!-- <tr>
+                <td>支付密码:</td>
+                <td>************</td>
+                <td><a href="#">修改</a></td>
+                <td><a href="#">找回</a></td>
+              </tr> -->
+              <tr>
+                <td>登录密码：</td>
+                <td>*********&nbsp;</td>
+                <td><a href="{:U('Home/User/makePassword')}">修改密码</a>&nbsp;</td>
+              </tr>
+            </table>
+          </div>
+      </div><br>
+
+      <div class="" style="width:100%;height:10px;"></div>
+
+      <div class=""  style="margin-bottom:10px;width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;">
+        <div class="">
+            认证信息:
+        </div>
+      </div>
+      <div class="container-filut">
+          <table class="table table-hover" id="atteinfo">
+            <foreach name="attestation_list" item="vo">
+              <tr>
+                    <td><img width="50" src="__PUBLIC__/home/pro/img/{$vo['attn_num']}2016-12-20_141558.jpg" alt="" /></td>
+                    <td>{$vo['appe_type']}</td>
+
+                    <if condition="$vo['attn_status'] eq 1">
+                      <td>已认证</td>                    
+                      <else />
+                      <td>未认证</td>
+                    </if>
+              </tr>
+            </foreach>
+          </table>
+
+      </div>
+    </div>
+    <!-- 结束 -->
+</block>

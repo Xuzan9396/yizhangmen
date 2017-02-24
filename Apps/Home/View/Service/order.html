@@ -1,0 +1,275 @@
+<extend name="./Public/template/serviceShop.html" />
+
+<block name="right1">
+	<script src="__PUBLIC__/layer/layer.js">
+	</script>
+	<load href="__PUBLIC__/layui/css/layui.css" />
+	<load href="__PUBLIC__/css/order.css" />
+	<link rel="stylesheet" href="__PUBLIC__/layer/mobile/need/layer.css">
+	<load href="__PUBLIC__/layui/layui.js" />
+	<style>
+		#row1 [class*="col-"] {
+			margin-bottom: 0;
+			padding-bottom: 0;
+		}
+		
+	</style>
+	<div class="service-trade-main">
+		<div class="header-name">
+			<div class="right-sgin"></div>
+			<div class="trade-title">我的订单</div>
+		</div>
+		<div class="line"></div>
+		<div class="service-trade-contents">
+			<form>
+				<div class="layui-form-pane" style="margin-top:15px;">
+					<div class="layui-form-item float">
+						<label class="layui-form-label" id="trade-time">交易时间</label>
+						<!-- 开始时间 -->
+						<div class="layui-inline" id="start-time">
+							<input class="layui-input start" value="{:I('get.startTime')}" name="startTime" placeholder="开始时间" onclick="layui.laydate({elem: this, festival: true})">
+						</div>
+						<!-- 结束时间 -->
+						<div class="layui-inline" id="end-time">
+							<input class="layui-input" value="{:I('get.endTime')}" name="endTime" placeholder="截止时间" onclick="layui.laydate({elem: this, festival: true})">
+						</div>
+					</div>
+					<div>
+						<select name="order_status" id="select">
+							<option value="-1" <if condition="I('get.order_status',-1) eq -1">selected</if>>--选择交易状态--</option>
+							<option value="0" <if condition="I('get.order_status',-1) eq 0">selected</if>>待付款</option>
+							<option value="1" <if condition="I('get.order_status',-1) eq 1">selected</if>>订单已经取消</option>
+							<option value="2" <if condition="I('get.order_status',-1) eq 2">selected</if>>退款中</option>
+							<option value="3" <if condition="I('get.order_status',-1) eq 3">selected</if>>退款成功</option>
+							<option value="4" <if condition="I('get.order_status',-1) eq 4">selected</if>>已付款</option>
+							<option value="5" <if condition="I('get.order_status',-1) eq 5">selected</if>>已托管</option>
+							<option value="6" <if condition="I('get.order_status',-1) eq 6">selected</if>>下线交易</option>
+							<option value="7" <if condition="I('get.order_status',-1) eq 7">selected</if>>发起合同</option>
+							<option value="8" <if condition="I('get.order_status',-1) eq 8">selected</if>>签合同</option>
+							<option value="10" <if condition="I('get.order_status',-1) eq 10">selected</if>>完成工作</option>
+						</select>
+					</div>
+					<div class="order-search">
+						订单号:<input type="text" name="order_number" value="{:I('get.order_number')}" />
+					</div>
+
+					<input type="submit" class="layui-btn layui-btn-normal" id="order-search" value="搜索">
+				</div>
+			</form>
+		</div>
+		<div class="clear"></div>
+		<div class="trade-data">
+			<table class="table table-order">
+				<tr>
+					<th>订单号</th>
+					<th>订单名称</th>
+					<th>交易模式</th>
+					<th>交易状态</th>
+					<th>交易金额</th>
+					<th>交易时间</th>
+					<th>修改金额</th>
+					<th>需求详情</th>
+					<th>雇主信息</th>
+					<th>回收站</th>
+				</tr>
+				
+				<volist name="data" id="vo">
+					<tr>
+						<td>{$vo.order_number}</td>
+						<td>{$vo.pubh_title}</td>
+						<td>{$vo.order_model}</td>
+						<td>{$vo.order_status1}</td>
+						<td>{$vo.order_number_price}</td>
+						<td>{:date('Y/m/d H:i:s' ,$vo['order_time'])}</td>
+						<if condition="$vo['order_status'] eq 0">
+							<td>
+								<a class="trusteeship-update layui-btn layui-btn-mini layui-btn-normal" href="javascript:;" xxx="{$vo['id']}">修改</a>
+							</td>
+						<else/>
+							<td>
+								<a class="layui-btn layui-btn-mini layui-btn-normal" href="javascript:;">不能修改</a>
+							</td>
+						</if>
+						<td><a class="layui-btn layui-btn-mini layui-btn-normal" target="_blank"
+
+						 <?php
+							switch($vo[ 'order_status']){
+								case 0:
+								$arr='home/service/orderTrusteeship' ; break;
+								case 5:
+								$arr='home/service/orderTrusteeship' ; break;
+								case 7:
+								$arr='home/service/orderTrusteeship2' ; break; 
+							}
+						 ?>
+						 
+							 href="{:U($arr,array('id'=>$vo['id']))}">订单详情</a></td>
+
+						<td><a class="layui-btn layui-btn-mini layui-btn-normal service-employer" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="detail('{$vo.id}')" href="javascript:void(0);">点击查看</a></td>
+						<if condition="$vo['order_status'] eq 1 or $vo['order_status'] eq 3 or $vo['order_status'] eq 4">
+							<td><a class="layui-icon" href="javascript:void(0)" onclick="storeRecycle('{$vo['id']}', this);">&#xe640;</a></td>
+							<else/>
+							<td><a onclick="order_nodelete();" class="layui-icon" href="javascript:void(0)">&#xe606;</a></td>
+						</if>
+					</tr>
+					<input type="hidden" name="id" value="{$vo['id']}">
+				</volist>
+				<tr>
+					<td colspan="8">
+						{$show}
+					</td>
+				</tr>
+			</table>
+		</div>
+		<!-- 模态框 -->
+		<div class="modal fade" id="trusteeship-modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">请输入赏金</h4>
+					</div>
+					<div class="row">
+						<center>
+							<form action="{:U('Home/service/orderUpdate')}" method="post" onsubmit="return orderVerify()">
+								<div class="modal-body">
+									<div class="form-group">
+										<label class="sr-only" for="exampleInputAmount"></label>
+										<div class="input-group col-lg-8">
+											<div class="input-group-addon">￥</div>
+											<input type="text" class="form-control" id="exampleInputAmount" placeholder="金额" name="order_number_price">
+											<input type="hidden" value="" name="id" id="xuzan">
+											<div class="input-group-addon">.00</div>
+										</div>
+									</div>
+									<div>
+										<p>请与雇主协商修改价格.</p>
+									</div>
+								</div>
+								<div class="modal-footer" style="width:598px;">
+									<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+									<button type="submit" class="btn btn-primary">确定修改</button>
+								</div>
+							</form>
+						</center>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		<!-- 模态框结束 -->
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content order-model">
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10">
+							<div class="text-center font-employer">雇主详情信息</div>
+							<div id="table-md10">
+
+							</div>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<script src="__PUBLIC__/js/mo.js"></script>
+	<script>
+		layui.use('laydate', function() {
+			var laydate = layui.laydate;
+			var start = {
+				min: laydate.now(),
+				max: '2099-06-16 23:59:59',
+				istoday: false,
+				choose: function(datas) {
+					end.min = datas; //开始日选好后，重置结束日的最小日期
+					end.start = datas //将结束日的初始值设定为开始日
+				}
+			};
+			var end = {
+				min: laydate.now(),
+				max: '2099-06-16 23:59:59',
+				istoday: false,
+				choose: function(datas) {
+					start.max = datas; //结束日选好后，重置开始日的最大日期
+				}
+			};
+			document.getElementById('LAY_demorange_s').onclick = function() {
+				start.elem = this;
+				laydate(start);
+			}
+			document.getElementById('LAY_demorange_e').onclick = function() {
+				end.elem = this
+				laydate(end);
+			}
+		});
+
+		function detail(id) {
+			$.ajax({
+				type: 'post',
+				url: "{:U('home/service/order1')}",
+				data: {
+					'id': id
+				},
+				dataType: "json",
+				async: true,
+				success: function(data) {
+					$('#table-md10').html(data);
+				}
+			});
+		}
+
+
+		function order_nodelete() {
+			layer.msg('此订单的不能丢入回收站！正在交易中！');
+		}
+
+		function storeRecycle(id, obj) {
+			$.ajax({
+				type: 'post',
+				url: "{:U('storeRecycleAdd')}",
+				data: {
+					'id': id
+				},
+				dataType: 'json',
+				success: function(data) {
+					if (data == '1') {
+						layer.msg('已经加入回收站');
+						$(obj).parent().parent().remove();
+					} else {
+						layer.msg('加入回收站失败！');
+					}
+				}
+			});
+		}
+	</script>
+
+	<script>
+		// 模态框
+		$('.trusteeship-update').click(function(key) {
+			// 调用模态框
+			$('#xuzan').val($(this).attr('xxx'));
+			$('#trusteeship-modal').modal();
+			// 位置
+			var top = $(window).height() / 4
+			$('#trusteeship-modal').css('margin-top', top);
+		});
+
+		//js验证
+		function orderVerify(){
+			// 赏金
+			var reward = $('#exampleInputAmount').val();
+			// 总金额
+			var pregreward = /^[1-9]\d{1,9}$/;
+			if(!pregreward.test(reward)){
+				mo.msg('请正确输入赏金');
+				return false;
+			}
+		}
+	</script>
+</block>

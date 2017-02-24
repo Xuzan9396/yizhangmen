@@ -1,0 +1,170 @@
+<extend name='./Public/template/listBase.html'/>
+
+  <!-- 加载自己的外部文件 -->
+  <block name="listfile">
+  </block>
+  <!-- 这里写内容 -->
+  <block name="listcentent">
+    <!-- 开始 -->
+    <div class="container-filut">
+      <div class="" style="margin-bottom:10px;width:100%;height:50px;font-size:20px;font-weight:bold;line-height:50px;padding-left:10px;border-bottom:1px solid #ccc;">
+          <div class="" style="">
+                我卖如的服务
+          </div>
+      </div>
+      <div class="" style="width:100%;;padding:10px;">
+        <div class="">
+          <!-- ajax请求 -->
+          <button type="button" class="btn btn-info" name="button">全部服务</button>
+        </div>
+          <div class="" style="height:10px;width:100%;"></div>
+        <div class="">
+          <form class="form-inline" action="{:U('Home/Demander/buyingDemander')}" method="get">
+            <table class="table">
+              <tr>
+                <td><input type="text" class="form-control" name="id" value="" placeholder="请输入编号"/></td>
+                <td>
+                  <select class="form-control" name="order_status" >
+                    <option value="all" selected="selected">全部</option>
+                    <option value="0">待付款</option>
+                    <option value="1" >已取消</option>
+                    <!-- <option value="2" >已付款</option>
+                    <option value="3" >工作中</option> -->
+                    <option value="4" >已付款</option>
+                    <option value="5" >以托管</option>
+                    <option value="6" >线下</option>
+                    <option value="7" >发起合同</option>
+                    <option value="8" >签署合同</option>
+                    <option value="10" >确认付款</option>
+                    <option value="12" >已评价</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="form-control" name="orderby">
+                    <option selected="selected" value="desc">编号降序</option>
+                    <option value="asc">编号升序</option>
+                  </select>
+                </td>
+                <td><input type="submit" class="btn btn-info" name="name" value="搜索"></td>
+              </tr>
+            </table>
+          </form>
+        </div>
+          <div class="" style="height:10px;width:100%;"></div>
+        <div class="">
+          <table class="table table-hover">
+            <tr>
+              <th>ID</th>
+              <th>订单编号</th>
+              <th>订单类型</th>
+              <th>购买数量</th>
+              <th>交易金额(元)</th>
+              <th>下单时间</th>
+              <th>交易状态</th>
+              <th>操作</th>
+            </tr>
+            <foreach name="orderList['orderList']" item="val">
+            <tr>
+              <td>{$val['id']}</td>
+              <td>{$val['order_number']}</td>
+              <td>
+                  {$val['order_serviceid']}
+              </td>
+              <td>{$val['order_number_total']}</td>
+              <td>&yen;{$val['order_number_price']}</td>
+              <td>{:date('Y-m-d H:i:s',$val['order_time'])}</td>
+                <switch name="val['order_status']">
+                  <case value="0">
+                    <td>待付款</td>
+                    <td>
+                      <a href="{:U('Home/Demander/buyingDetailDemander',['id'=>$val['id']])}" class="btn btn-info btn-sm">查看详情</a>
+                      <a href="{:U('Home/Demander/buyingDemanderAct',['id'=>$val['id'],'order_status'=>$val['order_status'],'need_id'=>$val['order_needid']])}" target="_top" class="btn btn-info btn-sm">去付款</a>
+                    </td>
+                  </case>
+                  <case value="1">
+                    <td>已取消</td>
+                    <td>
+                      <a href="{:U('Home/Demander/buyingDetailDemander',['id'=>$val['id']])}" class="btn btn-info btn-sm">查看详情</a>
+                    </td>
+                  </case>
+                  <case value="2">
+                    <td>退款中</td>
+                    <td>
+                      <a href="{:U('Home/Demander/buyingDetailDemander',['id'=>$val['id']])}" class="btn btn-info btn-sm">查看详情</a>
+                    </td>
+                  </case>
+                  <case value="3">
+                    <td>退款成功</td>
+                    <td>
+                      <a href="{:U('Home/Demander/buyingDetailDemander',['id'=>$val['id']])}" class="btn btn-info btn-sm">查看详情</a>
+                    </td>
+                  </case>
+                  <case value="4">
+                    <td>已付款</td>
+                    <td>
+                    <a href="{:U('Home/Demander/buyingDetailDemander',['id'=>$val['id']])}" class="btn btn-info btn-sm">查看详情</a>
+                      <if condition="$val['order_iscomment'] eq 0">
+                        <a href="{:U('Home/Demander/buyingDemanderAct',['id'=>$val['id'],'order_status'=>$val['order_status'],'need_id'=>$val['order_needid']])}" target="_top" class="btn btn-info btn-sm">去评价</a>
+                      </if>
+                    </td>
+                  </case>
+                  <case value="5">
+                    <td>以托管</td>
+                    <td>
+                    <a href="{:U('Home/Demander/buyingDetailDemander',['id'=>$val['id']])}" class="btn btn-info btn-sm">查看详情</a>
+                      <a href="{:U('Home/Demander/buyingDemanderAct',['id'=>$val['id'],'order_status'=>$val['order_status'],'need_id'=>$val['order_needid']])}" target="_top" class="btn btn-info btn-sm">去签署合同</a>
+                    </td>
+                  </case>
+                  <case value="6">
+                    <td>线下</td>
+                    <td>
+                    <a href="{:U('Home/Demander/buyingDetailDemander',['id'=>$val['id']])}" class="btn btn-info btn-sm">查看详情</a>
+                      <a href="{:U('Home/Demander/buyingDemanderAct',['id'=>$val['id'],'order_status'=>$val['order_status'],'need_id'=>$val['order_needid']])}" target="_top" class="btn btn-info btn-sm">去签署合同</a>
+                    </td>
+                  </case>
+                  <case value="7">
+                    <td>发起合同</td>
+                    <td>
+                      <a href="{:U('Home/Demander/buyingDetailDemander',['id'=>$val['id']])}" class="btn btn-info btn-sm">查看详情</a>
+                      <a href="{:U('Home/Demander/buyingDemanderAct',['id'=>$val['id'],'order_status'=>$val['order_status'],'need_id'=>$val['order_needid']])}" target="_top" class="btn btn-info btn-sm">去签署合同</a>
+                    </td>
+                  </case>
+                  <case value="8">
+                    <td>签署合同</td>
+                    <td>
+                      <a href="{:U('Home/Demander/buyingDetailDemander',['id'=>$val['id']])}" class="btn btn-info btn-sm">查看详情</a>
+                      <a href="{:U('Home/Demander/buyingDemanderAct',['id'=>$val['id'],'order_status'=>$val['order_status'],'need_id'=>$val['order_needid']])}" target="_top" class="btn btn-info btn-sm">工作中</a>
+                    </td>
+                  </case>
+                  <case value="10">
+                    <td>确认付款</td> 
+                    <td>
+                      <a href="{:U('Home/Demander/buyingDetailDemander',['id'=>$val['id']])}" class="btn btn-info btn-sm">查看详情</a>
+                      <a href="{:U('Home/Demander/buyingDemanderAct',['id'=>$val['id'],'order_status'=>$val['order_status'],'need_id'=>$val['order_needid']])}" target="_top" class="btn btn-info btn-sm">去评价</a>
+                    </td>
+                  </case>
+                  <case value="12">
+                    <td>已评价</td>
+                    <td>
+                      <a href="{:U('Home/Demander/buyingDetailDemander',['id'=>$val['id']])}" class="btn btn-info btn-sm">查看详情</a>
+                    </td>
+                  </case>
+                </switch>
+            </tr>
+            </foreach>
+          </table>
+        </div>
+          <div class="" style="height:10px;width:100%;"></div>
+        <div class="">
+          <!-- 分页 -->
+          <div class="" style="float:left;">
+            共有 {$orderList['orderCount']} 条数据
+          </div>
+          <div class="asdf" style="float:left;margin-left:50px;">
+            {$orderList['orderPage']}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 结束 -->
+</block>

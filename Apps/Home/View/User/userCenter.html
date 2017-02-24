@@ -1,0 +1,555 @@
+
+<extend name='./Public/template/userBase.html'/>
+
+<block name="file">
+		<load file="__PUBLIC__/home/pro/css/crowdfunding.css"/>
+		<load file="__PUBLIC__/home/pro/js/basics.js"/>
+		<style>
+			*{
+				font-family:"SimHei",黑体,"Microsoft YaHei",微软雅黑;
+			}
+		</style>
+		<!-- JS公共部分 结束 -->
+		<!-- <load file="__PUBLIC__/home/pro/js/crowdfunding.js"/> -->
+</block>
+
+<!-- 用户中心主题部分 -->
+<block name="content">
+		<!-- 核心分类类目开始 -->
+		<div class="container border1 nopadding margin10">
+		  	<div id="vertical_navigation" class="col-lg-2 background831312 nopadding">
+				<!-- 头像部分 -->
+			    <!-- <div class="dead_pic">
+			    	<img src="__PUBLIC__/home/pro/img/member_center/nopic.jpg.png"><br>
+			      	<span class="username">用户名</span>
+			    </div> -->
+			    <!-- 会员等级星星 -->
+					<!-- 用户类型： 跟投人<br> -->
+			    <!-- <div class="usertype">
+			      	会员等级：
+			      	<img style="margin-right:0px;" src="__PUBLIC__/home/pro/img/member_center/star.png">
+			      	<img style="margin-right:0px;" src="__PUBLIC__/home/pro/img/member_center/xx2.png">
+			      	<img style="margin-right:0px;" src="__PUBLIC__/home/pro/img/member_center/xx2.png">
+			      	<img style="margin-right:0px;" src="__PUBLIC__/home/pro/img/member_center/xx2.png">
+			      	<img style="margin-right:0px;" src="__PUBLIC__/home/pro/img/member_center/xx2.png">
+			    </div> -->
+			    <!-- 分割线 -->
+			    <!-- <div class="box-line"></div> -->
+			    <!-- 我的信息开始 -->
+			    <div class="menu">
+			      	<div class="menu_title">我的信息</div>
+			      	<div class="menu_list">
+				        <ul class="list-unstyled">
+				        	<li id="listClick1" class="" onClick="listClick(1)">
+				        		<img src="__PUBLIC__/home/pro/img/member_center/left_icon_1.png">
+				        		基本信息
+				        	</li>
+				          	<li id="listClick2" class="" onClick="listClick(2)">
+				          		<img src="__PUBLIC__/home/pro/img/member_center/left_icon_2.png">
+				          		修改头像
+				          	</li>
+				        </ul>
+			      </div>
+			    </div>
+			    <!-- 我的信息结束 -->
+			    <!-- <div class="box-line"></div> -->
+			    <!-- 我的相关项目开始 -->
+			    <div class="menu">
+			      	<div class="menu_title"> 账号安全 </div>
+			      	<div class="menu_list">
+			        	<ul class="list-unstyled">
+			          		<li id="listClick4" class="" onClick="listClick(4)">
+			          			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_6.png">
+								登录密码
+			          		</li>
+			          		<!-- <li id="listClick5" class="" onClick="listClick(5)">
+			          			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_6.png">
+			          			支付密码
+			          		</li>
+			          		<li id="listClick6" class="" onClick="listClick(6)">
+			          			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_6.png">
+			          			账号绑定
+			          		</li> -->
+			          		<li id="listClick7" class="" onClick="listClick(7)">
+			          			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_6.png">
+			          			账号认证
+			          		</li>
+			        	</ul>
+			      	</div>
+			    </div>
+			    <!-- 我的相关项目结束 -->
+			    <!-- <div class="box-line"></div> -->
+			    <!-- 我的资金管理开始 -->
+			    <div class="menu">
+			      	<div class="menu_title"> 资金管理 </div>
+			      	<div class="menu_list">
+			        	<ul class="list-unstyled">
+			         		<li id="listClick8" class="" onClick="listClick(8)">
+			         			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_8.png">
+			         			收支明细
+			         		</li>
+			         	 	<!-- <li id="listClick9" class="" onClick="listClick(9)">
+			         	 		<img src="__PUBLIC__/home/pro/img/member_center/left_icon_9.png">
+			         	 		我要提现
+			         	 	</li>
+			          		<li id="listClick10" class="" onClick="listClick(10)">
+			          			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_10.png">
+			          			账号充值
+			          		</li> -->
+			       		</ul>
+			      	</div>
+			    </div>
+			    <!-- 我的资金管理结束 -->
+			    <!-- <div class="box-line"></div> -->
+			    <!-- 星级和积分开始 -->
+			    <!-- <div class="menu">
+			      	<div class="menu_title"> 我的关注 </div>
+			     	<div class="menu_list">
+			       		<ul class="list-unstyled">
+			          		<li id="listClick11" class="" onClick="listClick(11)">
+			          			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_9.png">
+			          			全部关注
+			          		</li>
+			         		<li id="listClick12" class="" onClick="listClick(12)">
+			         			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_12.png">
+			         			我的粉丝
+			         		</li>
+			          		<li id="listClick13" class="" onClick="listClick(13)">
+			          			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_13.png">
+			          			相互关注
+			          		</li>
+			       	 	</ul>
+			      	</div>
+			    </div> -->
+			    <!-- 星级和积分结束 -->
+			    <!-- <div class="box-line"></div> -->
+			    <!-- 我的消息开始 -->
+<!-- 			    <div class="menu">
+			      	<div class="menu_title"> 我的消息</div>
+			      	<div class="menu_list">
+			        	<ul class="list-unstyled">
+			          		<li id="listClick14" class="" onClick="listClick(14)">
+			          			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_14.png">
+			          			发送新消息
+			          		</li>
+			          		<li id="listClick15" class="" onClick="listClick(15)">
+			          			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_15.png">
+			          			收件箱
+			          		</li>
+			          		<li id="listClick16" class="" onClick="listClick(16)">
+			          			<img src="__PUBLIC__/home/pro/img/member_center/left_icon_16.png">
+			          			发件箱
+			          		</li>
+			        	</ul>
+			      	</div>
+			    </div> -->
+			    <!-- 我的消息结束 -->
+		  	</div>
+		  	<!-- 分类类目结束 -->
+		  	<!-- 显示内容区开始 -->
+		  	<div class="col-lg-10">
+		  		<iframe name="left" id="crowdfunding_iframe" src="{:U('Home/User/userInfo')}" frameborder="false" scrolling="no" style="border:none;" width="100%" height="1085" allowtransparency="true"></iframe>
+		 	</div>
+		 	<!-- 显示内容结束 -->
+		</div>
+		<script>
+				$('.menu_title').click(function(){
+					$(this).next().slideToggle();
+				});
+				function listClick(value){
+					if(value == 1){
+						$("#listClick_1").css("border-bottom","1px solid #C40521");
+						$("#listClick_1").css("color","#C40521");
+						$("#listClick_3").css("border-bottom","1px solid #CCC");
+						$("#listClick_3").css("color","#666");
+						$("#listClick_4").css("border-bottom","1px solid #CCC");
+						$("#listClick_4").css("color","#666");
+
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/myInfo')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","menu_list_on");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 2){
+						// 修改头像
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/makeHead')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","menu_list_on");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 3){
+						$("#listClick_1").css("border-bottom","1px solid #CCC");
+						$("#listClick_1").css("color","#666");
+						$("#listClick_3").css("border-bottom","1px solid #C40521");
+						$("#listClick_3").css("color","#C40521");
+						$("#listClick_4").css("border-bottom","1px solid #CCC");
+						$("#listClick_4").css("color","#666");
+						// 技能标签
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/skillTag')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","menu_list_on");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 4){
+						$("#listClick_1").css("border-bottom","1px solid #CCC");
+						$("#listClick_1").css("color","#666");
+						$("#listClick_3").css("border-bottom","1px solid #CCC");
+						$("#listClick_3").css("color","#666");
+						$("#listClick_4").css("border-bottom","1px solid #C40521");
+						$("#listClick_4").css("color","#C40521");
+
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/makePassword')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","menu_list_on");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 5){
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/payPassword')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","menu_list_on");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 6){
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/accountBinding')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","menu_list_on");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 7){
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/identityAttestation')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","menu_list_on");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 8){
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/incomeDetail')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","menu_list_on");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 9){
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/wantDeposit')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","menu_list_on");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 10){
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/accountRecharge')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","menu_list_on");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 11){
+
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/allAttention')}");
+						$("#crowdfunding_iframe").attr("height","2000");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","menu_list_on");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 12){
+						$("#listClick_11").css("border-bottom","1px solid #CCC");
+						$("#listClick_11").css("color","#666");
+						$("#listClick_12").css("border-bottom","1px solid #C40521");
+						$("#listClick_12").css("color","#C40521");
+						$("#listClick_13").css("border-bottom","1px solid #CCC");
+						$("#listClick_13").css("color","#666");
+
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/myFans')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","menu_list_on");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 13){
+						$("#listClick_11").css("border-bottom","1px solid #CCC");
+						$("#listClick_11").css("color","#666");
+						$("#listClick_12").css("border-bottom","1px solid #CCC");
+						$("#listClick_12").css("color","#666");
+						$("#listClick_13").css("border-bottom","1px solid #C40521");
+						$("#listClick_13").css("color","#C40521");
+
+						$("#crowdfunding_iframe").attr("src","{:U('Home/User/mutualAttention')}");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","menu_list_on");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 14){
+						$("#crowdfunding_iframe").attr("src","crowdfunding.center/messages.html");
+						$("#crowdfunding_iframe").attr("height","1045");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","menu_list_on");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 15){
+						$("#crowdfunding_iframe").attr("src","crowdfunding.center/inbox.html");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","menu_list_on");
+						$("#listClick16").attr("class","");
+					}
+					if(value == 16){
+						$("#crowdfunding_iframe").attr("src","crowdfunding.center/outbox.html");
+						$("#crowdfunding_iframe").attr("height","1055");
+						$("#vertical_navigation").css("height","1085px");
+
+						$("#listClick1").attr("class","");
+						$("#listClick2").attr("class","");
+						$("#listClick3").attr("class","");
+						$("#listClick4").attr("class","");
+						$("#listClick5").attr("class","");
+						$("#listClick6").attr("class","");
+						$("#listClick7").attr("class","");
+						$("#listClick8").attr("class","");
+						$("#listClick9").attr("class","");
+						$("#listClick10").attr("class","");
+						$("#listClick11").attr("class","");
+						$("#listClick12").attr("class","");
+						$("#listClick13").attr("class","");
+						$("#listClick14").attr("class","");
+						$("#listClick15").attr("class","");
+						$("#listClick16").attr("class","menu_list_on");
+					}
+				}
+		</script>
+</block>
+
+<block name="foot_bar">
+	<h1>你好! 这里是foot</h1>
+</block>

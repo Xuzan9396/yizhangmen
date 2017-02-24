@@ -1,0 +1,47 @@
+<extend name="./Public/template/base.html"/>
+<block name="content">
+	<load href="__PUBLIC__/css/store.css" />
+	<load href="__PUBLIC__/css/service.css" />
+	<load href="__PUBLIC__/css/assess.css" />
+	<include file="./Apps/Home/View/service/publicStoreNav.html"/>
+		<!-- 案例展示   主体内容-->
+		<div class="deal-assess deal-border" >
+			<div class="deal-assess-content backg">
+				<div class="case-title">
+					<h3>{$listData['list'][0]['case_title']}</h3>
+				</div>
+				<div class="case-design-main">
+					<div class="case-design-title">
+						<p>设计方案 :</p>
+						<p class="case-desc">{$listData['list'][0]['case_scheme']}</p>
+					</div>
+					<div class="case-iamges">
+					<foreach name="listData['image']" item="dataval" key="key">
+						<img src="/shop/Public/Uploads/{$dataval['case_images']}" />
+					</foreach>
+					</div>
+				</div>
+				<div class="case-right">
+					<p class="price-name">设计费用 :</p>
+					<p class="case-price">￥ {$listData['order']['order_number_price']}</p>
+					<div class="case-company">
+						<p><strong>客户名称</strong> : {$listData['list'][0]['case_title']}</p>
+						<p><strong>服务类型</strong> : {$listData['cateName']}</p>
+					</div>
+					<div class="store-part">
+						<div class="store-logo">
+							<img src="/shop/Public/Uploads/{$shop[0]['file_image']}" alt="">
+						</div>
+						<div class="store-desc">
+							<p>{$shop[0]['store_name']}</p>
+							<if condition="$shop[0]['store_type'] eq 0">
+								<p>店铺类型 : 个人</p>
+							<elseif condition="$shop[0]['store_type'] eq 1" />
+								<p>店铺类型 : 企业</p>
+							</if> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</block>

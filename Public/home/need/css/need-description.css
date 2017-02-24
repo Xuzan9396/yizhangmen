@@ -1,0 +1,218 @@
+/*设置*/
+body{
+	background: #f0f0f0;
+}
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+a{
+	text-decoration: none;
+}
+/*进度条样式*/
+.ui-stepBar-wrap{
+	position: relative;
+	width: 100%;
+	height: 130px;
+	overflow: hidden;
+	z-index: 10;
+}
+.ui-stepBar-wrap .ui-stepBar{
+	position: relative;
+	width: 90%;
+	height: 5px;
+	background: #cccccc;
+	top: 50px;
+	left: 5%;
+	z-index: 11;
+}
+.ui-stepBar-wrap .ui-stepBar .ui-stepProcess{position:relative;
+	width: 0;
+	height: 5px;
+	background: #516784;
+	top: 0;
+	left: 0;
+	z-index: 12;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap{
+	width: 90%;
+	margin: 0 auto;
+	height: 100%;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo{
+	position: relative;
+	float: left;
+	padding-top: 36px;
+	text-align: center;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .ui-stepSequence{
+	position: relative;
+	padding: 4px 8px;
+	border-radius: 50%;
+	z-index: 13;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .ui-stepName{
+	position: relative;
+	line-height: 50px;
+	z-index: 13;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-pre-change,
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-hind-change{
+	cursor: pointer;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-pre-change:hover{
+	box-shadow: 0 0 3px 1px #516784;
+}
+.ui-stepBar-wrap .ui-stepInfo-wrap .ui-stepInfo .judge-stepSequence-hind-change:hover{
+	box-shadow: 0 0 3px 1px #cccccc;
+}
+.judge-stepSequence-pre{
+	background: #516784;
+	color: #ffffff;
+}
+.judge-stepSequence-hind{
+	background: #cccccc;
+	color: #000000;
+}
+
+.author{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	margin: 40px auto;
+	color: #1569ec;
+	text-shadow: 1px 1px 0 #e7e7e7, 0 1px 7px #fff;
+}
+/*内容区*/
+.box{
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background: #FAF2E8;
+}
+/*模板部分*/
+.box-row{
+	height: 86px;
+	margin-bottom:20px;
+}
+.box-modal{
+	width: 570px;
+	height: 86px;
+	background: #5BC0DE;
+	border-radius: 5px;
+	line-height: 86px;
+	font-size: 18px;
+	color: #fafafa;
+	text-align: left;
+	padding-left: 10px;
+}
+
+/*模态框类目*/
+#modal-body-con{
+	border:1px solid #ccc;
+	background: #FAF2E8;
+}
+#modal-body-con ul{
+	width: 100%;
+	height: 50px;
+	display: block;
+}
+#modal-title-ul li{
+	float: left;
+    width: 100px;
+    text-align: center;
+    margin-left: 10px;
+}
+#modal-title-ul li span{
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+}
+/*内容*/
+#modal-con-ol{
+	width: 2830px;
+	height: 200px;
+	float: left;
+}
+#modal-con-ol li{
+	display: block;
+	float: left;
+	width: 566px;
+	height: 200px;
+	color: #333333;
+	padding-left: 10px;
+}
+#modal-con-ol li p{
+	display: block;
+	float: left;
+	text-align: left;
+}
+
+#modal-con{
+	width: 566px;
+	height: 200px;
+	overflow: hidden;
+}
+/*莫泰框结束*/
+
+/*所有左右边字*/
+.left-label{
+	text-align: right;
+	line-height: 34px;
+	margin-right: 0;
+	color: #333333;
+}
+.left-label span{
+	color: red;
+}
+.col-lg-6{
+	padding: 0;
+}
+.right-span{
+	text-align: left;
+	line-height: 34px;
+	margin: 0;
+	color: #333333;
+}
+/*文件上传*/
+.form-file{
+	float:left;
+	margin-bottom: 0;
+	cursor: pointer;
+}
+/*手机*/
+.radio{
+	padding-left: 26px;
+	padding-right: 0;
+}
+.other-phone{
+	padding-left: 33px;
+	padding-right: 0;
+}
+.radio input{
+	cursor: pointer;
+}
+/*按钮上一页*/
+.form-group .last-page{
+	color: #fafafa;
+}
+/*合同*/
+.checkbox a{
+	color: #ff6600;
+}
+.input-phone{
+	margin-left: 263px;
+}
+#hidden-phone{
+	display: none;
+}
+/*隐藏协议*/
+#box-hidden{
+	background: #fafafa;
+	display:none;
+}
+
+
+

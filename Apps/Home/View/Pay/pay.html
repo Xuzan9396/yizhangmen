@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="__PUBLIC__/js/jquery-2.1.3.min.js"></script>
+	<style>
+		body,div,p,ul,li,dl,h2,a{
+			padding: 0;
+			margin: 0;
+			text-decoration: none;
+			list-style: none;
+			font-family: '微软雅黑';
+		}
+		.ui-header-bd{
+			width: 1190px;
+			height: 77px;
+			margin: 0 auto;
+			padding:35px 0 15px 0;
+		}
+		.ui-logo img{
+			padding-right: 15px;
+			border-right: 1px solid #666;
+		}
+		.ui-syt{
+			margin-left: 20px;
+		}
+
+		.content{
+			margin:0 auto;
+			width: 1349px;
+			height: 645px;
+			background: #e6e6e6;
+			padding:20px 0 20px 0;
+		}
+		.pay-main{
+			width: 980px;
+			height: 400px;
+			background: white;
+			margin:0 auto;
+			border: 1px solid #ccc;
+			padding: 25px 100px 25px 100px;
+		}
+		.content-header{
+			width: 990px;
+			height: 59px;
+		}
+		.logo-money{
+			float: left;
+			margin-right: 10px;
+		}
+		.tit-wrap{
+			float: left;
+			margin-top: 5px;
+
+		}
+		.color_666{
+			font-size: 12px;
+		}
+		.qrcode-detail{
+			width: 990px;
+			height: 100px;
+			position: relative;
+			padding-bottom: 3px;
+			border-bottom: 1px dashed #d8d8d8;
+		}
+		.fl{
+			float: left;
+		}
+		.qrcode-amount{
+			clear: left;
+			position: absolute;
+			top: 70px;
+			right: 15px;
+			font-size: 14px;
+		}
+		.qrcode-amount span{
+			font-size: 20px;
+			color: #ff9400;
+		}
+		.fl-middle{
+			margin-top: 30px;
+			margin-left: 10px;
+		}
+		.fl-middle p{
+			font-size: 13px;
+			margin-bottom: 15px;
+		}
+		.method-wrap{
+			width: 990px;
+			height: 155px;
+			font-size: 12px;
+		}
+		.method-wrap .method{
+			clear: left;
+			width: 990px;
+			height: 50px;
+			line-height: 50px;
+			padding-left: 10px;
+			border-bottom: 1px dashed #d8d8d8;
+		}
+		.method-name{
+			float: left;
+		}
+		.method-platform li{
+			float: left;
+		}
+		.method-platform label input{
+			margin-top: 18px;
+			margin-left: 20px;
+			float: left;
+		}
+		.pay-select{
+			margin-left: 25px;
+		}
+		.money-span{
+			float: right;
+			margin-right: 50px;
+			color: #ff9400;
+			font-size: 16px;
+		}
+		.pay-btn-wrap{
+			text-align: center;
+			margin-top: 30px;
+		}
+		.pay-btn-primary{
+			background: #ff9400;
+			border:0;
+			color: white;
+			width:150px;
+			height: 30px;
+			border-radius: 5px;
+			margin-right: 10px;
+		}
+		.pay-btn-later{
+			background: #e6e6e6;
+			border:0;
+			color: #666;
+			width:150px;
+			height: 30px;
+			border-radius: 5px;
+		}
+		.pay-question{
+			width: 1170px;
+			height: 200px;
+			margin:15px auto 0;
+			color: #666;
+		}
+		.faq-title{
+			margin-top: 40px;
+			margin-bottom: 20px;
+
+		}
+		.faq-q{
+			font-size: 12px;
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+		.faq-a{
+			font-size: 12px;
+			margin-bottom: 15px;
+		}
+		.ui-footer-hd{
+			width: 1349px;
+			height: 195px;
+			background: #404144;
+			margin-top: -30px;
+		}
+		.ui-footer-nav{
+			padding: 20px 70px;
+			text-align: center;
+		}
+		.item-new{
+			float: left;
+			width: 200px;
+			height: 100px;
+
+		}
+		.item-new dt{
+			margin-bottom: 20px;
+			margin-left: -20px;
+		}
+		.item-new dt img{
+			position: relative;
+			left: -6px;
+			top: 5px;
+		}
+		.item-new dd{
+			font-size: 12px;
+			margin-bottom: 10px;
+			float: left;
+		}
+		.item-new a{
+			color: #dcdcdc;
+		}
+	</style>
+</head>
+<body>
+	<div class="pay-grid">
+		<div class="ui-header-bd">
+			<div class="ui-logo"><img src="__PUBLIC__/image/pay/store-default.png" alt=""><span class="ui-syt">收银台</span></div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="pay-main">
+			<div class="content-header noborder">
+				<img class="logo-money" src="__PUBLIC__/image/pay/money.png" alt="">
+				<div class="tit-wrap clearfix">
+					<h2 class="tit yahei">收银台</h2>
+					<p class="color_666">您正在使用猪八戒网的担保交易，资金更安全。</p>
+				</div>
+
+			</div>
+			<div class="clearfix qrcode-detail">
+				<div class="fl"><img width="100" height="100" src="__PUBLIC__/Uploads/{$order_info.pubh_pic}" alt=""></div>
+				<div class="fl fl-middle">
+					<p class="mt20">交易名称：{$order_info.pubh_title}</p>
+					<p class="mt10">交易号：{$order_info.order_number}</p>
+				</div>
+				<div class="fr qrcode-amount">应付金额：<span>￥</span><span class="number_price">{$order_info.order_trusteeship_price}</span></div>
+			</div>
+			<div class="payment-method hide">
+				<ul class="method-wrap">
+					<li class="method clearfix">
+						<span class="method-checkbox"></span>
+						<span class="method-name">优惠券/码：</span>
+						<select name="coupon" class="pay-select">
+							<option value="">--选择优惠劵--</option>
+							<option value="1" selected>不用优惠券</option>
+							<option value="2">满200立减10元劵</option>
+							<option value="3">新用户9.8折劵</option>
+						</select>
+					</li>
+					<li class="method left-payment clearfix method-active">
+						<span class="method-checkbox"></span>
+						<span class="method-name">第三方支付：</span>
+						<ul class="method-platform fl clearfix">
+							<li>
+								<label for="payType" class="clearfix">
+									<input type="radio" checked name="payType" class="fl pay-channel-radio">
+									<span>支付宝</span>
+								</label>
+							</li>
+							<li>
+								<label for="" class="clearfix">
+									<input type="radio" name="payType" class="fl pay-channel-radio">
+									<span>微信</span>
+								</label>
+							</li>
+						</ul>
+						<span class="method-amount money-span J_pay-left">￥<span class="order_total">30000</span></span>
+					</li>
+				</ul>
+			</div>
+			<div class="pay-btn-wrap">
+				<form action="index" method="post">
+					<input type="hidden" name="uid" value="{$order_info['id']}" readonly="readonly">
+					<button class="pay-btn-primary">确认支付</button>
+					<a href="{:U('Home/User/isDemander')}"><button type="button" class="pay-btn-later">稍后支付</button></a>
+				</form>
+
+			</div>
+		</div>
+		<div class="pay-question">
+			<p class="faq-title mb20 mt20">付款遇到的问题：</p>
+			<ul class="faq-list">
+				<li class="faq-q">1.什么是快捷支付(含卡通)？</li>
+				<li class="faq-a mb10">答：快捷支付是支付宝联合各大银行推出的全新的支付方式。只要您有银行卡，就可以在支付宝付款。付款时无需登录网上银行，凭支付宝支付密码和手机效验码即可完成付款。（原卡通用户自动升级成为快捷支付用户）。</li>
+				<li class="faq-q">2.我有网上银行，如何在线开通储蓄卡快捷支付(含卡通)？</li>
+				<li class="faq-a mb10">答：已支持工行、招行、建行、中行、农行、北京银行在线开通。在支付宝填写信息后，根据页面引导完成马上开通。</li>
+
+			</ul>
+		</div>
+		<div class="ui-footer-hd">
+			<div class="ui-footer-nav">
+				<for start="0" end="4">
+				<dl class="item-new">
+					<dt><img src="__PUBLIC__/image/pay/wenhao.png" alt=""><a href="">新手指南</a></dt>
+					<dd><a href="">注册新用户</a></dd>
+					<dd><a href="">雇主入门</a></dd>
+					<dd><a href="">服务商入门</a></dd>
+					<dd><a href="">规则中心</a></dd>
+					<dd><a href="">开发者入门</a></dd>
+					<dd><a href="">信用查询</a></dd>
+				</dl>
+				</for>
+				<dl class="item-app"></dl>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('.order_total').text($('.number_price').text());
+	</script>
+</body>
+</html>

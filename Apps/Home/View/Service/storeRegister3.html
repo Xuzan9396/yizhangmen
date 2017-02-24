@@ -1,0 +1,74 @@
+<extend name="./Public/template/serviceShop.html"/>
+<block name="right1">
+<load href="__PUBLIC__/css/storeRegister1.css" />
+	<div class="col-free-shop">
+			  		<p class="free-set-shop">免费开店</p>
+			  	</div>
+			  	<div class="open-shop-bd">
+			  		<ul class="ui-step">
+			  			<li class="ui-step-active">
+			  				<div class="item-hd">
+			  					<span class="item-bg item-bg2"></span>
+			  					<span class="item-ico">√</span>
+			  				</div>
+			  				<div class="shop-ws">
+			  					店铺完善信息
+			  				</div>
+			  			</li>
+
+			  			<li class="ui-step-active">
+			  				<div class="item-hd">
+			  					<span class="item-bg item-bg2"></span>
+			  					<span class="item-ico item-ico3">√</span>
+			  				</div>
+			  				<div class="shop-ws">
+			  					技能设置
+			  				</div>
+			  			</li>
+
+			  			<li class="ui-step-active">
+			  				<div class="item-hd">
+			  					<span class="item-ico item-ico3">3</span>
+			  				</div>
+			  				<div class="shop-ws">
+			  					出售服务
+			  				</div>
+			  			</li>
+			  		</ul>
+			  	</div>
+				
+			  	<div class="clear"></div>
+				
+			  	<div class="row jiben-info">
+			  		<div><b>温馨提示</b></div>
+			  	</div>
+			  	
+			  	<div class="row shop-rule">
+			  		<strong class="item-label text-primary">选择你想入住的一级类目：</strong>
+			  		&nbsp;&nbsp;&nbsp;
+			  		<select name="xuzan"  class="form-control form-categroy-one">
+			  			<option value="2">一级类目</option>
+			  			<option value="1" >硬件开发</option>
+			  			<option value="1" >网站开发</option>
+			  		</select>
+			  		
+			  	</div>
+			  	<div class="up-down-step">
+			  		<a href="" class="btn btn-default">上一步</a>
+			  		<input type="submit" class="btn btn-warning" value="提交信息">
+			  	</div>
+			  	</form>
+			  	<div class="clear"></div>
+
+			<script>
+			$('document').ready(function(){
+
+				// $('.form-categroy-one').change(function(){
+				
+				// });
+
+			});
+
+			</script>
+
+</block>

@@ -1,0 +1,293 @@
+<extend name='./Public/template/base.html'/>
+
+<block name="file">
+    <!-- 独立的 -->
+    <load file="__PUBLIC__/home/order/css/bid-order-evaluate.css"/>
+    <load href="__PUBLIC__/home/need/js/stepBar.js"/>
+    <load file="__PUBLIC__/home/need/js/jquery.easing.1.3.js"/>
+    <!-- 公用 -->
+    <script src="__PUBLIC__/js/jquery.raty.js"></script>
+	<load href="__PUBLIC__/layui/css/layui.css"/>
+    <load href="__PUBLIC__/layer/layer.js"/>
+</block>
+
+<block name="content">
+	<!-- 托管页开始 -->
+	<div class="container">
+		<div class="row">
+			<div class="container-box col-lg-12">
+				<!-- 左边内容 -->
+				<div class="box-left col-lg-9">
+					<!-- 服务信息 -->
+					<div class="service-info">
+						<div class="service-info-box">
+							<!-- 头像 -->
+							<div class="service-info-div">
+								<a href="">
+									<img src="__PUBLIC__/Uploads/headportrait/{$user.impr_picture}">
+								</a>
+							</div>
+							<!-- 购买信息 -->
+							<div class="service-info-div-title">
+								<span>{$need.need_title}</span>
+							</div>
+							<div class="service-info-right">
+								<span>解释说明流程或logo区</span>
+							</div>
+							<!-- 托管金额 -->
+							<div class="service-info-con col-lg-10">
+								<!-- 判断线上 还是线下 托管金为默认的零时线下 反之 线上-->
+								<if condition="$order.order_trusteeship_price gt 0">
+									<div class="service-info-money">
+										<span class="span1">金额</span>
+										<span class="span2">￥</span>
+										<span class="span3">{$order.order_number_price}</span>
+									</div>
+								<else/>
+									<div class="service-info-money">
+										<span class="span1">线下交易金</span>
+										<span class="span2">￥</span>
+										<span class="span3">{$order.order_number_price}</span>
+									</div>
+								</if>
+							</div>
+							<!-- 解释流程 -->
+							
+							<div class="service-info-bottom col-lg-10">
+								<span class="service-info-con-span">请评价服务商互好评提升信誉</span>
+							</div>
+						</div>
+					</div>
+					<!-- 服务信息结束 -->
+					<!-- 进度条 -->
+					<div id="stepBar" class="ui-stepBar-wrap col-lg-12">
+						<div class="ui-stepBar">
+							<div class="ui-stepProcess"></div>
+						</div>
+						<div class="ui-stepInfo-wrap">
+							<table class="ui-stepLayout" border="0" cellpadding="0" cellspacing="0">
+								<tr>
+									<td class="ui-stepInfo">
+										<a class="ui-stepSequence">1</a>
+										<p class="ui-stepName">已中标</p>
+									</td>
+									<td class="ui-stepInfo">
+										<a class="ui-stepSequence">2</a>
+										<p class="ui-stepName">赏金托管</p>
+									</td>
+									<td class="ui-stepInfo">
+										<a class="ui-stepSequence">3</a>
+										<p class="ui-stepName">合同上传</p>
+									</td>
+									<td class="ui-stepInfo">
+										<a class="ui-stepSequence">4</a>
+										<p class="ui-stepName">工作中</p>
+									</td>
+									<td class="ui-stepInfo">
+										<a class="ui-stepSequence">5</a>
+										<p class="ui-stepName">评价</p>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!-- 进度条结束 -->
+					<!-- 评价 -->
+					<div class="row">
+						<div class="contract-box col-lg-12">
+							<div class="col-free-shop">
+								<p class="free-set-shop">评论服务商</p>
+							</div>
+							<!-- 店铺评分 -->
+							<form action="{:U('Home/StoreOrder/bidorderEvaluate')}" method="post" onsubmit="return evaluateVerify()">
+								<div class="col-free-shop">
+									<!-- 服务商评价 -->
+									<div class="shop-p">完善您对雇主的印象</div>
+									<div>
+										<table class="table table2-n">
+											<tr>
+												<th>
+													<span class="comment-icon good-comment"></span>
+													<label class="font1">
+													<input type="radio" name="comment" checked> 好评</label>
+												</th>
+												<th>
+													<span class="comment-icon middle-comment"></span>
+													<label class="font1">
+													<input type="radio" name="comment"> 中评</label>
+												</th>
+												<th>
+													<span class="comment-icon bad-comment"></span>
+													<label class="font1">
+													<input type="radio" name="comment"> 差评
+													</label>
+												</th>
+											</tr>
+											<tr>
+												<td>
+													<div id="star1"></div><span>服务态度</span>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="star2"></div><span>工作速度</span>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="star3"></div><span>工作质量</span>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<div class="star"></div>工作质量 -->
+									
+									<!-- 简单的描述回复内容 -->
+									<div>
+										<textarea name="content" rows="8" cols="90" id="evaluate-text">评价描述最多60字符</textarea>
+									</div>
+									<p class="mini-size">最多回复50字！</p>
+									<button type="submit" class="btn btn-info">提交评价</button>
+								</div>
+							</form>
+							<!-- 需求信息 -->
+							<div class="need-desc-box">
+								<p class="need-desc">
+									需求号: <span>{$need.need_id}</span>
+									发布时间: <span class="need-time">{:date('Y-m-d',$need['need_time'])}</span>
+								</p>
+							</div>
+							<!-- 需求信息结束 -->	
+						</div>	
+					</div>
+					<!-- 评价结束 -->
+				</div>
+				<!-- 右边服务商信息 -->
+				<div class="box-right col-lg-3">
+					<p class="service-store-title">--服务商--</p>
+					<!-- 服务商店铺信息 -->
+					<div class="service-store">
+						<!-- 店铺图片 -->
+						<a href="">
+							<img class="service-store-img" src="___PUBLIC__/Uploads/{$store['file_image']}">
+						</a>
+						<!-- 店铺名称 -->
+						<p class="service-store-name">
+							{$store.store_name}
+						</p>
+						<!-- 能力等级 -->
+						<p class="service-store-level">
+							<span>建立时间:</span>
+							<span class="level-span">{:date('Y-m-d',$store['store_addtime'])}</span>
+						</p>
+						<!-- 所在地 -->
+						<p class="service-store-level">
+							<span>所在地:</span>
+							<span class="level-span">{$store.store_address}</span>
+						</p>
+					</div>
+					<!-- 最新案例 -->
+					<p class="service-store-title">--他的最新案例--</p>
+					<div class="service-store-case col-lg-12">
+						<!-- 遍历最新成功案例 -->
+						<empty name="case">
+							<p>暂无最新案例!</p>
+						<else/>
+							<foreach name="case" item="val">
+								<p class="col-lg-12">
+									<span class="case-money">￥金额</span>
+									<span class="level-span">{$val.case_title}</span>
+								</p>
+							</foreach>
+						</empty>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<load href="__PUBLIC__/js/mo.js" />
+	<script type="text/javascript">
+	// 调用进度条js
+	$(function(){
+		stepBar.init("stepBar", {
+			// 目标进度
+			step : 5,
+			// 插件是否被选中
+			change : true,
+			animation : true,
+			// 时间
+			speed : 50
+		});
+	});
+	// 星星评分
+    $('#star1').raty({ 
+		score:3,
+		// halfShow: true,
+		path:'/shop/Public/image/service/star',
+		starOff: 'star-off-big.png',
+		starOn: 'star-on-big.png',
+		starHalf: 'star-half-big.png',
+		// input(name) 分数名自己定义
+		scoreName    : 'star_service_attitude',
+		cancel   : true,
+		cancelOff: 'cancel-off-big.png',
+		cancelOn : 'cancel-on-big.png',
+		cancelPlace: 'right',
+		  click: function(score, evt) {
+		    $(this).attr('value',score);
+	 	 }
+	});
+
+	$('.star2').raty({ 
+		score:3,
+		// halfShow: true,
+		path:'/shop/Public/image/service/star',
+		starOff: 'star-off-big.png',
+		starOn: 'star-on-big.png',
+		starHalf: 'star-half-big.png',
+		// input(name) 分数名自己定义
+		scoreName    : 'star_work_speed',
+		cancel   : true,
+		cancelOff: 'cancel-off-big.png',
+		cancelOn : 'cancel-on-big.png',
+		cancelPlace: 'right',
+		  click: function(score, evt) {
+			$(this).attr('value',score);
+		 }
+	});
+	
+	$('.star3').raty({ 
+		score:3,
+		// halfShow: true,
+		path:'/shop/Public/image/service/star',
+		starOff: 'star-off-big.png',
+		starOn: 'star-on-big.png',
+		starHalf: 'star-half-big.png',
+		// input(name) 分数名自己定义
+		scoreName    : 'star_finish_quality',
+		cancel   : true,
+		cancelOff: 'cancel-off-big.png',
+		cancelOn : 'cancel-on-big.png',
+		cancelPlace: 'right',
+		click: function(score, evt) {
+			  $(this).attr('value',score);
+		  	}
+	});
+
+	// testarea 提示信息
+	$('#evaluate-text').focus(function(){
+		$(this).html('');
+	}).blur(function(){
+		$(this).html('评价描述最多60字符');
+	});
+	// 验证 留言评价
+	function evaluateVerify(){
+    	// 留言
+    	var areatext = $('#evaluate-text').val();
+    	if(areatext.length > 60){
+    		mo.msg('留言过长');
+    		return false;
+    	}
+    }
+	</script>
+</block>

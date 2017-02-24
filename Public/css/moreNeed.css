@@ -1,0 +1,80 @@
+/*导航栏*/
+p{
+	padding: 0;
+	margin: 0;
+}
+.active{
+	background: blue;
+}
+.chose{
+	background: #62C9FA;
+}
+.nochose{
+	background: red;
+}
+.strong{
+	color: red;
+}
+.nav-bar{
+	width: 1170px;
+	height: 50px;
+	line-height: 50px;
+	background: #62C9FA;
+	margin:22px 0 0 0;
+}
+
+.nav-bar-ul li,.nav-bar-ul a{
+	transition: background 0.5s;
+	float: left;
+	color: white;
+	padding:0 10px;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: bold; 
+}
+.nav-bar-ul li:hover{
+	transition: background 0.5s;
+	background: #3195F3;
+}
+/*面包线样式*/
+.crumb-line{
+	margin:0;
+	padding:0 0 5px 10px;
+	height:40px;
+	line-height:40px
+}
+.crumb-line li a{
+	color: red;
+}
+.demand-couent{
+	width: auto;
+}
+/*=========================================================*/
+.demand-couent-1{
+	width:130px;
+	text-align:center;
+	display:block;
+	float: left;
+	list-style-type:none;
+	/*line-height: 30px;*/
+}
+.demand-couent-2{
+	width:180px;
+	text-align:center;
+	display:block;
+	float: left;
+	list-style-type:none;
+}
+.demand-couent-3{
+	width:250px;
+	/*text-align:center;*/
+	display:block;
+	float: left;
+	list-style-type:none;
+}
+.need_hove_dis{
+	margin:8px 0 0 8px;
+	height:50px;
+	display:none;
+}

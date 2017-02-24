@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>添加</title>
+
+<load href="__PUBLIC__/js/jquery-2.1.3.min.js" />
+<load href="__PUBLIC__/js/bootstrap.min.js" />
+
+<load href="__PUBLIC__/css/add.css" />
+<load href="__PUBLIC__/css/bootstrap.min.css" />
+
+</head>
+<body>
+<div class="div_from_aoto" style="width: 500px;">
+    <!-- <form action="{:U('Admin/Admin/add')}" method="post"> -->
+        <div class="control-group">
+            <label class="laber_from">用户名</label>
+            <div class="controls"><input name="admn_realname" id="admn_realname" class="input_from" placeholder=" 用户名必须大于5位" type="text"><p class="help-block p1"></p></div>
+        </div>
+        <div class="control-group">
+            <label class="laber_from">手机号码</label>
+            <div class="controls"><input name="admn_tel" id="admn_tel" class="input_from" placeholder=" 请输入手机号码" type="text" maxlength="11" onblur="checkTel()"><p class="help-block"></p></div>
+        </div>
+        <div class="control-group">
+            <label class="laber_from">密码</label>
+            <div class="controls"><input name="admn_password" id="admn_password" class="input_from" placeholder=" 请输入密码" type="password" maxlength="20" onblur="checkPwd()"><p class="help-block"></p></div>
+        </div>
+
+        <div class="control-group">
+            <label class="laber_from"></label>
+            <div class="controls"><button class="btn btn-success" onclick="addAct()" style="width:120px;">确认添加</button></div>
+        </div>
+        <p id="tips" class="help-block" style="font-size:16px;color:red;margin-left:100px;"></p>
+    <!-- </form> -->
+</div>
+
+</body>
+<load href="__PUBLIC__/layer/layer.js"/>
+<load href="__PUBLIC__/js/mo.js"/>
+
+<script>
+
+    function checkTel()
+    {
+        var zeng = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+        if ( zeng.test( $('#admn_tel').val() ) ) {
+            $('#tips').html('');
+            $.ajax({
+                url:"{:U('Admin/Admin/chkTel')}",
+                data:{'admn_tel':$('#admn_tel').val()},
+                type:"post",
+                success: function(data){
+                    if (data!=null) {
+                        $('#tips').html('手机号已被使用');
+                    }
+                }
+            });
+
+        }else{
+            
+            $('#tips').html('手机格式错误');
+        }    
+    }
+
+     function addAct()
+    {
+        $.ajax({
+            url:"{:U('addad')}",
+            data:{'admn_realname':$('#admn_realname').val(),'admn_tel':$('#admn_tel').val(),'admn_password':$('#admn_password').val()},
+            type:"post",
+            success: function(data){
+                if (data['status']) {
+                  layer.msg(data['info'],{icon:6});
+                  setTimeout(function(){
+                    window.location.reload();
+                  },1000)
+                    
+                }else{
+                    $('#tips').html('');
+                   layer.msg(data['info'],{icon:5});
+                }
+            }
+        });
+    }
+
+</script>
+</html>
